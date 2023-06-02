@@ -1,0 +1,2597 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Régressions linéaires | Travaux dirigés d’Informatique</title>
+  <meta name="description" content="8 Régressions linéaires | Travaux dirigés d’Informatique" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Régressions linéaires | Travaux dirigés d’Informatique" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Régressions linéaires | Travaux dirigés d’Informatique" />
+  
+  
+  
+
+<meta name="author" content="Ewen Gallic" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="statistiques-descriptives.html"/>
+<link rel="next" href="instructions-conditionnelles-et-boucles.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Register.StartupHook("TeX color Ready", function() {
+	     MathJax.Extension["TeX/color"].colors["wongBlack"] = '#000000';
+		 MathJax.Extension["TeX/color"].colors["wongGold"] = '#E69F00';
+		 MathJax.Extension["TeX/color"].colors["wongLightBlue"] = '#56B4E9';
+		 MathJax.Extension["TeX/color"].colors["wongGreen"] = '#009E73';
+		 MathJax.Extension["TeX/color"].colors["wongYellow"] = '#F0E442';
+		 MathJax.Extension["TeX/color"].colors["wongBlue"] = '#0072B2';
+		 MathJax.Extension["TeX/color"].colors["wongOrange"] = '#D55E00';
+		 MathJax.Extension["TeX/color"].colors["wongPurple"] = '#CC79A7';
+		 
+		 
+		 MathJax.Extension["TeX/color"].colors["IBMBlue"] = '#648FFF';
+		 MathJax.Extension["TeX/color"].colors["IBMPurple"] = '#785EF0';
+		 MathJax.Extension["TeX/color"].colors["IBMMagenta"] = '#DC267F';
+		 MathJax.Extension["TeX/color"].colors["IBMOrange"] = '#FE6100';
+		 MathJax.Extension["TeX/color"].colors["IBMYellow"] = '#FFB000';
+	});
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="initiation-à-r.html"><a href="initiation-à-r.html"><i class="fa fa-check"></i><b>1</b> Initiation à R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="initiation-à-r.html"><a href="initiation-à-r.html#travailler-par-projets"><i class="fa fa-check"></i><b>1.1</b> Travailler par projets</a></li>
+<li class="chapter" data-level="1.2" data-path="initiation-à-r.html"><a href="initiation-à-r.html#création-modification-suppression-dun-objet"><i class="fa fa-check"></i><b>1.2</b> Création, modification, suppression d’un objet</a></li>
+<li class="chapter" data-level="1.3" data-path="initiation-à-r.html"><a href="initiation-à-r.html#lecture-dune-page-daide"><i class="fa fa-check"></i><b>1.3</b> Lecture d’une page d’aide</a></li>
+<li class="chapter" data-level="1.4" data-path="initiation-à-r.html"><a href="initiation-à-r.html#installation-et-chargement-dun-package"><i class="fa fa-check"></i><b>1.4</b> Installation et chargement d’un package</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html"><i class="fa fa-check"></i><b>2</b> Type des données et première structure</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#types-de-données"><i class="fa fa-check"></i><b>2.1</b> Types de données</a></li>
+<li class="chapter" data-level="2.2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#structure-de-données-les-vecteurs"><i class="fa fa-check"></i><b>2.2</b> Structure de données : les vecteurs</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-position"><i class="fa fa-check"></i><b>2.2.1</b> Indexation par position</a></li>
+<li class="chapter" data-level="2.2.2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-nom"><i class="fa fa-check"></i><b>2.2.2</b> Indexation par nom</a></li>
+<li class="chapter" data-level="2.2.3" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-condition"><i class="fa fa-check"></i><b>2.2.3</b> Indexation par condition</a></li>
+<li class="chapter" data-level="2.2.4" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#gestion-des-valeurs-manquantes"><i class="fa fa-check"></i><b>2.2.4</b> Gestion des valeurs manquantes</a></li>
+<li class="chapter" data-level="2.2.5" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#remplacement-et-ajout-de-valeurs"><i class="fa fa-check"></i><b>2.2.5</b> Remplacement et ajout de valeurs</a></li>
+<li class="chapter" data-level="2.2.6" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#exercice-de-synthèse"><i class="fa fa-check"></i><b>2.2.6</b> Exercice de synthèse</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html"><i class="fa fa-check"></i><b>3</b> Matrices et listes</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#matrice"><i class="fa fa-check"></i><b>3.1</b> Matrice</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#accès-aux-éléments-dune-matrice"><i class="fa fa-check"></i><b>3.1.1</b> Accès aux éléments d’une matrice</a></li>
+<li class="chapter" data-level="3.1.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#remplacement-et-ajout-de-valeurs-1"><i class="fa fa-check"></i><b>3.1.2</b> Remplacement et ajout de valeurs</a></li>
+<li class="chapter" data-level="3.1.3" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#calculs-matriciels"><i class="fa fa-check"></i><b>3.1.3</b> Calculs matriciels</a></li>
+<li class="chapter" data-level="3.1.4" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#combiner-des-matrices"><i class="fa fa-check"></i><b>3.1.4</b> Combiner des matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#listes"><i class="fa fa-check"></i><b>3.2</b> Listes</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#accès-aux-éléments"><i class="fa fa-check"></i><b>3.2.1</b> Accès aux éléments</a></li>
+<li class="chapter" data-level="3.2.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#remplacement-et-ajout-déléments"><i class="fa fa-check"></i><b>3.2.2</b> Remplacement et ajout d’éléments</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html"><i class="fa fa-check"></i><b>4</b> Importation et exportation de donnée</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#chargement-de-données-chemins"><i class="fa fa-check"></i><b>4.1</b> Chargement de données : chemins</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#avantages-de-lutilisation-de-chemins-relatifs"><i class="fa fa-check"></i><b>4.1.1</b> Avantages de l’utilisation de chemins relatifs</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#chargement-de-formats-différents"><i class="fa fa-check"></i><b>4.2</b> Chargement de formats différents</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichiers-texte"><i class="fa fa-check"></i><b>4.2.1</b> Fichiers texte</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichier-excel"><i class="fa fa-check"></i><b>4.2.2</b> Fichier Excel</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichiers-r"><i class="fa fa-check"></i><b>4.2.3</b> Fichiers R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#exportation"><i class="fa fa-check"></i><b>4.3</b> Exportation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#format-texte"><i class="fa fa-check"></i><b>4.3.1</b> Format texte</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#format-r"><i class="fa fa-check"></i><b>4.3.2</b> Format R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html"><i class="fa fa-check"></i><b>5</b> Tableaux de données</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#importation-des-données-de-la-séance"><i class="fa fa-check"></i><b>5.1</b> Importation des données de la séance</a></li>
+<li class="chapter" data-level="5.2" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#tibbles"><i class="fa fa-check"></i><b>5.2</b> Tibbles</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#dimensions"><i class="fa fa-check"></i><b>5.2.1</b> Dimensions</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#accès-aux-éléments-1"><i class="fa fa-check"></i><b>5.2.2</b> Accès aux éléments</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#résumés-statistiques-sur-les-colonnes-dun-tableau"><i class="fa fa-check"></i><b>5.3</b> Résumés statistiques sur les colonnes d’un tableau</a></li>
+<li class="chapter" data-level="5.4" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#sélection-dune-ou-plusieurs-colonnes"><i class="fa fa-check"></i><b>5.4</b> Sélection d’une ou plusieurs colonnes</a></li>
+<li class="chapter" data-level="5.5" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#créationmodification-dune-nouvelle-colonne"><i class="fa fa-check"></i><b>5.5</b> Création/Modification d’une nouvelle colonne</a></li>
+<li class="chapter" data-level="5.6" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#renommer-une-colonne"><i class="fa fa-check"></i><b>5.6</b> Renommer une colonne</a></li>
+<li class="chapter" data-level="5.7" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#filtrage"><i class="fa fa-check"></i><b>5.7</b> Filtrage</a></li>
+<li class="chapter" data-level="5.8" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#résumés-statistiques-sur-lensemble-du-tableau"><i class="fa fa-check"></i><b>5.8</b> Résumés statistiques sur l’ensemble du tableau</a></li>
+<li class="chapter" data-level="5.9" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#agrégation-par-groupes"><i class="fa fa-check"></i><b>5.9</b> Agrégation par groupes</a></li>
+<li class="chapter" data-level="5.10" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#tri"><i class="fa fa-check"></i><b>5.10</b> Tri</a></li>
+<li class="chapter" data-level="5.11" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#jointures"><i class="fa fa-check"></i><b>5.11</b> Jointures</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>6</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="r-markdown.html"><a href="r-markdown.html#créer-un-document-r-markdown-avec-rstudio"><i class="fa fa-check"></i><b>6.1</b> Créer un document R Markdown avec RStudio</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="r-markdown.html"><a href="r-markdown.html#yaml"><i class="fa fa-check"></i><b>6.1.1</b> YAML</a></li>
+<li class="chapter" data-level="6.1.2" data-path="r-markdown.html"><a href="r-markdown.html#textes"><i class="fa fa-check"></i><b>6.1.2</b> Textes</a></li>
+<li class="chapter" data-level="6.1.3" data-path="r-markdown.html"><a href="r-markdown.html#morceaux-de-code"><i class="fa fa-check"></i><b>6.1.3</b> Morceaux de code</a></li>
+<li class="chapter" data-level="6.1.4" data-path="r-markdown.html"><a href="r-markdown.html#compilation"><i class="fa fa-check"></i><b>6.1.4</b> Compilation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="r-markdown.html"><a href="r-markdown.html#markdown"><i class="fa fa-check"></i><b>6.2</b> Ecriture du texte : syntaxe en Markdown</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="r-markdown.html"><a href="r-markdown.html#texte"><i class="fa fa-check"></i><b>6.2.1</b> Texte</a></li>
+<li class="chapter" data-level="6.2.2" data-path="r-markdown.html"><a href="r-markdown.html#styles-de-texte"><i class="fa fa-check"></i><b>6.2.2</b> Styles de texte</a></li>
+<li class="chapter" data-level="6.2.3" data-path="r-markdown.html"><a href="r-markdown.html#titres"><i class="fa fa-check"></i><b>6.2.3</b> Titres</a></li>
+<li class="chapter" data-level="6.2.4" data-path="r-markdown.html"><a href="r-markdown.html#citations"><i class="fa fa-check"></i><b>6.2.4</b> Citations</a></li>
+<li class="chapter" data-level="6.2.5" data-path="r-markdown.html"><a href="r-markdown.html#tirets-longs-tirets-moyens"><i class="fa fa-check"></i><b>6.2.5</b> Tirets longs, tirets moyens</a></li>
+<li class="chapter" data-level="6.2.6" data-path="r-markdown.html"><a href="r-markdown.html#lignes-horizontale"><i class="fa fa-check"></i><b>6.2.6</b> Lignes horizontale</a></li>
+<li class="chapter" data-level="6.2.7" data-path="r-markdown.html"><a href="r-markdown.html#points-de-suspension"><i class="fa fa-check"></i><b>6.2.7</b> Points de suspension</a></li>
+<li class="chapter" data-level="6.2.8" data-path="r-markdown.html"><a href="r-markdown.html#liens-hypertextes"><i class="fa fa-check"></i><b>6.2.8</b> Liens hypertextes</a></li>
+<li class="chapter" data-level="6.2.9" data-path="r-markdown.html"><a href="r-markdown.html#notes-de-bas-de-page"><i class="fa fa-check"></i><b>6.2.9</b> Notes de bas de page</a></li>
+<li class="chapter" data-level="6.2.10" data-path="r-markdown.html"><a href="r-markdown.html#listes-1"><i class="fa fa-check"></i><b>6.2.10</b> Listes</a></li>
+<li class="chapter" data-level="6.2.11" data-path="r-markdown.html"><a href="r-markdown.html#listes-imbriquées"><i class="fa fa-check"></i><b>6.2.11</b> Listes imbriquées</a></li>
+<li class="chapter" data-level="6.2.12" data-path="r-markdown.html"><a href="r-markdown.html#images"><i class="fa fa-check"></i><b>6.2.12</b> Images</a></li>
+<li class="chapter" data-level="6.2.13" data-path="r-markdown.html"><a href="r-markdown.html#tableaux"><i class="fa fa-check"></i><b>6.2.13</b> Tableaux</a></li>
+<li class="chapter" data-level="6.2.14" data-path="r-markdown.html"><a href="r-markdown.html#formules-mathématiques-en-latex"><i class="fa fa-check"></i><b>6.2.14</b> Formules mathématiques en LaTeX</a></li>
+<li class="chapter" data-level="6.2.15" data-path="r-markdown.html"><a href="r-markdown.html#md-codes-blocs-codes"><i class="fa fa-check"></i><b>6.2.15</b> Codes et blocs de code</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="r-markdown.html"><a href="r-markdown.html#morceaux-de-code-1"><i class="fa fa-check"></i><b>6.3</b> Morceaux de code</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="r-markdown.html"><a href="r-markdown.html#codes-en-ligne"><i class="fa fa-check"></i><b>6.3.1</b> Codes en ligne</a></li>
+<li class="chapter" data-level="6.3.2" data-path="r-markdown.html"><a href="r-markdown.html#blocs-de-code"><i class="fa fa-check"></i><b>6.3.2</b> Blocs de code</a></li>
+<li class="chapter" data-level="6.3.3" data-path="r-markdown.html"><a href="r-markdown.html#mise-en-cache"><i class="fa fa-check"></i><b>6.3.3</b> Mise en cache</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="r-markdown.html"><a href="r-markdown.html#insertion-dune-bibliographie"><i class="fa fa-check"></i><b>6.4</b> Insertion d’une bibliographie</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="r-markdown.html"><a href="r-markdown.html#création-du-fichier-de-bibliographie"><i class="fa fa-check"></i><b>6.4.1</b> Création du fichier de bibliographie</a></li>
+<li class="chapter" data-level="6.4.2" data-path="r-markdown.html"><a href="r-markdown.html#lier-le-fichier-dentrées-bibliographiques-avec-le-document-rmarkdown"><i class="fa fa-check"></i><b>6.4.2</b> Lier le fichier d’entrées bibliographiques avec le document RMarkdown</a></li>
+<li class="chapter" data-level="6.4.3" data-path="r-markdown.html"><a href="r-markdown.html#citer-les-documents-dans-le-corps-de-texte"><i class="fa fa-check"></i><b>6.4.3</b> Citer les documents dans le corps de texte</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html"><i class="fa fa-check"></i><b>7</b> Statistiques descriptives</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#données-du-chapitre"><i class="fa fa-check"></i><b>7.1</b> Données du chapitre</a></li>
+<li class="chapter" data-level="7.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#résumés-statistiques-à-la-main"><i class="fa fa-check"></i><b>7.2</b> Résumés statistiques à la main</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#dimensions-résumés-grossiers"><i class="fa fa-check"></i><b>7.2.1</b> Dimensions, résumés grossiers</a></li>
+<li class="chapter" data-level="7.2.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#exploration-des-valeurs-avec-des-tableaux"><i class="fa fa-check"></i><b>7.2.2</b> Exploration des valeurs avec des tableaux</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#résumés-avec-gtsummary-vers-la-communication-des-résultats"><i class="fa fa-check"></i><b>7.3</b> Résumés avec gtsummary : vers la communication des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#contexte-et-rappels"><i class="fa fa-check"></i><b>8.1</b> Contexte et rappels</a></li>
+<li class="chapter" data-level="8.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#chargement-du-jeu-de-données"><i class="fa fa-check"></i><b>8.2</b> Chargement du jeu de données</a></li>
+<li class="chapter" data-level="8.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#régression-pas-à-pas"><i class="fa fa-check"></i><b>8.3</b> Régression pas à pas</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#estimation-des-coefficients-de-la-régression-par-moindres-carrés-ordinaires"><i class="fa fa-check"></i><b>8.3.1</b> Estimation des coefficients de la régression par moindres carrés ordinaires</a></li>
+<li class="chapter" data-level="8.3.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#prédiction-des-valeurs"><i class="fa fa-check"></i><b>8.3.2</b> Prédiction des valeurs</a></li>
+<li class="chapter" data-level="8.3.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#les-résidus-de-la-régression"><i class="fa fa-check"></i><b>8.3.3</b> Les résidus de la régression</a></li>
+<li class="chapter" data-level="8.3.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#un-indicateur-de-la-qualité-dajustement-le-coefficient-de-détermination"><i class="fa fa-check"></i><b>8.3.4</b> Un indicateur de la qualité d’ajustement : le coefficient de détermination</a></li>
+<li class="chapter" data-level="8.3.5" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire"><i class="fa fa-check"></i><b>8.3.5</b> Tests de nullité des coefficients de la régression linéaire</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#régression-avec-lm"><i class="fa fa-check"></i><b>8.4</b> Régression avec lm</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#résumé-de-lestimation"><i class="fa fa-check"></i><b>8.4.1</b> Résumé de l’estimation</a></li>
+<li class="chapter" data-level="8.4.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#prédictions-des-valeurs"><i class="fa fa-check"></i><b>8.4.2</b> Prédictions des valeurs</a></li>
+<li class="chapter" data-level="8.4.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire-1"><i class="fa fa-check"></i><b>8.4.3</b> Tests de nullité des coefficients de la régression linéaire</a></li>
+<li class="chapter" data-level="8.4.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#mise-en-forme-des-résultats-avec-modelsummary"><i class="fa fa-check"></i><b>8.4.4</b> Mise en forme des résultats avec modelsummary</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html"><i class="fa fa-check"></i><b>9</b> Instructions conditionnelles et boucles</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instructions-conditionnelles"><i class="fa fa-check"></i><b>9.1</b> Instructions conditionnelles</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instruction-if"><i class="fa fa-check"></i><b>9.1.1</b> Instruction <code>if</code></a></li>
+<li class="chapter" data-level="9.1.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instruction-if-else"><i class="fa fa-check"></i><b>9.1.2</b> Instruction <code>if-else</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles"><i class="fa fa-check"></i><b>9.2</b> Boucles</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles-while"><i class="fa fa-check"></i><b>9.2.1</b> Boucles <code>while()</code></a></li>
+<li class="chapter" data-level="9.2.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles-for"><i class="fa fa-check"></i><b>9.2.2</b> Boucles <code>for()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>10</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Travaux dirigés d’Informatique</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="régressions-linéaires" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> Régressions linéaires<a href="régressions-linéaires.html#régressions-linéaires" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="orangebox">
+<p>Pour aborder sereinement ce chapitre, il est utile de savoir <a href="http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#structures-de-base">manipuler des vecteurs</a>, <a href="http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#calculs-matriciels">des matrices</a> et des <a href="http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#tableaux_de_donnees">tableaux de données</a>.</p>
+<p>Des compléments de lecture sont disponibles dans le chapitre des notes de cours concernant la <a href="http://egallic.fr/Enseignement/R/Book/r%C3%A9gressions-lin%C3%A9aires.html">régression linéaire avec R</a>.</p>
+</div>
+<div id="contexte-et-rappels" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Contexte et rappels<a href="régressions-linéaires.html#contexte-et-rappels" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dans ce chapitre, nous allons utiliser R pour estimer la relation entre une variable à expliquer et une ou plusieurs autres variables. Nous effectuerons quelques rappels d’économétrie, puis effectuerons les calculs à la main dans un premier temps. Ensuite, nous utiliserons des routines permettant d’estimer des modèles de régression linéaire et nous attacherons à expliquer comment lire et extraire les résultats obtenus.</p>
+<p>Pour illustrer notre propos, nous tâcherons de relier la mesure de la taille de l’empan à la taille d’un humain. L’empan correspond à la distance entre l’extrêmité du pouce et celle de l’auriculaire, comme illustré sur la Figure <a href="régressions-linéaires.html#fig:illustration-empan">8.1</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:illustration-empan"></span>
+<img src="figs/Mesures_de_la_main_artlibre_jnl.png" title="Le trait no 2 figure un empan. Source: https://fr.wiktionary.org/wiki/empan" width="500" alt="" />
+<p class="caption">Figure 8.1:  Schéma montrant que l’empan correspond à la distance entre l’extrêmité du pouce et celle de l’auriculaire.</p>
+</div>
+<p>En notant <span class="math inline">\(y_i\)</span> la taille de l’individu <span class="math inline">\(i\)</span>, et <span class="math inline">\(x\)</span> son empan, il s’agit de regarder si la taille dépend linéairement de l’empan. On pose alors, pour tous les individus <span class="math inline">\(i = 1, \\ldots, n\)</span>:</p>
+<p><span class="math display">\[y_i = \beta_0 x_i + \beta_1 + \varepsilon_i,\]</span>
+avec <span class="math inline">\(\mathbb{E}(\varepsilon_i) = 0, \quad \forall i \in 1,\ldots, n\)</span>, <span class="math inline">\(\mathbb{E}(\varepsilon_i \varepsilon_j) = 0, \forall i \ne j\)</span>, et <span class="math inline">\(\mathbb{V}(\varepsilon_i) = \sigma^2_{\varepsilon}, \quad \forall i = 1, \ldots, n.\)</span></p>
+<p>En termes matriciels, on peut noter :
+<span class="math display">\[\boldsymbol y = \boldsymbol X \boldsymbol \beta + \boldsymbol \varepsilon,\]</span>
+avec <span class="math inline">\(\boldsymbol \varepsilon \sim \mathcal{N}(0, \Sigma^2)\)</span>, et
+<span class="math display">\[\begin{align*}
+\textrm{où } \boldsymbol y = \begin{bmatrix}
+y_1 \\ y_2 \\ \vdots \\ y_n
+\end{bmatrix}, \, \boldsymbol X = \begin{bmatrix}
+1 &amp; x_{1,1}  \\
+1 &amp; x_{1,2}  \\
+1 &amp; \vdots  \\
+1 &amp; x_{1,n}
+\end{bmatrix}, \, \boldsymbol \beta =  \begin{bmatrix}
+\beta_0\\
+\beta_1\\
+\end{bmatrix} \textrm{ et } \boldsymbol \varepsilon = \begin{bmatrix}
+\varepsilon_1\\
+\varepsilon_2\\
+\vdots\\
+\varepsilon_n
+\end{bmatrix}.
+\end{align*}\]</span></p>
+<p>La méthode des moindres carrés ordinaires (MCO) propose une estimation <span class="math inline">\((\hat\alpha, \hat\beta)\)</span> telle que la somme des carrés des résidus soit minimisée:
+<span class="math display">\[\arg \min_{\boldsymbol \beta}\mid \mid \boldsymbol y - \boldsymbol X \boldsymbol \beta \mid \mid^2 = \arg \min_{\boldsymbol \beta} \sum_{i=1}^{n} (y_i - x_i \beta)^2.\]</span></p>
+<p>Les résidus correspondent à l’écart entre la valeur observée de la taille <span class="math inline">\(y_i\)</span> et celle prédite par le modèle <span class="math inline">\(\hat y_i\)</span> : <span class="math inline">\(e_i = y_i - \hat y_i\)</span>.</p>
+<p>Le modèle estimé s’écrit :</p>
+<p><span class="math display">\[\hat{y_i} = \hat{\beta_0} + \hat{\beta_1} x_i,\]</span>
+soit, en termes matriciels:
+<span class="math display">\[\hat{\boldsymbol y} = \boldsymbol X \hat{\boldsymbol \beta},\]</span>
+<span class="math display">\[\begin{align*}
+\textrm{où } \hat{\boldsymbol y} = \begin{bmatrix}
+\hat{y}_1 \\ \hat{y}_2 \\ \vdots \\ \hat{y}_n
+\end{bmatrix}, \, \boldsymbol X = \begin{bmatrix}
+1 &amp; x_{1,1} \\
+1 &amp; x_{1,2} \\
+1 &amp; \vdots \\
+1 &amp; x_{1,n}
+\end{bmatrix}, \textrm{ et } \hat{\boldsymbol \beta} =  \begin{bmatrix}
+\hat{\beta}_0\\
+\hat{\beta}_1\\
+\end{bmatrix}.
+\end{align*}\]</span></p>
+<p>La condition du premier ordre donne<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> :</p>
+<p><span class="math display">\[\begin{align*}
+&amp; \boldsymbol X^t \boldsymbol X\hat{\boldsymbol \beta} - 2 \boldsymbol X^t \boldsymbol X \hat{\boldsymbol \beta} - 2 \boldsymbol X^t \boldsymbol y = 0\notag\\
+\Leftrightarrow \quad &amp; \boldsymbol X^t \boldsymbol X \hat{\boldsymbol\beta} = \boldsymbol X^t \boldsymbol y\notag\\
+\Leftrightarrow \quad &amp; \hat{\boldsymbol\beta} = (\boldsymbol X^t \boldsymbol X)^{-1} \boldsymbol X^t \boldsymbol y.
+\end{align*}\]</span></p>
+</div>
+<div id="chargement-du-jeu-de-données" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Chargement du jeu de données<a href="régressions-linéaires.html#chargement-du-jeu-de-données" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="greenbox">
+<p>Créez un projet RStudio pour ce chapitre (cf. le <a href="initiation-à-r.html#initiation-à-r">chapitre d’initiation à R</a>). Pensez bien à créer le répertoire <code>Data</code> dans le répertoire contenant le fichier de projet <code>.Rproj</code>.</p>
+</div>
+<p>Les données ont été mesurées sur des étudiantes et étudiants de l’Université de Rennes 1. Elles sont disponibles dans un fichier CSV à l’adresse suivante : <a href="https://egallic.fr/Enseignement/L3_EcoFi/Exercices/empan.csv" class="uri">https://egallic.fr/Enseignement/L3_EcoFi/Exercices/empan.csv</a>. Téléchargeons ces données et enregistrons le fichier dans le répertoire <code>Data</code> :</p>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="régressions-linéaires.html#cb514-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">&quot;https://egallic.fr/Enseignement/L3_EcoFi/Exercices/empan.csv&quot;</span>,</span>
+<span id="cb514-2"><a href="régressions-linéaires.html#cb514-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">destfile =</span> <span class="st">&quot;Data/empan.csv&quot;</span>)</span></code></pre></div>
+<p>Puis, chargeons-le dans R :</p>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="régressions-linéaires.html#cb515-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb515-2"><a href="régressions-linéaires.html#cb515-2" aria-hidden="true" tabindex="-1"></a>df_empan <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Data/empan.csv&quot;</span>)</span>
+<span id="cb515-3"><a href="régressions-linéaires.html#cb515-3" aria-hidden="true" tabindex="-1"></a>df_empan</span></code></pre></div>
+<pre><code>## # A tibble: 40 × 6
+##    empan_main_forte empan_main_faible   age genre taille forte
+##               &lt;dbl&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;
+##  1             19                19      19 H        172 D    
+##  2             20.5              20.5    27 H        179 G    
+##  3             21                21      26 H        179 G    
+##  4             19                19      27 F        160 D    
+##  5             21                22      25 H        186 D    
+##  6             19                18.5    25 H        178 D    
+##  7             19                19      20 H        182 B    
+##  8             21                22      21 H        179 D    
+##  9             23                22      19 H        186 D    
+## 10             20                20      20 F        163 D    
+## # … with 30 more rows</code></pre>
+<p>Les colonnes sont les suivantes (les caractéristiques des individus) :</p>
+<ul>
+<li><code>empan_main_forte</code> : empan main forte (en cm)</li>
+<li><code>empan_main_faible</code> : empan main faible (en cm)</li>
+<li><code>age</code> : age (en année)</li>
+<li><code>genre</code> : genre (H, F, A)</li>
+<li><code>taille</code> : taille (en cm)</li>
+<li><code>forte</code> : main forte (“G” pour gauche, “D” pour droite, “B” pour ambidextre)</li>
+</ul>
+<div class="greenbox">
+<ol style="list-style-type: decimal">
+<li>Affichez quelques statistiques descriptives pour vous familiariser avec les données (moyenne, écart-type, quantiles, proportions, etc.). Vous pouvez, par exemple utiliser la fonction <code class="sourceCode r"><span class="fu">tbl_summary</span>()</code> de {gtsummary} abordée au chapitre <a href="statistiques-descriptives.html#statistiques-descriptives">de statistiques descriptives</a>.</li>
+<li>Calculez la corrélation entre la taille de l’empan de la main forte et la taille des individus.</li>
+</ol>
+</div>
+</div>
+<div id="régression-pas-à-pas" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Régression pas à pas<a href="régressions-linéaires.html#régression-pas-à-pas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dans cette partie, nous allons effectuer quelques opérations “à la main”. Nous allons créer avec R tous les objets nécessaires pour pouvoir estimer par la méthode des moindres carrés les coefficient de la régression. Ensuite, nous regarderons comment réaliser des tests d’hypothèse de nullité des coefficients. La section suivante permettra de retrouver les mêmes résultats à l’aide de routines.</p>
+<p>Nous verrons dans un autre chapitre comment réaliser des graphiques avec le <em>package</em> {ggplot2}. Pour réaliser des nuages de points facilement, nous pouvons utiliser la fonction <code class="sourceCode r"><span class="fu">qplot</span>()</code> de ce <em>package</em>. Le tableau de données contenant les observations à afficher est indiqué à l’argument <code class="sourceCode r">data<span class="ot">=</span></code>. Les arguments <code class="sourceCode r">x<span class="ot">=</span></code> et <code class="sourceCode r">y<span class="ot">=</span></code> reçoivent le nom des colonnes du tableau à utiliser pour l’axe des abscisses et des ordonnées, respectivement. L’argument <code class="sourceCode r">geom<span class="ot">=</span></code> définit le type de géométrie à représenter. Dans l’exemple ci-dessous, nous souhaitons réaliser un nuage de points. Nous indiquerons donc <code class="sourceCode r">geom <span class="ot">=</span> point</code>. Une fois le nuage créé, nous ajoutons une couche au graphique, pour nommer les axes et le graphique, avec la fonction <code class="sourceCode r"><span class="fu">labs</span>()</code>.</p>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="régressions-linéaires.html#cb517-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb517-2"><a href="régressions-linéaires.html#cb517-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(<span class="at">x =</span> empan_main_forte, <span class="at">y =</span> taille,</span>
+<span id="cb517-3"><a href="régressions-linéaires.html#cb517-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> df_empan, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="sc">+</span></span>
+<span id="cb517-4"><a href="régressions-linéaires.html#cb517-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Empan de la main forte (en cm)&quot;</span>,</span>
+<span id="cb517-5"><a href="régressions-linéaires.html#cb517-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Taille de l&#39;individu (en cm)&quot;</span>,</span>
+<span id="cb517-6"><a href="régressions-linéaires.html#cb517-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Taille des individus en fonction de la mesure de l&#39;empan&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-248-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="estimation-des-coefficients-de-la-régression-par-moindres-carrés-ordinaires" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> Estimation des coefficients de la régression par moindres carrés ordinaires<a href="régressions-linéaires.html#estimation-des-coefficients-de-la-régression-par-moindres-carrés-ordinaires" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Comme indiqué précédemment, nous souhaitons estimer la relation suivante : <span class="math display">\[\boldsymbol y = \boldsymbol X \boldsymbol \beta + \boldsymbol \varepsilon,\]</span></p>
+<p>où <span class="math inline">\(\boldsymbol y\)</span> est un vecteur contenant les tailles des individus, <span class="math inline">\(\boldsymbol X\)</span> une matrice contenant deux colonne : une pour la constante et une deuxième pour les valeurs de l’empan de la main forte. Nous allons estimer les valeurs des deux coefficients du vecteur <span class="math inline">\(\boldsymbol \beta\)</span> (celui pour la constante, et celui pour l’empan de la main forte).</p>
+<div class="greenbox">
+<ol start="3" style="list-style-type: decimal">
+<li>Dans un objet que vous appellerez <code>n</code>, stockez le nombre d’observations dans le tableau de données <code>df</code>.</li>
+<li>Créez un vecteur que vous nommerez <code>constante</code>. Cet objet doit contenir la valeur <code>1</code> répétée <code>n</code> fois.</li>
+<li>Créez un vecteur que vous nommerez <code>y</code>. Cet objet doit contenir les valeurs la colonne <code>taille</code> du tableau <code>df_empan</code>. Cet objet sera notre variable de réponse, celle que nous souhaitons pouvoir prédire à l’aide du modèle de régression linéaire. Les premières valeurs de <code>y</code> seront comme suit :</li>
+</ol>
+<pre><code>## [1] 172 179 179 160 186 178</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Créez une matrice que vous nommerez <code>X</code>, qui contiendra deux colonnes : une première contenant les valeurs de <code>constante</code>, et une deuxième contenant les valeurs de la colonne <code>empan_main_forte</code> de <code>df</code>. Les premières valeurs de <code>X</code> seront comme suit :</li>
+</ol>
+<pre><code>##      [,1] [,2]
+## [1,]    1 19.0
+## [2,]    1 20.5
+## [3,]    1 21.0
+## [4,]    1 19.0
+## [5,]    1 21.0
+## [6,]    1 19.0</code></pre>
+</div>
+<p>Avec la méthode des moindres carrés, les coefficients de la régression sont estimé en effectuant le calcul suivant :
+<span class="math display">\[\hat{\boldsymbol\beta} = (\boldsymbol X^t \boldsymbol X)^{-1} \boldsymbol X^t \boldsymbol y.\]</span></p>
+<div class="greenbox">
+<ol start="7" style="list-style-type: decimal">
+<li>Calculez la transposée de <code>X</code>, c’est-à-dire <span class="math inline">\(\boldsymbol X^t\)</span>.</li>
+<li>Calculez, à l’aide d’un produit matriciel, la matrice <span class="math inline">\(\boldsymbol X^t \boldsymbol X\)</span></li>
+<li>Calculez l’inverse de la matrice de la fonction précédente, c’est-à-dire <span class="math inline">\(\left(\boldsymbol X^t \boldsymbol X\right)^{-1}\)</span></li>
+<li>Calculez le vecteur colonne <span class="math inline">\(\boldsymbol X^t \boldsymbol y\)</span></li>
+<li>Calculez le vecteur des coefficients de régression par la méthode des moindres carrés ordinaires, c’est-à-dire <span class="math inline">\(\hat{\boldsymbol\beta} = \left(\boldsymbol X^t \boldsymbol X\right)^{-1} \boldsymbol X^t \boldsymbol y\)</span>. Stockez le résultat dans un objet que vous nommerez <code>hat_beta</code>.</li>
+<li>Avec les crochets, extrayez chaque coefficient de <code>hat_beta</code> (le coefficient associé à la constane – <em>i.e.</em>, la pente ici – et le coefficient associé à la taille de l’empan). Vous devez obtenir les valeurs suivantes :</li>
+</ol>
+<pre><code>## Constante</code></pre>
+<pre><code>## [1] 96.27554</code></pre>
+<pre><code>## Coeff empan</code></pre>
+<pre><code>## [1] 3.885117</code></pre>
+<p><em>Note</em> : lors de la <a href="matrices-et-listes.html#matrice">séance portant sur les matrices</a>, vous avez déjà appris à effectuer toutes ces opérations.</p>
+</div>
+</div>
+<div id="prédiction-des-valeurs" class="section level3 hasAnchor" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> Prédiction des valeurs<a href="régressions-linéaires.html#prédiction-des-valeurs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Une fois que nous avons obtenu les coefficients de la régression, nous pouvons les réutiliser pour calculer les valeurs prédites par le modèle, à savoir <span class="math inline">\(\hat{\boldsymbol y}\)</span>. Il suffit pour cela d’appliquer la formule :</p>
+<p><span class="math display">\[\hat{\boldsymbol y} = \boldsymbol X \boldsymbol{\hat{\beta}}.\]</span></p>
+<div class="greenbox">
+<ol start="13" style="list-style-type: decimal">
+<li>Calculez les valeurs prédites, c’est-à-dire <span class="math inline">\(\hat{\boldsymbol y} = \boldsymbol X \hat{\boldsymbol\beta}\)</span>. Stockez les valeurs dans un objet que vous nommerez <code>y_pred</code>. Les premières valeurs sont les suivantes :</li>
+</ol>
+<pre><code>##          [,1]
+## [1,] 170.0928
+## [2,] 175.9204
+## [3,] 177.8630
+## [4,] 170.0928
+## [5,] 177.8630
+## [6,] 170.0928</code></pre>
+</div>
+</div>
+<div id="les-résidus-de-la-régression" class="section level3 hasAnchor" number="8.3.3">
+<h3><span class="header-section-number">8.3.3</span> Les résidus de la régression<a href="régressions-linéaires.html#les-résidus-de-la-régression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les résidus correspondent à la différence entre les valeurs observées et les valeurs prédites, soit <span class="math inline">\(e = \boldsymbol y - \boldsymbol{X}\hat{\boldsymbol\beta}\)</span>.</p>
+<div class="greenbox">
+<ol start="14" style="list-style-type: decimal">
+<li>Calculez les résidus <span class="math inline">\(e = \boldsymbol y - \boldsymbol{X}\hat{\boldsymbol\beta}\)</span>. Stockez le résultat dans un objet que vous nommerez <code>residus</code>. Les premières valeurs sont les suivantes :</li>
+</ol>
+<pre><code>##            [,1]
+## [1,]   1.907245
+## [2,]   3.079570
+## [3,]   1.137011
+## [4,] -10.092755
+## [5,]   8.137011
+## [6,]   7.907245</code></pre>
+</div>
+<p>Nous pouvons regarder la distribution des résidus, pour voir s’ils ont une allure normale (ici, nous avons peu d’observations…) :</p>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="régressions-linéaires.html#cb526-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(residus, <span class="at">geom=</span><span class="st">&quot;histogram&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-258-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="un-indicateur-de-la-qualité-dajustement-le-coefficient-de-détermination" class="section level3 hasAnchor" number="8.3.4">
+<h3><span class="header-section-number">8.3.4</span> Un indicateur de la qualité d’ajustement : le coefficient de détermination<a href="régressions-linéaires.html#un-indicateur-de-la-qualité-dajustement-le-coefficient-de-détermination" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour avoir une idée de la qualité d’ajustement du modèle, il est coutume de calculer le coefficient de détermination, le <span class="math inline">\(R^2\)</span>. Nous pouvons au préalable calculer la somme des carrés des écarts expliqués ainsi que la somme des carrés totale.</p>
+<p>La variance peut se décomposer en deux termes : une part expliquée par le modèle et une part inexpliquée :</p>
+<p><span class="math display">\[\underbrace{(y_i - \bar{y})}_{\text{Ecart total}} = \underbrace{(\hat{y}_i - \bar{y})}_{\text{Écart expliqué}} + \underbrace{(y_i - \hat{y}_i)}_{\text{Écart résiduel}},\]</span>
+avec <span class="math inline">\(\overline y = \frac{1}{n}\sum_{i=1}^{n} y_i\)</span> la moyenne de<span class="math inline">\(y\)</span>.</p>
+<p>On peut montrer que :</p>
+<p><span class="math display">\[\underbrace{\sum_{i=1}^{n}(y_i - \bar{y})^2}_{\text{SCT}} = \underbrace{\sum_{i=1}^{n}(\hat{y}_i - \bar{y})^2}_{\text{SCE}} + \underbrace{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}_{\text{SCR}},\]</span>
+avec :</p>
+<ul>
+<li><span class="math inline">\(\text{SCT}\)</span> : la somme des carrés totale</li>
+<li><span class="math inline">\(\text{SCE}\)</span> : la somme des carrés des écarts expliqués par le modèle</li>
+<li><span class="math inline">\(\text{SCR}\)</span> : la somme des carrés des résidus</li>
+</ul>
+<div class="greenbox">
+<ol start="15" style="list-style-type: decimal">
+<li>Calculez la somme des carrés des résidus, c’est-à-dire <span class="math inline">\(\text{SCR} = \sum_{i=1}^{n} \left( y_i - \hat{y_i}\right)^2\)</span>. Stockez le résultat dans un objet que vous nommerez <code>somme_carre_residus</code>. Vous obtiendrez :</li>
+</ol>
+<pre><code>## [1] 3421.886</code></pre>
+<ol start="16" style="list-style-type: decimal">
+<li>Calculez <span class="math inline">\(\text{SCT}\)</span> et <span class="math inline">\(\text{SCE}\)</span> et stockez les valeurs dans des objets que vous nommerez <code>somme_carres_totale</code> et <code>somme_carres_expliques</code>, respectivement. Vous obtiendrez :</li>
+</ol>
+<pre><code>## Somme des carrés totale :</code></pre>
+<pre><code>## [1] 4666.775</code></pre>
+<pre><code>## Somme des carrés expliqués :</code></pre>
+<pre><code>## [1] 1244.889</code></pre>
+<ol start="17" style="list-style-type: decimal">
+<li>Calculez le coefficient de détermination : <span class="math inline">\(R^2 = \frac{\text{SCE}}{\text{SCT}}\)</span>. Vous obtiendrez :</li>
+</ol>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="régressions-linéaires.html#cb532-1" aria-hidden="true" tabindex="-1"></a>r_2</span></code></pre></div>
+</div>
+</div>
+<div id="tests-de-nullité-des-coefficients-de-la-régression-linéaire" class="section level3 hasAnchor" number="8.3.5">
+<h3><span class="header-section-number">8.3.5</span> Tests de nullité des coefficients de la régression linéaire<a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>À présent, nous souhaitons pouvoir effectuer des tests de significativité des coefficients de la régression. Le test se présente sous la forme suivante :
+<span class="math display">\[\begin{align*}
+\begin{cases}
+H_0 : \beta_i = 0\\
+H_1 : \beta_i \ne 0
+\end{cases}, i = 1, 2
+\end{align*}\]</span></p>
+<p>Ce test s’appuie sur la statistique de test suivante :
+<span class="math display">\[\begin{align*}
+T = \frac{\hat{\beta}_i - \beta_{i,H_0}}{\hat{\sigma}_{\hat{\beta}_i}} \sim \mathcal{S}t(n-m-1),
+\end{align*}\]</span>
+avec <span class="math inline">\(\beta_{i,H_0}\)</span> la valeur de <span class="math inline">\(\beta_i\)</span> sous l’hypothèse nulle, <span class="math inline">\(\hat{\sigma}_{\hat{\beta}_i}\)</span> l’estimation de l’écart-type de l’estimation du paramètre <span class="math inline">\(\beta_i\)</span>.</p>
+<p>Pour effectuer ce test bilatéral, on peut lire dans la table de la loi de Student deux fractiles tels que :
+<span class="math display">\[\begin{align*}
+\mathbb{P}\left( -t_{1-\alpha/2} &lt; \frac{\hat{\beta}_i - \alpha_{i,H_0}}{\hat{\sigma}_{\hat{\beta}_i}} &lt; t_{1-\alpha/2} \right) = 1 - \alpha.
+\end{align*}\]</span>
+avec <span class="math inline">\(\alpha\)</span> le risque de première espèce (le risque de rejeter <span class="math inline">\(H_0\)</span> alors qu’elle est vraie).</p>
+<p>À partir des observations, il est possible de calculer :
+<span class="math display">\[\begin{align*}
+t_{i,\textrm{obs.}} = \frac{\hat{\beta}_i}{\hat{\sigma}_{\hat{\beta}_i}}.
+\end{align*}\]</span></p>
+<p>La règle de décision est la suivante :</p>
+<ul>
+<li>si <span class="math inline">\(t_{i,\textrm{obs.}} \in [-t_{1-\alpha/2}, t_{1-\alpha/2}]\)</span>, nous somme dans la région de non rejet, on ne rejette donc pas <span class="math inline">\(H_0\)</span> au seuil <span class="math inline">\(\alpha\)</span> (avec <span class="math inline">\(\alpha=5\%\)</span>, par exemple), et on considère alors que <span class="math inline">\(\beta_i\)</span> n’est pas statistiquement différent de zéro ;</li>
+<li>si en revanche <span class="math inline">\(t_{i,\textrm{obs.}} \notin [-t_{1-\alpha/2}, t_{1-\alpha/2}]\)</span>, nous sommes dans la région critique et cette fois on rejette l’hypothèse nulle en faveur de l’hypothèse alternative. On considère alors qu’avec un risque de première espèce <span class="math inline">\(\alpha\)</span>, on a <span class="math inline">\(\alpha_i \ne 0\)</span>.</li>
+</ul>
+<div class="greenbox">
+<ol start="18" style="list-style-type: decimal">
+<li>Calculez la variance des erreurs <span class="math inline">\(\hat{\sigma}^2_\varepsilon = \frac{\text{SCR}}{n-m-1}\)</span>. Stockez le résultat dans un objet que vous nommerez <code>hat_sigma_2_u</code>. Vous devez obtenir :</li>
+</ol>
+<pre><code>## [1] 90.04964</code></pre>
+<ol start="19" style="list-style-type: decimal">
+<li>Calculez la matrice de variance-covariance des estimateurs <span class="math inline">\(\mathbb{V}\left(\hat{\boldsymbol\beta}\right) = \hat{\sigma}^2_\varepsilon \left(\boldsymbol X^t \boldsymbol X\right)^{-1}\)</span>. Stockez le résultat dans un objet que vous nommerez <code>var_cov</code>. Vous obtiendrez la matrice suivante :</li>
+</ol>
+<pre><code>##           [,1]       [,2]
+## [1,] 440.08045 -21.864130
+## [2,] -21.86413   1.091842</code></pre>
+<ol start="20" style="list-style-type: decimal">
+<li>Extrayez les éléments de la diagonale de la matrice de variance-covariance (les variances, donc), puis calculez leur racine carrée de manière à obtenir les erreurs-types <span class="math inline">\(\hat{\sigma}_{\hat{\boldsymbol\beta}}\)</span>. Stockez le résultat dans un vecteur que vous nommerez <code>hat_sigma_betas</code>. Vous obtiendrez les valeurs suivantes :</li>
+</ol>
+<pre><code>## [1] 20.978094  1.044912</code></pre>
+<ol start="21" style="list-style-type: decimal">
+<li>Pour chaque coefficient, calculez la statistique observée du test de nullité des coefficients <span class="math inline">\(t_{i,\textrm{obs.}} = \frac{\hat{\beta}_i}{\hat{\sigma}_{\hat{\beta}_i}}\)</span>. Stockez le résultat dans un vecteur que vous nommerez <code>t_obs</code>. Vous obtiendrez les valeurs suivantes :</li>
+</ol>
+<pre><code>##          [,1]
+## [1,] 4.589337
+## [2,] 3.718127</code></pre>
+<ol start="22" style="list-style-type: decimal">
+<li>À l’aide de la fonction <code class="sourceCode r"><span class="fu">qt</span>()</code>, stockez dans un objet que vous nommerez <code>t_tab</code> le quantile d’ordre 95% d’une Student à <code>n-m-1</code> degrés de libertés. Vous obtiendrez la valeur suivante :</li>
+</ol>
+<pre><code>## [1] 2.024394</code></pre>
+<ol start="23" style="list-style-type: decimal">
+<li><p>Comparez les valeurs de <code>t_obs</code> avec celles de <code>t_tab</code>. Concluez pour chaque coefficient.</p></li>
+<li><p>À l’aide de la fonction <code class="sourceCode r"><span class="fu">pt</span>()</code>, calculez la p-value associée au test de nullité de chaque coefficient (rappel : nous effectuons un test bilatéral ici, donc nous cherchons <span class="math inline">\(2 \times \mathbb{P}(\vert T \vert &gt; t_{obs})\)</span>). Vous obtiendrea les valeurs suivantes :</p></li>
+</ol>
+<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="régressions-linéaires.html#cb538-1" aria-hidden="true" tabindex="-1"></a>p_val</span></code></pre></div>
+<pre><code>##              [,1]
+## [1,] 4.745605e-05
+## [2,] 6.453478e-04</code></pre>
+</div>
+</div>
+</div>
+<div id="régression-avec-lm" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Régression avec lm<a href="régressions-linéaires.html#régression-avec-lm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La fonction permettant de réaliser une régression linéaire avec R se nomme <code class="sourceCode r"><span class="fu">lm</span>()</code>. Il est nécessaire de fournir une formule à l’arguemnt <code>formula=</code>. L’argument <code>data=</code> indique le tableau de données dans lequel les variables mentionnées dans la formule se trouvent.</p>
+<p>Pour écrire la formule, on indique le nom de la variable à expliquer, puis, après avoir ajouté un tilde (<code class="sourceCode r"><span class="sc">~</span></code>), on écrit le nom des variables explicatives en les séparant par un symbole plus (<code class="sourceCode r"><span class="sc">+</span></code>). Par défaut, la constante est ajoutée au modèle.</p>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="régressions-linéaires.html#cb540-1" aria-hidden="true" tabindex="-1"></a>reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(taille <span class="sc">~</span> empan_main_forte, <span class="at">data =</span> df_empan)</span>
+<span id="cb540-2"><a href="régressions-linéaires.html#cb540-2" aria-hidden="true" tabindex="-1"></a>reg</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = taille ~ empan_main_forte, data = df_empan)
+## 
+## Coefficients:
+##      (Intercept)  empan_main_forte  
+##           96.276             3.885</code></pre>
+<div class="notebox">
+<p><strong>Note</strong></p>
+<p>Pour estimer le modèle sans la constante, on ajoute dans le membre à droite du tilde : <code class="sourceCode r"><span class="sc">-</span> <span class="dv">1</span></code> :</p>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="régressions-linéaires.html#cb542-1" aria-hidden="true" tabindex="-1"></a>reg_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(taille <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span>empan_main_forte, <span class="at">data =</span> df_empan)</span>
+<span id="cb542-2"><a href="régressions-linéaires.html#cb542-2" aria-hidden="true" tabindex="-1"></a>reg_2</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = taille ~ -1 + empan_main_forte, data = df_empan)
+## 
+## Coefficients:
+## empan_main_forte  
+##            8.668</code></pre>
+</div>
+<p>Pour ajouter des variables explicatives, il suffit d’écrire leur nom en séparant chaque variables par le symbole plus (<code class="sourceCode r"><span class="sc">+</span></code>) :</p>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="régressions-linéaires.html#cb544-1" aria-hidden="true" tabindex="-1"></a>reg_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(taille <span class="sc">~</span> empan_main_forte <span class="sc">+</span> genre, <span class="at">data =</span> df_empan)</span>
+<span id="cb544-2"><a href="régressions-linéaires.html#cb544-2" aria-hidden="true" tabindex="-1"></a>reg_3</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = taille ~ empan_main_forte + genre, data = df_empan)
+## 
+## Coefficients:
+##      (Intercept)  empan_main_forte            genreH  
+##          141.897             1.058            16.275</code></pre>
+<p>L’objet retourné par la fonction <code class="sourceCode r"><span class="fu">lm</span>()</code> est de classe <code>lm</code>. Il s’agit d’une liste contenant plusieurs éléments nommés, dont :</p>
+<ul>
+<li><code>coefficients</code> : un vecteur nommé de coefficients (<span class="math inline">\(\hat{\boldsymbol\beta}\)</span>) ; les noms correspondent aux noms des variables explicatives</li>
+<li><code>residuals</code> : les résidus</li>
+<li><code>fitted.values</code> : les valeurs prédites par le modèle</li>
+</ul>
+<p>On peut donc accéder à ces éléments avec les crochets, ou à leur contenu avec les doubles crochets (ou le dollar) :</p>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="régressions-linéaires.html#cb546-1" aria-hidden="true" tabindex="-1"></a>reg[[<span class="st">&quot;coefficients&quot;</span>]]</span></code></pre></div>
+<pre><code>##      (Intercept) empan_main_forte 
+##        96.275538         3.885117</code></pre>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="régressions-linéaires.html#cb548-1" aria-hidden="true" tabindex="-1"></a>reg<span class="sc">$</span>coefficients</span></code></pre></div>
+<pre><code>##      (Intercept) empan_main_forte 
+##        96.275538         3.885117</code></pre>
+<p>On retrouve bien les mêmes valeurs que celles que nous avons calculées “à la main”. On note que le coefficient associé à la constante se nome <code>(Intercept)</code> (soit la pente de la droite de régression).</p>
+<div id="résumé-de-lestimation" class="section level3 hasAnchor" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Résumé de l’estimation<a href="régressions-linéaires.html#résumé-de-lestimation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La fonction <code class="sourceCode r"><span class="fu">summary</span>()</code> permet d’obtenir quelques résumés concernant l’estimation :</p>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="régressions-linéaires.html#cb550-1" aria-hidden="true" tabindex="-1"></a>resume_reg <span class="ot">&lt;-</span> <span class="fu">summary</span>(reg)</span>
+<span id="cb550-2"><a href="régressions-linéaires.html#cb550-2" aria-hidden="true" tabindex="-1"></a>resume_reg</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = taille ~ empan_main_forte, data = df_empan)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -17.150  -7.343   0.108   5.252  31.907 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        96.276     20.978   4.589 4.75e-05 ***
+## empan_main_forte    3.885      1.045   3.718 0.000645 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 9.489 on 38 degrees of freedom
+## Multiple R-squared:  0.2668, Adjusted R-squared:  0.2475 
+## F-statistic: 13.82 on 1 and 38 DF,  p-value: 0.0006453</code></pre>
+<p>Les valeurs qui s’affichent sont accessibles (avec les crochets doubles ou le symbole dollar) :</p>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="régressions-linéaires.html#cb552-1" aria-hidden="true" tabindex="-1"></a>resume_reg<span class="sc">$</span>coefficients</span></code></pre></div>
+<pre><code>##                   Estimate Std. Error  t value     Pr(&gt;|t|)
+## (Intercept)      96.275538  20.978094 4.589337 4.745605e-05
+## empan_main_forte  3.885117   1.044912 3.718127 6.453478e-04</code></pre>
+<p>Regardons d’un peu plus près les différents éléments de la sortie :</p>
+<ul>
+<li><code>Call</code> : la formule du modèle.</li>
+<li><code>Residuals</code> : des statistiques descriptives des résidus.</li>
+<li><code>Coefficients</code> : un tableau à deux entrées où les lignes correspondent aux coefficients associés aux variables explicatives, et les colonnes, dans l’ordre, à l’estimation du coefficient, l’écart-type estimé, la valeur du test de Student de nullité statistique du coefficient et enfin la p-value associé à ce test, suivie d’un symbole pour lire rapidement la significativité.</li>
+<li><code>Signif. codes</code> : les significations des symboles de niveau de significativité.</li>
+<li><code>Residual standard error</code> : estimation de l’écart-type de l’aléa et degré de liberté.</li>
+<li><code>Multiple R-squared</code> : coefficient de détermination.</li>
+<li><code>Adjusted R-squared</code> : coefficient de détermination ajusté.</li>
+<li><code>F-statistic</code> : valeur de la statistique de Fisher du test de significativité globale, ainsi que les degrés de liberté et la p-value associée au test.</li>
+</ul>
+</div>
+<div id="prédictions-des-valeurs" class="section level3 hasAnchor" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Prédictions des valeurs<a href="régressions-linéaires.html#prédictions-des-valeurs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les valeurs prédites par le modèle sont dans l’élément <code>fitted.values</code> de l’objet retourné par <code class="sourceCode r"><span class="fu">lm</span>()</code>.</p>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="régressions-linéaires.html#cb554-1" aria-hidden="true" tabindex="-1"></a>reg<span class="sc">$</span>fitted.values</span></code></pre></div>
+<pre><code>##        1        2        3        4        5        6        7        8 
+## 170.0928 175.9204 177.8630 170.0928 177.8630 170.0928 170.0928 177.8630 
+##        9       10       11       12       13       14       15       16 
+## 185.6332 173.9779 170.0928 173.9779 173.9779 173.9779 166.2076 181.7481 
+##       17       18       19       20       21       22       23       24 
+## 183.6907 175.9204 168.1502 181.7481 170.0928 177.8630 173.9779 177.8630 
+##       25       26       27       28       29       30       31       32 
+## 173.9779 170.0928 177.8630 170.0928 168.1502 177.8630 181.7481 172.0353 
+##       33       34       35       36       37       38       39       40 
+## 181.7481 179.8055 175.9204 166.2076 166.2076 160.3800 175.9204 166.2076</code></pre>
+<p>La fonction <code class="sourceCode r"><span class="fu">predict</span>()</code> peut aussi être appliquée à l’objet de régression (il s’agit d’un alias de la fonction <code class="sourceCode r"><span class="fu">predict.lm</span>()</code> ; pour afficher la fiche d’aide il faut écrire <code class="sourceCode r">?<span class="fu">predict.lm</span>()</code>) :</p>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="régressions-linéaires.html#cb556-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(reg)</span></code></pre></div>
+<pre><code>##        1        2        3        4        5        6        7        8 
+## 170.0928 175.9204 177.8630 170.0928 177.8630 170.0928 170.0928 177.8630 
+##        9       10       11       12       13       14       15       16 
+## 185.6332 173.9779 170.0928 173.9779 173.9779 173.9779 166.2076 181.7481 
+##       17       18       19       20       21       22       23       24 
+## 183.6907 175.9204 168.1502 181.7481 170.0928 177.8630 173.9779 177.8630 
+##       25       26       27       28       29       30       31       32 
+## 173.9779 170.0928 177.8630 170.0928 168.1502 177.8630 181.7481 172.0353 
+##       33       34       35       36       37       38       39       40 
+## 181.7481 179.8055 175.9204 166.2076 166.2076 160.3800 175.9204 166.2076</code></pre>
+<p>Cette fonction permet par ailleurs d’effectuer des prédictions pour de nouvelles valeurs, à condition de fournir un tableau de données contenant les colonnes utilisées comme variables explicatrices. Pour prédire la taille d’une personne, selon notre premier modèle, si la mesure de l’empan est de 15 cm :</p>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="régressions-linéaires.html#cb558-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">empan_main_forte =</span> <span class="dv">15</span>)</span>
+<span id="cb558-2"><a href="régressions-linéaires.html#cb558-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(reg, <span class="at">newdata =</span> new_data)</span></code></pre></div>
+<pre><code>##        1 
+## 154.5523</code></pre>
+<p>Avec la régression de la taille sur l’empan de la main forte et le genre, si la mesure de l’empan est de 15 cm et que l’individu est un homme :</p>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="régressions-linéaires.html#cb560-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(reg_3, <span class="at">newdata =</span> <span class="fu">tibble</span>(<span class="at">empan_main_forte =</span> <span class="dv">15</span>, <span class="at">genre =</span> <span class="st">&quot;H&quot;</span>))</span></code></pre></div>
+<pre><code>##        1 
+## 174.0465</code></pre>
+<div class="greenbox">
+<ol start="25" style="list-style-type: decimal">
+<li>À l’aide d’un mètre-ruban, mesurez la taille de votre empan. En utilsant le modèle estimé de votre choix, prédisez votre taille. Comparez avec la réalité.</li>
+</ol>
+</div>
+<p>Pour munir une prédiction d’un intervalle de confiance, on peut ajouter des arguments à la fonction <code class="sourceCode r"><span class="fu">predict</span>()</code>. Avec l’argument <code class="sourceCode r">interval<span class="ot">=</span></code>, on choisit le type d’intervalle (<code class="sourceCode r"><span class="st">&quot;confidence&quot;</span></code> ou <code class="sourceCode r"><span class="st">&quot;prediction&quot;</span></code>), avec <code class="sourceCode r">level<span class="ot">=</span></code> on choisir le niveau de confiance, et avec <code class="sourceCode r">se.fit<span class="ot">=</span></code> on précise si l’on souhaite ou non que l’écart-type estimé soit retourné.</p>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="régressions-linéaires.html#cb562-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> </span>
+<span id="cb562-2"><a href="régressions-linéaires.html#cb562-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict</span>(reg, <span class="at">newdata =</span> new_data,</span>
+<span id="cb562-3"><a href="régressions-linéaires.html#cb562-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>, <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb562-4"><a href="régressions-linéaires.html#cb562-4" aria-hidden="true" tabindex="-1"></a>pred</span></code></pre></div>
+<pre><code>## $fit
+##        fit      lwr      upr
+## 1 154.5523 132.3881 176.7165
+## 
+## $se.fit
+## [1] 5.460854
+## 
+## $df
+## [1] 38
+## 
+## $residual.scale
+## [1] 9.489449</code></pre>
+<p>Dans l’élément <code class="sourceCode r">fit</code>, les valeurs sont les suivantes : <code>fit</code> pour la valeur prédite, <code>lwr</code> et <code>upr</code> les bornes inférieure et supérieure de l’intervalle de confiance de la prédiction (<code>lwr</code> pour <em>lower</em> et <code>upr</code> pour <em>upper</em>).</p>
+</div>
+<div id="tests-de-nullité-des-coefficients-de-la-régression-linéaire-1" class="section level3 hasAnchor" number="8.4.3">
+<h3><span class="header-section-number">8.4.3</span> Tests de nullité des coefficients de la régression linéaire<a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’élément appelé <code class="sourceCode r">coefficients</code> obtenu en application de la fonction <code class="sourceCode r"><span class="fu">summary</span>()</code> sur l’objet issu de la régression contient un tableau donnant pour chaque coefficient (en ligne), la valeur estimée (<code>Estimate</code>), l’écart-type de l’estimateur (<code>Std. Error</code>), la valeur observé de la statistique de Student du test de nullité du coefficient (<code>Std. Error</code>) et la p-value associée au test (<code>Pr(&gt;|t|)</code>).</p>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="régressions-linéaires.html#cb564-1" aria-hidden="true" tabindex="-1"></a>resume_reg<span class="sc">$</span>coefficients</span></code></pre></div>
+<pre><code>##                   Estimate Std. Error  t value     Pr(&gt;|t|)
+## (Intercept)      96.275538  20.978094 4.589337 4.745605e-05
+## empan_main_forte  3.885117   1.044912 3.718127 6.453478e-04</code></pre>
+</div>
+<div id="mise-en-forme-des-résultats-avec-modelsummary" class="section level3 hasAnchor" number="8.4.4">
+<h3><span class="header-section-number">8.4.4</span> Mise en forme des résultats avec modelsummary<a href="régressions-linéaires.html#mise-en-forme-des-résultats-avec-modelsummary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour créer de jolis tableaux de statistiques descriptives, nous allons utiliser la fonction <code class="sourceCode r"><span class="fu">modelsummary</span>()</code> du <em>package</em> du même nom. Un <a href="https://vincentarelbundock.github.io/modelsummary/articles/modelsummary.html">tutoriel</a> est disponible sur le site du créateur du <em>package</em>, Vincent Arel-Bundock. Nous allons ici explorer uniquement les rudiments de la fonction <code class="sourceCode r"><span class="fu">modelsummary</span>()</code>.</p>
+<div class="notebox">
+<p><strong>Note</strong></p>
+<p>Nous avons vu dans le chapitre sur les <a href="statistiques-descriptives.html#statistiques-descriptives">résumés statistiques</a> que nous pouvions utiliser une fonction du <em>package</em> {gtsummary}. Pour des tableaux présentant les tableaux de régression, bien que {gtsummary} propose une fonction nommée <code class="sourceCode r"><span class="fu">tbl_regression</span>()</code>, nous préférons utiliser ici le <em>package</em> {modelsummary}. Pour celles et ceux qui voudraient apprendre à utiliser <code class="sourceCode r"><span class="fu">tbl_regression</span>()</code>, une bonne vignette facile d’accès est disponible sur le <a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html">site de Daniel D. Sjoberg, le créateur du <em>package</em></a>.</p>
+</div>
+<p>Dans un premier temps, nous allons charger le <em>package</em> {modelsummary} :</p>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="régressions-linéaires.html#cb566-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span></code></pre></div>
+<p>L’argument <code class="sourceCode r">models<span class="ot">=</span></code> de la fonction <code class="sourceCode r"><span class="fu">modelsummary</span>()</code> reçoit un objet issu d’une régression (ou une liste d’objets issus de régressions si l’on souhaite afficher plusieurs estimateurs provenant de plusieurs modèles). En fournissant les objets issus d’une régression dans une liste nommée, les noms que l’on donne sont ensuite utilisés en en-tête.</p>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="régressions-linéaires.html#cb567-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="at">models =</span> <span class="fu">list</span>(<span class="st">&quot;MCO 1&quot;</span> <span class="ot">=</span> reg,</span>
+<span id="cb567-2"><a href="régressions-linéaires.html#cb567-2" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 2&quot;</span> <span class="ot">=</span> reg_2,</span>
+<span id="cb567-3"><a href="régressions-linéaires.html#cb567-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 3&quot;</span> <span class="ot">=</span> reg_3))</span></code></pre></div>
+<table class="table table" style="width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+MCO 1
+</th>
+<th style="text-align:center;">
+MCO 2
+</th>
+<th style="text-align:center;">
+MCO 3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+96.276
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+141.897
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(20.978)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(17.069)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+empan_main_forte
+</td>
+<td style="text-align:center;">
+3.885
+</td>
+<td style="text-align:center;">
+8.668
+</td>
+<td style="text-align:center;">
+1.058
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(1.045)
+</td>
+<td style="text-align:center;">
+(0.092)
+</td>
+<td style="text-align:center;">
+(0.896)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+genreH
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+16.275
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(2.748)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.267
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.624
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.247
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.603
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+297.5
+</td>
+<td style="text-align:center;">
+313.1
+</td>
+<td style="text-align:center;">
+272.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+302.5
+</td>
+<td style="text-align:center;">
+316.5
+</td>
+<td style="text-align:center;">
+279.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+−145.739
+</td>
+<td style="text-align:center;">
+−154.559
+</td>
+<td style="text-align:center;">
+−132.403
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:center;">
+13.824
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+30.649
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RMSE
+</td>
+<td style="text-align:center;">
+9.25
+</td>
+<td style="text-align:center;">
+11.53
+</td>
+<td style="text-align:center;">
+6.63
+</td>
+</tr>
+</tbody>
+</table>
+<p>Le tableau ainsi créé retourne les coefficients estimés et leur écart-type pour chaque modèle, suivis de du nombre d’observations et de quelques statistiques de qualité d’ajustement des modèles (R<span class="math inline">\(^2\)</span>, R<span class="math inline">\(^2\)</span> ajusté, AIC, BIC, log vraisemblance, F de Fisher, racine de l’erreur quadratique moyenne).</p>
+<p>Lorsque nous affichons le résumé d’une régression avec la fonction <code class="sourceCode r"><span class="fu">summary</span>()</code>, le <strong>nombre de décimales des coefficients</strong> peut s’avérer plus grand que nécessaire pour la communication des résultats. L’argument <code class="sourceCode r">fmt<span class="ot">=</span></code> permet de déterminer comment formater les valeurs numériques du tableau. Si l’on souhaite par exemple ne faire figurer que 2 décimales, on peut écrire :</p>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="régressions-linéaires.html#cb568-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="at">models =</span> <span class="fu">list</span>(<span class="st">&quot;MCO 1&quot;</span> <span class="ot">=</span> reg,</span>
+<span id="cb568-2"><a href="régressions-linéaires.html#cb568-2" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 2&quot;</span> <span class="ot">=</span> reg_2,</span>
+<span id="cb568-3"><a href="régressions-linéaires.html#cb568-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 3&quot;</span> <span class="ot">=</span> reg_3),</span>
+<span id="cb568-4"><a href="régressions-linéaires.html#cb568-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="dv">2</span>)</span></code></pre></div>
+<table class="table table" style="width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+MCO 1
+</th>
+<th style="text-align:center;">
+MCO 2
+</th>
+<th style="text-align:center;">
+MCO 3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+96.28
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+141.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(20.98)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(17.07)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+empan_main_forte
+</td>
+<td style="text-align:center;">
+3.89
+</td>
+<td style="text-align:center;">
+8.67
+</td>
+<td style="text-align:center;">
+1.06
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(1.04)
+</td>
+<td style="text-align:center;">
+(0.09)
+</td>
+<td style="text-align:center;">
+(0.90)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+genreH
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+16.28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(2.75)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.267
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.624
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.247
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.603
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+297.5
+</td>
+<td style="text-align:center;">
+313.1
+</td>
+<td style="text-align:center;">
+272.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+302.5
+</td>
+<td style="text-align:center;">
+316.5
+</td>
+<td style="text-align:center;">
+279.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+−145.739
+</td>
+<td style="text-align:center;">
+−154.559
+</td>
+<td style="text-align:center;">
+−132.403
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:center;">
+13.824
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+30.649
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RMSE
+</td>
+<td style="text-align:center;">
+9.25
+</td>
+<td style="text-align:center;">
+11.53
+</td>
+<td style="text-align:center;">
+6.63
+</td>
+</tr>
+</tbody>
+</table>
+<p>Nous pouvons aussi utiliser une fonction pour formater les nombres, ce qui peut s’avérer utile pour produire un tableau avec des normes françaises (virgule utilisée comme séparateur décimal, espace comme sépartateur de milliers).</p>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="régressions-linéaires.html#cb569-1" aria-hidden="true" tabindex="-1"></a>fmt_fr <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb569-2"><a href="régressions-linéaires.html#cb569-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formatC</span>(x, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">big.mark =</span> <span class="st">&quot; &quot;</span>, <span class="at">decimal.mark =</span> <span class="st">&quot;,&quot;</span>, <span class="at">format =</span> <span class="st">&quot;f&quot;</span>)</span>
+<span id="cb569-3"><a href="régressions-linéaires.html#cb569-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="régressions-linéaires.html#cb570-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="at">models =</span> <span class="fu">list</span>(<span class="st">&quot;MCO 1&quot;</span> <span class="ot">=</span> reg,</span>
+<span id="cb570-2"><a href="régressions-linéaires.html#cb570-2" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 2&quot;</span> <span class="ot">=</span> reg_2,</span>
+<span id="cb570-3"><a href="régressions-linéaires.html#cb570-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 3&quot;</span> <span class="ot">=</span> reg_3),</span>
+<span id="cb570-4"><a href="régressions-linéaires.html#cb570-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> fmt_fr)</span></code></pre></div>
+<table class="table table" style="width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+MCO 1
+</th>
+<th style="text-align:center;">
+MCO 2
+</th>
+<th style="text-align:center;">
+MCO 3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+96,28
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+141,90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(20,98)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(17,07)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+empan_main_forte
+</td>
+<td style="text-align:center;">
+3,89
+</td>
+<td style="text-align:center;">
+8,67
+</td>
+<td style="text-align:center;">
+1,06
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(1,04)
+</td>
+<td style="text-align:center;">
+(0,09)
+</td>
+<td style="text-align:center;">
+(0,90)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+genreH
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+16,28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(2,75)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.267
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.624
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.247
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.603
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+297.5
+</td>
+<td style="text-align:center;">
+313.1
+</td>
+<td style="text-align:center;">
+272.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+302.5
+</td>
+<td style="text-align:center;">
+316.5
+</td>
+<td style="text-align:center;">
+279.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+−145.739
+</td>
+<td style="text-align:center;">
+−154.559
+</td>
+<td style="text-align:center;">
+−132.403
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:center;">
+13.824
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+30.649
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RMSE
+</td>
+<td style="text-align:center;">
+9.25
+</td>
+<td style="text-align:center;">
+11.53
+</td>
+<td style="text-align:center;">
+6.63
+</td>
+</tr>
+</tbody>
+</table>
+<div class="notebox">
+<p><strong>Note</strong></p>
+<p>On remarque que les statistiques en bas du tableau ne sont pas affectées par l’argument <code class="sourceCode r">fmt<span class="ot">=</span></code>. Nous verrons plus bas comment changer le format de ces statistiques.</p>
+</div>
+<p>Pour faire figurer une indication visuelle permettant de savoir rapidement le <strong>seuil de significativité du test de nullité des coefficients</strong>, la fonction <code class="sourceCode r"><span class="fu">modelsummary</span>()</code> accepte un argument <code class="sourceCode r">star<span class="ot">=</span></code>. Les symboles retenus sont les suivants : <code>+</code> pour un seuil de 10%, <code>*</code> pour un seuil de 5%, <code>**</code> pour un seuil de 1%, <code>***</code> pour un seuil de 0,1%. La légende est ajoutée en note de bas de tableau.</p>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="régressions-linéaires.html#cb571-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="at">models =</span> <span class="fu">list</span>(<span class="st">&quot;MCO 1&quot;</span> <span class="ot">=</span> reg,</span>
+<span id="cb571-2"><a href="régressions-linéaires.html#cb571-2" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 2&quot;</span> <span class="ot">=</span> reg_2,</span>
+<span id="cb571-3"><a href="régressions-linéaires.html#cb571-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 3&quot;</span> <span class="ot">=</span> reg_3),</span>
+<span id="cb571-4"><a href="régressions-linéaires.html#cb571-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">stars =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;" class="table table">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+MCO 1
+</th>
+<th style="text-align:center;">
+MCO 2
+</th>
+<th style="text-align:center;">
+MCO 3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+96.276***
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+141.897***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(20.978)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(17.069)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+empan_main_forte
+</td>
+<td style="text-align:center;">
+3.885***
+</td>
+<td style="text-align:center;">
+8.668***
+</td>
+<td style="text-align:center;">
+1.058
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(1.045)
+</td>
+<td style="text-align:center;">
+(0.092)
+</td>
+<td style="text-align:center;">
+(0.896)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+genreH
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+16.275***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(2.748)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.267
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.624
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.247
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.603
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+297.5
+</td>
+<td style="text-align:center;">
+313.1
+</td>
+<td style="text-align:center;">
+272.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+302.5
+</td>
+<td style="text-align:center;">
+316.5
+</td>
+<td style="text-align:center;">
+279.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+−145.739
+</td>
+<td style="text-align:center;">
+−154.559
+</td>
+<td style="text-align:center;">
+−132.403
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:center;">
+13.824
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+30.649
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RMSE
+</td>
+<td style="text-align:center;">
+9.25
+</td>
+<td style="text-align:center;">
+11.53
+</td>
+<td style="text-align:center;">
+6.63
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup></sup> + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001
+</td>
+</tr>
+</tfoot>
+</table>
+<p>Pour utiliser des seuils que l’on définit nous-mêmes, il suffit de fournir à l’argument <code class="sourceCode r">stars<span class="ot">=</span></code> un vecteur nommé : le nom correspond au symbole utilisé, la valeur au seuil retenu.</p>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="régressions-linéaires.html#cb572-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="at">models =</span> <span class="fu">list</span>(<span class="st">&quot;MCO 1&quot;</span> <span class="ot">=</span> reg,</span>
+<span id="cb572-2"><a href="régressions-linéaires.html#cb572-2" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 2&quot;</span> <span class="ot">=</span> reg_2,</span>
+<span id="cb572-3"><a href="régressions-linéaires.html#cb572-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 3&quot;</span> <span class="ot">=</span> reg_3),</span>
+<span id="cb572-4"><a href="régressions-linéaires.html#cb572-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">stars =</span> <span class="fu">c</span>(<span class="st">&quot;*&quot;</span> <span class="ot">=</span> .<span class="dv">1</span>, <span class="st">&quot;**&quot;</span> <span class="ot">=</span> .<span class="dv">05</span>, <span class="st">&quot;***&quot;</span> <span class="ot">=</span> <span class="fl">0.01</span>))</span></code></pre></div>
+<table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;" class="table table">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+MCO 1
+</th>
+<th style="text-align:center;">
+MCO 2
+</th>
+<th style="text-align:center;">
+MCO 3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+96.276***
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+141.897***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(20.978)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(17.069)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+empan_main_forte
+</td>
+<td style="text-align:center;">
+3.885***
+</td>
+<td style="text-align:center;">
+8.668***
+</td>
+<td style="text-align:center;">
+1.058
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(1.045)
+</td>
+<td style="text-align:center;">
+(0.092)
+</td>
+<td style="text-align:center;">
+(0.896)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+genreH
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+16.275***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(2.748)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.267
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.624
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.247
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.603
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+297.5
+</td>
+<td style="text-align:center;">
+313.1
+</td>
+<td style="text-align:center;">
+272.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+302.5
+</td>
+<td style="text-align:center;">
+316.5
+</td>
+<td style="text-align:center;">
+279.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+−145.739
+</td>
+<td style="text-align:center;">
+−154.559
+</td>
+<td style="text-align:center;">
+−132.403
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:center;">
+13.824
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+30.649
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RMSE
+</td>
+<td style="text-align:center;">
+9.25
+</td>
+<td style="text-align:center;">
+11.53
+</td>
+<td style="text-align:center;">
+6.63
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup></sup> * p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01
+</td>
+</tr>
+</tfoot>
+</table>
+<p>L’argument <code class="sourceCode r">coef_rename<span class="ot">=</span></code> permet de <strong>renommer les coefficients dans le tableau</strong>, afin de produire un résultat plus lisible.</p>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="régressions-linéaires.html#cb573-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="at">models =</span> <span class="fu">list</span>(<span class="st">&quot;MCO 1&quot;</span> <span class="ot">=</span> reg,</span>
+<span id="cb573-2"><a href="régressions-linéaires.html#cb573-2" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 2&quot;</span> <span class="ot">=</span> reg_2,</span>
+<span id="cb573-3"><a href="régressions-linéaires.html#cb573-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 3&quot;</span> <span class="ot">=</span> reg_3),</span>
+<span id="cb573-4"><a href="régressions-linéaires.html#cb573-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">stars =</span> <span class="fu">c</span>(<span class="st">&quot;*&quot;</span> <span class="ot">=</span> .<span class="dv">1</span>, <span class="st">&quot;**&quot;</span> <span class="ot">=</span> .<span class="dv">05</span>, <span class="st">&quot;***&quot;</span> <span class="ot">=</span> <span class="fl">0.01</span>),</span>
+<span id="cb573-5"><a href="régressions-linéaires.html#cb573-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">&quot;(Intercept)&quot;</span> <span class="ot">=</span> <span class="st">&quot;Constante&quot;</span>,</span>
+<span id="cb573-6"><a href="régressions-linéaires.html#cb573-6" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;empan_main_forte&quot;</span> <span class="ot">=</span> <span class="st">&quot;Empan main forte&quot;</span>,</span>
+<span id="cb573-7"><a href="régressions-linéaires.html#cb573-7" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;genreH&quot;</span> <span class="ot">=</span> <span class="st">&quot;Genre - Homme&quot;</span>))</span></code></pre></div>
+<table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;" class="table table">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+MCO 1
+</th>
+<th style="text-align:center;">
+MCO 2
+</th>
+<th style="text-align:center;">
+MCO 3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Constante
+</td>
+<td style="text-align:center;">
+96.276***
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+141.897***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(20.978)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(17.069)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Empan main forte
+</td>
+<td style="text-align:center;">
+3.885***
+</td>
+<td style="text-align:center;">
+8.668***
+</td>
+<td style="text-align:center;">
+1.058
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(1.045)
+</td>
+<td style="text-align:center;">
+(0.092)
+</td>
+<td style="text-align:center;">
+(0.896)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Genre - Homme
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+16.275***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(2.748)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.267
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.624
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.247
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.603
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+297.5
+</td>
+<td style="text-align:center;">
+313.1
+</td>
+<td style="text-align:center;">
+272.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+302.5
+</td>
+<td style="text-align:center;">
+316.5
+</td>
+<td style="text-align:center;">
+279.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+−145.739
+</td>
+<td style="text-align:center;">
+−154.559
+</td>
+<td style="text-align:center;">
+−132.403
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:center;">
+13.824
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+30.649
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RMSE
+</td>
+<td style="text-align:center;">
+9.25
+</td>
+<td style="text-align:center;">
+11.53
+</td>
+<td style="text-align:center;">
+6.63
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup></sup> * p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01
+</td>
+</tr>
+</tfoot>
+</table>
+<p>L’argument <code class="sourceCode r">gof_map<span class="ot">=</span></code> contrôle l’<strong>affichage des statistiques de qualité d’ajustement</strong> (<em>goodness of fit</em>) et d’autres informations relatives aux modèles.</p>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="régressions-linéaires.html#cb574-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="at">models =</span> <span class="fu">list</span>(<span class="st">&quot;MCO 1&quot;</span> <span class="ot">=</span> reg,</span>
+<span id="cb574-2"><a href="régressions-linéaires.html#cb574-2" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 2&quot;</span> <span class="ot">=</span> reg_2,</span>
+<span id="cb574-3"><a href="régressions-linéaires.html#cb574-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;MCO 3&quot;</span> <span class="ot">=</span> reg_3),</span>
+<span id="cb574-4"><a href="régressions-linéaires.html#cb574-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">stars =</span> <span class="fu">c</span>(<span class="st">&quot;*&quot;</span> <span class="ot">=</span> .<span class="dv">1</span>, <span class="st">&quot;**&quot;</span> <span class="ot">=</span> .<span class="dv">05</span>, <span class="st">&quot;***&quot;</span> <span class="ot">=</span> <span class="fl">0.01</span>),</span>
+<span id="cb574-5"><a href="régressions-linéaires.html#cb574-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">&quot;(Intercept)&quot;</span> <span class="ot">=</span> <span class="st">&quot;Constante&quot;</span>,</span>
+<span id="cb574-6"><a href="régressions-linéaires.html#cb574-6" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;empan_main_forte&quot;</span> <span class="ot">=</span> <span class="st">&quot;Empan main forte&quot;</span>,</span>
+<span id="cb574-7"><a href="régressions-linéaires.html#cb574-7" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;genreH&quot;</span> <span class="ot">=</span> <span class="st">&quot;Genre - Homme&quot;</span>),</span>
+<span id="cb574-8"><a href="régressions-linéaires.html#cb574-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">&quot;nobs&quot;</span>, <span class="st">&quot;r.squared&quot;</span>, <span class="st">&quot;adj.r.squared&quot;</span>, <span class="st">&quot;F&quot;</span>))</span></code></pre></div>
+<table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;" class="table table">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+MCO 1
+</th>
+<th style="text-align:center;">
+MCO 2
+</th>
+<th style="text-align:center;">
+MCO 3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Constante
+</td>
+<td style="text-align:center;">
+96.276***
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+141.897***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(20.978)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(17.069)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Empan main forte
+</td>
+<td style="text-align:center;">
+3.885***
+</td>
+<td style="text-align:center;">
+8.668***
+</td>
+<td style="text-align:center;">
+1.058
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(1.045)
+</td>
+<td style="text-align:center;">
+(0.092)
+</td>
+<td style="text-align:center;">
+(0.896)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Genre - Homme
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+16.275***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(2.748)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.267
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.624
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.247
+</td>
+<td style="text-align:center;">
+0.996
+</td>
+<td style="text-align:center;">
+0.603
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:center;">
+13.824
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+30.649
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup></sup> * p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01
+</td>
+</tr>
+</tfoot>
+</table>
+<p>Les noms des statistiques à afficher correspondent aux noms des colonnes du tableau retourné par l’évaluation de la fonction <code class="sourceCode r"><span class="fu">get_gof</span>()</code> :</p>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="régressions-linéaires.html#cb575-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_gof</span>(reg)</span></code></pre></div>
+<pre><code>##        aic      bic r.squared adj.r.squared     rmse nobs        F    logLik
+## 1 297.4778 302.5444 0.2667556     0.2474597 9.249171   40 13.82447 -145.7389</code></pre>
+<p>Pour <strong>renommer</strong> et contrôler le <strong>format</strong> des stastistiques affichées dans le bas du tableau, on peut fournir à l’argument <code class="sourceCode r">gof_map<span class="ot">=</span></code> une liste de liste, chacune contenant trois éléments :</p>
+<ol style="list-style-type: decimal">
+<li><code>raw</code> : le nom de la statiqtique telle que retournée par la fonction <code class="sourceCode r"><span class="fu">get_gof</span>()</code>`</li>
+<li><code>clean</code> : le nom à afficher dans le tableau</li>
+<li><code>fmt</code> : le format à utiliser (on peut à nouveau utiliser une fonction définie par nous-mêmes) :</li>
+</ol>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="régressions-linéaires.html#cb577-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb577-2"><a href="régressions-linéaires.html#cb577-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> <span class="fu">list</span>(<span class="st">&quot;MCO 1&quot;</span> <span class="ot">=</span> reg,</span>
+<span id="cb577-3"><a href="régressions-linéaires.html#cb577-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;MCO 2&quot;</span> <span class="ot">=</span> reg_2,</span>
+<span id="cb577-4"><a href="régressions-linéaires.html#cb577-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;MCO 3&quot;</span> <span class="ot">=</span> reg_3),</span>
+<span id="cb577-5"><a href="régressions-linéaires.html#cb577-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fmt =</span> fmt_fr,</span>
+<span id="cb577-6"><a href="régressions-linéaires.html#cb577-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">stars =</span> <span class="fu">c</span>(<span class="st">&quot;*&quot;</span> <span class="ot">=</span> .<span class="dv">1</span>, <span class="st">&quot;**&quot;</span> <span class="ot">=</span> .<span class="dv">05</span>, <span class="st">&quot;***&quot;</span> <span class="ot">=</span> <span class="fl">0.01</span>),</span>
+<span id="cb577-7"><a href="régressions-linéaires.html#cb577-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">&quot;(Intercept)&quot;</span> <span class="ot">=</span> <span class="st">&quot;Constante&quot;</span>,</span>
+<span id="cb577-8"><a href="régressions-linéaires.html#cb577-8" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;empan_main_forte&quot;</span> <span class="ot">=</span> <span class="st">&quot;Empan main forte&quot;</span>,</span>
+<span id="cb577-9"><a href="régressions-linéaires.html#cb577-9" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;genreH&quot;</span> <span class="ot">=</span> <span class="st">&quot;Genre - Homme&quot;</span>),</span>
+<span id="cb577-10"><a href="régressions-linéaires.html#cb577-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">gof_map =</span> <span class="fu">list</span>(</span>
+<span id="cb577-11"><a href="régressions-linéaires.html#cb577-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;nobs&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;N&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> fmt_fr),</span>
+<span id="cb577-12"><a href="régressions-linéaires.html#cb577-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;r.squared&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;R2&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> fmt_fr),</span>
+<span id="cb577-13"><a href="régressions-linéaires.html#cb577-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;adj.r.squared&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;R2 ajusté&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> fmt_fr),</span>
+<span id="cb577-14"><a href="régressions-linéaires.html#cb577-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;F&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;F&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> fmt_fr)</span>
+<span id="cb577-15"><a href="régressions-linéaires.html#cb577-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb577-16"><a href="régressions-linéaires.html#cb577-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;" class="table table">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+MCO 1
+</th>
+<th style="text-align:center;">
+MCO 2
+</th>
+<th style="text-align:center;">
+MCO 3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Constante
+</td>
+<td style="text-align:center;">
+96,28***
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+141,90***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(20,98)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(17,07)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Empan main forte
+</td>
+<td style="text-align:center;">
+3,89***
+</td>
+<td style="text-align:center;">
+8,67***
+</td>
+<td style="text-align:center;">
+1,06
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(1,04)
+</td>
+<td style="text-align:center;">
+(0,09)
+</td>
+<td style="text-align:center;">
+(0,90)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Genre - Homme
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+16,28***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(2,75)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:center;">
+40,00
+</td>
+<td style="text-align:center;">
+40,00
+</td>
+<td style="text-align:center;">
+40,00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0,27
+</td>
+<td style="text-align:center;">
+1,00
+</td>
+<td style="text-align:center;">
+0,62
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 ajusté
+</td>
+<td style="text-align:center;">
+0,25
+</td>
+<td style="text-align:center;">
+1,00
+</td>
+<td style="text-align:center;">
+0,60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:center;">
+13,82
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+30,65
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup></sup> * p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01
+</td>
+</tr>
+</tfoot>
+</table>
+<p>Pour <strong>exporter le tableau</strong> dans un fichier, la fonction <code class="sourceCode r"><span class="fu">modelsummary</span>()</code> propose l’argument <code class="sourceCode r">output<span class="ot">=</span></code>. En fonction de l’extension du fichier dans lequel nous souhaitons exporter le tableau, la fonction `<code class="sourceCode r"><span class="fu">modelsummary</span>()</code>` s’adapte. Les extensions que l’on peut utiliser :</p>
+<ul>
+<li><code>.docx</code> : pour un export en format word ;</li>
+<li><code>.html</code> : pour un export en format html ;</li>
+<li><code>.tex</code> : pour un export en format LaTeX ;</li>
+<li><code>.md</code> : pour un export en format markdown ;</li>
+<li><code>.txt</code> : pour un export en format texte brut ;</li>
+<li><code>.png</code> : pour un export en format image PNG.</li>
+</ul>
+<p>Voici un exemple pour créer un fichier word (<code>.docx</code>) intitulé <code>regressions.docx</code>, dans le répetoire <code>Output</code> contenu dans le répertoire courant :</p>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="régressions-linéaires.html#cb578-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb578-2"><a href="régressions-linéaires.html#cb578-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> <span class="fu">list</span>(<span class="st">&quot;MCO 1&quot;</span> <span class="ot">=</span> reg,</span>
+<span id="cb578-3"><a href="régressions-linéaires.html#cb578-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;MCO 2&quot;</span> <span class="ot">=</span> reg_2,</span>
+<span id="cb578-4"><a href="régressions-linéaires.html#cb578-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;MCO 3&quot;</span> <span class="ot">=</span> reg_3),</span>
+<span id="cb578-5"><a href="régressions-linéaires.html#cb578-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fmt =</span> fmt_fr,</span>
+<span id="cb578-6"><a href="régressions-linéaires.html#cb578-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">stars =</span> <span class="fu">c</span>(<span class="st">&quot;*&quot;</span> <span class="ot">=</span> .<span class="dv">1</span>, <span class="st">&quot;**&quot;</span> <span class="ot">=</span> .<span class="dv">05</span>, <span class="st">&quot;***&quot;</span> <span class="ot">=</span> <span class="fl">0.01</span>),</span>
+<span id="cb578-7"><a href="régressions-linéaires.html#cb578-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">&quot;(Intercept)&quot;</span> <span class="ot">=</span> <span class="st">&quot;Constante&quot;</span>,</span>
+<span id="cb578-8"><a href="régressions-linéaires.html#cb578-8" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;empan_main_forte&quot;</span> <span class="ot">=</span> <span class="st">&quot;Empan main forte&quot;</span>,</span>
+<span id="cb578-9"><a href="régressions-linéaires.html#cb578-9" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;genreH&quot;</span> <span class="ot">=</span> <span class="st">&quot;Genre - Homme&quot;</span>),</span>
+<span id="cb578-10"><a href="régressions-linéaires.html#cb578-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">gof_map =</span> <span class="fu">list</span>(</span>
+<span id="cb578-11"><a href="régressions-linéaires.html#cb578-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;nobs&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;N&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> fmt_fr),</span>
+<span id="cb578-12"><a href="régressions-linéaires.html#cb578-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;r.squared&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;R2&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> fmt_fr),</span>
+<span id="cb578-13"><a href="régressions-linéaires.html#cb578-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;adj.r.squared&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;R2 ajusté&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> fmt_fr),</span>
+<span id="cb578-14"><a href="régressions-linéaires.html#cb578-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;F&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;F&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> fmt_fr)</span>
+<span id="cb578-15"><a href="régressions-linéaires.html#cb578-15" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb578-16"><a href="régressions-linéaires.html#cb578-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">output =</span> <span class="st">&quot;Output/regression.docx&quot;</span></span>
+<span id="cb578-17"><a href="régressions-linéaires.html#cb578-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="notebox">
+<p><strong>Note</strong></p>
+<p>Si un message d’erreur vous indique qu’il faut installer le <em>package</em> {flextable} :</p>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="régressions-linéaires.html#cb579-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;flextable&quot;</span>)</span></code></pre></div>
+</div>
+<p>Enfin, si vous souhaitez afficher le code LaTeX, HTML ou Markdown dans la console (sans créer de fichier), il suffit de donner à l’argument <code class="sourceCode r">output<span class="ot">=</span></code> la chaine de caractère <code class="sourceCode r"><span class="st">&quot;latex&quot;</span></code>, <code class="sourceCode r"><span class="st">&quot;HTML&quot;</span></code>, ou <code class="sourceCode r"><span class="st">&quot;markdown&quot;</span></code>, respectivement.</p>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="régressions-linéaires.html#cb580-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb580-2"><a href="régressions-linéaires.html#cb580-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">models =</span> <span class="fu">list</span>(<span class="st">&quot;MCO 1&quot;</span> <span class="ot">=</span> reg,</span>
+<span id="cb580-3"><a href="régressions-linéaires.html#cb580-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;MCO 2&quot;</span> <span class="ot">=</span> reg_2,</span>
+<span id="cb580-4"><a href="régressions-linéaires.html#cb580-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;MCO 3&quot;</span> <span class="ot">=</span> reg_3),</span>
+<span id="cb580-5"><a href="régressions-linéaires.html#cb580-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fmt =</span> fmt_fr,</span>
+<span id="cb580-6"><a href="régressions-linéaires.html#cb580-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">stars =</span> <span class="fu">c</span>(<span class="st">&quot;*&quot;</span> <span class="ot">=</span> .<span class="dv">1</span>, <span class="st">&quot;**&quot;</span> <span class="ot">=</span> .<span class="dv">05</span>, <span class="st">&quot;***&quot;</span> <span class="ot">=</span> <span class="fl">0.01</span>),</span>
+<span id="cb580-7"><a href="régressions-linéaires.html#cb580-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">&quot;(Intercept)&quot;</span> <span class="ot">=</span> <span class="st">&quot;Constante&quot;</span>,</span>
+<span id="cb580-8"><a href="régressions-linéaires.html#cb580-8" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;empan_main_forte&quot;</span> <span class="ot">=</span> <span class="st">&quot;Empan main forte&quot;</span>,</span>
+<span id="cb580-9"><a href="régressions-linéaires.html#cb580-9" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;genreH&quot;</span> <span class="ot">=</span> <span class="st">&quot;Genre - Homme&quot;</span>),</span>
+<span id="cb580-10"><a href="régressions-linéaires.html#cb580-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">gof_map =</span> <span class="fu">list</span>(</span>
+<span id="cb580-11"><a href="régressions-linéaires.html#cb580-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;nobs&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;N&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> fmt_fr),</span>
+<span id="cb580-12"><a href="régressions-linéaires.html#cb580-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;r.squared&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;R2&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> fmt_fr),</span>
+<span id="cb580-13"><a href="régressions-linéaires.html#cb580-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;adj.r.squared&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;R2 ajusté&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> fmt_fr),</span>
+<span id="cb580-14"><a href="régressions-linéaires.html#cb580-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="st">&quot;raw&quot;</span> <span class="ot">=</span> <span class="st">&quot;F&quot;</span>, <span class="st">&quot;clean&quot;</span> <span class="ot">=</span> <span class="st">&quot;F&quot;</span>, <span class="st">&quot;fmt&quot;</span> <span class="ot">=</span> fmt_fr)</span>
+<span id="cb580-15"><a href="régressions-linéaires.html#cb580-15" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb580-16"><a href="régressions-linéaires.html#cb580-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">output =</span> <span class="st">&quot;markdown&quot;</span></span>
+<span id="cb580-17"><a href="régressions-linéaires.html#cb580-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<!-- # Seance 8 -->
+<!-- # Fonctions -->
+<!-- # Boucles -->
+<!-- # Seance 10 -->
+<!-- # Graphiques -->
+<!-- # Seance 11 -->
+<!-- # Graphiques -->
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>On utilise les propriétés suivantes : <span class="math inline">\(\frac{\partial \boldsymbol x^t \boldsymbol A}{\partial \boldsymbol x} = \boldsymbol A^t\)</span>, <span class="math inline">\(\frac{\partial \boldsymbol A \boldsymbol x}{\partial \boldsymbol x} = \boldsymbol A\)</span> et <span class="math inline">\(\frac{\partial a \boldsymbol \varepsilon}{\partial \boldsymbol x} = a \frac{\partial u}{\partial \boldsymbol x}\)</span>, avec <span class="math inline">\(u = u(\boldsymbol x)\)</span>.<a href="régressions-linéaires.html#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="statistiques-descriptives.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="instructions-conditionnelles-et-boucles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "night",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

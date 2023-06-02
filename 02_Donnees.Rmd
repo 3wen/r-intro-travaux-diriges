@@ -1,0 +1,437 @@
+# Type des données et première structure
+
+## Types de données
+
+
+::::{.orangebox data-latex=""}
+
+
+La réalisation de cet exercice nécessite la lecture des sections [2.1 Types de données du cours](http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#types-de-donn%C3%A9es) et [2.2.1.1 Vecteurs](http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#structures-de-base)
+
+:::
+
+
+R gère des objets qui disposent de 4 caractéristiques :
+
+- un nom ;
+- un type : la nature des éléments ; les 4 types principaux sont les suivants :
+
+    - _numeric_ : des nombres entiers (on ajoute un L majuscule après le nombre pour le déclarer comme entier `1L`{.R}) ou réels (`1.4` ou `1` ou `1.0`),
+    - _character_ : des chaînes de caractère (que l'on créé à l'aide de guillemets doubles ou de guillemets simples),
+    - _logical_ : des valeurs logiques (`TRUE`{.R}, `FALSE`{.R} et `NA`{.R}),
+    - _complex_ : des nombres complexes (`2+3i`{.R});
+- une longueur ;
+- un contenu.
+
+Par ailleurs, R propose un objet `NULL`{.R}, de longueur 0 et de type `NULL`{.R}. Il représente le vide.
+
+Enfin, R propose de marquer les valeurs manquantes avec le mot réservé `NA`{.R}. Comme indiqué plus haut, il s'agit d'un objet de type logique.
+
+
+Il est important de connaître le type des données que l'on manipule : chaque objet dispose d'une classe qui dépend du type. Or, certaines opérations sont réalisables pour certaines classes mais pas pour d'autres. Par exemple, la fonction `abs()`{.R} qui calcule la valeur absolue, est applicable à des objets de type numérique mais ne fonctionne pas pour des chaînes de caractères.
+
+
+```{r, error=TRUE}
+x <- 3
+abs(x)
+
+y <- "toto"
+abs(y)
+```
+
+
+::::{.notebox data-latex=""}
+
+**Note** :
+
+Quelques fonctions à connaître concernant les types de données :
+
+- Pour savoir le type d'un objet : `typeof()`{.R}
+```{r}
+x <- 3
+typeof(x)
+y <- "hello"
+typeof(y)
+```
+
+
+- Pour savoir si un objet est d'un type spécifique, R propose des fonctions retournant une valeur logique. La syntaxe de ces fonctions est simple : on ajoute le suffixe `is.`{.R} au nom du type.
+```{r}
+is.character(x)
+is.numeric(x)
+is.na(x)
+```
+
+- La longueur d'un objet est obtenue avec la fonction `length()`{.R}. Pour le moment, les objets que nous créons dans cette sectionsont tous de longueur 1. Nous verrons dans la section suivante qu'il s'agit simplement de vecteurs de longueur 1.
+
+- Pour forcer le changement de type d'un objet, R propose des fonctions à la syntaxe simple : il suffit d'ajouter le préfixe `as.`{.R} au type voulu. Lorsqu'une conversion n'est pas possible, R retourne la valeur `NA`{.R}
+```{r, error=TRUE}
+z <- as.character(x)
+z
+typeof(z)
+as.numeric("hello")
+```
+
+
+:::
+
+
+
+::::{.greenbox data-latex=""}
+
+**Exercice**
+
+1. Créez les objets suivants :
+
+    - `x_1` : un objet contenant la valeur `10`{.R},
+    - `x_2` : un objet contenant la valeur `20`{.R},
+    - `y` : un objet contenant la chaîne de caractères `10`,
+    - `z` : un objet contenant la valeur `NULL`{.R},
+    - `t` : un objet contenant la valeur `NA`{.R},
+    - `v` : un objet contenant la valeur logique `TRUE`{.R},
+    - `f` : un objet contenant la valeur logique `FALSE`{.R}.
+2. Dans un objet que vous nommerez `s`, additionnez `x_1` et `x_2`, puis affichez la valeur de `s` dans la console.
+3. Dans un objet que vous nommerez `s_2`, additionnez `x_1` et `y`, puis affichez la valeur de `s_2` dans la console. Lisez l'erreur.
+4. Changez le type de `y` de sorte que l'objet ne soit plus une chaîne de caractères mais une valeur numérique.
+5. Dans un objet que vous nommerez `s_3`, additionnez `x_1` et `z`, puis affichez la valeur de `s_3` dans la console. Vérifiez, à l'aide de la fonction adéquate, la longueur de `s_3`.
+6. Dans un objet que vous nommerez `s_4`, additionnez `x_1` et `t`, puis affichez la valeur de `s_4` dans la console.
+7. Divisez la valeur `x_1` par 0 et regardez la valeur retournée.
+8. Affichez, sans modifier le contenu de `v` et `f`, le résultat de l'application de la fonction `as.numeric()`{.R} aux objets `v` puis `f`.
+9. Dans un objet que vous nommerez `s_5`, additionnez `v` et `f`, puis affichez la valeur de `s_5` dans la console.
+10. Dans un objet que vous nommerez `s_6`, additionnez `v` et `v`, puis affichez la valeur de `s_6` dans la console.
+11. Dans un objet que vous nommerez `s_7`, multipliez `v` et `f`, puis affichez la valeur de `s_7` dans la console.
+
+:::
+
+
+## Structure de données : les vecteurs
+
+Les vecteurs sont les objets les plus communs en R. Il s'agit d'une collection d'éléments à une dimension. Les éléments contenus dans un vecteur doivent nécessairement être **de même type**. Lorsque nous avons créé des objets contenant un numérique ou une chaîne de caractère, R a stocké l'information sous la forme d'un vecteur de longueur 1 (vecteur contenant un seul élément).
+
+
+La fonction `c()`{.R} (pour _combine_) permet de créer un vecteur, on lui donne les éléments en argument de la fonction, en les séparant par une virgule (et éventuellement d'une espace).
+
+
+
+Le tableau Table \@ref(tab:pib-nominal) reporte les valeurs du PIB nominal de la France, en fréquence annuelle.
+
+<div class="tableau50">
+
+| Année | PIB |
+| :---- | --------: |
+| 2015 | 549901,2 |
+| 2016 | 558184,9 |
+| 2017 | 574852,5 |
+| 2018 | 591119,6 |
+| 2019 | 610003,3 |
+| 2020 | 577434,8 |
+| 2021 | 624705,6 |
+
+Table: (\#tab:pib-nominal) PIB nominal annuel de la France, en millions d'Euros (série ajustée de la saisonnalité) (Source: [Fred Economic Data](https://fred.stlouisfed.org/series/CPMNACSCAB1GQFR)).
+
+</div>
+
+Utilisons la fonction `c()`{.R} pour créer un vecteur contenant les valeurs du PIB pour les années 2015 à 2019 :
+
+
+```{r}
+pib_1 <- c(549901.2, 558184.9, 574852.5, 591119.6, 610003.3)
+pib_1
+```
+
+L'objet `pib_1` que nous venons de créer est un vecteur de numériques de longueur 5 :
+```{r}
+class(pib_1)
+length(pib_1)
+```
+
+La fonction `c()`{.R} permet également de combiner plusieurs vecteurs :
+```{r}
+pib_2 <- c(577434.8, 624705.6)
+pib <- c(pib_1, pib_2)
+pib
+```
+
+
+Pour **sélectionner** des sous-ensembles dans un vecteur, R propose l'indexation. Trois indexations différentes sont possibles : par position, par nom, et par condition.
+
+### Indexation par position
+
+Chaque élément d'un vecteur possède une position, qui débute en R à 1. On utilise des crochets dans lesquels les positions des éléments à conserver sont données dans un vecteur. Pour extraire le premier élément de du vecteur de numériques `pib` :
+```{r}
+pib[1]
+```
+
+Pour extraire le 1er et le 3e éléments :
+
+```{r}
+pib[c(1,3)]
+```
+
+
+Il est possible d'exclure les éléments dont les positions sont données dans le vecteur dans les crochets :
+```{r}
+pib[-c(1,3)]
+```
+
+
+
+
+
+::::{.greenbox data-latex=""}
+
+**Exercice**
+
+1. Créez un vecteur que vous nommerez `annees` qui contiendra les valeurs des années du tableau Table \@ref(tab:pib-nominal).
+2. En utilisant l'indexation par position, extrayez les années aux positions 2 et 4.
+3. En utilisant l'indexation par position, récupérez le dernier élément du vecteur `annees`.
+4. Si, à la question précédente, vous avez inscrit à la main la valeur de la position du dernier élément, recommencez la question en obtenant la position du dernier élément à l'aide d'une fonction (pour que votre instruction retourne le dernier élément du vecteur, peu importe sa taille).
+
+:::
+
+### Indexation par nom
+
+Il est possible de nommer les éléments d'un vecteur lors de sa création :
+```{r}
+notes <- c(maths = 10, francais = 12, anglais = 15)
+notes
+```
+
+Ou bien une fois que le vecteur a été créé, en utilisant la fonction `name()`{.R} :
+```{r}
+notes_2 <- c(10, 12, 15)
+names(notes_2) <- c("maths", "francais", "anglais")
+notes_2
+```
+
+La fonction `names()`{.R} permet d'obtenir la liste des noms (et dans l'intruction précédente, les noms ont été remplacés avec une nouvelle assignation) :
+```{r}
+names(notes_2)
+```
+
+Pour extraire des sous-éléments d'un vecteur à l'aide des noms, le fonctionnement est similaire à l'indexation par position :
+
+```{r}
+notes_2["maths"]
+notes_2[c("maths", "anglais")]
+```
+
+### Indexation par condition
+
+Plutôt que d'indiquer les positions ou les noms des éléments, il est possible de fournir un vecteur de logique précisant, pour chaque élément, si celui-ci doit être inclus (`TRUE`{.R}) ou exclus (`FALSE`{.R}) :
+
+```{r}
+pib[c(TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE)]
+```
+
+
+Evidemment, écrire un vecteur de logique à la main est assez fastidieux. Imaginons que nous disposons d'un vecteur indiquant pour chaque année correspondant à nos observations de PIB s'il s'agit d'une année touchée par une crise économique :
+```{r}
+crise <- c(FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE)
+```
+
+Ce vecteur peut être utilisé pour filtrer les valeurs du PIB lors des crises :
+
+```{r}
+pib[crise]
+```
+
+Les vecteurs de logiques peuvent de surcroit être obtenus en faisant appel à des opérateurs de comparaison reportés dans le tableau ci-dessous.
+
+
+<div class="tableau50">
+
+| Opérateur | Description |
+| :-- | -----: |
+| `<`  | inférieur à |
+| `<=` | inféfieur ou égal à |
+| `>`  | supérieur à |
+| `>=` | supérieur ou égal à |
+| `==` | égal à|
+| `!=` | différent de |
+
+Table: (\#tab:operateurs-comparaison) Opérateurs de comparaison
+
+</div>
+
+Par exemple, pour obtenir un vecteur qui indique pour chaque élément contenu dans le vecteur numérique `pib` si la valeur est inférieure à 560 000:
+```{r}
+pib < 560000
+```
+
+
+Aussi, pour obtenir les éléments de `pib` dont les valeurs sont inférieures à 560 000, on peut écrire :
+```{r}
+pib[pib < 560000]
+```
+
+
+::::{.greenbox data-latex=""}
+
+**Exercice**
+
+
+1. Créez un vecteur de logiques à partir du vecteur `annees` créé lors du précédent exercice indiquant si chaque valeur du vecteur `annees` est égale à 2017.
+2. Utilisez le vecteur de logiques de la question précédente pour extraire la valeur du vecteur `pib` correspondant à l'année 2017.
+3. En consultant un moteur de recherche, cherchez l'opérateur mathématique permettant de calculer le modulo d'un nombre.
+4. En utilisant l'opérateur trouvé en première question, créez un vecteur logique permettant d'obtenir les années paires du vecteur `annees`.
+
+:::
+
+Les vecteurs de logiques peuvent être le résultat de l'évaluation de plusieurs conditions logiques, en s'appuyant sur les opérateurs logiques.
+
+<div class="tableau50">
+
+| Opérateur | Description |
+| :-- | -----: |
+| `&`  | et logique |
+| `|` | ou logique |
+| `!`  | négation logique |
+
+Table: (\#tab:operateurs-logiques) Opérateurs logiques
+
+</div>
+
+
+```{r}
+pib < 560000 | pib > 600000
+pib[pib < 560000 | pib > 600000]
+```
+
+
+::::{.greenbox data-latex=""}
+
+**Exercice**
+
+1. À l'aide d'une condition logique multiple, extrayez les valeurs du vecteur `pib` pour lesquelles les deux conditions suivantes sont remplies : l'année est inférieure ou égale à 2018, et la valeur est inférieure à 560 000.
+2. À quelles années les valeurs extraites correspondent-elles ?
+
+:::
+
+::::{.notebox data-latex=""}
+
+**Notes** :
+
+Il existe en R un opérateur permettant de tester l'appartenance à un ensemble discret de valeurs : `%in%`{.R}.
+
+```{r}
+x <- c("A", "B", "C", "D")
+x %in% c("D", "B")
+x[x %in% c("D", "B")]
+```
+
+Par ailleurs, R propose deux fonctions très pratiques pour les vecteurs de logiques : 
+
+- `any()`{.R} : au moins un des éléments du vecteur vaut `TRUE`{.R} ;
+- `all()`{.R} : tous les éléments du vecteur valent `TRUE`{.R}.
+
+```{r}
+x <- c(TRUE, FALSE)
+any(x)
+
+y <- c(FALSE, FALSE)
+all(!y)
+```
+
+Enfin, la fonction `which()`{.R} permet d'obtenir les positions des valeurs `TRUE`{.R} dans un vecteur de logiques :
+```{r}
+z <- c(TRUE, FALSE, FALSE, TRUE, TRUE)
+which(z)
+```
+
+
+:::
+
+
+
+
+
+
+### Gestion des valeurs manquantes
+
+
+Admettons que nous disposions d'une valeur manquante pour une des années.
+```{r}
+pib <- c(549901.2, 558184.9, NA, 591119.6, 
+         610003.3, 577434.8, 624705.6)
+pib
+```
+
+
+Lorsque l'on fait un test logique sur une valeur `NA`{.R}, le résultat est `NA`{.R}:
+```{r}
+pib > 550000
+```
+
+Les valeurs `NA`{.R} d'un vecteur de logiques utilisé dans le cadre d'une indexation par condition retournent `NA`{.R}
+```{r}
+pib[pib > 550000]
+```
+Ce qui peut être pénible... Si on souhaite obtenir les années pour lesquelles le PIB est supérieur à 550 000 :
+
+```{r}
+annees <- 2015:2022
+annees
+annees[pib > 550000]
+```
+
+On note que l'année pour laquelle la valeur du PIB est manquante a été transformée en `NA`{.R}.
+
+
+Si on souhaite exclure les valeurs manquantes, on peut utiliser la fonction `is.na()`{.R} à laquelle on applique l'opérateur de négation logique :
+```{r}
+annees[pib > 550000 & !is.na(pib)]
+```
+
+
+### Remplacement et ajout de valeurs
+
+Pour effectuer un remplacement de valeurs à l'intérieur d'un vecteur, on peut utiliser la fonction crochet (`"["()`{.R} que nous utilisons dans sa version plus pratique `[]`{.R}) et la flèche d'affectation (`<-`{.R}).
+
+```{r}
+pib[3] <- 574852.5
+```
+
+
+Plusieurs éléments peuvent être modifiés en une seule instruction.
+```{r}
+pib[pib < 560000 | pib > 600000] <- -1000
+pib
+```
+
+
+Nous avons vu précédemment que pour ajouter des valeurs, il est possible de combiner plusieurs vecteurs. Il est aussi possible d'utiliser l'indexation.
+
+```{r}
+pib[8] <- 10
+pib
+```
+
+
+
+### Exercice de synthèse
+
+::: {.greenbox data-latex=""}
+
+Reprenons les données de PIB nominal de la France, en fréquence annuelle:
+
+```{r}
+pib <- c(549901.2, 558184.9, 574852.5, 591119.6, 
+         610003.3, 577434.8, 624705.6)
+annees <- 2015:2021
+```
+
+
+1. En utilisant la fonction appropriée, retournez le nombre d'éléments contenus dans le vecteur numérique `pib`.
+2. Donnez la valeur du PIB en milliards plutôt qu'en millions, et placez le resultat dans un vecteur que vous nommerez `pib_milliards`.
+3. Quelles sont les années pour lesquelles le PIB est compris entre 560 000 et 590 000 (pensez à effectuer un test logique contenant deux conditions logiques et un opérateur logique).
+4. Créez un indice pour le PIB, en prenant comme référence l'année 2020 (valeur 100 en 2020). Stockez le résultat dans un objet que vous nommerez `pib_ind_2020`. Pour ce faire :
+    - créez un objet que vous nommerez `ref` qui contiendra la valeur du PIB en 2020 (utilisez une extraction par condition)
+    - divisez les valeurs de `pib` par la valeur stockée dans `ref`, puis multipliez le résultat par 100.
+5. Regardez le fonctionnement de la fonction `lag()`{.R} du _package_ {dplyr} dans le fichier d'aide et en observant le résultat dans la console lorsque vous l'appliquez au vecteur `pib`.
+6. En utilisant la fonction `lag()`{.R}, calculez le taux de croissance, en pourcentage du PIB d'une année à l'autre.
+7. Admettons que la réserve Fédérale de Saint Louis vous informe que la valeur du PIB en 2016 est finalement corrigée et est maintenant estimée à  55963.2. Corrigez la valeur à l'aide d'une affectation de remplacement.
+
+
+
+:::

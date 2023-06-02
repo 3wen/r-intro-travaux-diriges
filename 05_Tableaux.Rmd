@@ -1,0 +1,783 @@
+# Tableaux de données
+
+
+::::{.orangebox data-latex=""}
+
+Ce chapitre s'appuie sur les [Sections 2.2.2 Tableaux de données](http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#tableaux-de-donn%C3%A9es) et [2.4.6 Tableaux de données](http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#tableaux_de_donnees) des notes de cours.
+
+:::
+
+Dans les chapitres [Matrices et listes](#matrices-et-listes) et [Importation de données](#importation-et-exportation-de-donnée), vous avez appris à manipuler des matrices et à importer des données tabulaires dans R. Dans ce document, vous allez dans un premier temps utliser des techniques similaires à celles permettant de manipuler les matrices pour les appliquer à des tableaux que vous aurez importé depuis un fichier CSV dans R. Ensuite, vous apprendrez d'autres techniques proposées par l'environnement {tidyverse} pour manipuler des tableaux de données. Vous serez capable, une fois que vous aurez terminé de parcourir ce document, d'effectuer des opérations basiques de manipulation de tableau pour produire des statistiques descriptives.
+
+## Importation des données de la séance
+
+
+Dans un premier temps, vous allez importer les données de notes des étudiant•es pour l'ensemble des matières, pour la première année (L1) et la deuxième année (L2). Ces données sont disponibles au format CSV, dans l'archive téléchargeable à l'adresse suivante : <https://egallic.fr/Enseignement/R/Exercices/exercice_notes.zip>.
+
+:::: {.greenbox data-latex=""}
+
+1. Créez un nouveau projet RStudio dans un dossier que nous intitulerez `TD_5`, au sein de votre espace étudiant sur les serveurs de l'Université.
+2. Dans le répertoire `TD_5`, créez trois répertoires : `Data`, `Script` et `Output`.
+3. Créez un script R que vous appellerez `notes.R` et enregistrez-le dans le répertoire `Script`.
+4. Téléchargez l'archive `exercice_notes.zip` en suivant le lien donné plus haut, et extrayez son contenu.
+5. Placez les deux fichiers CSV (`notes_L1.csv` et `notes_L2.csv`) et le fichier de données R (`moyennes.RData`) dans le répertoire `Data`.
+
+L'arborescence de votre dossier de travaux dirigés pour cette séance doit être comme suit :
+
+```
+TD_5
+├──  notes.RProj
+├── Data
+│   └──  notes_L1.csv
+│   └──  notes_L2.csv
+│   └──  moyennes.RData
+├── Script
+|   └── notes.R
+├── Output
+```
+6. À présent, dans R, dans un objet que vous appellerez `notes_L1`, importez les données dans un tableau depuis le fichier `notes_L1.csv`.
+7. Dans un objet que vous appellerez `notes_L2`, importez les données dans un tableau depuis le fichier `notes_L2.csv`.
+
+:::
+
+```{r, echo=FALSE}
+notes_L1 <- read_csv("exercice_notes/notes_L1.csv")
+notes_L2 <- read_csv("exercice_notes/notes_L2.csv")
+```
+
+En appelant les deux tableaux dans la console, vous devez voir les aperçus suivants :
+
+```{r}
+notes_L1
+```
+
+
+```{r}
+notes_L2
+```
+
+
+
+## Tibbles
+
+Les tableaux de données sont traditionnellement des objets à deux dimensions, comme les matrices. Une dimension pour les colonnes, et une autre pour les lignes. En R, les tableaux de données pricipaux sont appelés _data frames_. Nous allons, dans le cadre de ce cours, utiliser majoritairement des tableaux de données de classe `tbl_df`, une sous classe de `data.frame`, que l'on nommera des _tibbles_. Il s'agit de la structure de données centrale dans l'environnement tidyverse. Pour pouvoir créer ou manipuler des tibbles, il est nécessaire de charger le _package_ {tibble}. Ce _package_ est automatiquement chargé lorsque vous chargez {tidyverse} :
+
+```{r}
+library(tidyverse)
+```
+
+
+Avant de manipuler les tableaux de données que vous venez d'importer, vous allez apprendre quelques notions élémentaires au sujet des tibbles. La fonction `tibble()`{.R} permet de créer un tableau de données. On lui donne en arguments les colonnes, en les séparant par une virgule. Pour une facilité d'utilisation, il est préférable de nommer ces colonnes, en inscrivant simplement le nom suivi du symbole `=`{.R} avant le contenu de la colonne :
+
+
+```{r}
+tableau <- tibble(
+  x = c(1,2,3,4, 5),
+  y = c(10, 20, 30, 40, 50),
+  z = c("A","B","C","D", "E"),
+  t = x + y)
+tableau
+```
+
+Une colonne doit contenir des observations de même type. Comme vous l'avez vu dans le [chapitre 2](#type-des-données-et-première-structure), les éléments d'un vecteur sont tous de même type. Aussi, dans l'exemple précédent, où chaque colonne est un vecteur, l'ensemble des éléments de chaque colonne est bien de même type (_double_ pour `x`, `y` et `t`, _character_ pour `z`).
+
+Il est possible de donner des noms non conventionnels aux colonnes. En pratique, lorsque nous importons des données issues d'un fichier CSV, il n'est pas rare de faire face à des noms de colonnes non conventionnels (contenant des espaces par exemple, ou commençant par un nombre ou bien contenant des caractères spéciaux). Aussi, il est important de savoir comment faire face à cette situation : en utilisant des accents graves (`` ` ``, _backtick_) :
+
+
+```{r}
+tibble(
+  `nom de colonne` = c(1,2,3)
+)
+```
+
+### Dimensions
+
+
+Lors de l'affichage dans la console de l'aperçu d'un tableau de données, les premières colonnes, leur type, et leur contenu s'affichent. Les dimensions sont données dans la première ligne d'affichage :
+```{r}
+tableau
+```
+
+La première valeur correspond au nombre de lignes, tandis que la deuxième valeur correspond au nombre de colonnes. Pour accéder à ces valeurs, R propose la fonction `dim()`{.R}, qui retourne les dimensions sous la forme d'un vecteur :
+```{r}
+dim(tableau)
+```
+
+
+On peut ensuite, comme expliqué dans le [chapitre introductif](#initiation-à-r) accéder à une dimension spécifique avec la fonction crochet :
+```{r}
+dim(tableau)[1] # nombre de lignes
+dim(tableau)[2] # nombre de colonnes
+```
+
+
+Il est également possible d'utiliser les fonctions `nrow()`{.R} et `ncol()`{.R} qui donnent le nombre de lignes (_rows_ en anglais) et de colonnes (_columns_ en anglais), respectivement :
+```{r}
+nrow(tableau)
+ncol(tableau)
+```
+
+### Accès aux éléments
+
+Pour accéder aux éléments d'un tibble, on peut utiliser les crochets simples (`[]`) ou doubles (`[[]]`), en utilisant l'indexation (par position, nom, ou condition). Avec les crochets simples, un tibble est retourné :
+
+```{r}
+tableau[c(1,3),] # Lignes 1 et 3
+tableau[,c(2,4)] # Colonnes 2 et 4
+tableau[, c("x", "t")]
+```
+
+
+Avec les crochets doubles, le contenu de la colonne que l'on souhaite extraire est retourné :
+
+```{r}
+tableau[[2]]
+tableau[["z"]]
+```
+
+
+Pour extraire le contenu d'une colonne, R propose aussi d'utiliser le dollar plutôt que les crochets doubles, pour une écriture plus compacte :
+```{r}
+tableau$z
+```
+
+
+:::: {.greenbox data-latex=""}
+
+**Exercice**
+
+1. Affichez, à l'aide d'une fonction, le nombre de lignes du tableau `notes_L1`.
+2. Idem avec le nombre de colonnes.
+3. Extrayez les valeurs de la colonne `note` du tableau `notes_L1`.
+4. Sur un moteur de recherche, cherchez comment afficher les valeurs distinctes d'un vecteur, puis appliquez les fruits de votre recherche pour afficher les valeurs distinctes de la colonne `matiere` du tableau `notes_L1`. Stockez le résultat dans un objet que vous nommerez `matieres`.
+5. Combien de matières différentes y a-t-il dans le tableau `notes_L1` ? Utilisez le vecteur `matieres` et une fonction retournant le nombre d'éléments dans un vecteur pour répondre à cette question.
+
+:::
+
+
+## Résumés statistiques sur les colonnes d'un tableau
+
+Des statistiques descriptives sur un vecteur peuvent facilement être obtenues à l’aide des fonctions suivantes :
+
+
+- somme : `sum()`{.R}
+- moyenne : `mean()`{.R}
+- écart-type : `sd()`{.R}
+- min : `min()`{.R}
+- max : `max()`{.R}
+- médiane : `median()`{.R}
+- quantile quelconque : `quantile()`{.R}
+
+
+Il suffit de donner un vecteur de valeurs numériques à ces fonctions pour obtenir la statistique calculée sur la base de l'échantillon de valeurs fournies.
+
+La moyenne et l'écart-type de la colonne `x` du tableau `tableau` :
+
+```{r}
+mean(tableau$x)
+sd(tableau$x)
+```
+
+:::: {.notebox data-latex=""}
+
+Attention, la fonction `sd()`{.R} retourne la valeur de l'estimateur de l'écart-type d'une population : $\frac{1}{n-1}\sum_{i=1}^{n} (x_i - \bar{x})^2$, où $\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$.
+
+```{r}
+n <- length(tableau$x)
+
+moy <- sum(tableau$x) / n
+moy
+
+
+variance <- sum((tableau$x - moy)^2) / (n-1)
+variance
+ecart_type <- sqrt(variance)
+ecart_type
+
+```
+
+
+
+:::
+
+
+Le minimum et le maximum : 
+```{r}
+min(tableau$x)
+max(tableau$x)
+```
+
+
+La médiane : 
+```{r}
+median(tableau$x)
+```
+
+Pour d'autres quantiles que la médiane, on utilise la fonction `quantile()`{.R}, en précisant le quantile à l'argument `probs` :
+```{r}
+quantile(tableau$x, probs = .25) # Premier quartile
+quantile(tableau$x, probs = .75) # Troisième quartile
+quantile(tableau$x, probs = .90) # Neuvième décile
+```
+
+En cas de présence de valeurs manquantes (`NA`{.R}), les fonctions `sum()`{.R} `mean()`{.R}, `sd()`{.R}, `min()`{.R}, etc. retournent la valeur `NA`{.R}  :
+
+```{r}
+x <- c(1,2,3,NA,4,NA)
+mean(x)
+```
+
+
+Pour que la fonction soit appliquée en retirant au préalable du calcul les observations manquantes, on peut ajouter l'argument `na.rm=TRUE`{.R} (avec `rm` pour _remove_, c'est-à-dire retirer) :
+```{r}
+mean(x, na.rm=TRUE)
+```
+
+
+:::: {.greenbox data-latex=""}
+
+
+**Exercice**
+
+1. À partir du tableau `notes_L1`, calculez la moyenne et l'écart-type des valeurs dans la colonne `note`.
+2. Extrayez le vecteur de notes du tableau `notes_L1`, et conservez uniquement les 32 premières valeurs (ce qui correspond aux notes de microéconomie), à l'aide des crochets. Calculez la moyenne en microéconomie, ainsi que les premier et troisième quartiles.
+
+:::
+
+
+## Sélection d’une ou plusieurs colonnes
+
+
+La fonction `select()`{.R} du _package_ {dplyr} (qui est chargé lorsque {tiduverse} est chargé) permet de sélectionner une ou plusieurs colonnes. On donne un tableau de données comme premier argument à cette fonction. On indique ensuite la ou les noms des colonnes à conserver, en les séparant par une virgule. Admettons par exemple que l'on souhaite conserver uniquement les colonnes `x` et `z` de `tableau` :
+```{r}
+tableau_2 <- select(tableau, x, z)
+tableau_2
+```
+
+::::{.notebox data-latex=""}
+
+Pour conserver l'ensemble des colonnes **excepté** certaines, il faut faire précéder le nom de ces colonnes que l'on souhaite ne pas conserver par le signe moins (`-`{.R}) dans la fonction `select`{.R}
+
+```{r}
+select(tableau_2, -z)
+```
+
+
+:::
+
+L'ordre dans lequel sont écrits les noms de colonnes lors de l'appel à la fonction `select()`{.R} définit l'odre d'apparition des colonnes dans le résultat. Pour changer la position des colonnes d'un tibble, il existe une fonction dans {tidyverse} : `relocate()`{.R}. Si on souhaite voir apparaître certaines colonnes sans se soucier de l'ordre d'autres colonnes, il suffit de nommer les colonnes à positionner dans les premières positions :
+
+```{r}
+tableau <- relocate(tableau, z, x)
+tableau
+```
+
+Il est également possible de préciser que l'on désire placer une colonne avant ou après une autre colonne, en renseignant les arguments `.before`{.R} ou `.after`{.R}:
+```{r}
+tableau <- relocate(tableau, z, .before = y)
+tableau
+```
+
+
+
+
+::::{.greenbox data-latex=""}
+
+**Exercice**
+
+1. À partir du tableau `notes_L1`, créez le tableau `eleves` qui contiendra uniquement les colonnes `nom`, `prenom` et `id`.
+2. Appliquez la fonction `unique()`{.R} au tableau `eleves` pour ne conserver dans le tableau `eleves` que les enregistrements distincts (de sorte à avoir 1 ligne correspondant à une seule personne).
+
+:::
+
+
+
+## Création/Modification d'une nouvelle colonne
+
+Le _package_ {tidyverse} offre une fonction permettant de créer ou de modifier une colonne d'un tableau de données : `mutate()`{.R}. Son premier argument est le tableau de données, le ou les arguments suivants correspondent aux colonnes à créer ou modifier.
+
+
+Illustrons le fonctionnement de cette fonction en ramenant les notes de la colonne `note` de `tableau` sur 10 plutôt que sur 20. Appelons `notes_10` la colonne contenant les résultats de la division par deux des valeurs de la colonne `note` :
+
+```{r}
+notes_L1 <- mutate(notes_L1, notes_10 = note/2)
+notes_L1
+```
+
+Admettons à présent que l'on souhaite ajouter 1 point à l'ensemble des élèves :
+```{r}
+notes_L1 <- mutate(notes_L1, notes_10_augmentees = notes_10 +1)
+```
+
+Regardons les valeurs, en utilisant la fonction `select()`{.R} pour éviter d'afficher toutes les colonnes :
+```{r}
+select(notes_L1, nom, note, notes_10, notes_10_augmentees)
+```
+
+
+Admettons que l'on souhaite ajouter 1 autre point à l'ensemble des élèves. Cette fois, nous allons **modifier** la colonne `notes_10_augmentees` en récupérant la valeur déjà présente, puis en lui ajoutante la valeur 1.
+```{r}
+notes_L1 <- mutate(notes_L1, notes_10_augmentees = notes_10_augmentees +1)
+```
+
+Regardons à nouveau les valeurs, en utilisant la fonction `select()`{.R} pour éviter d'afficher toutes les colonnes :
+```{r}
+select(notes_L1, nom, note, notes_10, notes_10_augmentees)
+```
+
+
+Ainsi, lorsque le nom de la colonne que l'on donne en argument de la fonction `select()`{.R} est déjà présent dans le tableau donné en premier argument, la fonction `select()`{.R} effectue une modification de cette colonne. Si le nom de colonne fait référence à une colonne qui n'existe pas dans le tableau, alors la fonction `select()`{.R} créé une nouvelle colonne.
+
+
+::::{.notebox data-latex=""}
+
+Ces opérations en plusieurs étapes peuvent se réaliser à l'aide d'une seule instruction :
+```{r}
+notes_L1 <- mutate(notes_L1,
+                   notes_10 = note / 2,
+                   notes_10_augmentees = notes_10 + 1,
+                   notes_10_augmentees = notes_10_augmentees + 1)
+select(notes_L1, nom, note, notes_10, notes_10_augmentees)
+```
+
+
+:::
+
+
+
+::::{.greenbox data-latex=""}
+
+**Exercice**
+
+Dans le tableau `notes_L1`, créez la colonne `notes_100` qui contiendra les notes exprimées sur 100 points et non pas sur 20.
+
+:::
+
+## Renommer une colonne
+
+Pour renommer une colonne, le _package_ {dplyr} propose la fonction `rename()`{.R}. Elle s'applique directement à un tableau de données et retourne un tableau de données. Il suffit d'indiquer le nouveau nom suivi du symbole égal (`=`{.R}) puis de l'ancien nom. Lorsqu'un nom n'est pas conventionnel, on utilise l'accent grave (`` ` ``, _backtick_) pour entourer le nom :
+```{r}
+notes_L1 <- 
+  rename(notes_L1,
+         notes_dix = notes_10,
+         `notes 10 augmentees` = notes_10_augmentees)
+notes_L1
+```
+
+
+
+## Filtrage
+
+Pour conserver uniquement les lignes d'un tableau qui remplissent les conditions d'un filtre, la fonction `filter()`{.R} du package {dplyr} s'avère être très pratique. Cette fonction qui fait égalemnt partie de l'environnement {tidyverse}, s'applique directement à un tableau de données, et retourne un tableau de données comprenant les lignes pour lesquels le filtre retourne une valeur logique `TRUE`{.R}.
+
+Le premier argument de la fonction `filter()`{.R} est le tableau de données. Les arguments suivants correspondent au(x) filtre(s) à appliquer. Par exemple, pour conserver uniquement les lignes du tableau `notes_L1` pour lesquelles la note est inférieure à 10 :
+
+```{r}
+filter(notes_L1, note < 10)
+```
+
+::::{.notebox data-latex=""}
+
+Pour chaque ligne, le test logique consistant à regarder si la valeur de la colonne `note` est strictement supérieure à 10 est réalisé. Si la valeur retournée est `TRUE`{.R}, la ligne est retournée. Dans tous les autres cas, la ligne est retirée du résultat.
+
+:::
+
+Des filtres plus complexes peuvent être réalisés, à l'aide des opérateurs logiques présentés dans [la section portant sur l'indexation par condition](#indexation-par-condition) (ET logique `&`{.R}, OU logique `|`{.R}, `!`{.R} négation logique).
+
+
+Par exemple, pour obtenir les lignes du tableau `notes_L1` dont la valeur de la colonne `note` est comprise dans l'intervalle $[10;12]$, on écrira :
+```{r}
+filter(notes_L1, note >= 10 & note <= 12)
+```
+
+
+Pour conserver les lignes pour lesquelles la valeur d'une colonne fait partie d'un ensemble de valeurs, on utilise l'opérateur `%in%`{.R}. Par exemple, pour conserver les observations du tableau `notes_L1` pour lesquelles le nom est `"Amsberry"`{.R} ou `"Basurto 1"`{.R}, on écrira :
+
+```{r}
+filter(notes_L1, nom %in% c("Amsberry", "Basurto"))
+```
+
+
+::::{.greenbox data-latex=""}
+
+**Exercice**
+
+1. Filtrez le tableau `notes_L1` pour ne conserver que les lignes pour lesquelles la valeur de la colonne `note` est supérieure ou égale à 10.
+2. Filtrez le tableau `notes_L1` pour ne conserver que les lignes concernant la matière "Microéconomie 1".
+
+3. Filtrez le tableau `notes_L1` pour ne conserver que les lignes pour lesquelles la valeur de la colonne `matiere` est soit `Microéconomie 1`, soit `Macroéconomie 1`. Stockez le résultat dans un objet que vous appellerez `eco`.
+
+
+:::
+
+## Résumés statistiques sur l'ensemble du tableau
+
+Nous avons vu précédemment que les fonctions `mean()`{.R}, `sum()`{.R}, `sd()`{.R}, etc. permettent de calculer des statistiques sur des vecteurs de valeurs numériques. Il est possible d'appliquer ces mêmes fonctions à travers la fonction `summarise()`{.R} sur les colonnes des tableaux de données, pour obtenir les mêmes statistiques. Le résultat sera retourné à l'intérieur d'un tableau de données.
+
+Le premier argment de la fonction `summarise`{.R} est le tableau de données sur lequel les résumés statistiques sont effectués. Les arguments suivants indiquent les fonctions à appliquer sur une colonne. Ces fonctions doivent retourner une valeur unique (ce qui est le cas des fonctions `mean()`{.R}, `sum`{.R}, `sd()`{.R}, etc.). On indique d'abord le nom de la colonne qui contiendra la valeur calculée, puis la fonction à appliquer à une ou plusieurs colonnes du tableau. Par exemple, pour calculer la moyenne et l'écart-type des colonnes `note` et `notes 10 augmentees`, on écrira :
+
+```{r}
+summarise(notes_L1,
+          moyenne = mean(note),
+          ecart_type = sd(note),
+          moyennes_aug = mean(`notes 10 augmentees`),
+          sd_aug = sd(`notes 10 augmentees`)
+          )
+```
+
+
+::::{.notebox}
+
+La fonction `summarise`{.R} a été utilisée sur l'ensemble du tableau `notes_L1`. Nous avons fourni 4 opérations à éffectuer, le tableau retourné contient ainsi 4 colonnes correspondant aux résultats de ces opérations.
+
+:::
+
+## Agrégation par groupes
+
+
+La colonne `matiere` du tableau de données `tableau` indique la matière dans lequel la note de l'élève est obtenue. Si l'on souhaite obtenir les moyennes de chaque matière, il est nécessaire de réaliser des agrégations par matière. Commençons par réaliser le calcul à la main.
+
+Regardons les différentes matières :
+
+
+```{r}
+unique(notes_L1$matiere)
+```
+
+Calculons la note moyenne dans le groupe pour la microéconomie :
+
+```{r}
+micro <- filter(notes_L1, matiere == "Microéconomie 1")
+moyenne_micro <- mean(micro$note)
+moyenne_micro
+```
+
+
+Pour la macroéconomie :
+```{r}
+macro <- filter(notes_L1, matiere == "Macroéconomie 1")
+moyenne_macro <- mean(macro$note)
+moyenne_macro
+```
+
+Bien qu'il soit possible de continuer, on se rend rapidement compte que ce calcul répétitif est pénible. Heureusement, {tidyverse} propose une combo de fonctions qui permet de grouper les observations d'un tableau dans un premier temps, puis d'appliquer une fonction à une ou plusieurs colonnes à chacun des sous groupes, et enfin de retourner le résultat. Ces fonctions sont les suivantes :
+
+1. `group_by()`{.R} : dans un premier temps, les données du tableau sont regroupées selon les modalités d'une ou de plusieurs colonnes. Il s'agit de créer des sous-groupes dans le tableau de données. Dans notre cas, nous allons effectuer le regroupement selon les valeurs prises par la colonne `matiere`.
+2. `summarise()`{.R} : dans un deuxième temps, pour chaque groupe, les observations des lignes sont agrégées, résumées.
+
+Regroupons les observations de `notes_L1` en fonction des valeurs de la colonne `matière` (la microéconomie 1 avec la microéconomie 1, la macroéconomie 1 avec la macroéconomie 1, etc.) :
+
+```{r}
+group_by(notes_L1, matiere)
+```
+
+On note dans la sortie précédente que cela correspond à 8 groupes (il y a en effet 8 valeurs distinctes dans la colonne `matiere` du tableau de données).
+
+Une fois les groupes désignés, il reste à effectuer le calcul de résumé (la moyenne des valeurs de la colonne `note`) sur chacun des groupes, à l'aide de la fonction `summarise()`{.R}.Le résultat du calcul sera donné dans une colonne que l'on pourra nommer, par exemple, `moyenne`.
+
+```{r}
+moyennes_matieres <- 
+  summarise(group_by(notes_L1, matiere), moyenne = mean(note))
+moyennes_matieres
+```
+
+
+
+::::{.notebox}
+
+Pour éviter d'écrire les compositions de fonctions de manière condensée comme dans l'exemple précédent, le _package_ {magrittr} propose un opérateur nommé "pipe", dont la syntaxe est la suivante ` %>% `{.R}.
+
+Cet opérateur fournit le résultat de l'évaluation de ce qui se trouve avant lui en premier argument de la fonction qui se situe immédiatement après.
+
+```{r}
+moyennes_matieres <- 
+  notes_L1 %>% 
+  group_by(matiere) %>% 
+  summarise(moyenne = mean(note))
+```
+
+
+
+Le code devient plus facile à lire :
+
+- on part du tableau de données `notes_L1` ;
+- ce tableau est donné en premier argument de la fonction `group_by()`{.R} ;
+- le regroupement est fait selon la colonne `matiere` ;
+- une fois le regroupement effectué, le résultat est donné comme premier argument de la fonction `summarise()`{.R} ;
+- le calcul de la moyenne des valeurs de la colonne `note` est effectué pour chaque groupe du tableau de données, et le résultat est indiqué dans une colonne nommée `moyenne`.
+
+:::
+
+
+::::{.notebox}
+
+Si on souhaite effectuer des regroupements en fonction des valeurs de plusieurs colonnes, il suffit d'ajouter les noms de colonnes dans la fonction `group_by()`{.R}. La syntaxe est la suivante :
+
+```{r, eval=FALSE}
+# ne pas évaluer
+group_by(tableau, colonne_1, colonne_2)
+```
+
+L'exercice qui suit vous permettra d'essayer un regroupement selon plusieurs colonnes.
+
+
+:::
+
+
+::::{.greenbox data-latex=""}
+
+**Exercice**
+
+1. Intéressez-vous aux résultats de Rebecca Coberley. Créez un tableau que vous appellerez `notes_coberley` qui contiendra les observations de `notes_L1` concernant l'élève Rebecca Coberley (Note : vous devez créer ce nouveau tableau en manipulant le tableau `notes_L1`, pas en inscrivant à la main les valeurs).
+2. Calculez la moyenne des notes de cette élève à partir du tableau `notes_coberley`.
+3. À partir de `notes_L1`, calculez la moyenne générale de chaque élève. Pour ce faire :
+
+a. regroupez les valeurs par les colonnes `nom`, `prenom`, `id`
+b. calculez la moyenne de la colonne `note` pour chaque sous-groupe.
+4. Retrouvez dans le tableau ainsi obtenu la moyenne de Rebecca Coberley
+
+:::
+
+
+## Tri
+
+La fonction `arrange()`{.R} du _package_ {dplyr} permet d'ordonner les observations par valeurs croissantes ou décroissantes d'une ou de plusieurs colonnes. À nouveau, le premier argument attendu est un tableau de données, et le résultat est un tableau de données. Les arguments suivants sont les noms des colonnes sur lesquels effectuer le tri. Par défaut, le tri se fait par valeurs **croissantes**.
+
+Par exemple, pour trier les valeurs par valeurs croissantes de la colonne `notes`, on écrit simplement :
+```{r}
+arrange(notes_L1, note)
+```
+
+
+Pour trier par valeurs décroissantes, on applique la fonction `desc()`{.R} sur le nom de la colonne, à l'intérieur de la fonction `arrange`{.R} :
+
+```{r}
+arrange(notes_L1, desc(note))
+```
+
+Lorsque une colonne utilisée pour faire un tri est une chaîne de caractères, l'ordre alphanumérique est utilisé :
+
+```{r}
+arrange(notes_L1, nom)
+```
+::::{.notebox data-latex=""}
+
+Selon l'ordre alphanumérique, les caractères spéciaux apparaissent en premier, suivis des valeurs numériques, puis par les lettres.
+
+:::
+
+
+Pour trier par une colonne, puis par une autre, il suffit d'ajouter les noms des colonnes en arguments. L'ordre d'énumération définit l'ordre du tri. Par exemple, pour trier par valeurs croissantes des matières (colonne `matiere`), puis, pour chaque matière, par valeurs décroissantes des notes (colonne `note`) : 
+
+```{r}
+arrange(notes_L1, matiere, desc(note))
+```
+
+::::{.notebox data-latex=""}
+
+Pour avoir une meilleure idée de ce qu'il se passe, regardons avec un plus petit tableau. Considérons le tableau suivant :
+```{r}
+tableau <- 
+  tibble(
+    numero_ligne_initial = c(1,2,3,4),
+    matiere = c("Microéconomie 1", "Anglais 1",
+                "Microéconomie 1", "Anglais 1"),
+    notes = c(20,18,15,5))
+tableau
+```
+
+Si on ordonne uniquement par la colonne `matiere`, par valeurs croissantes :
+```{r}
+arrange(tableau, matiere)
+```
+
+Les lignes où `matiere` vaut `"Anglais 1"` sont remontées avant celles où `matiere` vaut `"Microéconomie 1"`.
+
+Si on veut, une fois ce tri effectué, trier par valeurs croissantes de  `notes`, en conservant les observations pour l'anglais avant celles de la microéconomie :
+```{r}
+arrange(tableau, matiere, notes)
+```
+
+
+
+:::
+
+
+
+::::{.greenbox data-latex=""}
+
+À votre tour.
+
+
+1. Trier le tableau `notes_L1` par valeurs décroissante des noms (colonne `nom`) .
+2. Trier le tableau `notes_L1` par valeurs croissante des matières (colonne `matiere`) et valeurs croissante des noms (colonne `nom`).
+3. Affichez le top 3 des élèves par matière. Pour ce faire : 
+
+- regroupez les les observations par matiere (colonne `matiere`),
+- triez les observations par valeurs décroissantes des notes (colonne `note`),
+- utilisez la fonction `slice_head()`{.R} sur le tableau trié (et groupé) pour extraire uniquement les 3 premières observations de chaque groupe.
+
+:::
+
+## Jointures
+
+Il n'est pas rare d'avoir deux tableaux de données qui disposent d'une ou de plusieurs colonnes communes, et qui peuvent être joints. Dans l'archive téléchargée au début de ce chapitre, vous avez extrait un fichier intitulé `moyennes.RData` que vous avez placé dans le répertoire `Data` de votre projet. Ce fichier contient deux tableaux de données :
+
+1. `moyennes_L1` : les moyennes à l'année de L1, sur 20, pour les élèves ;
+2. `moyennes_L2` : les moyennes à l'année de L2, sur 20, pour les élèves.
+
+::::{.greenbox data-latex=""}
+
+Chargez dans R les données contenues dans le fichier `moyennes.RData`
+
+
+```{r, echo=FALSE}
+load("exercice_notes/moyennes.RData")
+```
+
+:::
+
+
+La plupart des élèves de L1 sont aussi en L2 et vice-versa, mais certaines personnes étaient en L1 et n'ont pas été en L2, tandis que d'autres sont arrivées en L2 mais sont absentes du tableau concernant la L1.
+
+
+Admettons que l'on souhaite mettre en commun les deux tableaux. Ils diposent tous deux d'une colonne indiquant les noms, une autre indiquant les prénoms, une autre indiquant l'identifiant, et enfin une dernière indiquant la moyenne annuelle. Cependant, le nom des colonnes de noms et prénoms diffère d'une année à l'autre : la colonne `nom` du tableau `moyennes_L1` s'appelle `last_name` dans le tableau `moyennes_L2` et la colonne `prenom` dans `moyennes_L1` est désignée par `first_name` dans `moyennes_L2` :
+```{r}
+moyennes_L1
+moyennes_L2
+```
+
+Si l'on souhaite réaliser une jointure entre les deux tableaux, une multitude de fonctions sont disponibles. Elles partagent une syntaxe commune : 
+
+`xx_join(x, y, by = NULL, copy = FALSE, ...)`{.R},
+
+où `x` et `y` sont les tableaux à joindre, `by` est un vecteur de chaînes de caractères contenant les noms des variables permettant la jointure (si la valeur est `NULL`{.R} -- par défaut -- la jointure se fera à l'aide des variables portant le même nom dans les deux tables).
+
+::::{.notebox data-latex=""}
+
+Si la jointure s'effectue à l'aide de deux colonnes ou plus, on donner au paramètre `by`{.R} de la fonction de jointure un vecteur comportant plusieurs éléments, chaque élément indiquant la correspondance entre les noms de colonnes dans les deux tableaux.
+
+La syntaxe est la suivante, si la colonne `nom_colonne_1_x` du tableau `x` correspond à la colonne `nom_colonne_1_y` du tableau `y`, et si la colonne `nom_colonne_2_x` du tableau `x` correspond à la colonne `nom_colonne_2_y` du tableau `y`.
+
+```{r, eval=FALSE}
+xx_join(x, y, by = c("nom_colonne_1_x" = "nom_colonne_1_y",
+                     "nom_colonne_2_x" = "nom_colonne_2_y"))
+```
+
+
+:::
+
+
+Pour illustrer les différentes jointures, travaillons sur un plus petit jeu de données. Vous aurez l'occasion de vous exercer sur le jeu complet par la suite.
+
+```{r}
+moy_l1 <- tibble(
+  nom = c("Fuentes Gomez", "Kohyann", "Zagoury", "Souvestre"),
+  prenom = c("Sofia", "Hugo", "David", "Pierre"),
+  id = c(1, 2, 3, 4),
+  moyenne_L1 = c(12, 14, 12, 12),
+  groupe_TD = c("A", "B", "A", "A")
+)
+
+moy_l2 <- tibble(
+  last_name = c("Fuentes Gomez", "Kohyann", "Lang", "Souvestre"),
+  first_name = c("Sofia", "Hugo", "Lea", "Pierre"),
+  id = c(1, 2, 5, 4),
+  moyenne_L2 = c(12, 14, 16, 13),
+  groupe_TD = c("A", "A", "B", "B")
+)
+
+moy_l1
+moy_l2
+```
+
+
+Les différentes fonctions de jointure sont les suivantes :
+
+- `inner_join()`{.R} : toutes les lignes de `x` pour lesquelles il y a des valeurs correspondantes dans `y`, et toutes les colonnes de `x` et `y`. S’il y a plusieurs correspondances dans les noms entre `x` et `y`, toutes les combinaisons possibles sont retournées ;
+
+```{r}
+inner_join(moy_l1, moy_l2,
+           by = c("nom" = "last_name", "prenom" = "first_name", "id"))
+```
+
+
+::::{.notebox}
+
+La colonne `id` est présente à la fois dans `moy_l1` et dans `moy_l2`. Il est donc possible de ne pas écrire `"id" = "id"`{.R} dans le vecteur donné à l'argument `by`. Nénamoins, ce n'est pas une obligation, nous pouvons très bien écrire l'instruction suivante et obtenir le même résultat que précédemment.
+
+```{r, eval=FALSE}
+inner_join(moy_l1, moy_l2,
+           by = c("nom" = "last_name", "prenom" = "first_name", "id" = "id"))
+```
+
+:::
+
+- `left_join()`{.R} : toutes les lignes de `x`, et toutes les colonnes de `x` et `y`. Les lignes dans `x` pour lesquelles il n'y a pas de correspondance dans y auront des valeurs `NA`{.R} dans les nouvelles colonnes. S’il y a plusieurs correspondances dans les noms entre `x` et `y`, toutes les combinaisons sont retournées ;
+
+```{r}
+left_join(moy_l1, moy_l2,
+          by = c("nom" = "last_name", "prenom" = "first_name", "id"))
+```
+
+- `right_join()`{.R} : toutes les lignes de `y`, et toutes les colonnes de `x` et `y`. Les lignes dans `y` pour lesquelles il n'y a pas de correspondance dans `x` auront des valeurs `NA`{.R} dans les nouvelles colonnes. S'il y a plusieurs correspondances dans les noms entre `x` et `y`, toutes les combinaisons sont retournées ;
+
+```{r}
+right_join(moy_l1, moy_l2,
+           by = c("nom" = "last_name", "prenom" = "first_name", "id"))
+```
+
+- `semi_join()`{.R} : toutes les lignes de `x` pour lesquelles il y a des valeurs correspondantes dans `y`, en ne conservant uniquement les colonnes de `x`;
+
+```{r}
+semi_join(moy_l1, moy_l2,
+          by = c("nom" = "last_name", "prenom" = "first_name", "id"))
+```
+
+
+- `anti_join()`{.R} : toutes les lignes de `x` pour lesquelles il n’y a pas de correspondances dans `y`, en ne conservant que les colonnes de `x`.
+
+```{r}
+anti_join(moy_l1, moy_l2,
+          by = c("nom" = "last_name", "prenom" = "first_name", "id"))
+```
+
+
+- `full_join()`{.R} : toutes les lignes et toutes les colonnes de `x` et de `y`. Les lignes dans `x` pour lesquelles il n'y a pas de correspondance dans `y` auront des valeurs `NA`{.R} dans les colonnes de `y`. Les lignes dans `y` pour lesquelles il n'y a pas de correspondance dans `x` auront des valeurs `NA`{.R} dans les colonnes de `x`. S'il y a plusieurs correspondances dans les noms entre `x` et `y`, toutes les combinaisons sont retournées ;
+
+```{r}
+full_join(moy_l1, moy_l2,
+          by = c("nom" = "last_name", "prenom" = "first_name", "id"))
+```
+
+::::{.greenbox data-latex=""}
+
+**Exercice**
+
+
+1. À partir des tableaux `moyennes_L1` et `moyennes_L2` (qui sont importés dans R en chargeant le fichier `moyennes.RData` que vous avez placé dans le répertoire `Data` de votre projet), effectuez une jointure permettant d'avoir dans un même tableau l'ensemble des élèves (ayant suivi ou non les deux années) et leur moyenne en L1 et en L2.
+2. Identifiez à l'aide d'une jointure des tableaux `moyennes_L1` et `moyennes_L2`  les élèves présents en L1 mais pas en L2.
+3. Identifiez à l'aide d'une jointure des tableaux `moyennes_L1` et `moyennes_L2`  les élèves présents en L2 mais pas en L1.
+
+
+:::
+
+
+
+<!-- # Seance 6 -->
+<!-- # Faire des tableaux de résumés statistiques + exports -->
+<!-- # Markdown -->
+
+<!-- # Seance 7 -->
+<!-- # regressions -->
+
+<!-- # Seance 8 -->
+<!-- # Fonctions -->
+<!-- # Boucles -->
+
+
+<!-- # Seance 10 -->
+<!-- # Graphiques -->
+
+<!-- # Seance 11 -->
+<!-- # Graphiques -->

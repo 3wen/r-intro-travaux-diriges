@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Tableaux de données | Travaux dirigés d’Informatique</title>
+  <meta name="description" content="5 Tableaux de données | Travaux dirigés d’Informatique" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Tableaux de données | Travaux dirigés d’Informatique" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Tableaux de données | Travaux dirigés d’Informatique" />
+  
+  
+  
+
+<meta name="author" content="Ewen Gallic" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="importation-et-exportation-de-donnée.html"/>
+<link rel="next" href="r-markdown.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Register.StartupHook("TeX color Ready", function() {
+	     MathJax.Extension["TeX/color"].colors["wongBlack"] = '#000000';
+		 MathJax.Extension["TeX/color"].colors["wongGold"] = '#E69F00';
+		 MathJax.Extension["TeX/color"].colors["wongLightBlue"] = '#56B4E9';
+		 MathJax.Extension["TeX/color"].colors["wongGreen"] = '#009E73';
+		 MathJax.Extension["TeX/color"].colors["wongYellow"] = '#F0E442';
+		 MathJax.Extension["TeX/color"].colors["wongBlue"] = '#0072B2';
+		 MathJax.Extension["TeX/color"].colors["wongOrange"] = '#D55E00';
+		 MathJax.Extension["TeX/color"].colors["wongPurple"] = '#CC79A7';
+		 
+		 
+		 MathJax.Extension["TeX/color"].colors["IBMBlue"] = '#648FFF';
+		 MathJax.Extension["TeX/color"].colors["IBMPurple"] = '#785EF0';
+		 MathJax.Extension["TeX/color"].colors["IBMMagenta"] = '#DC267F';
+		 MathJax.Extension["TeX/color"].colors["IBMOrange"] = '#FE6100';
+		 MathJax.Extension["TeX/color"].colors["IBMYellow"] = '#FFB000';
+	});
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="initiation-à-r.html"><a href="initiation-à-r.html"><i class="fa fa-check"></i><b>1</b> Initiation à R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="initiation-à-r.html"><a href="initiation-à-r.html#travailler-par-projets"><i class="fa fa-check"></i><b>1.1</b> Travailler par projets</a></li>
+<li class="chapter" data-level="1.2" data-path="initiation-à-r.html"><a href="initiation-à-r.html#création-modification-suppression-dun-objet"><i class="fa fa-check"></i><b>1.2</b> Création, modification, suppression d’un objet</a></li>
+<li class="chapter" data-level="1.3" data-path="initiation-à-r.html"><a href="initiation-à-r.html#lecture-dune-page-daide"><i class="fa fa-check"></i><b>1.3</b> Lecture d’une page d’aide</a></li>
+<li class="chapter" data-level="1.4" data-path="initiation-à-r.html"><a href="initiation-à-r.html#installation-et-chargement-dun-package"><i class="fa fa-check"></i><b>1.4</b> Installation et chargement d’un package</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html"><i class="fa fa-check"></i><b>2</b> Type des données et première structure</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#types-de-données"><i class="fa fa-check"></i><b>2.1</b> Types de données</a></li>
+<li class="chapter" data-level="2.2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#structure-de-données-les-vecteurs"><i class="fa fa-check"></i><b>2.2</b> Structure de données : les vecteurs</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-position"><i class="fa fa-check"></i><b>2.2.1</b> Indexation par position</a></li>
+<li class="chapter" data-level="2.2.2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-nom"><i class="fa fa-check"></i><b>2.2.2</b> Indexation par nom</a></li>
+<li class="chapter" data-level="2.2.3" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-condition"><i class="fa fa-check"></i><b>2.2.3</b> Indexation par condition</a></li>
+<li class="chapter" data-level="2.2.4" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#gestion-des-valeurs-manquantes"><i class="fa fa-check"></i><b>2.2.4</b> Gestion des valeurs manquantes</a></li>
+<li class="chapter" data-level="2.2.5" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#remplacement-et-ajout-de-valeurs"><i class="fa fa-check"></i><b>2.2.5</b> Remplacement et ajout de valeurs</a></li>
+<li class="chapter" data-level="2.2.6" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#exercice-de-synthèse"><i class="fa fa-check"></i><b>2.2.6</b> Exercice de synthèse</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html"><i class="fa fa-check"></i><b>3</b> Matrices et listes</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#matrice"><i class="fa fa-check"></i><b>3.1</b> Matrice</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#accès-aux-éléments-dune-matrice"><i class="fa fa-check"></i><b>3.1.1</b> Accès aux éléments d’une matrice</a></li>
+<li class="chapter" data-level="3.1.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#remplacement-et-ajout-de-valeurs-1"><i class="fa fa-check"></i><b>3.1.2</b> Remplacement et ajout de valeurs</a></li>
+<li class="chapter" data-level="3.1.3" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#calculs-matriciels"><i class="fa fa-check"></i><b>3.1.3</b> Calculs matriciels</a></li>
+<li class="chapter" data-level="3.1.4" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#combiner-des-matrices"><i class="fa fa-check"></i><b>3.1.4</b> Combiner des matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#listes"><i class="fa fa-check"></i><b>3.2</b> Listes</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#accès-aux-éléments"><i class="fa fa-check"></i><b>3.2.1</b> Accès aux éléments</a></li>
+<li class="chapter" data-level="3.2.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#remplacement-et-ajout-déléments"><i class="fa fa-check"></i><b>3.2.2</b> Remplacement et ajout d’éléments</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html"><i class="fa fa-check"></i><b>4</b> Importation et exportation de donnée</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#chargement-de-données-chemins"><i class="fa fa-check"></i><b>4.1</b> Chargement de données : chemins</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#avantages-de-lutilisation-de-chemins-relatifs"><i class="fa fa-check"></i><b>4.1.1</b> Avantages de l’utilisation de chemins relatifs</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#chargement-de-formats-différents"><i class="fa fa-check"></i><b>4.2</b> Chargement de formats différents</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichiers-texte"><i class="fa fa-check"></i><b>4.2.1</b> Fichiers texte</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichier-excel"><i class="fa fa-check"></i><b>4.2.2</b> Fichier Excel</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichiers-r"><i class="fa fa-check"></i><b>4.2.3</b> Fichiers R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#exportation"><i class="fa fa-check"></i><b>4.3</b> Exportation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#format-texte"><i class="fa fa-check"></i><b>4.3.1</b> Format texte</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#format-r"><i class="fa fa-check"></i><b>4.3.2</b> Format R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html"><i class="fa fa-check"></i><b>5</b> Tableaux de données</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#importation-des-données-de-la-séance"><i class="fa fa-check"></i><b>5.1</b> Importation des données de la séance</a></li>
+<li class="chapter" data-level="5.2" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#tibbles"><i class="fa fa-check"></i><b>5.2</b> Tibbles</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#dimensions"><i class="fa fa-check"></i><b>5.2.1</b> Dimensions</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#accès-aux-éléments-1"><i class="fa fa-check"></i><b>5.2.2</b> Accès aux éléments</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#résumés-statistiques-sur-les-colonnes-dun-tableau"><i class="fa fa-check"></i><b>5.3</b> Résumés statistiques sur les colonnes d’un tableau</a></li>
+<li class="chapter" data-level="5.4" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#sélection-dune-ou-plusieurs-colonnes"><i class="fa fa-check"></i><b>5.4</b> Sélection d’une ou plusieurs colonnes</a></li>
+<li class="chapter" data-level="5.5" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#créationmodification-dune-nouvelle-colonne"><i class="fa fa-check"></i><b>5.5</b> Création/Modification d’une nouvelle colonne</a></li>
+<li class="chapter" data-level="5.6" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#renommer-une-colonne"><i class="fa fa-check"></i><b>5.6</b> Renommer une colonne</a></li>
+<li class="chapter" data-level="5.7" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#filtrage"><i class="fa fa-check"></i><b>5.7</b> Filtrage</a></li>
+<li class="chapter" data-level="5.8" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#résumés-statistiques-sur-lensemble-du-tableau"><i class="fa fa-check"></i><b>5.8</b> Résumés statistiques sur l’ensemble du tableau</a></li>
+<li class="chapter" data-level="5.9" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#agrégation-par-groupes"><i class="fa fa-check"></i><b>5.9</b> Agrégation par groupes</a></li>
+<li class="chapter" data-level="5.10" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#tri"><i class="fa fa-check"></i><b>5.10</b> Tri</a></li>
+<li class="chapter" data-level="5.11" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#jointures"><i class="fa fa-check"></i><b>5.11</b> Jointures</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>6</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="r-markdown.html"><a href="r-markdown.html#créer-un-document-r-markdown-avec-rstudio"><i class="fa fa-check"></i><b>6.1</b> Créer un document R Markdown avec RStudio</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="r-markdown.html"><a href="r-markdown.html#yaml"><i class="fa fa-check"></i><b>6.1.1</b> YAML</a></li>
+<li class="chapter" data-level="6.1.2" data-path="r-markdown.html"><a href="r-markdown.html#textes"><i class="fa fa-check"></i><b>6.1.2</b> Textes</a></li>
+<li class="chapter" data-level="6.1.3" data-path="r-markdown.html"><a href="r-markdown.html#morceaux-de-code"><i class="fa fa-check"></i><b>6.1.3</b> Morceaux de code</a></li>
+<li class="chapter" data-level="6.1.4" data-path="r-markdown.html"><a href="r-markdown.html#compilation"><i class="fa fa-check"></i><b>6.1.4</b> Compilation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="r-markdown.html"><a href="r-markdown.html#markdown"><i class="fa fa-check"></i><b>6.2</b> Ecriture du texte : syntaxe en Markdown</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="r-markdown.html"><a href="r-markdown.html#texte"><i class="fa fa-check"></i><b>6.2.1</b> Texte</a></li>
+<li class="chapter" data-level="6.2.2" data-path="r-markdown.html"><a href="r-markdown.html#styles-de-texte"><i class="fa fa-check"></i><b>6.2.2</b> Styles de texte</a></li>
+<li class="chapter" data-level="6.2.3" data-path="r-markdown.html"><a href="r-markdown.html#titres"><i class="fa fa-check"></i><b>6.2.3</b> Titres</a></li>
+<li class="chapter" data-level="6.2.4" data-path="r-markdown.html"><a href="r-markdown.html#citations"><i class="fa fa-check"></i><b>6.2.4</b> Citations</a></li>
+<li class="chapter" data-level="6.2.5" data-path="r-markdown.html"><a href="r-markdown.html#tirets-longs-tirets-moyens"><i class="fa fa-check"></i><b>6.2.5</b> Tirets longs, tirets moyens</a></li>
+<li class="chapter" data-level="6.2.6" data-path="r-markdown.html"><a href="r-markdown.html#lignes-horizontale"><i class="fa fa-check"></i><b>6.2.6</b> Lignes horizontale</a></li>
+<li class="chapter" data-level="6.2.7" data-path="r-markdown.html"><a href="r-markdown.html#points-de-suspension"><i class="fa fa-check"></i><b>6.2.7</b> Points de suspension</a></li>
+<li class="chapter" data-level="6.2.8" data-path="r-markdown.html"><a href="r-markdown.html#liens-hypertextes"><i class="fa fa-check"></i><b>6.2.8</b> Liens hypertextes</a></li>
+<li class="chapter" data-level="6.2.9" data-path="r-markdown.html"><a href="r-markdown.html#notes-de-bas-de-page"><i class="fa fa-check"></i><b>6.2.9</b> Notes de bas de page</a></li>
+<li class="chapter" data-level="6.2.10" data-path="r-markdown.html"><a href="r-markdown.html#listes-1"><i class="fa fa-check"></i><b>6.2.10</b> Listes</a></li>
+<li class="chapter" data-level="6.2.11" data-path="r-markdown.html"><a href="r-markdown.html#listes-imbriquées"><i class="fa fa-check"></i><b>6.2.11</b> Listes imbriquées</a></li>
+<li class="chapter" data-level="6.2.12" data-path="r-markdown.html"><a href="r-markdown.html#images"><i class="fa fa-check"></i><b>6.2.12</b> Images</a></li>
+<li class="chapter" data-level="6.2.13" data-path="r-markdown.html"><a href="r-markdown.html#tableaux"><i class="fa fa-check"></i><b>6.2.13</b> Tableaux</a></li>
+<li class="chapter" data-level="6.2.14" data-path="r-markdown.html"><a href="r-markdown.html#formules-mathématiques-en-latex"><i class="fa fa-check"></i><b>6.2.14</b> Formules mathématiques en LaTeX</a></li>
+<li class="chapter" data-level="6.2.15" data-path="r-markdown.html"><a href="r-markdown.html#md-codes-blocs-codes"><i class="fa fa-check"></i><b>6.2.15</b> Codes et blocs de code</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="r-markdown.html"><a href="r-markdown.html#morceaux-de-code-1"><i class="fa fa-check"></i><b>6.3</b> Morceaux de code</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="r-markdown.html"><a href="r-markdown.html#codes-en-ligne"><i class="fa fa-check"></i><b>6.3.1</b> Codes en ligne</a></li>
+<li class="chapter" data-level="6.3.2" data-path="r-markdown.html"><a href="r-markdown.html#blocs-de-code"><i class="fa fa-check"></i><b>6.3.2</b> Blocs de code</a></li>
+<li class="chapter" data-level="6.3.3" data-path="r-markdown.html"><a href="r-markdown.html#mise-en-cache"><i class="fa fa-check"></i><b>6.3.3</b> Mise en cache</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="r-markdown.html"><a href="r-markdown.html#insertion-dune-bibliographie"><i class="fa fa-check"></i><b>6.4</b> Insertion d’une bibliographie</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="r-markdown.html"><a href="r-markdown.html#création-du-fichier-de-bibliographie"><i class="fa fa-check"></i><b>6.4.1</b> Création du fichier de bibliographie</a></li>
+<li class="chapter" data-level="6.4.2" data-path="r-markdown.html"><a href="r-markdown.html#lier-le-fichier-dentrées-bibliographiques-avec-le-document-rmarkdown"><i class="fa fa-check"></i><b>6.4.2</b> Lier le fichier d’entrées bibliographiques avec le document RMarkdown</a></li>
+<li class="chapter" data-level="6.4.3" data-path="r-markdown.html"><a href="r-markdown.html#citer-les-documents-dans-le-corps-de-texte"><i class="fa fa-check"></i><b>6.4.3</b> Citer les documents dans le corps de texte</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html"><i class="fa fa-check"></i><b>7</b> Statistiques descriptives</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#données-du-chapitre"><i class="fa fa-check"></i><b>7.1</b> Données du chapitre</a></li>
+<li class="chapter" data-level="7.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#résumés-statistiques-à-la-main"><i class="fa fa-check"></i><b>7.2</b> Résumés statistiques à la main</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#dimensions-résumés-grossiers"><i class="fa fa-check"></i><b>7.2.1</b> Dimensions, résumés grossiers</a></li>
+<li class="chapter" data-level="7.2.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#exploration-des-valeurs-avec-des-tableaux"><i class="fa fa-check"></i><b>7.2.2</b> Exploration des valeurs avec des tableaux</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#résumés-avec-gtsummary-vers-la-communication-des-résultats"><i class="fa fa-check"></i><b>7.3</b> Résumés avec gtsummary : vers la communication des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#contexte-et-rappels"><i class="fa fa-check"></i><b>8.1</b> Contexte et rappels</a></li>
+<li class="chapter" data-level="8.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#chargement-du-jeu-de-données"><i class="fa fa-check"></i><b>8.2</b> Chargement du jeu de données</a></li>
+<li class="chapter" data-level="8.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#régression-pas-à-pas"><i class="fa fa-check"></i><b>8.3</b> Régression pas à pas</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#estimation-des-coefficients-de-la-régression-par-moindres-carrés-ordinaires"><i class="fa fa-check"></i><b>8.3.1</b> Estimation des coefficients de la régression par moindres carrés ordinaires</a></li>
+<li class="chapter" data-level="8.3.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#prédiction-des-valeurs"><i class="fa fa-check"></i><b>8.3.2</b> Prédiction des valeurs</a></li>
+<li class="chapter" data-level="8.3.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#les-résidus-de-la-régression"><i class="fa fa-check"></i><b>8.3.3</b> Les résidus de la régression</a></li>
+<li class="chapter" data-level="8.3.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#un-indicateur-de-la-qualité-dajustement-le-coefficient-de-détermination"><i class="fa fa-check"></i><b>8.3.4</b> Un indicateur de la qualité d’ajustement : le coefficient de détermination</a></li>
+<li class="chapter" data-level="8.3.5" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire"><i class="fa fa-check"></i><b>8.3.5</b> Tests de nullité des coefficients de la régression linéaire</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#régression-avec-lm"><i class="fa fa-check"></i><b>8.4</b> Régression avec lm</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#résumé-de-lestimation"><i class="fa fa-check"></i><b>8.4.1</b> Résumé de l’estimation</a></li>
+<li class="chapter" data-level="8.4.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#prédictions-des-valeurs"><i class="fa fa-check"></i><b>8.4.2</b> Prédictions des valeurs</a></li>
+<li class="chapter" data-level="8.4.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire-1"><i class="fa fa-check"></i><b>8.4.3</b> Tests de nullité des coefficients de la régression linéaire</a></li>
+<li class="chapter" data-level="8.4.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#mise-en-forme-des-résultats-avec-modelsummary"><i class="fa fa-check"></i><b>8.4.4</b> Mise en forme des résultats avec modelsummary</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html"><i class="fa fa-check"></i><b>9</b> Instructions conditionnelles et boucles</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instructions-conditionnelles"><i class="fa fa-check"></i><b>9.1</b> Instructions conditionnelles</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instruction-if"><i class="fa fa-check"></i><b>9.1.1</b> Instruction <code>if</code></a></li>
+<li class="chapter" data-level="9.1.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instruction-if-else"><i class="fa fa-check"></i><b>9.1.2</b> Instruction <code>if-else</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles"><i class="fa fa-check"></i><b>9.2</b> Boucles</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles-while"><i class="fa fa-check"></i><b>9.2.1</b> Boucles <code>while()</code></a></li>
+<li class="chapter" data-level="9.2.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles-for"><i class="fa fa-check"></i><b>9.2.2</b> Boucles <code>for()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>10</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Travaux dirigés d’Informatique</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tableaux-de-données" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> Tableaux de données<a href="tableaux-de-données.html#tableaux-de-données" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="orangebox">
+<p>Ce chapitre s’appuie sur les <a href="http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#tableaux-de-donn%C3%A9es">Sections 2.2.2 Tableaux de données</a> et <a href="http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#tableaux_de_donnees">2.4.6 Tableaux de données</a> des notes de cours.</p>
+</div>
+<p>Dans les chapitres <a href="matrices-et-listes.html#matrices-et-listes">Matrices et listes</a> et <a href="importation-et-exportation-de-donnée.html#importation-et-exportation-de-donnée">Importation de données</a>, vous avez appris à manipuler des matrices et à importer des données tabulaires dans R. Dans ce document, vous allez dans un premier temps utliser des techniques similaires à celles permettant de manipuler les matrices pour les appliquer à des tableaux que vous aurez importé depuis un fichier CSV dans R. Ensuite, vous apprendrez d’autres techniques proposées par l’environnement {tidyverse} pour manipuler des tableaux de données. Vous serez capable, une fois que vous aurez terminé de parcourir ce document, d’effectuer des opérations basiques de manipulation de tableau pour produire des statistiques descriptives.</p>
+<div id="importation-des-données-de-la-séance" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Importation des données de la séance<a href="tableaux-de-données.html#importation-des-données-de-la-séance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dans un premier temps, vous allez importer les données de notes des étudiant•es pour l’ensemble des matières, pour la première année (L1) et la deuxième année (L2). Ces données sont disponibles au format CSV, dans l’archive téléchargeable à l’adresse suivante : <a href="https://egallic.fr/Enseignement/R/Exercices/exercice_notes.zip" class="uri">https://egallic.fr/Enseignement/R/Exercices/exercice_notes.zip</a>.</p>
+<div class="greenbox">
+<ol style="list-style-type: decimal">
+<li>Créez un nouveau projet RStudio dans un dossier que nous intitulerez <code>TD_5</code>, au sein de votre espace étudiant sur les serveurs de l’Université.</li>
+<li>Dans le répertoire <code>TD_5</code>, créez trois répertoires : <code>Data</code>, <code>Script</code> et <code>Output</code>.</li>
+<li>Créez un script R que vous appellerez <code>notes.R</code> et enregistrez-le dans le répertoire <code>Script</code>.</li>
+<li>Téléchargez l’archive <code>exercice_notes.zip</code> en suivant le lien donné plus haut, et extrayez son contenu.</li>
+<li>Placez les deux fichiers CSV (<code>notes_L1.csv</code> et <code>notes_L2.csv</code>) et le fichier de données R (<code>moyennes.RData</code>) dans le répertoire <code>Data</code>.</li>
+</ol>
+<p>L’arborescence de votre dossier de travaux dirigés pour cette séance doit être comme suit :</p>
+<pre><code>TD_5
+├──  notes.RProj
+├── Data
+│   └──  notes_L1.csv
+│   └──  notes_L2.csv
+│   └──  moyennes.RData
+├── Script
+|   └── notes.R
+├── Output</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>À présent, dans R, dans un objet que vous appellerez <code>notes_L1</code>, importez les données dans un tableau depuis le fichier <code>notes_L1.csv</code>.</li>
+<li>Dans un objet que vous appellerez <code>notes_L2</code>, importez les données dans un tableau depuis le fichier <code>notes_L2.csv</code>.</li>
+</ol>
+</div>
+<p>En appelant les deux tableaux dans la console, vous devez voir les aperçus suivants :</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="tableaux-de-données.html#cb233-1" aria-hidden="true" tabindex="-1"></a>notes_L1</span></code></pre></div>
+<pre><code>## # A tibble: 224 × 5
+##    nom        prenom     id matiere          note
+##    &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
+##  1 Amsberry   Evan        1 Microéconomie 1  11.5
+##  2 Basurto    Anthony     2 Microéconomie 1   9  
+##  3 Begaye     Kai         3 Microéconomie 1  16.5
+##  4 Brack      Michael     4 Microéconomie 1   4  
+##  5 Burgess    Jamie       5 Microéconomie 1   6.5
+##  6 Christian  Colton      6 Microéconomie 1  14.5
+##  7 Cly        Jesse       7 Microéconomie 1   2.5
+##  8 Coberley   Rebecca     8 Microéconomie 1  20  
+##  9 De Venecia Madison     9 Microéconomie 1   6  
+## 10 Gurule     Elliott    12 Microéconomie 1   7.5
+## # … with 214 more rows</code></pre>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="tableaux-de-données.html#cb235-1" aria-hidden="true" tabindex="-1"></a>notes_L2</span></code></pre></div>
+<pre><code>## # A tibble: 217 × 5
+##    nom        prenom     id matiere          note
+##    &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
+##  1 Amsberry   Evan        1 Microéconomie 2   5.5
+##  2 Basurto    Anthony     2 Microéconomie 2   5  
+##  3 Begaye     Kai         3 Microéconomie 2   8.5
+##  4 Brack      Michael     4 Microéconomie 2   5  
+##  5 Burgess    Jamie       5 Microéconomie 2   9  
+##  6 Christian  Colton      6 Microéconomie 2  20  
+##  7 Coberley   Rebecca     8 Microéconomie 2  15.5
+##  8 De Venecia Madison     9 Microéconomie 2   5.5
+##  9 Dewitt     Amelia     10 Microéconomie 2   6.5
+## 10 Eisenberg  Kelly      11 Microéconomie 2   7  
+## # … with 207 more rows</code></pre>
+</div>
+<div id="tibbles" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Tibbles<a href="tableaux-de-données.html#tibbles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Les tableaux de données sont traditionnellement des objets à deux dimensions, comme les matrices. Une dimension pour les colonnes, et une autre pour les lignes. En R, les tableaux de données pricipaux sont appelés <em>data frames</em>. Nous allons, dans le cadre de ce cours, utiliser majoritairement des tableaux de données de classe <code>tbl_df</code>, une sous classe de <code>data.frame</code>, que l’on nommera des <em>tibbles</em>. Il s’agit de la structure de données centrale dans l’environnement tidyverse. Pour pouvoir créer ou manipuler des tibbles, il est nécessaire de charger le <em>package</em> {tibble}. Ce <em>package</em> est automatiquement chargé lorsque vous chargez {tidyverse} :</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="tableaux-de-données.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p>Avant de manipuler les tableaux de données que vous venez d’importer, vous allez apprendre quelques notions élémentaires au sujet des tibbles. La fonction <code class="sourceCode r"><span class="fu">tibble</span>()</code> permet de créer un tableau de données. On lui donne en arguments les colonnes, en les séparant par une virgule. Pour une facilité d’utilisation, il est préférable de nommer ces colonnes, en inscrivant simplement le nom suivi du symbole <code class="sourceCode r"><span class="ot">=</span></code> avant le contenu de la colonne :</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="tableaux-de-données.html#cb238-1" aria-hidden="true" tabindex="-1"></a>tableau <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb238-2"><a href="tableaux-de-données.html#cb238-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>, <span class="dv">5</span>),</span>
+<span id="cb238-3"><a href="tableaux-de-données.html#cb238-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>),</span>
+<span id="cb238-4"><a href="tableaux-de-données.html#cb238-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">z =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>),</span>
+<span id="cb238-5"><a href="tableaux-de-données.html#cb238-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">t =</span> x <span class="sc">+</span> y)</span>
+<span id="cb238-6"><a href="tableaux-de-données.html#cb238-6" aria-hidden="true" tabindex="-1"></a>tableau</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 4
+##       x     y z         t
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;
+## 1     1    10 A        11
+## 2     2    20 B        22
+## 3     3    30 C        33
+## 4     4    40 D        44
+## 5     5    50 E        55</code></pre>
+<p>Une colonne doit contenir des observations de même type. Comme vous l’avez vu dans le <a href="type-des-données-et-première-structure.html#type-des-données-et-première-structure">chapitre 2</a>, les éléments d’un vecteur sont tous de même type. Aussi, dans l’exemple précédent, où chaque colonne est un vecteur, l’ensemble des éléments de chaque colonne est bien de même type (<em>double</em> pour <code>x</code>, <code>y</code> et <code>t</code>, <em>character</em> pour <code>z</code>).</p>
+<p>Il est possible de donner des noms non conventionnels aux colonnes. En pratique, lorsque nous importons des données issues d’un fichier CSV, il n’est pas rare de faire face à des noms de colonnes non conventionnels (contenant des espaces par exemple, ou commençant par un nombre ou bien contenant des caractères spéciaux). Aussi, il est important de savoir comment faire face à cette situation : en utilisant des accents graves (<code>`</code>, <em>backtick</em>) :</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="tableaux-de-données.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb240-2"><a href="tableaux-de-données.html#cb240-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">nom de colonne</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb240-3"><a href="tableaux-de-données.html#cb240-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 1
+##   `nom de colonne`
+##              &lt;dbl&gt;
+## 1                1
+## 2                2
+## 3                3</code></pre>
+<div id="dimensions" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Dimensions<a href="tableaux-de-données.html#dimensions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lors de l’affichage dans la console de l’aperçu d’un tableau de données, les premières colonnes, leur type, et leur contenu s’affichent. Les dimensions sont données dans la première ligne d’affichage :</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="tableaux-de-données.html#cb242-1" aria-hidden="true" tabindex="-1"></a>tableau</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 4
+##       x     y z         t
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;
+## 1     1    10 A        11
+## 2     2    20 B        22
+## 3     3    30 C        33
+## 4     4    40 D        44
+## 5     5    50 E        55</code></pre>
+<p>La première valeur correspond au nombre de lignes, tandis que la deuxième valeur correspond au nombre de colonnes. Pour accéder à ces valeurs, R propose la fonction <code class="sourceCode r"><span class="fu">dim</span>()</code>, qui retourne les dimensions sous la forme d’un vecteur :</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="tableaux-de-données.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tableau)</span></code></pre></div>
+<pre><code>## [1] 5 4</code></pre>
+<p>On peut ensuite, comme expliqué dans le <a href="initiation-à-r.html#initiation-à-r">chapitre introductif</a> accéder à une dimension spécifique avec la fonction crochet :</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="tableaux-de-données.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tableau)[<span class="dv">1</span>] <span class="co"># nombre de lignes</span></span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="tableaux-de-données.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tableau)[<span class="dv">2</span>] <span class="co"># nombre de colonnes</span></span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>Il est également possible d’utiliser les fonctions <code class="sourceCode r"><span class="fu">nrow</span>()</code> et <code class="sourceCode r"><span class="fu">ncol</span>()</code> qui donnent le nombre de lignes (<em>rows</em> en anglais) et de colonnes (<em>columns</em> en anglais), respectivement :</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="tableaux-de-données.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(tableau)</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="tableaux-de-données.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(tableau)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+</div>
+<div id="accès-aux-éléments-1" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Accès aux éléments<a href="tableaux-de-données.html#accès-aux-éléments-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour accéder aux éléments d’un tibble, on peut utiliser les crochets simples (<code>[]</code>) ou doubles (<code>[[]]</code>), en utilisant l’indexation (par position, nom, ou condition). Avec les crochets simples, un tibble est retourné :</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="tableaux-de-données.html#cb254-1" aria-hidden="true" tabindex="-1"></a>tableau[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>),] <span class="co"># Lignes 1 et 3</span></span></code></pre></div>
+<pre><code>## # A tibble: 2 × 4
+##       x     y z         t
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;
+## 1     1    10 A        11
+## 2     3    30 C        33</code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="tableaux-de-données.html#cb256-1" aria-hidden="true" tabindex="-1"></a>tableau[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)] <span class="co"># Colonnes 2 et 4</span></span></code></pre></div>
+<pre><code>## # A tibble: 5 × 2
+##       y     t
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1    10    11
+## 2    20    22
+## 3    30    33
+## 4    40    44
+## 5    50    55</code></pre>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="tableaux-de-données.html#cb258-1" aria-hidden="true" tabindex="-1"></a>tableau[, <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;t&quot;</span>)]</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 2
+##       x     t
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    11
+## 2     2    22
+## 3     3    33
+## 4     4    44
+## 5     5    55</code></pre>
+<p>Avec les crochets doubles, le contenu de la colonne que l’on souhaite extraire est retourné :</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="tableaux-de-données.html#cb260-1" aria-hidden="true" tabindex="-1"></a>tableau[[<span class="dv">2</span>]]</span></code></pre></div>
+<pre><code>## [1] 10 20 30 40 50</code></pre>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="tableaux-de-données.html#cb262-1" aria-hidden="true" tabindex="-1"></a>tableau[[<span class="st">&quot;z&quot;</span>]]</span></code></pre></div>
+<pre><code>## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot;</code></pre>
+<p>Pour extraire le contenu d’une colonne, R propose aussi d’utiliser le dollar plutôt que les crochets doubles, pour une écriture plus compacte :</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="tableaux-de-données.html#cb264-1" aria-hidden="true" tabindex="-1"></a>tableau<span class="sc">$</span>z</span></code></pre></div>
+<pre><code>## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot;</code></pre>
+<div class="greenbox">
+<p><strong>Exercice</strong></p>
+<ol style="list-style-type: decimal">
+<li>Affichez, à l’aide d’une fonction, le nombre de lignes du tableau <code>notes_L1</code>.</li>
+<li>Idem avec le nombre de colonnes.</li>
+<li>Extrayez les valeurs de la colonne <code>note</code> du tableau <code>notes_L1</code>.</li>
+<li>Sur un moteur de recherche, cherchez comment afficher les valeurs distinctes d’un vecteur, puis appliquez les fruits de votre recherche pour afficher les valeurs distinctes de la colonne <code>matiere</code> du tableau <code>notes_L1</code>. Stockez le résultat dans un objet que vous nommerez <code>matieres</code>.</li>
+<li>Combien de matières différentes y a-t-il dans le tableau <code>notes_L1</code> ? Utilisez le vecteur <code>matieres</code> et une fonction retournant le nombre d’éléments dans un vecteur pour répondre à cette question.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="résumés-statistiques-sur-les-colonnes-dun-tableau" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Résumés statistiques sur les colonnes d’un tableau<a href="tableaux-de-données.html#résumés-statistiques-sur-les-colonnes-dun-tableau" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Des statistiques descriptives sur un vecteur peuvent facilement être obtenues à l’aide des fonctions suivantes :</p>
+<ul>
+<li>somme : <code class="sourceCode r"><span class="fu">sum</span>()</code></li>
+<li>moyenne : <code class="sourceCode r"><span class="fu">mean</span>()</code></li>
+<li>écart-type : <code class="sourceCode r"><span class="fu">sd</span>()</code></li>
+<li>min : <code class="sourceCode r"><span class="fu">min</span>()</code></li>
+<li>max : <code class="sourceCode r"><span class="fu">max</span>()</code></li>
+<li>médiane : <code class="sourceCode r"><span class="fu">median</span>()</code></li>
+<li>quantile quelconque : <code class="sourceCode r"><span class="fu">quantile</span>()</code></li>
+</ul>
+<p>Il suffit de donner un vecteur de valeurs numériques à ces fonctions pour obtenir la statistique calculée sur la base de l’échantillon de valeurs fournies.</p>
+<p>La moyenne et l’écart-type de la colonne <code>x</code> du tableau <code>tableau</code> :</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="tableaux-de-données.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(tableau<span class="sc">$</span>x)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="tableaux-de-données.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(tableau<span class="sc">$</span>x)</span></code></pre></div>
+<pre><code>## [1] 1.581139</code></pre>
+<div class="notebox">
+<p>Attention, la fonction <code class="sourceCode r"><span class="fu">sd</span>()</code> retourne la valeur de l’estimateur de l’écart-type d’une population : <span class="math inline">\(\frac{1}{n-1}\sum_{i=1}^{n} (x_i - \bar{x})^2\)</span>, où <span class="math inline">\(\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i\)</span>.</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="tableaux-de-données.html#cb270-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(tableau<span class="sc">$</span>x)</span>
+<span id="cb270-2"><a href="tableaux-de-données.html#cb270-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-3"><a href="tableaux-de-données.html#cb270-3" aria-hidden="true" tabindex="-1"></a>moy <span class="ot">&lt;-</span> <span class="fu">sum</span>(tableau<span class="sc">$</span>x) <span class="sc">/</span> n</span>
+<span id="cb270-4"><a href="tableaux-de-données.html#cb270-4" aria-hidden="true" tabindex="-1"></a>moy</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="tableaux-de-données.html#cb272-1" aria-hidden="true" tabindex="-1"></a>variance <span class="ot">&lt;-</span> <span class="fu">sum</span>((tableau<span class="sc">$</span>x <span class="sc">-</span> moy)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (n<span class="dv">-1</span>)</span>
+<span id="cb272-2"><a href="tableaux-de-données.html#cb272-2" aria-hidden="true" tabindex="-1"></a>variance</span></code></pre></div>
+<pre><code>## [1] 2.5</code></pre>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="tableaux-de-données.html#cb274-1" aria-hidden="true" tabindex="-1"></a>ecart_type <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(variance)</span>
+<span id="cb274-2"><a href="tableaux-de-données.html#cb274-2" aria-hidden="true" tabindex="-1"></a>ecart_type</span></code></pre></div>
+<pre><code>## [1] 1.581139</code></pre>
+</div>
+<p>Le minimum et le maximum :</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="tableaux-de-données.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(tableau<span class="sc">$</span>x)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="tableaux-de-données.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(tableau<span class="sc">$</span>x)</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>La médiane :</p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="tableaux-de-données.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(tableau<span class="sc">$</span>x)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>Pour d’autres quantiles que la médiane, on utilise la fonction <code class="sourceCode r"><span class="fu">quantile</span>()</code>, en précisant le quantile à l’argument <code>probs</code> :</p>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="tableaux-de-données.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(tableau<span class="sc">$</span>x, <span class="at">probs =</span> .<span class="dv">25</span>) <span class="co"># Premier quartile</span></span></code></pre></div>
+<pre><code>## 25% 
+##   2</code></pre>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="tableaux-de-données.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(tableau<span class="sc">$</span>x, <span class="at">probs =</span> .<span class="dv">75</span>) <span class="co"># Troisième quartile</span></span></code></pre></div>
+<pre><code>## 75% 
+##   4</code></pre>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="tableaux-de-données.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(tableau<span class="sc">$</span>x, <span class="at">probs =</span> .<span class="dv">90</span>) <span class="co"># Neuvième décile</span></span></code></pre></div>
+<pre><code>## 90% 
+## 4.6</code></pre>
+<p>En cas de présence de valeurs manquantes (<code class="sourceCode r"><span class="cn">NA</span></code>), les fonctions <code class="sourceCode r"><span class="fu">sum</span>()</code> <code class="sourceCode r"><span class="fu">mean</span>()</code>, <code class="sourceCode r"><span class="fu">sd</span>()</code>, <code class="sourceCode r"><span class="fu">min</span>()</code>, etc. retournent la valeur <code class="sourceCode r"><span class="cn">NA</span></code> :</p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="tableaux-de-données.html#cb288-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="cn">NA</span>,<span class="dv">4</span>,<span class="cn">NA</span>)</span>
+<span id="cb288-2"><a href="tableaux-de-données.html#cb288-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>Pour que la fonction soit appliquée en retirant au préalable du calcul les observations manquantes, on peut ajouter l’argument <code class="sourceCode r">na.rm<span class="ot">=</span><span class="cn">TRUE</span></code> (avec <code>rm</code> pour <em>remove</em>, c’est-à-dire retirer) :</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="tableaux-de-données.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 2.5</code></pre>
+<div class="greenbox">
+<p><strong>Exercice</strong></p>
+<ol style="list-style-type: decimal">
+<li>À partir du tableau <code>notes_L1</code>, calculez la moyenne et l’écart-type des valeurs dans la colonne <code>note</code>.</li>
+<li>Extrayez le vecteur de notes du tableau <code>notes_L1</code>, et conservez uniquement les 32 premières valeurs (ce qui correspond aux notes de microéconomie), à l’aide des crochets. Calculez la moyenne en microéconomie, ainsi que les premier et troisième quartiles.</li>
+</ol>
+</div>
+</div>
+<div id="sélection-dune-ou-plusieurs-colonnes" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Sélection d’une ou plusieurs colonnes<a href="tableaux-de-données.html#sélection-dune-ou-plusieurs-colonnes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La fonction <code class="sourceCode r"><span class="fu">select</span>()</code> du <em>package</em> {dplyr} (qui est chargé lorsque {tiduverse} est chargé) permet de sélectionner une ou plusieurs colonnes. On donne un tableau de données comme premier argument à cette fonction. On indique ensuite la ou les noms des colonnes à conserver, en les séparant par une virgule. Admettons par exemple que l’on souhaite conserver uniquement les colonnes <code>x</code> et <code>z</code> de <code>tableau</code> :</p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="tableaux-de-données.html#cb292-1" aria-hidden="true" tabindex="-1"></a>tableau_2 <span class="ot">&lt;-</span> <span class="fu">select</span>(tableau, x, z)</span>
+<span id="cb292-2"><a href="tableaux-de-données.html#cb292-2" aria-hidden="true" tabindex="-1"></a>tableau_2</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 2
+##       x z    
+##   &lt;dbl&gt; &lt;chr&gt;
+## 1     1 A    
+## 2     2 B    
+## 3     3 C    
+## 4     4 D    
+## 5     5 E</code></pre>
+<div class="notebox">
+<p>Pour conserver l’ensemble des colonnes <strong>excepté</strong> certaines, il faut faire précéder le nom de ces colonnes que l’on souhaite ne pas conserver par le signe moins (<code class="sourceCode r"><span class="sc">-</span></code>) dans la fonction <code class="sourceCode r">select</code></p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="tableaux-de-données.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(tableau_2, <span class="sc">-</span>z)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 1
+##       x
+##   &lt;dbl&gt;
+## 1     1
+## 2     2
+## 3     3
+## 4     4
+## 5     5</code></pre>
+</div>
+<p>L’ordre dans lequel sont écrits les noms de colonnes lors de l’appel à la fonction <code class="sourceCode r"><span class="fu">select</span>()</code> définit l’odre d’apparition des colonnes dans le résultat. Pour changer la position des colonnes d’un tibble, il existe une fonction dans {tidyverse} : <code class="sourceCode r"><span class="fu">relocate</span>()</code>. Si on souhaite voir apparaître certaines colonnes sans se soucier de l’ordre d’autres colonnes, il suffit de nommer les colonnes à positionner dans les premières positions :</p>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="tableaux-de-données.html#cb296-1" aria-hidden="true" tabindex="-1"></a>tableau <span class="ot">&lt;-</span> <span class="fu">relocate</span>(tableau, z, x)</span>
+<span id="cb296-2"><a href="tableaux-de-données.html#cb296-2" aria-hidden="true" tabindex="-1"></a>tableau</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 4
+##   z         x     y     t
+##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 A         1    10    11
+## 2 B         2    20    22
+## 3 C         3    30    33
+## 4 D         4    40    44
+## 5 E         5    50    55</code></pre>
+<p>Il est également possible de préciser que l’on désire placer une colonne avant ou après une autre colonne, en renseignant les arguments <code class="sourceCode r">.before</code> ou <code class="sourceCode r">.after</code>:</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="tableaux-de-données.html#cb298-1" aria-hidden="true" tabindex="-1"></a>tableau <span class="ot">&lt;-</span> <span class="fu">relocate</span>(tableau, z, <span class="at">.before =</span> y)</span>
+<span id="cb298-2"><a href="tableaux-de-données.html#cb298-2" aria-hidden="true" tabindex="-1"></a>tableau</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 4
+##       x z         y     t
+##   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1 A        10    11
+## 2     2 B        20    22
+## 3     3 C        30    33
+## 4     4 D        40    44
+## 5     5 E        50    55</code></pre>
+<div class="greenbox">
+<p><strong>Exercice</strong></p>
+<ol style="list-style-type: decimal">
+<li>À partir du tableau <code>notes_L1</code>, créez le tableau <code>eleves</code> qui contiendra uniquement les colonnes <code>nom</code>, <code>prenom</code> et <code>id</code>.</li>
+<li>Appliquez la fonction <code class="sourceCode r"><span class="fu">unique</span>()</code> au tableau <code>eleves</code> pour ne conserver dans le tableau <code>eleves</code> que les enregistrements distincts (de sorte à avoir 1 ligne correspondant à une seule personne).</li>
+</ol>
+</div>
+</div>
+<div id="créationmodification-dune-nouvelle-colonne" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Création/Modification d’une nouvelle colonne<a href="tableaux-de-données.html#créationmodification-dune-nouvelle-colonne" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le <em>package</em> {tidyverse} offre une fonction permettant de créer ou de modifier une colonne d’un tableau de données : <code class="sourceCode r"><span class="fu">mutate</span>()</code>. Son premier argument est le tableau de données, le ou les arguments suivants correspondent aux colonnes à créer ou modifier.</p>
+<p>Illustrons le fonctionnement de cette fonction en ramenant les notes de la colonne <code>note</code> de <code>tableau</code> sur 10 plutôt que sur 20. Appelons <code>notes_10</code> la colonne contenant les résultats de la division par deux des valeurs de la colonne <code>note</code> :</p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="tableaux-de-données.html#cb300-1" aria-hidden="true" tabindex="-1"></a>notes_L1 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(notes_L1, <span class="at">notes_10 =</span> note<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb300-2"><a href="tableaux-de-données.html#cb300-2" aria-hidden="true" tabindex="-1"></a>notes_L1</span></code></pre></div>
+<pre><code>## # A tibble: 224 × 6
+##    nom        prenom     id matiere          note notes_10
+##    &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Amsberry   Evan        1 Microéconomie 1  11.5     5.75
+##  2 Basurto    Anthony     2 Microéconomie 1   9       4.5 
+##  3 Begaye     Kai         3 Microéconomie 1  16.5     8.25
+##  4 Brack      Michael     4 Microéconomie 1   4       2   
+##  5 Burgess    Jamie       5 Microéconomie 1   6.5     3.25
+##  6 Christian  Colton      6 Microéconomie 1  14.5     7.25
+##  7 Cly        Jesse       7 Microéconomie 1   2.5     1.25
+##  8 Coberley   Rebecca     8 Microéconomie 1  20      10   
+##  9 De Venecia Madison     9 Microéconomie 1   6       3   
+## 10 Gurule     Elliott    12 Microéconomie 1   7.5     3.75
+## # … with 214 more rows</code></pre>
+<p>Admettons à présent que l’on souhaite ajouter 1 point à l’ensemble des élèves :</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="tableaux-de-données.html#cb302-1" aria-hidden="true" tabindex="-1"></a>notes_L1 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(notes_L1, <span class="at">notes_10_augmentees =</span> notes_10 <span class="sc">+</span><span class="dv">1</span>)</span></code></pre></div>
+<p>Regardons les valeurs, en utilisant la fonction <code class="sourceCode r"><span class="fu">select</span>()</code> pour éviter d’afficher toutes les colonnes :</p>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="tableaux-de-données.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(notes_L1, nom, note, notes_10, notes_10_augmentees)</span></code></pre></div>
+<pre><code>## # A tibble: 224 × 4
+##    nom         note notes_10 notes_10_augmentees
+##    &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;               &lt;dbl&gt;
+##  1 Amsberry    11.5     5.75                6.75
+##  2 Basurto      9       4.5                 5.5 
+##  3 Begaye      16.5     8.25                9.25
+##  4 Brack        4       2                   3   
+##  5 Burgess      6.5     3.25                4.25
+##  6 Christian   14.5     7.25                8.25
+##  7 Cly          2.5     1.25                2.25
+##  8 Coberley    20      10                  11   
+##  9 De Venecia   6       3                   4   
+## 10 Gurule       7.5     3.75                4.75
+## # … with 214 more rows</code></pre>
+<p>Admettons que l’on souhaite ajouter 1 autre point à l’ensemble des élèves. Cette fois, nous allons <strong>modifier</strong> la colonne <code>notes_10_augmentees</code> en récupérant la valeur déjà présente, puis en lui ajoutante la valeur 1.</p>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="tableaux-de-données.html#cb305-1" aria-hidden="true" tabindex="-1"></a>notes_L1 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(notes_L1, <span class="at">notes_10_augmentees =</span> notes_10_augmentees <span class="sc">+</span><span class="dv">1</span>)</span></code></pre></div>
+<p>Regardons à nouveau les valeurs, en utilisant la fonction <code class="sourceCode r"><span class="fu">select</span>()</code> pour éviter d’afficher toutes les colonnes :</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="tableaux-de-données.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(notes_L1, nom, note, notes_10, notes_10_augmentees)</span></code></pre></div>
+<pre><code>## # A tibble: 224 × 4
+##    nom         note notes_10 notes_10_augmentees
+##    &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;               &lt;dbl&gt;
+##  1 Amsberry    11.5     5.75                7.75
+##  2 Basurto      9       4.5                 6.5 
+##  3 Begaye      16.5     8.25               10.2 
+##  4 Brack        4       2                   4   
+##  5 Burgess      6.5     3.25                5.25
+##  6 Christian   14.5     7.25                9.25
+##  7 Cly          2.5     1.25                3.25
+##  8 Coberley    20      10                  12   
+##  9 De Venecia   6       3                   5   
+## 10 Gurule       7.5     3.75                5.75
+## # … with 214 more rows</code></pre>
+<p>Ainsi, lorsque le nom de la colonne que l’on donne en argument de la fonction <code class="sourceCode r"><span class="fu">select</span>()</code> est déjà présent dans le tableau donné en premier argument, la fonction <code class="sourceCode r"><span class="fu">select</span>()</code> effectue une modification de cette colonne. Si le nom de colonne fait référence à une colonne qui n’existe pas dans le tableau, alors la fonction <code class="sourceCode r"><span class="fu">select</span>()</code> créé une nouvelle colonne.</p>
+<div class="notebox">
+<p>Ces opérations en plusieurs étapes peuvent se réaliser à l’aide d’une seule instruction :</p>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="tableaux-de-données.html#cb308-1" aria-hidden="true" tabindex="-1"></a>notes_L1 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(notes_L1,</span>
+<span id="cb308-2"><a href="tableaux-de-données.html#cb308-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">notes_10 =</span> note <span class="sc">/</span> <span class="dv">2</span>,</span>
+<span id="cb308-3"><a href="tableaux-de-données.html#cb308-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">notes_10_augmentees =</span> notes_10 <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb308-4"><a href="tableaux-de-données.html#cb308-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">notes_10_augmentees =</span> notes_10_augmentees <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb308-5"><a href="tableaux-de-données.html#cb308-5" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(notes_L1, nom, note, notes_10, notes_10_augmentees)</span></code></pre></div>
+<pre><code>## # A tibble: 224 × 4
+##    nom         note notes_10 notes_10_augmentees
+##    &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;               &lt;dbl&gt;
+##  1 Amsberry    11.5     5.75                7.75
+##  2 Basurto      9       4.5                 6.5 
+##  3 Begaye      16.5     8.25               10.2 
+##  4 Brack        4       2                   4   
+##  5 Burgess      6.5     3.25                5.25
+##  6 Christian   14.5     7.25                9.25
+##  7 Cly          2.5     1.25                3.25
+##  8 Coberley    20      10                  12   
+##  9 De Venecia   6       3                   5   
+## 10 Gurule       7.5     3.75                5.75
+## # … with 214 more rows</code></pre>
+</div>
+<div class="greenbox">
+<p><strong>Exercice</strong></p>
+<p>Dans le tableau <code>notes_L1</code>, créez la colonne <code>notes_100</code> qui contiendra les notes exprimées sur 100 points et non pas sur 20.</p>
+</div>
+</div>
+<div id="renommer-une-colonne" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> Renommer une colonne<a href="tableaux-de-données.html#renommer-une-colonne" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Pour renommer une colonne, le <em>package</em> {dplyr} propose la fonction <code class="sourceCode r"><span class="fu">rename</span>()</code>. Elle s’applique directement à un tableau de données et retourne un tableau de données. Il suffit d’indiquer le nouveau nom suivi du symbole égal (<code class="sourceCode r"><span class="ot">=</span></code>) puis de l’ancien nom. Lorsqu’un nom n’est pas conventionnel, on utilise l’accent grave (<code>`</code>, <em>backtick</em>) pour entourer le nom :</p>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="tableaux-de-données.html#cb310-1" aria-hidden="true" tabindex="-1"></a>notes_L1 <span class="ot">&lt;-</span> </span>
+<span id="cb310-2"><a href="tableaux-de-données.html#cb310-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(notes_L1,</span>
+<span id="cb310-3"><a href="tableaux-de-données.html#cb310-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">notes_dix =</span> notes_10,</span>
+<span id="cb310-4"><a href="tableaux-de-données.html#cb310-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">notes 10 augmentees</span><span class="st">`</span> <span class="ot">=</span> notes_10_augmentees)</span>
+<span id="cb310-5"><a href="tableaux-de-données.html#cb310-5" aria-hidden="true" tabindex="-1"></a>notes_L1</span></code></pre></div>
+<pre><code>## # A tibble: 224 × 7
+##    nom        prenom     id matiere          note notes_dix notes 10 augmentee…¹
+##    &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;                &lt;dbl&gt;
+##  1 Amsberry   Evan        1 Microéconomie 1  11.5      5.75                 7.75
+##  2 Basurto    Anthony     2 Microéconomie 1   9        4.5                  6.5 
+##  3 Begaye     Kai         3 Microéconomie 1  16.5      8.25                10.2 
+##  4 Brack      Michael     4 Microéconomie 1   4        2                    4   
+##  5 Burgess    Jamie       5 Microéconomie 1   6.5      3.25                 5.25
+##  6 Christian  Colton      6 Microéconomie 1  14.5      7.25                 9.25
+##  7 Cly        Jesse       7 Microéconomie 1   2.5      1.25                 3.25
+##  8 Coberley   Rebecca     8 Microéconomie 1  20       10                   12   
+##  9 De Venecia Madison     9 Microéconomie 1   6        3                    5   
+## 10 Gurule     Elliott    12 Microéconomie 1   7.5      3.75                 5.75
+## # … with 214 more rows, and abbreviated variable name ¹​`notes 10 augmentees`</code></pre>
+</div>
+<div id="filtrage" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Filtrage<a href="tableaux-de-données.html#filtrage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Pour conserver uniquement les lignes d’un tableau qui remplissent les conditions d’un filtre, la fonction <code class="sourceCode r"><span class="fu">filter</span>()</code> du package {dplyr} s’avère être très pratique. Cette fonction qui fait égalemnt partie de l’environnement {tidyverse}, s’applique directement à un tableau de données, et retourne un tableau de données comprenant les lignes pour lesquels le filtre retourne une valeur logique <code class="sourceCode r"><span class="cn">TRUE</span></code>.</p>
+<p>Le premier argument de la fonction <code class="sourceCode r"><span class="fu">filter</span>()</code> est le tableau de données. Les arguments suivants correspondent au(x) filtre(s) à appliquer. Par exemple, pour conserver uniquement les lignes du tableau <code>notes_L1</code> pour lesquelles la note est inférieure à 10 :</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="tableaux-de-données.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(notes_L1, note <span class="sc">&lt;</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 148 × 7
+##    nom        prenom     id matiere          note notes_dix notes 10 augmentee…¹
+##    &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;                &lt;dbl&gt;
+##  1 Basurto    Anthony     2 Microéconomie 1   9        4.5                  6.5 
+##  2 Brack      Michael     4 Microéconomie 1   4        2                    4   
+##  3 Burgess    Jamie       5 Microéconomie 1   6.5      3.25                 5.25
+##  4 Cly        Jesse       7 Microéconomie 1   2.5      1.25                 3.25
+##  5 De Venecia Madison     9 Microéconomie 1   6        3                    5   
+##  6 Gurule     Elliott    12 Microéconomie 1   7.5      3.75                 5.75
+##  7 Israel     Joshua     14 Microéconomie 1   4        2                    4   
+##  8 Jacket     Kanae      15 Microéconomie 1   6.5      3.25                 5.25
+##  9 Kinney     Jonah      17 Microéconomie 1   2        1                    3   
+## 10 Ledbetter  Conor      18 Microéconomie 1   9        4.5                  6.5 
+## # … with 138 more rows, and abbreviated variable name ¹​`notes 10 augmentees`</code></pre>
+<div class="notebox">
+<p>Pour chaque ligne, le test logique consistant à regarder si la valeur de la colonne <code>note</code> est strictement supérieure à 10 est réalisé. Si la valeur retournée est <code class="sourceCode r"><span class="cn">TRUE</span></code>, la ligne est retournée. Dans tous les autres cas, la ligne est retirée du résultat.</p>
+</div>
+<p>Des filtres plus complexes peuvent être réalisés, à l’aide des opérateurs logiques présentés dans <a href="type-des-données-et-première-structure.html#indexation-par-condition">la section portant sur l’indexation par condition</a> (ET logique <code class="sourceCode r"><span class="sc">&amp;</span></code>, OU logique <code class="sourceCode r"><span class="sc">|</span></code>, <code class="sourceCode r"><span class="sc">!</span></code> négation logique).</p>
+<p>Par exemple, pour obtenir les lignes du tableau <code>notes_L1</code> dont la valeur de la colonne <code>note</code> est comprise dans l’intervalle <span class="math inline">\([10;12]\)</span>, on écrira :</p>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="tableaux-de-données.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(notes_L1, note <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span> note <span class="sc">&lt;=</span> <span class="dv">12</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 32 × 7
+##    nom              prenom     id matiere          note notes_dix notes 10 aug…¹
+##    &lt;chr&gt;            &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt;
+##  1 Amsberry         Evan        1 Microéconomie 1  11.5      5.75           7.75
+##  2 Medicine Blanket Robert     23 Microéconomie 1  11        5.5            7.5 
+##  3 Thiede           Tyler      33 Microéconomie 1  10.5      5.25           7.25
+##  4 Gurule           Elliott    12 Macroéconomie 1  12        6              8   
+##  5 Medicine Blanket Robert     23 Macroéconomie 1  10.5      5.25           7.25
+##  6 Pereyra          Emilie     27 Macroéconomie 1  11.5      5.75           7.75
+##  7 Jacket           Kanae      15 Mathématiques 1  11.5      5.75           7.75
+##  8 Oyebi            Rachael    26 Mathématiques 1  12        6              8   
+##  9 Joy              Michael    16 Informatique 1   10        5              7   
+## 10 Kinney           Jonah      17 Informatique 1   10        5              7   
+## # … with 22 more rows, and abbreviated variable name ¹​`notes 10 augmentees`</code></pre>
+<p>Pour conserver les lignes pour lesquelles la valeur d’une colonne fait partie d’un ensemble de valeurs, on utilise l’opérateur <code class="sourceCode r"><span class="sc">%in%</span></code>. Par exemple, pour conserver les observations du tableau <code>notes_L1</code> pour lesquelles le nom est <code class="sourceCode r"><span class="st">&quot;Amsberry&quot;</span></code> ou <code class="sourceCode r"><span class="st">&quot;Basurto 1&quot;</span></code>, on écrira :</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="tableaux-de-données.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(notes_L1, nom <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Amsberry&quot;</span>, <span class="st">&quot;Basurto&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 14 × 7
+##    nom      prenom     id matiere                      note notes_dix notes 10…¹
+##    &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Amsberry Evan        1 Microéconomie 1              11.5      5.75       7.75
+##  2 Basurto  Anthony     2 Microéconomie 1               9        4.5        6.5 
+##  3 Amsberry Evan        1 Macroéconomie 1               7.5      3.75       5.75
+##  4 Basurto  Anthony     2 Macroéconomie 1               4.5      2.25       4.25
+##  5 Amsberry Evan        1 Mathématiques 1               5        2.5        4.5 
+##  6 Basurto  Anthony     2 Mathématiques 1               6        3          5   
+##  7 Amsberry Evan        1 Informatique 1                5.5      2.75       4.75
+##  8 Basurto  Anthony     2 Informatique 1                3.5      1.75       3.75
+##  9 Amsberry Evan        1 Statistiques 1                9        4.5        6.5 
+## 10 Basurto  Anthony     2 Statistiques 1                4        2          4   
+## 11 Amsberry Evan        1 Anglais 1                     4        2          4   
+## 12 Basurto  Anthony     2 Anglais 1                     5.5      2.75       4.75
+## 13 Amsberry Evan        1 Economie environnementale 1   6        3          5   
+## 14 Basurto  Anthony     2 Economie environnementale 1  12        6          8   
+## # … with abbreviated variable name ¹​`notes 10 augmentees`</code></pre>
+<div class="greenbox">
+<p><strong>Exercice</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Filtrez le tableau <code>notes_L1</code> pour ne conserver que les lignes pour lesquelles la valeur de la colonne <code>note</code> est supérieure ou égale à 10.</p></li>
+<li><p>Filtrez le tableau <code>notes_L1</code> pour ne conserver que les lignes concernant la matière “Microéconomie 1”.</p></li>
+<li><p>Filtrez le tableau <code>notes_L1</code> pour ne conserver que les lignes pour lesquelles la valeur de la colonne <code>matiere</code> est soit <code>Microéconomie 1</code>, soit <code>Macroéconomie 1</code>. Stockez le résultat dans un objet que vous appellerez <code>eco</code>.</p></li>
+</ol>
+</div>
+</div>
+<div id="résumés-statistiques-sur-lensemble-du-tableau" class="section level2 hasAnchor" number="5.8">
+<h2><span class="header-section-number">5.8</span> Résumés statistiques sur l’ensemble du tableau<a href="tableaux-de-données.html#résumés-statistiques-sur-lensemble-du-tableau" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Nous avons vu précédemment que les fonctions <code class="sourceCode r"><span class="fu">mean</span>()</code>, <code class="sourceCode r"><span class="fu">sum</span>()</code>, <code class="sourceCode r"><span class="fu">sd</span>()</code>, etc. permettent de calculer des statistiques sur des vecteurs de valeurs numériques. Il est possible d’appliquer ces mêmes fonctions à travers la fonction <code class="sourceCode r"><span class="fu">summarise</span>()</code> sur les colonnes des tableaux de données, pour obtenir les mêmes statistiques. Le résultat sera retourné à l’intérieur d’un tableau de données.</p>
+<p>Le premier argment de la fonction <code class="sourceCode r">summarise</code> est le tableau de données sur lequel les résumés statistiques sont effectués. Les arguments suivants indiquent les fonctions à appliquer sur une colonne. Ces fonctions doivent retourner une valeur unique (ce qui est le cas des fonctions <code class="sourceCode r"><span class="fu">mean</span>()</code>, <code class="sourceCode r">sum</code>, <code class="sourceCode r"><span class="fu">sd</span>()</code>, etc.). On indique d’abord le nom de la colonne qui contiendra la valeur calculée, puis la fonction à appliquer à une ou plusieurs colonnes du tableau. Par exemple, pour calculer la moyenne et l’écart-type des colonnes <code>note</code> et <code>notes 10 augmentees</code>, on écrira :</p>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="tableaux-de-données.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(notes_L1,</span>
+<span id="cb318-2"><a href="tableaux-de-données.html#cb318-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">moyenne =</span> <span class="fu">mean</span>(note),</span>
+<span id="cb318-3"><a href="tableaux-de-données.html#cb318-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">ecart_type =</span> <span class="fu">sd</span>(note),</span>
+<span id="cb318-4"><a href="tableaux-de-données.html#cb318-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">moyennes_aug =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">notes 10 augmentees</span><span class="st">`</span>),</span>
+<span id="cb318-5"><a href="tableaux-de-données.html#cb318-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">sd_aug =</span> <span class="fu">sd</span>(<span class="st">`</span><span class="at">notes 10 augmentees</span><span class="st">`</span>)</span>
+<span id="cb318-6"><a href="tableaux-de-données.html#cb318-6" aria-hidden="true" tabindex="-1"></a>          )</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##   moyenne ecart_type moyennes_aug sd_aug
+##     &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+## 1    8.52       4.75         6.26   2.37</code></pre>
+<div class="notebox">
+<p>La fonction <code class="sourceCode r">summarise</code> a été utilisée sur l’ensemble du tableau <code>notes_L1</code>. Nous avons fourni 4 opérations à éffectuer, le tableau retourné contient ainsi 4 colonnes correspondant aux résultats de ces opérations.</p>
+</div>
+</div>
+<div id="agrégation-par-groupes" class="section level2 hasAnchor" number="5.9">
+<h2><span class="header-section-number">5.9</span> Agrégation par groupes<a href="tableaux-de-données.html#agrégation-par-groupes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La colonne <code>matiere</code> du tableau de données <code>tableau</code> indique la matière dans lequel la note de l’élève est obtenue. Si l’on souhaite obtenir les moyennes de chaque matière, il est nécessaire de réaliser des agrégations par matière. Commençons par réaliser le calcul à la main.</p>
+<p>Regardons les différentes matières :</p>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="tableaux-de-données.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(notes_L1<span class="sc">$</span>matiere)</span></code></pre></div>
+<pre><code>## [1] &quot;Microéconomie 1&quot;             &quot;Macroéconomie 1&quot;            
+## [3] &quot;Mathématiques 1&quot;             &quot;Informatique 1&quot;             
+## [5] &quot;Statistiques 1&quot;              &quot;Anglais 1&quot;                  
+## [7] &quot;Economie environnementale 1&quot; &quot;Finance 1&quot;</code></pre>
+<p>Calculons la note moyenne dans le groupe pour la microéconomie :</p>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="tableaux-de-données.html#cb322-1" aria-hidden="true" tabindex="-1"></a>micro <span class="ot">&lt;-</span> <span class="fu">filter</span>(notes_L1, matiere <span class="sc">==</span> <span class="st">&quot;Microéconomie 1&quot;</span>)</span>
+<span id="cb322-2"><a href="tableaux-de-données.html#cb322-2" aria-hidden="true" tabindex="-1"></a>moyenne_micro <span class="ot">&lt;-</span> <span class="fu">mean</span>(micro<span class="sc">$</span>note)</span>
+<span id="cb322-3"><a href="tableaux-de-données.html#cb322-3" aria-hidden="true" tabindex="-1"></a>moyenne_micro</span></code></pre></div>
+<pre><code>## [1] 8.96875</code></pre>
+<p>Pour la macroéconomie :</p>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="tableaux-de-données.html#cb324-1" aria-hidden="true" tabindex="-1"></a>macro <span class="ot">&lt;-</span> <span class="fu">filter</span>(notes_L1, matiere <span class="sc">==</span> <span class="st">&quot;Macroéconomie 1&quot;</span>)</span>
+<span id="cb324-2"><a href="tableaux-de-données.html#cb324-2" aria-hidden="true" tabindex="-1"></a>moyenne_macro <span class="ot">&lt;-</span> <span class="fu">mean</span>(macro<span class="sc">$</span>note)</span>
+<span id="cb324-3"><a href="tableaux-de-données.html#cb324-3" aria-hidden="true" tabindex="-1"></a>moyenne_macro</span></code></pre></div>
+<pre><code>## [1] 8.484375</code></pre>
+<p>Bien qu’il soit possible de continuer, on se rend rapidement compte que ce calcul répétitif est pénible. Heureusement, {tidyverse} propose une combo de fonctions qui permet de grouper les observations d’un tableau dans un premier temps, puis d’appliquer une fonction à une ou plusieurs colonnes à chacun des sous groupes, et enfin de retourner le résultat. Ces fonctions sont les suivantes :</p>
+<ol style="list-style-type: decimal">
+<li><code class="sourceCode r"><span class="fu">group_by</span>()</code> : dans un premier temps, les données du tableau sont regroupées selon les modalités d’une ou de plusieurs colonnes. Il s’agit de créer des sous-groupes dans le tableau de données. Dans notre cas, nous allons effectuer le regroupement selon les valeurs prises par la colonne <code>matiere</code>.</li>
+<li><code class="sourceCode r"><span class="fu">summarise</span>()</code> : dans un deuxième temps, pour chaque groupe, les observations des lignes sont agrégées, résumées.</li>
+</ol>
+<p>Regroupons les observations de <code>notes_L1</code> en fonction des valeurs de la colonne <code>matière</code> (la microéconomie 1 avec la microéconomie 1, la macroéconomie 1 avec la macroéconomie 1, etc.) :</p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="tableaux-de-données.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(notes_L1, matiere)</span></code></pre></div>
+<pre><code>## # A tibble: 224 × 7
+## # Groups:   matiere [8]
+##    nom        prenom     id matiere          note notes_dix notes 10 augmentee…¹
+##    &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;                &lt;dbl&gt;
+##  1 Amsberry   Evan        1 Microéconomie 1  11.5      5.75                 7.75
+##  2 Basurto    Anthony     2 Microéconomie 1   9        4.5                  6.5 
+##  3 Begaye     Kai         3 Microéconomie 1  16.5      8.25                10.2 
+##  4 Brack      Michael     4 Microéconomie 1   4        2                    4   
+##  5 Burgess    Jamie       5 Microéconomie 1   6.5      3.25                 5.25
+##  6 Christian  Colton      6 Microéconomie 1  14.5      7.25                 9.25
+##  7 Cly        Jesse       7 Microéconomie 1   2.5      1.25                 3.25
+##  8 Coberley   Rebecca     8 Microéconomie 1  20       10                   12   
+##  9 De Venecia Madison     9 Microéconomie 1   6        3                    5   
+## 10 Gurule     Elliott    12 Microéconomie 1   7.5      3.75                 5.75
+## # … with 214 more rows, and abbreviated variable name ¹​`notes 10 augmentees`</code></pre>
+<p>On note dans la sortie précédente que cela correspond à 8 groupes (il y a en effet 8 valeurs distinctes dans la colonne <code>matiere</code> du tableau de données).</p>
+<p>Une fois les groupes désignés, il reste à effectuer le calcul de résumé (la moyenne des valeurs de la colonne <code>note</code>) sur chacun des groupes, à l’aide de la fonction <code class="sourceCode r"><span class="fu">summarise</span>()</code>.Le résultat du calcul sera donné dans une colonne que l’on pourra nommer, par exemple, <code>moyenne</code>.</p>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="tableaux-de-données.html#cb328-1" aria-hidden="true" tabindex="-1"></a>moyennes_matieres <span class="ot">&lt;-</span> </span>
+<span id="cb328-2"><a href="tableaux-de-données.html#cb328-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">group_by</span>(notes_L1, matiere), <span class="at">moyenne =</span> <span class="fu">mean</span>(note))</span>
+<span id="cb328-3"><a href="tableaux-de-données.html#cb328-3" aria-hidden="true" tabindex="-1"></a>moyennes_matieres</span></code></pre></div>
+<pre><code>## # A tibble: 8 × 2
+##   matiere                     moyenne
+##   &lt;chr&gt;                         &lt;dbl&gt;
+## 1 Anglais 1                      7.11
+## 2 Economie environnementale 1    8.56
+## 3 Finance 1                      8.75
+## 4 Informatique 1                 8.38
+## 5 Macroéconomie 1                8.48
+## 6 Mathématiques 1                9.05
+## 7 Microéconomie 1                8.97
+## 8 Statistiques 1                 9</code></pre>
+<div class="notebox">
+<p>Pour éviter d’écrire les compositions de fonctions de manière condensée comme dans l’exemple précédent, le <em>package</em> {magrittr} propose un opérateur nommé “pipe”, dont la syntaxe est la suivante <code class="sourceCode r"><span class="sc">%&gt;%</span></code>.</p>
+<p>Cet opérateur fournit le résultat de l’évaluation de ce qui se trouve avant lui en premier argument de la fonction qui se situe immédiatement après.</p>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="tableaux-de-données.html#cb330-1" aria-hidden="true" tabindex="-1"></a>moyennes_matieres <span class="ot">&lt;-</span> </span>
+<span id="cb330-2"><a href="tableaux-de-données.html#cb330-2" aria-hidden="true" tabindex="-1"></a>  notes_L1 <span class="sc">%&gt;%</span> </span>
+<span id="cb330-3"><a href="tableaux-de-données.html#cb330-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(matiere) <span class="sc">%&gt;%</span> </span>
+<span id="cb330-4"><a href="tableaux-de-données.html#cb330-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">moyenne =</span> <span class="fu">mean</span>(note))</span></code></pre></div>
+<p>Le code devient plus facile à lire :</p>
+<ul>
+<li>on part du tableau de données <code>notes_L1</code> ;</li>
+<li>ce tableau est donné en premier argument de la fonction <code class="sourceCode r"><span class="fu">group_by</span>()</code> ;</li>
+<li>le regroupement est fait selon la colonne <code>matiere</code> ;</li>
+<li>une fois le regroupement effectué, le résultat est donné comme premier argument de la fonction <code class="sourceCode r"><span class="fu">summarise</span>()</code> ;</li>
+<li>le calcul de la moyenne des valeurs de la colonne <code>note</code> est effectué pour chaque groupe du tableau de données, et le résultat est indiqué dans une colonne nommée <code>moyenne</code>.</li>
+</ul>
+</div>
+<div class="notebox">
+<p>Si on souhaite effectuer des regroupements en fonction des valeurs de plusieurs colonnes, il suffit d’ajouter les noms de colonnes dans la fonction <code class="sourceCode r"><span class="fu">group_by</span>()</code>. La syntaxe est la suivante :</p>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="tableaux-de-données.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ne pas évaluer</span></span>
+<span id="cb331-2"><a href="tableaux-de-données.html#cb331-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(tableau, colonne_1, colonne_2)</span></code></pre></div>
+<p>L’exercice qui suit vous permettra d’essayer un regroupement selon plusieurs colonnes.</p>
+</div>
+<div class="greenbox">
+<p><strong>Exercice</strong></p>
+<ol style="list-style-type: decimal">
+<li>Intéressez-vous aux résultats de Rebecca Coberley. Créez un tableau que vous appellerez <code>notes_coberley</code> qui contiendra les observations de <code>notes_L1</code> concernant l’élève Rebecca Coberley (Note : vous devez créer ce nouveau tableau en manipulant le tableau <code>notes_L1</code>, pas en inscrivant à la main les valeurs).</li>
+<li>Calculez la moyenne des notes de cette élève à partir du tableau <code>notes_coberley</code>.</li>
+<li>À partir de <code>notes_L1</code>, calculez la moyenne générale de chaque élève. Pour ce faire :</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>regroupez les valeurs par les colonnes <code>nom</code>, <code>prenom</code>, <code>id</code></li>
+<li>calculez la moyenne de la colonne <code>note</code> pour chaque sous-groupe.</li>
+</ol>
+<ol start="4" style="list-style-type: decimal">
+<li>Retrouvez dans le tableau ainsi obtenu la moyenne de Rebecca Coberley</li>
+</ol>
+</div>
+</div>
+<div id="tri" class="section level2 hasAnchor" number="5.10">
+<h2><span class="header-section-number">5.10</span> Tri<a href="tableaux-de-données.html#tri" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La fonction <code class="sourceCode r"><span class="fu">arrange</span>()</code> du <em>package</em> {dplyr} permet d’ordonner les observations par valeurs croissantes ou décroissantes d’une ou de plusieurs colonnes. À nouveau, le premier argument attendu est un tableau de données, et le résultat est un tableau de données. Les arguments suivants sont les noms des colonnes sur lesquels effectuer le tri. Par défaut, le tri se fait par valeurs <strong>croissantes</strong>.</p>
+<p>Par exemple, pour trier les valeurs par valeurs croissantes de la colonne <code>notes</code>, on écrit simplement :</p>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="tableaux-de-données.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(notes_L1, note)</span></code></pre></div>
+<pre><code>## # A tibble: 224 × 7
+##    nom        prenom      id matiere                      note notes_dix notes…¹
+##    &lt;chr&gt;      &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Lehi       Savannah    19 Informatique 1                1        0.5     2.5 
+##  2 Cly        Jesse        7 Mathématiques 1               1.5      0.75    2.75
+##  3 De Venecia Madison      9 Mathématiques 1               1.5      0.75    2.75
+##  4 Brack      Michael      4 Anglais 1                     1.5      0.75    2.75
+##  5 Lucero     Cole        21 Economie environnementale 1   1.5      0.75    2.75
+##  6 Brack      Michael      4 Finance 1                     1.5      0.75    2.75
+##  7 Kinney     Jonah       17 Microéconomie 1               2        1       3   
+##  8 Cly        Jesse        7 Macroéconomie 1               2        1       3   
+##  9 Slovonsky  Tevin       32 Informatique 1                2        1       3   
+## 10 Thiede     Tyler       33 Informatique 1                2        1       3   
+## # … with 214 more rows, and abbreviated variable name ¹​`notes 10 augmentees`</code></pre>
+<p>Pour trier par valeurs décroissantes, on applique la fonction <code class="sourceCode r"><span class="fu">desc</span>()</code> sur le nom de la colonne, à l’intérieur de la fonction <code class="sourceCode r">arrange</code> :</p>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="tableaux-de-données.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(notes_L1, <span class="fu">desc</span>(note))</span></code></pre></div>
+<pre><code>## # A tibble: 224 × 7
+##    nom              prenom     id matiere                   note notes…¹ notes…²
+##    &lt;chr&gt;            &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;                    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Coberley         Rebecca     8 Microéconomie 1             20    10      12  
+##  2 Joy              Michael    16 Microéconomie 1             20    10      12  
+##  3 Massey           Taylor     22 Mathématiques 1             20    10      12  
+##  4 Medicine Blanket Robert     23 Mathématiques 1             20    10      12  
+##  5 Scholer          Julia      31 Informatique 1              20    10      12  
+##  6 Riley            Paige      28 Statistiques 1              20    10      12  
+##  7 Rosen            Richard    29 Anglais 1                   20    10      12  
+##  8 Rosen            Richard    29 Economie environnementa…    20    10      12  
+##  9 Begaye           Kai         3 Statistiques 1              19     9.5    11.5
+## 10 Scholer          Julia      31 Statistiques 1              19     9.5    11.5
+## # … with 214 more rows, and abbreviated variable names ¹​notes_dix,
+## #   ²​`notes 10 augmentees`</code></pre>
+<p>Lorsque une colonne utilisée pour faire un tri est une chaîne de caractères, l’ordre alphanumérique est utilisé :</p>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="tableaux-de-données.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(notes_L1, nom)</span></code></pre></div>
+<pre><code>## # A tibble: 224 × 7
+##    nom      prenom     id matiere                      note notes_dix notes 10…¹
+##    &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Amsberry Evan        1 Microéconomie 1              11.5      5.75       7.75
+##  2 Amsberry Evan        1 Macroéconomie 1               7.5      3.75       5.75
+##  3 Amsberry Evan        1 Mathématiques 1               5        2.5        4.5 
+##  4 Amsberry Evan        1 Informatique 1                5.5      2.75       4.75
+##  5 Amsberry Evan        1 Statistiques 1                9        4.5        6.5 
+##  6 Amsberry Evan        1 Anglais 1                     4        2          4   
+##  7 Amsberry Evan        1 Economie environnementale 1   6        3          5   
+##  8 Basurto  Anthony     2 Microéconomie 1               9        4.5        6.5 
+##  9 Basurto  Anthony     2 Macroéconomie 1               4.5      2.25       4.25
+## 10 Basurto  Anthony     2 Mathématiques 1               6        3          5   
+## # … with 214 more rows, and abbreviated variable name ¹​`notes 10 augmentees`</code></pre>
+<div class="notebox">
+<p>Selon l’ordre alphanumérique, les caractères spéciaux apparaissent en premier, suivis des valeurs numériques, puis par les lettres.</p>
+</div>
+<p>Pour trier par une colonne, puis par une autre, il suffit d’ajouter les noms des colonnes en arguments. L’ordre d’énumération définit l’ordre du tri. Par exemple, pour trier par valeurs croissantes des matières (colonne <code>matiere</code>), puis, pour chaque matière, par valeurs décroissantes des notes (colonne <code>note</code>) :</p>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="tableaux-de-données.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(notes_L1, matiere, <span class="fu">desc</span>(note))</span></code></pre></div>
+<pre><code>## # A tibble: 224 × 7
+##    nom              prenom     id matiere    note notes_dix notes 10 augmentee…¹
+##    &lt;chr&gt;            &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;                &lt;dbl&gt;
+##  1 Rosen            Richard    29 Anglais 1  20       10                   12   
+##  2 Joy              Michael    16 Anglais 1  13.5      6.75                 8.75
+##  3 Massey           Taylor     22 Anglais 1  13        6.5                  8.5 
+##  4 Begaye           Kai         3 Anglais 1  11        5.5                  7.5 
+##  5 Medicine Blanket Robert     23 Anglais 1  10.5      5.25                 7.25
+##  6 Pereyra          Emilie     27 Anglais 1  10        5                    7   
+##  7 Mullins          Brenna     24 Anglais 1   9.5      4.75                 6.75
+##  8 Slovonsky        Tevin      32 Anglais 1   9.5      4.75                 6.75
+##  9 Schlaver         Lexa       30 Anglais 1   9        4.5                  6.5 
+## 10 Kinney           Jonah      17 Anglais 1   8.5      4.25                 6.25
+## # … with 214 more rows, and abbreviated variable name ¹​`notes 10 augmentees`</code></pre>
+<div class="notebox">
+<p>Pour avoir une meilleure idée de ce qu’il se passe, regardons avec un plus petit tableau. Considérons le tableau suivant :</p>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="tableaux-de-données.html#cb340-1" aria-hidden="true" tabindex="-1"></a>tableau <span class="ot">&lt;-</span> </span>
+<span id="cb340-2"><a href="tableaux-de-données.html#cb340-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb340-3"><a href="tableaux-de-données.html#cb340-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">numero_ligne_initial =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),</span>
+<span id="cb340-4"><a href="tableaux-de-données.html#cb340-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">matiere =</span> <span class="fu">c</span>(<span class="st">&quot;Microéconomie 1&quot;</span>, <span class="st">&quot;Anglais 1&quot;</span>,</span>
+<span id="cb340-5"><a href="tableaux-de-données.html#cb340-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;Microéconomie 1&quot;</span>, <span class="st">&quot;Anglais 1&quot;</span>),</span>
+<span id="cb340-6"><a href="tableaux-de-données.html#cb340-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">notes =</span> <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">18</span>,<span class="dv">15</span>,<span class="dv">5</span>))</span>
+<span id="cb340-7"><a href="tableaux-de-données.html#cb340-7" aria-hidden="true" tabindex="-1"></a>tableau</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   numero_ligne_initial matiere         notes
+##                  &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
+## 1                    1 Microéconomie 1    20
+## 2                    2 Anglais 1          18
+## 3                    3 Microéconomie 1    15
+## 4                    4 Anglais 1           5</code></pre>
+<p>Si on ordonne uniquement par la colonne <code>matiere</code>, par valeurs croissantes :</p>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="tableaux-de-données.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(tableau, matiere)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   numero_ligne_initial matiere         notes
+##                  &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
+## 1                    2 Anglais 1          18
+## 2                    4 Anglais 1           5
+## 3                    1 Microéconomie 1    20
+## 4                    3 Microéconomie 1    15</code></pre>
+<p>Les lignes où <code>matiere</code> vaut <code>"Anglais 1"</code> sont remontées avant celles où <code>matiere</code> vaut <code>"Microéconomie 1"</code>.</p>
+<p>Si on veut, une fois ce tri effectué, trier par valeurs croissantes de <code>notes</code>, en conservant les observations pour l’anglais avant celles de la microéconomie :</p>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="tableaux-de-données.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(tableau, matiere, notes)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   numero_ligne_initial matiere         notes
+##                  &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
+## 1                    4 Anglais 1           5
+## 2                    2 Anglais 1          18
+## 3                    3 Microéconomie 1    15
+## 4                    1 Microéconomie 1    20</code></pre>
+</div>
+<div class="greenbox">
+<p>À votre tour.</p>
+<ol style="list-style-type: decimal">
+<li>Trier le tableau <code>notes_L1</code> par valeurs décroissante des noms (colonne <code>nom</code>) .</li>
+<li>Trier le tableau <code>notes_L1</code> par valeurs croissante des matières (colonne <code>matiere</code>) et valeurs croissante des noms (colonne <code>nom</code>).</li>
+<li>Affichez le top 3 des élèves par matière. Pour ce faire :</li>
+</ol>
+<ul>
+<li>regroupez les les observations par matiere (colonne <code>matiere</code>),</li>
+<li>triez les observations par valeurs décroissantes des notes (colonne <code>note</code>),</li>
+<li>utilisez la fonction <code class="sourceCode r"><span class="fu">slice_head</span>()</code> sur le tableau trié (et groupé) pour extraire uniquement les 3 premières observations de chaque groupe.</li>
+</ul>
+</div>
+</div>
+<div id="jointures" class="section level2 hasAnchor" number="5.11">
+<h2><span class="header-section-number">5.11</span> Jointures<a href="tableaux-de-données.html#jointures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Il n’est pas rare d’avoir deux tableaux de données qui disposent d’une ou de plusieurs colonnes communes, et qui peuvent être joints. Dans l’archive téléchargée au début de ce chapitre, vous avez extrait un fichier intitulé <code>moyennes.RData</code> que vous avez placé dans le répertoire <code>Data</code> de votre projet. Ce fichier contient deux tableaux de données :</p>
+<ol style="list-style-type: decimal">
+<li><code>moyennes_L1</code> : les moyennes à l’année de L1, sur 20, pour les élèves ;</li>
+<li><code>moyennes_L2</code> : les moyennes à l’année de L2, sur 20, pour les élèves.</li>
+</ol>
+<div class="greenbox">
+<p>Chargez dans R les données contenues dans le fichier <code>moyennes.RData</code></p>
+</div>
+<p>La plupart des élèves de L1 sont aussi en L2 et vice-versa, mais certaines personnes étaient en L1 et n’ont pas été en L2, tandis que d’autres sont arrivées en L2 mais sont absentes du tableau concernant la L1.</p>
+<p>Admettons que l’on souhaite mettre en commun les deux tableaux. Ils diposent tous deux d’une colonne indiquant les noms, une autre indiquant les prénoms, une autre indiquant l’identifiant, et enfin une dernière indiquant la moyenne annuelle. Cependant, le nom des colonnes de noms et prénoms diffère d’une année à l’autre : la colonne <code>nom</code> du tableau <code>moyennes_L1</code> s’appelle <code>last_name</code> dans le tableau <code>moyennes_L2</code> et la colonne <code>prenom</code> dans <code>moyennes_L1</code> est désignée par <code>first_name</code> dans <code>moyennes_L2</code> :</p>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="tableaux-de-données.html#cb346-1" aria-hidden="true" tabindex="-1"></a>moyennes_L1</span></code></pre></div>
+<pre><code>## # A tibble: 32 × 4
+##    nom        prenom     id moyenne_L1
+##    &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Amsberry   Evan        1       6.93
+##  2 Basurto    Anthony     2       6.36
+##  3 Begaye     Kai         3      13.4 
+##  4 Brack      Michael     4       5   
+##  5 Burgess    Jamie       5       9.36
+##  6 Christian  Colton      6      10.3 
+##  7 Cly        Jesse       7       5.29
+##  8 Coberley   Rebecca     8       9.5 
+##  9 De Venecia Madison     9       4.07
+## 10 Gurule     Elliott    12       7.71
+## # … with 22 more rows</code></pre>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="tableaux-de-données.html#cb348-1" aria-hidden="true" tabindex="-1"></a>moyennes_L2</span></code></pre></div>
+<pre><code>## # A tibble: 31 × 4
+##    last_name  first_name    id moyenne_L2
+##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Amsberry   Evan           1       4.21
+##  2 Basurto    Anthony        2       8.21
+##  3 Begaye     Kai            3      15.6 
+##  4 Brack      Michael        4       6.36
+##  5 Burgess    Jamie          5       9.21
+##  6 Christian  Colton         6      10.2 
+##  7 Coberley   Rebecca        8      10.9 
+##  8 De Venecia Madison        9       5.79
+##  9 Dewitt     Amelia        10       6.93
+## 10 Eisenberg  Kelly         11      12.1 
+## # … with 21 more rows</code></pre>
+<p>Si l’on souhaite réaliser une jointure entre les deux tableaux, une multitude de fonctions sont disponibles. Elles partagent une syntaxe commune :</p>
+<p><code class="sourceCode r"><span class="fu">xx_join</span>(x, y, <span class="at">by =</span> <span class="cn">NULL</span>, <span class="at">copy =</span> <span class="cn">FALSE</span>, ...)</code>,</p>
+<p>où <code>x</code> et <code>y</code> sont les tableaux à joindre, <code>by</code> est un vecteur de chaînes de caractères contenant les noms des variables permettant la jointure (si la valeur est <code class="sourceCode r"><span class="cn">NULL</span></code> – par défaut – la jointure se fera à l’aide des variables portant le même nom dans les deux tables).</p>
+<div class="notebox">
+<p>Si la jointure s’effectue à l’aide de deux colonnes ou plus, on donner au paramètre <code class="sourceCode r">by</code> de la fonction de jointure un vecteur comportant plusieurs éléments, chaque élément indiquant la correspondance entre les noms de colonnes dans les deux tableaux.</p>
+<p>La syntaxe est la suivante, si la colonne <code>nom_colonne_1_x</code> du tableau <code>x</code> correspond à la colonne <code>nom_colonne_1_y</code> du tableau <code>y</code>, et si la colonne <code>nom_colonne_2_x</code> du tableau <code>x</code> correspond à la colonne <code>nom_colonne_2_y</code> du tableau <code>y</code>.</p>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="tableaux-de-données.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xx_join</span>(x, y, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;nom_colonne_1_x&quot;</span> <span class="ot">=</span> <span class="st">&quot;nom_colonne_1_y&quot;</span>,</span>
+<span id="cb350-2"><a href="tableaux-de-données.html#cb350-2" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;nom_colonne_2_x&quot;</span> <span class="ot">=</span> <span class="st">&quot;nom_colonne_2_y&quot;</span>))</span></code></pre></div>
+</div>
+<p>Pour illustrer les différentes jointures, travaillons sur un plus petit jeu de données. Vous aurez l’occasion de vous exercer sur le jeu complet par la suite.</p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="tableaux-de-données.html#cb351-1" aria-hidden="true" tabindex="-1"></a>moy_l1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb351-2"><a href="tableaux-de-données.html#cb351-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">nom =</span> <span class="fu">c</span>(<span class="st">&quot;Fuentes Gomez&quot;</span>, <span class="st">&quot;Kohyann&quot;</span>, <span class="st">&quot;Zagoury&quot;</span>, <span class="st">&quot;Souvestre&quot;</span>),</span>
+<span id="cb351-3"><a href="tableaux-de-données.html#cb351-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">prenom =</span> <span class="fu">c</span>(<span class="st">&quot;Sofia&quot;</span>, <span class="st">&quot;Hugo&quot;</span>, <span class="st">&quot;David&quot;</span>, <span class="st">&quot;Pierre&quot;</span>),</span>
+<span id="cb351-4"><a href="tableaux-de-données.html#cb351-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb351-5"><a href="tableaux-de-données.html#cb351-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">moyenne_L1 =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">12</span>),</span>
+<span id="cb351-6"><a href="tableaux-de-données.html#cb351-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">groupe_TD =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>)</span>
+<span id="cb351-7"><a href="tableaux-de-données.html#cb351-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb351-8"><a href="tableaux-de-données.html#cb351-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb351-9"><a href="tableaux-de-données.html#cb351-9" aria-hidden="true" tabindex="-1"></a>moy_l2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb351-10"><a href="tableaux-de-données.html#cb351-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">last_name =</span> <span class="fu">c</span>(<span class="st">&quot;Fuentes Gomez&quot;</span>, <span class="st">&quot;Kohyann&quot;</span>, <span class="st">&quot;Lang&quot;</span>, <span class="st">&quot;Souvestre&quot;</span>),</span>
+<span id="cb351-11"><a href="tableaux-de-données.html#cb351-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">first_name =</span> <span class="fu">c</span>(<span class="st">&quot;Sofia&quot;</span>, <span class="st">&quot;Hugo&quot;</span>, <span class="st">&quot;Lea&quot;</span>, <span class="st">&quot;Pierre&quot;</span>),</span>
+<span id="cb351-12"><a href="tableaux-de-données.html#cb351-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">4</span>),</span>
+<span id="cb351-13"><a href="tableaux-de-données.html#cb351-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">moyenne_L2 =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">16</span>, <span class="dv">13</span>),</span>
+<span id="cb351-14"><a href="tableaux-de-données.html#cb351-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">groupe_TD =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>)</span>
+<span id="cb351-15"><a href="tableaux-de-données.html#cb351-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb351-16"><a href="tableaux-de-données.html#cb351-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb351-17"><a href="tableaux-de-données.html#cb351-17" aria-hidden="true" tabindex="-1"></a>moy_l1</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   nom           prenom    id moyenne_L1 groupe_TD
+##   &lt;chr&gt;         &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    
+## 1 Fuentes Gomez Sofia      1         12 A        
+## 2 Kohyann       Hugo       2         14 B        
+## 3 Zagoury       David      3         12 A        
+## 4 Souvestre     Pierre     4         12 A</code></pre>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="tableaux-de-données.html#cb353-1" aria-hidden="true" tabindex="-1"></a>moy_l2</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   last_name     first_name    id moyenne_L2 groupe_TD
+##   &lt;chr&gt;         &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    
+## 1 Fuentes Gomez Sofia          1         12 A        
+## 2 Kohyann       Hugo           2         14 A        
+## 3 Lang          Lea            5         16 B        
+## 4 Souvestre     Pierre         4         13 B</code></pre>
+<p>Les différentes fonctions de jointure sont les suivantes :</p>
+<ul>
+<li><code class="sourceCode r"><span class="fu">inner_join</span>()</code> : toutes les lignes de <code>x</code> pour lesquelles il y a des valeurs correspondantes dans <code>y</code>, et toutes les colonnes de <code>x</code> et <code>y</code>. S’il y a plusieurs correspondances dans les noms entre <code>x</code> et <code>y</code>, toutes les combinaisons possibles sont retournées ;</li>
+</ul>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="tableaux-de-données.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(moy_l1, moy_l2,</span>
+<span id="cb355-2"><a href="tableaux-de-données.html#cb355-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;nom&quot;</span> <span class="ot">=</span> <span class="st">&quot;last_name&quot;</span>, <span class="st">&quot;prenom&quot;</span> <span class="ot">=</span> <span class="st">&quot;first_name&quot;</span>, <span class="st">&quot;id&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 7
+##   nom           prenom    id moyenne_L1 groupe_TD.x moyenne_L2 groupe_TD.y
+##   &lt;chr&gt;         &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;      
+## 1 Fuentes Gomez Sofia      1         12 A                   12 A          
+## 2 Kohyann       Hugo       2         14 B                   14 A          
+## 3 Souvestre     Pierre     4         12 A                   13 B</code></pre>
+<div class="notebox">
+<p>La colonne <code>id</code> est présente à la fois dans <code>moy_l1</code> et dans <code>moy_l2</code>. Il est donc possible de ne pas écrire <code class="sourceCode r"><span class="st">&quot;id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span></code> dans le vecteur donné à l’argument <code>by</code>. Nénamoins, ce n’est pas une obligation, nous pouvons très bien écrire l’instruction suivante et obtenir le même résultat que précédemment.</p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="tableaux-de-données.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(moy_l1, moy_l2,</span>
+<span id="cb357-2"><a href="tableaux-de-données.html#cb357-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;nom&quot;</span> <span class="ot">=</span> <span class="st">&quot;last_name&quot;</span>, <span class="st">&quot;prenom&quot;</span> <span class="ot">=</span> <span class="st">&quot;first_name&quot;</span>, <span class="st">&quot;id&quot;</span> <span class="ot">=</span> <span class="st">&quot;id&quot;</span>))</span></code></pre></div>
+</div>
+<ul>
+<li><code class="sourceCode r"><span class="fu">left_join</span>()</code> : toutes les lignes de <code>x</code>, et toutes les colonnes de <code>x</code> et <code>y</code>. Les lignes dans <code>x</code> pour lesquelles il n’y a pas de correspondance dans y auront des valeurs <code class="sourceCode r"><span class="cn">NA</span></code> dans les nouvelles colonnes. S’il y a plusieurs correspondances dans les noms entre <code>x</code> et <code>y</code>, toutes les combinaisons sont retournées ;</li>
+</ul>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="tableaux-de-données.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(moy_l1, moy_l2,</span>
+<span id="cb358-2"><a href="tableaux-de-données.html#cb358-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;nom&quot;</span> <span class="ot">=</span> <span class="st">&quot;last_name&quot;</span>, <span class="st">&quot;prenom&quot;</span> <span class="ot">=</span> <span class="st">&quot;first_name&quot;</span>, <span class="st">&quot;id&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 7
+##   nom           prenom    id moyenne_L1 groupe_TD.x moyenne_L2 groupe_TD.y
+##   &lt;chr&gt;         &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;      
+## 1 Fuentes Gomez Sofia      1         12 A                   12 A          
+## 2 Kohyann       Hugo       2         14 B                   14 A          
+## 3 Zagoury       David      3         12 A                   NA &lt;NA&gt;       
+## 4 Souvestre     Pierre     4         12 A                   13 B</code></pre>
+<ul>
+<li><code class="sourceCode r"><span class="fu">right_join</span>()</code> : toutes les lignes de <code>y</code>, et toutes les colonnes de <code>x</code> et <code>y</code>. Les lignes dans <code>y</code> pour lesquelles il n’y a pas de correspondance dans <code>x</code> auront des valeurs <code class="sourceCode r"><span class="cn">NA</span></code> dans les nouvelles colonnes. S’il y a plusieurs correspondances dans les noms entre <code>x</code> et <code>y</code>, toutes les combinaisons sont retournées ;</li>
+</ul>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="tableaux-de-données.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">right_join</span>(moy_l1, moy_l2,</span>
+<span id="cb360-2"><a href="tableaux-de-données.html#cb360-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;nom&quot;</span> <span class="ot">=</span> <span class="st">&quot;last_name&quot;</span>, <span class="st">&quot;prenom&quot;</span> <span class="ot">=</span> <span class="st">&quot;first_name&quot;</span>, <span class="st">&quot;id&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 7
+##   nom           prenom    id moyenne_L1 groupe_TD.x moyenne_L2 groupe_TD.y
+##   &lt;chr&gt;         &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;      
+## 1 Fuentes Gomez Sofia      1         12 A                   12 A          
+## 2 Kohyann       Hugo       2         14 B                   14 A          
+## 3 Souvestre     Pierre     4         12 A                   13 B          
+## 4 Lang          Lea        5         NA &lt;NA&gt;                16 B</code></pre>
+<ul>
+<li><code class="sourceCode r"><span class="fu">semi_join</span>()</code> : toutes les lignes de <code>x</code> pour lesquelles il y a des valeurs correspondantes dans <code>y</code>, en ne conservant uniquement les colonnes de <code>x</code>;</li>
+</ul>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="tableaux-de-données.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">semi_join</span>(moy_l1, moy_l2,</span>
+<span id="cb362-2"><a href="tableaux-de-données.html#cb362-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;nom&quot;</span> <span class="ot">=</span> <span class="st">&quot;last_name&quot;</span>, <span class="st">&quot;prenom&quot;</span> <span class="ot">=</span> <span class="st">&quot;first_name&quot;</span>, <span class="st">&quot;id&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 5
+##   nom           prenom    id moyenne_L1 groupe_TD
+##   &lt;chr&gt;         &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    
+## 1 Fuentes Gomez Sofia      1         12 A        
+## 2 Kohyann       Hugo       2         14 B        
+## 3 Souvestre     Pierre     4         12 A</code></pre>
+<ul>
+<li><code class="sourceCode r"><span class="fu">anti_join</span>()</code> : toutes les lignes de <code>x</code> pour lesquelles il n’y a pas de correspondances dans <code>y</code>, en ne conservant que les colonnes de <code>x</code>.</li>
+</ul>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="tableaux-de-données.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anti_join</span>(moy_l1, moy_l2,</span>
+<span id="cb364-2"><a href="tableaux-de-données.html#cb364-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;nom&quot;</span> <span class="ot">=</span> <span class="st">&quot;last_name&quot;</span>, <span class="st">&quot;prenom&quot;</span> <span class="ot">=</span> <span class="st">&quot;first_name&quot;</span>, <span class="st">&quot;id&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 5
+##   nom     prenom    id moyenne_L1 groupe_TD
+##   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    
+## 1 Zagoury David      3         12 A</code></pre>
+<ul>
+<li><code class="sourceCode r"><span class="fu">full_join</span>()</code> : toutes les lignes et toutes les colonnes de <code>x</code> et de <code>y</code>. Les lignes dans <code>x</code> pour lesquelles il n’y a pas de correspondance dans <code>y</code> auront des valeurs <code class="sourceCode r"><span class="cn">NA</span></code> dans les colonnes de <code>y</code>. Les lignes dans <code>y</code> pour lesquelles il n’y a pas de correspondance dans <code>x</code> auront des valeurs <code class="sourceCode r"><span class="cn">NA</span></code> dans les colonnes de <code>x</code>. S’il y a plusieurs correspondances dans les noms entre <code>x</code> et <code>y</code>, toutes les combinaisons sont retournées ;</li>
+</ul>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="tableaux-de-données.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">full_join</span>(moy_l1, moy_l2,</span>
+<span id="cb366-2"><a href="tableaux-de-données.html#cb366-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;nom&quot;</span> <span class="ot">=</span> <span class="st">&quot;last_name&quot;</span>, <span class="st">&quot;prenom&quot;</span> <span class="ot">=</span> <span class="st">&quot;first_name&quot;</span>, <span class="st">&quot;id&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 7
+##   nom           prenom    id moyenne_L1 groupe_TD.x moyenne_L2 groupe_TD.y
+##   &lt;chr&gt;         &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;      
+## 1 Fuentes Gomez Sofia      1         12 A                   12 A          
+## 2 Kohyann       Hugo       2         14 B                   14 A          
+## 3 Zagoury       David      3         12 A                   NA &lt;NA&gt;       
+## 4 Souvestre     Pierre     4         12 A                   13 B          
+## 5 Lang          Lea        5         NA &lt;NA&gt;                16 B</code></pre>
+<div class="greenbox">
+<p><strong>Exercice</strong></p>
+<ol style="list-style-type: decimal">
+<li>À partir des tableaux <code>moyennes_L1</code> et <code>moyennes_L2</code> (qui sont importés dans R en chargeant le fichier <code>moyennes.RData</code> que vous avez placé dans le répertoire <code>Data</code> de votre projet), effectuez une jointure permettant d’avoir dans un même tableau l’ensemble des élèves (ayant suivi ou non les deux années) et leur moyenne en L1 et en L2.</li>
+<li>Identifiez à l’aide d’une jointure des tableaux <code>moyennes_L1</code> et <code>moyennes_L2</code> les élèves présents en L1 mais pas en L2.</li>
+<li>Identifiez à l’aide d’une jointure des tableaux <code>moyennes_L1</code> et <code>moyennes_L2</code> les élèves présents en L2 mais pas en L1.</li>
+</ol>
+</div>
+<!-- # Seance 6 -->
+<!-- # Faire des tableaux de résumés statistiques + exports -->
+<!-- # Markdown -->
+<!-- # Seance 7 -->
+<!-- # regressions -->
+<!-- # Seance 8 -->
+<!-- # Fonctions -->
+<!-- # Boucles -->
+<!-- # Seance 10 -->
+<!-- # Graphiques -->
+<!-- # Seance 11 -->
+<!-- # Graphiques -->
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="importation-et-exportation-de-donnée.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-markdown.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "night",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

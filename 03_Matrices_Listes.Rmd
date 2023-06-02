@@ -1,0 +1,661 @@
+# Matrices et listes
+
+::::{.orangebox data-latex=""}
+
+Ce chapitre s'appuie sur les sections 2.2.1.4 Matrices et 2.2.1.5 Listes du [chapitre 2 des notes de cours](http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#structures-de-base), ainsi que sur la [Section 2.4 Manipulation des données](http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#manipulation-des-donn%C3%A9es).
+
+:::
+
+
+## Matrice
+
+En R, les matrices sont des vecteurs auxquels un attridut `dim` de dimension est ajouté (cet attribut est de longueur 2). La fonction `matrix()`{.R} permet de créer une matrice. Son premier argument, `data` reçoit un vecteur de valeurs. Les arguments `ncol` et `nrow` reçoivent quant à eux le nombre de colonnes et de lignes, respectivement. Il est possible de ne préciser qu'un seul de ces deux derniers arguments (en fonction de la longueur du vecteur donné à l'argument `data`, R devine).
+
+Créons la matrice suivante en R:
+
+$$A = \begin{bmatrix}1 & 4 & 7 & 10\\2 & 5 & 8 & 11\\ 3 & 6 & 9 & 12\end{bmatrix}$$
+
+```{r}
+A <- matrix(data = c(1,2,3,4,5,6, 7, 8, 9, 10, 11, 12), ncol = 4)
+A
+```
+
+::::{.notebox data-latex=""}
+
+
+**Notes**
+
+- Le remplissage de la matrice s'est effectué colonne par colonne, de sorte à avoir 4 colonnes dans le résultat final (`ncol=4{.R}`).
+- Les données fourniées à l'argument `data` doivent être de même type (puisqu'elles sont contenues dans un vecteur).
+- Nous pouvons ne pas écrire `data=` et simplement écrire `matrix(c(1,2,3,4,5,6,7,8,9,10,11,12), ncol = 4)`{.R}.
+- Au lieu d'écrire `c(1,2,3,4,5,6,7,8,9,10,11,12)`{.R}, il est possible de générer la même séquence de nombres à l'aide d'une syntaxe plus courte : `seq(1,12)`{.R} ou encore plus court : `1:12`{.R}.
+
+:::
+
+
+Pour remplir la matrice en procédant ligne par ligne plutôt que colonne par colonne, on peut ajouter `byrow = TRUE`{.R} en argument à la fonction `matrix()`{.R}
+
+```{r}
+matrix(1:12, ncol = 4, byrow = TRUE)
+```
+
+
+### Accès aux éléments d'une matrice
+
+#### Indexation par position
+
+Avec les vecteurs, nous avons extrait des sous-ensembles à l'aide de la fonction crochet, en utilisant l'indexation. Les vecteurs étant des objets en dimension 1, nous n'avons donné à la fonction crochet qu'un seul argument : `x[c(2,3)]`{.R} permet d'extraire les éléments aux positions 2 et 3 de `x`. Les matrices étant des objets à deux dimensions, il convient de fournir deux arguments à la fonction crochet, en les séparant par une virgule : `x[i,j]`. Le premier argument, `i` correspond aux indices de la première dimension (les lignes) et `j` aux indices de la deuxième dimension (les colonnes).
+
+
+Revenons à notre matrice `A`. Extrayons les observations des lignes 1 et 3 aux colonnes 2 et 4 :
+
+```{r}
+A[c(1,3), c(2,4)]
+```
+
+En ommettant l'argument `i` ou l'argument `j`, l'ensemble des lignes ou des colonnes respectivement est retourné.
+
+Les éléments de l'ensemble des lignes aux colonnes 2 et 4 :
+```{r}
+A[, c(2,4)]
+```
+
+
+Les éléments des lignes 1 et 3 pour l'ensemble des colonnes :
+```{r}
+A[c(1,3), ]
+```
+
+
+Pour exclure des éléments, comme pour les vecteurs, on utilise le symbole moins (`-`). Par exemple, pour extraire les éléments pour toutes les lignes, pour toutes les colonnes sauf la 2e et la 4e :
+```{r}
+A[, -c(2,4)]
+```
+
+
+
+
+::::{.notebox data-latex=""}
+
+**Note**
+
+Rappelez-vous que les matrices sont stockés sous forme de vecteurs. Il est donc possible d'utiliser la fonction crochet en lui fournissant uniquement l'argument `i`. L'instruction suivante retourne, sous la forme d'un vecteur, les éléments aux positions 1, 4, et 3 :
+```{r}
+A[c(1,4,3)]
+```
+
+
+:::
+
+
+:::: {.greenbox data-latex=""}
+
+**Exercice**
+
+1. Créez la matrice suivante : $$B = \begin{bmatrix}-2 & 2 & -3 \\ -1 & 1 & 3\\4 & 0 & -1\end{bmatrix}.$$
+2. Extrayez la 2e colonne de la matrice B.
+3. Extrayez la sous-matrice dans le coin inférieur de B : $$C=\begin{bmatrix}1 & 3 \\ 0 & -1\end{bmatrix}.$$
+4. Extrayez toutes les colonnes de B sauf la 2e.
+5. Extrayez le terme en dernière ligne et en dernière colonne de B.
+
+:::
+
+
+#### Indexation par condition
+
+Comme pour les vecteur, nous pouvons utiliser une matrice de logique indiquant si les éléments doivent être retournés (`TRUE`{.R}) ou non(`FALSE`{.R}).
+
+
+```{r}
+masque <- matrix(c(TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, 
+                   TRUE, TRUE, FALSE, FALSE, FALSE, FALSE), ncol = 4)
+masque
+```
+
+En appliquant ce masque de valeurs logiques à la matrice A, on récpuère dans un vecteur les valeurs pour lesquelles la valeur dans le masque à la même position vaut `TRUE`{.R} :
+```{r}
+A[masque]
+```
+
+
+
+Evidemment, écrire de tels masques à la main n'est pas très utile. En revanche, ils peuvent être obtenus suite à l'évaluation d'une condition logique. Par exemple, si on souhaite obtenir les éléments de la matrice A dont la valeur est inférieure à 5, on peut créer le masque suivant :
+```{r}
+A<5
+```
+
+Et ensuite appliquer ce masque avec la fonction crochet :
+
+```{r}
+A[A<5]
+```
+
+:::: {.greenbox data-latex=""}
+
+**Exercice**
+
+1. Récupérez les valeurs de la matrice A qui sont inférieures à 3 ou supérieures à 7.
+2. Récupérez les valeurs paires de la matrice A (utilisez le modulo).
+
+
+:::
+
+
+### Remplacement et ajout de valeurs
+
+
+Comme pour les vecteurs, le remplacement de valeurs peut s'effectuer avec la flèche d'affectation `<-`{.R}. On écrit à gauche de cette flèche l'extraction réalisée par indexation et à droite les valeurs de remplacement.
+
+Reprenons notre matrice A :
+
+$$A = \begin{bmatrix}1 & 4 & 7 & 10\\2 & 5 & 8 & 11\\ 3 & 6 & 9 & 12\end{bmatrix}$$
+
+```{r}
+A <- matrix(1:12, ncol = 4)
+A
+```
+
+
+Remplaçons les valeurs 10 et 11 par -10 et -11
+```{r}
+A[c(1,2),4] <- c(-10, -11)
+A
+```
+
+
+Cela fonctionne aussi avec un indexation par condition. Créons un masque indiquant si les valeurs sont négatives :
+```{r}
+A<0
+```
+
+Puis affectons la valeur `NA`{.R} à la place des valeurs négatives de la matrice `A` :
+
+```{r}
+A[A<0] <- NA
+A
+```
+
+
+
+:::: {.greenbox data-latex=""}
+
+**Exercice**
+
+1. Créez la matrice suivante : $$X = \begin{bmatrix}-2 & 2 & -3 \\ -1 & 1 & 3\\4 & 0 & -1\end{bmatrix}.$$
+2. Remplacez les valeurs positives de `X` par 1000.
+3. Remplacez les éléments aux positions (1,1) et (2,3) par `NA`{.R}.
+
+:::
+
+
+
+
+### Calculs matriciels
+
+
+En économie, et particulièrement en économétrie, nous manipulons beaucoup de matrices. Il est important de savoir effectuer avec R les différents calculs matriciels les plus courants dans notre discipline.
+
+Considérons quelques matrices :
+
+$$A = \begin{bmatrix}1 & 2 & 0\\ 4 & 3 & -1\end{bmatrix}$$
+
+$$B = \begin{bmatrix}5 & 1\\ 2 & 3\\ 3 & 4\end{bmatrix}$$
+
+$$C = \begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix}$$
+
+$$D = \begin{bmatrix}-2 & 2 & -3 \\ -1 & 1 & 3\\4 & 0 & -1\end{bmatrix}$$
+
+```{r}
+A <- matrix(c(1,4,2,3,0,-1), nrow = 2)
+B <- matrix(c(5,2,3, 1,3,4), ncol = 2)
+C <- matrix(c(1,0,0,0,1,0,0,0,1), ncol = 3)
+D <- matrix(c(-2,-1,4,2,1,0,-3,3,-1), ncol = 3)
+```
+
+
+
+Considérons par ailleurs le scalaire $a = 3$.
+```{r}
+a <- 3
+```
+
+
+#### Addition, soustraction
+
+
+Pour additionner ou soustraire un scalaire ou une matrice à une matrice, on utilise simplement les opérateurs d'addition (`+`{.R}) ou de soustraction (`-`{.R}), respectivement :
+```{r}
+A+a
+A-a
+C+D
+C-D
+```
+
+Lorsqu'on essaie d'additionner ou de soustraire deux matrices non compatibles, R retourne une erreur :
+```{r, error=TRUE}
+A+C
+```
+
+#### Multiplication
+
+La multiplication par un scalaire s'effectue avec l'étoile `*`{.R}:
+```{r}
+A*a
+```
+
+
+Pour multiplier deux matrices (compatibles) entre-elles, on utilise l'opérateur de produit matriciel `%*%` :
+```{r}
+A %*% B
+```
+
+En cas d'incompatibilité, R nous prévient :
+```{r, error=TRUE}
+C %*% A
+```
+
+::::{.notebox data-latex=""}
+
+Attention, si on utilise l'étoile au lieu de l'opérateur de produit matriciel, si les deux matrices ont la même dimension, alors R effectue une multiplication terme à terme :
+
+```{r}
+C * D
+```
+
+
+:::
+
+
+
+#### Transposée
+
+La transposée d'une matrice s'obtient en R avec la fonction `t()`{.R}:
+```{r}
+t(A)
+```
+
+
+#### Inversion
+
+L'inversion d'une matrice est calculée à l'aide de la fonction `solve()`:
+```{r}
+solve(D)
+```
+
+
+::::{.notebox data-latex=""}
+
+
+En économétrie, l'estimateur des moindres carrés ordinaires est donné par $(X^{\top}X)^{-1}(X^{\top}y)$, où $X$ est la matrice des variables explicatives et $y$ le vecteur de la variable endogène.
+```{r, eval=FALSE}
+solve(t(X) %*% X) %*% (t(X) %*% y)
+```
+
+Qui peut aussi se calculer de manière équivalente (nous le ferons dans un prochain exercice) :
+```{r, eval=FALSE}
+crossprod(X,X) %*% crossprod(X,y)
+```
+
+:::
+
+
+#### Déterminant
+
+Le déterminant s'obtient avec la fonction `det()`{.R} :
+```{r}
+det(D)
+```
+
+
+#### Diagonale
+
+La diagonale d'une matrice peut être obtenue avec la fonction `det()`{.R :
+```{r}
+diag(C)
+```
+
+
+::::{.notebox data-latex=""}
+
+**Note**
+
+La fonction `diag()` permet par ailleurs de créer une matrice identité :
+```{r}
+diag(3)
+```
+
+
+:::
+
+
+Pour obtenir la trace d'une matrice carrée, on peut simplement sommer les éléments de la diagonale :
+```{r}
+sum(diag(D))
+```
+
+
+### Combiner des matrices
+
+
+Pour ajouter des **colonnes** à une matrice, la fonction `cbind()`{.R} peut être utilisée. Il s'agit de combiner (_bind_) les colonnes (_columns_) de deux matrices ou d'une matrice et d'un vecteur colonne.
+```{r}
+cbind(B, C)
+cbind(B, c(10,11,12))
+```
+
+Pour ajouter des **lignes** à une matrice, la fonction `rbind()`{.R} peut être utilisée. Il s'agit de combiner (_bind_) les lignes (_rows_) de deux matrices ou d'une matrice et d'un vecteur ligne.
+```{r}
+rbind(C, D)
+rbind(C, c(10,11,12))
+```
+
+
+
+::::{.notebox data-latex=""}
+
+**Note**
+
+
+Si on ajoute un vecteur colonne (ligne) à une matrice, et que la taille du vecteur est inférieure au nombre de colonnes (lignes), R effectue ce que l'on appelle un **recyclage**. C'est-à-dire que R va compléter le vecteur plus court à l'aide des valeurs de ce même vecteur, en repartant au début de celui-ci, afin d’obtenir deux objets de même taille.
+
+```{r}
+cbind(B, c(10, 11))
+```
+
+:::
+
+
+
+
+
+
+
+
+::::{.greenbox data-latex=""}
+
+**Exercice**
+
+Dans cet exercice, nous allons considérer un modèle de régression linéaire. 
+
+
+$$y_i = \beta_0 + \sum_{j=1}^{p} \beta_j x_{p,i} + \varepsilon_i,$$
+
+avec $i=1,\ldots, n$ indiçant les individus statistiques, $y$ la variable à expliquer, $\beta_0$ le coefficient de la constante, $\beta_j$ le coefficient associé à la variable explicative $x_j$ (avec $j=1, \ldots, p$), et $\epsilon$ un terme d'erreur distribué normalement avec une espérance nulle et une variance $\sigma^2$.
+
+
+L'écriture matricielle du modèle est la suivante :
+
+$$y = \boldsymbol{X} \beta + \varepsilon,$$
+avec $y$ le vecteur de la variable à expliquer, $\boldsymbol X$ la matrice contenant les variables explicatives (et la constante), et $\varepsilon$ le terme d'erreur.
+
+
+Dans cet exercice, vous allez utiliser vos connaissances acquises sur les matrices pour estimer les coefficients du modèle par la méthode des moindres carrés ordinaires.
+
+Considérons le modèle suivant, pour les observations $i=1,\ldots, n$ :
+
+$$\textrm{consommation}_i = \beta_0 + \beta_1 \textrm{puissance}_i + \beta_2 \textrm{masse}_i + \varepsilon_i,$$
+où $\textrm{consommation}$ est la variables à expliquer ($y$). Il s'agit d'un vecteur de valeurs de consommation de carburant (miles par gallons). $\textrm{puissance}$ et $\textrm{masse}$ sont des vecteurs de puissance (nombre de chevaux) et de masse du véhicule (en millième de livres) respectivement. Le vecteur $\varepsilon$ est un terme d'erreurs que l'on suppose distribué selon une normale d'espérance nulle.
+
+L'objectif de l'exercice est d'estimer les paramètres $\beta_0$, $\beta_1$ et $\beta_2$.
+
+Dans un premier temps, évaluez les instructions suivantes pour récupérer les valeurs (qui sont stockées dans un tableau de données nommé `mtcars` qui est fourni dans le _package_ {datasets}).
+
+```{r}
+consommation <- mtcars$mpg
+puissance <- mtcars$hp
+masse <- mtcars$wt
+```
+
+Créez également un vecteur pour la constante (ce vecteur ne contient que des 1) :
+```{r}
+constante <- rep(1, nrow(mtcars))
+```
+
+
+1. Créez la matrice `X` qui doit contenir 3 colonnes : une pour la constante (`constante`), une autre pour la puissance (`puissance`) et une dernière pour la masse (`masse`) ;
+2. Calculez la transposée de $X$ : $X^\top$ ;
+3. Calculez le produit matriciel : $X^\top X$ ;
+4. Calculez l'inverse de ce produit matriciel : $(X^\top X)^{-1}$ ;
+5. Calculez le produit matriciel $X^\top y$;
+6. Donnez les estimations des paramètres : $(X^\top X)^{-1} X^\top y$.
+
+
+
+:::
+
+
+## Listes
+
+Tandis que les éléments d'un vecteur ou d'une matrice doivent nécessairement être de même type, les listes proposent une structure de données moins rigide à cet égard. Les types des élément d'une liste en R peuvent être différents.
+
+
+```{r}
+l_1 <- list(c(10,12,15), c("Janvier", "Fevrier"))
+l_1
+```
+
+
+Les classes d'objets à l'intérieur d'une liste ne sont pas non plus nécessairement identiques. Dans l'exemple qui suit, la liste `l_2` contient un vecteur de numériques en premier élément, et une matrice de numériques en second :
+```{r}
+l_2 <- list(c(1,2,3), matrix(c(1,2,3,4), ncol = 2))
+l_2
+```
+
+
+Les éléments peuvent être, comme dans un vecteur, nommés. Les noms peuvent être indiqués au moment de la création...
+```{r}
+l_1 <- list(notes = c(10,12,5), mois = c("Janvier", "Fevrier"))
+l_1
+```
+
+... ou une fois la liste créée, à l'aide de la fonction `names()`{.R} :
+```{r}
+l_1 <- list(c(10,12,5),  c("Janvier", "Fevrier"))
+names(l_1) <- c("notes", "mois")
+l_1
+```
+
+
+### Accès aux éléments
+
+Comme pour les vecteurs, il est possible d'utiliser les crochets pour extraire des éléments d'une liste. **La fonction crochet appliquée à une liste retourne une liste**. On donne en arguments de cette fonction, comme pour les vecteurs, soit des positions, soit des noms, soit des valeurs logiques.
+
+
+Créons une liste contenant 4 éléments :
+```{r}
+l_3 <- list(nombres = 1:5, alphabet_min = letters,
+            alphabet_maj = LETTERS, mois = month.name)
+l_3
+```
+
+
+::::{.notebox data-latex=""}
+
+**Note**
+
+Il existe 5 constantes intégrées en R :
+
+- `LETTERS` : les 26 lettres de l'alphabet occidental, en majuscules ;
+- `letters` : les 26 lettres de l'alphabet occidental, en minuscules ;
+- `month` : les noms des 12 mois de l'année du calendrier grégorien ;
+- `month.abb` : les abbréviations en 3 lettres des 12 mois du calendrier grégorien ;
+- `pi` : le ratio de la circonférence d'un cercle sur son diamiètre ($pi$).
+
+
+:::
+
+
+L'indexation par position fonctionne comme pour un vecteur :
+
+```{r}
+l_3[1]
+l_3[c(1,3)]
+l_3[-c(2,3)]
+```
+
+
+L'indexation par nom fonctionne aussi comme pour les vecteurs :
+```{r}
+l_3[c("mois", "nombres")]
+```
+
+Il en est de même pour l'indexation par condition :
+```{r}
+l_3[c(TRUE, FALSE, FALSE, TRUE)]
+```
+
+
+::::{.notebox data-latex=""}
+
+
+**Note**
+
+Nous verrons lors de la séance de travaux dirigés sur les boucles comment parcourir les éléments d'une liste tout en appliquant un test logique à chaque élément.
+
+:::
+
+
+
+On note bien que le résultat retourné est une liste :
+
+```{r}
+class(l_3[1])
+class(l_3[c(1,3)])
+class(l_3["nombres"])
+```
+
+
+Si l'on souhaite accéder au **contenu** d'un élément particulier, il faut utiliser la fonction double crochets (`"[["()`{.R}). De manière analogue à la fonction crochets (`"["()`{.R}), une syntaxe allégée est proposée.
+```{r}
+l_3[[1]]
+```
+
+Le résultat retourné est bien le contenu, ici un vecteur d'entiers :
+
+```{r}
+class(l_3[[1]])
+```
+
+La fonction `str()`{.R}, qui affiche la structure d'un objet de manière compacte, permet de mieux se fixer les idées :
+
+```{r}
+str(l_3[1])
+str(l_3[[1]])
+```
+
+
+::::{.notebox data-latex=""}
+
+
+**Note**
+
+Lorsque les éléments de la liste son nommés et que l'on désire extraire le contenu d'un seul élément, il est possible d'utiliser le dollar en lieu et place des crochets, en indiquant le nom de l'élément.
+
+```{r, eval=FALSE}
+l_3$nombres
+```
+
+
+:::
+
+
+Créons une liste comprenant trois éléments, dont le 3e est une liste de deux éléments :
+
+```{r}
+l_4 <- 
+  list(c(1,2,3),
+     c("Bonjour", "Hello"),
+     list(c(1,2,3), month.name))
+l_4
+```
+
+
+Si on souhaite extraire le premier élément du troisième élément de `l_4`, on utilise dans un premier temps les doubles crochets (pour extraire le contenu du 3e élément de `l_4`), puis on utilise la fonction crochet sur le résultat (pour extraire le premier élément). Il s'agit d'une composition de fonctions, et la fonction appliquée en dernier étant la fonction crochet, le résultat est... une liste !
+
+```{r}
+l_4[[3]][1]
+```
+
+Si l'on souhaite extraire le **contenu** du 1er élément du 3e élément de `l_4`, on utilisera deux fois la fonction double crochets : la première pour extraire le contenu du 3e élément (on récupère l'objet en 3e position, qui est une liste) puis la seconde pour extraire le contenu du premier élément de ce que l'on vient d'extraire :
+```{r}
+l_4[[3]][[1]]
+```
+
+
+
+### Remplacement et ajout d'éléments
+
+
+Pour remplacer un élément dans une liste, comme pour un vecteur ou une matrice, on utilise une nouvelle affectation.
+
+```{r}
+l_3[["nombres"]] <- c(6,5,4,3,2,1,0)
+l_3$mois <- c("January", "February")
+l_3
+```
+
+
+Pour ajouter un élément, on effectue simplement une affectation. Soit on nomme le nouvel élément :
+```{r}
+l_3["autres_nombres"] <- c(1,2,3)
+l_3
+```
+
+
+Si l'élément n'as pas vocation à être nommé, on utilise la fonction `c()`{.R} et on place le nouvel élément au sein d'une liste :
+```{r}
+l_3 <- c(l_3, list(c(4,5,6)))
+l_3
+```
+
+
+
+:::: {.greenbox data-latex=""}
+
+**Exercice**
+
+1. Extrayez le 3e élément de la liste suivante :
+    ```{r, eval=FALSE}
+ma_liste <- list(rnorm(10), LETTERS[1:26], month.abb)
+    ```
+    
+2. Extrayez tous les éléments de la liste `ma_liste` sauf le second.
+
+3. Extrayez le contenu du troisième élément de la liste `ma_liste_2`{.R}, en utilisant le nom de l'élément. 
+    ```{r, eval=FALSE}
+ma_liste_2 <- list(nombre = rnorm(10),
+                 lettre = LETTERS[1:26], mois = month.abb)
+    ```
+    
+4. Toujours en accédant par le nom, ajoutez `10`{.R} à chacune des valeurs du premier élément de `ma_liste_2`. Le résultat doit altérer `ma_liste_2`.
+
+5. Ajouter un élément au vecteur de nombres de l'élément `nombre` de la liste `ma_liste_2`. Cet élément doit être le numérique `-10`{.R}.
+
+:::
+
+
+<!-- # Seance 4 -->
+
+<!-- Tableaux -->
+<!-- # Manipulation des tableaux -->
+
+<!-- # Seance 5 -->
+<!-- # Importation et exportation de données -->
+<!-- # Faire des tableaux de résumés statistiques + exports -->
+
+<!-- # Seance 6 -->
+<!-- # Markdown -->
+
+<!-- # Seance 7 -->
+<!-- # regressions -->
+
+<!-- # Seance 8 -->
+<!-- # Fonctions -->
+<!-- # Boucles -->
+
+
+<!-- # Seance 10 -->
+<!-- # Graphiques -->
+
+<!-- # Seance 11 -->
+<!-- # Graphiques -->

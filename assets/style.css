@@ -1,0 +1,164 @@
+.caption{
+  color:#706e6e;
+}
+
+div.remarque:before {
+	font-weight: bold;
+	content: "Remarque";
+}
+div.remarque {
+	background-color: #c5e4ed;
+}
+div.exframe {
+	background-color: #CFE3D1;
+}
+
+.notebox {
+    background: #fff3c7;
+    padding: 1em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-family: sans-serif;
+    color: black;
+    box-shadow: 3px 5px 7px #959da5;
+}
+
+.notebox p::selection, .notebox ul::selection, .notebox li::selection, .notebox a::selection, .notebox strong::selection, .notebox span::selection, .notebox em::selection {
+  background-color: #ee8cff;
+}
+
+.greenbox {
+    background: #d6f5d6;
+    padding: 1em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-family: sans-serif;
+    color: black;
+    box-shadow: 3px 5px 7px #959da5;
+}
+
+.greenbox p::selection, .greenbox ul::selection, .greenbox li::selection, .greenbox a::selection, .greenbox strong::selection, .greenbox span::selection, .greenbox em::selection  {
+  background-color: #005A8B;
+  color: white;
+}
+
+
+
+.bluebox {
+    background: #a3c0e6;
+    padding: 1em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-family: sans-serif;
+    color: black;
+    box-shadow: 3px 5px 7px #959da5;
+}
+
+.bluebox p::selection, .bluebox ul::selection, .bluebox li::selection, .bluebox a::selection, .bluebox strong::selection, .bluebox span::selection, .bluebox em::selection {
+  background-color: #fff3c7;
+}
+
+.redbox {
+    background: #ffbdc6;
+    padding: 1em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-family: sans-serif;
+    color: black;
+    box-shadow: 3px 5px 7px #959da5;
+}
+
+.redbox p::selection, .redbox ul::selection, .redbox li::selection, .redbox a::selection, .redbox strong::selection, .redbox span::selection, .redbox em::selection {
+  background-color: black;
+  color: white;
+}
+
+.orangebox {
+    background: #FFA100;
+    padding: 1em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-family: sans-serif;
+    color: black;
+    box-shadow: 3px 5px 7px #959da5;
+}
+
+
+
+.orangebox p::selection, .orangebox ul::selection, .orangebox li::selection, .orangebox a::selection, .orangebox strong::selection, .orangebox span::selection, .orangebox em::selection {
+  background-color: black;
+  color: white;
+}
+
+.center {
+  text-align: center;
+}
+
+
+.bluebox a, .bluebox a:visited, .orangebox a, .orangebox a:visited {
+  color: white;
+}
+
+pre {
+  border-radius: 0px;
+}
+
+
+body {
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #005A8B;
+}
+
+#header h1, #header h2, #header h3, #header h4{
+  color: white;
+}
+
+#header {
+    color: #fff;
+    text-align: center;
+    background-color: #159957;
+    /*background-image: linear-gradient(120deg,#155799,#159957);*/
+    background-image: linear-gradient(120deg,#005A8B,#5482AB);
+    padding: 1.5rem 2rem;
+}
+
+/*
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    background-color: #005A8B;
+    border-color: #005A8B;
+    border: 0px;
+}*/
+
+.tocify {
+  border-radius: 0px;
+  border:none;
+}
+
+.list-group-item.active {
+    color: #005A8B;
+    background-color: white;
+    border-left: solid;
+    border-color: #005A8B;
+}
+
+.tableau50 table {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}

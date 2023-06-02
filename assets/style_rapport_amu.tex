@@ -1,0 +1,178 @@
+\usepackage[utf8]{inputenc} 
+\usepackage[T1]{fontenc} % pour taper les lettres accentuees
+\usepackage[english]{babel}
+\usepackage{amsthm,amssymb,amsbsy,amsmath,amsfonts,amssymb,amscd,mathrsfs}
+% Mise en page
+\usepackage{geometry} %pour la modification des marges
+\usepackage{fancyhdr} %pour modification des pieds de page
+\usepackage{lastpage} %numero de la derniËre page
+\usepackage{lscape} % Pour pouvoir activer le mode landscape
+\usepackage{lmodern}
+%Images, figures, etc.
+\usepackage{booktabs} %tableaux
+\usepackage{float}	%pour forcer le placement des images.
+\usepackage{graphicx} %pour afficher des images
+\usepackage{longtable} %tables sur plusieurs pages
+\usepackage{animate} %transformer des gifs
+\usepackage{caption}
+
+\def\frenchtablename{Tableau}
+
+% Chemin vers les images
+\graphicspath{{../figs}}
+%\usepackage{subcaption}
+\captionsetup{labelformat=simple}
+\usepackage[scriptsize]{subfigure}
+\usepackage{multirow} 			%fusionner lignes
+\usepackage{tikz}
+\usepackage{adjustbox}
+\usetikzlibrary{arrows,positioning}
+\usetikzlibrary{mindmap,trees,shadows,backgrounds}
+\usepackage{tabularx}
+%Code
+\usepackage{verbatim}%insertion de code
+\usepackage{listings}
+%Polices, format,couleurs
+\usepackage{dsfont} % Pour les lettres mathematiques
+
+% Bibliographie
+\usepackage[nottoc]{tocbibind}
+\usepackage{hyperref} %pour que les references soient des liens hypertextes
+\usepackage{natbib}
+\usepackage{bibentry}
+%\usepackage{color}
+\usepackage{xcolor,colortbl}
+\usepackage{ragged2e} % Pour justifier
+%Symboles, theoremes
+\newcommand{\iid}{\stackrel{\mathrm{iid}}{\sim}}
+\newtheorem{theorem}{Theorem}[part]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{hypothese}{Hypoth\`ese}
+\newtheorem{corollary}[theorem]{Corollary}
+\usepackage{enumerate}%listes
+\usepackage[subnum]{cases}% cas numerotes
+\newtheorem{rmarque}{Remarque}[section]
+\newtheorem{exmp}{Exemple}[section]
+% Numeroter les equations en fonction du numero de section
+\numberwithin{equation}{section}
+\usepackage[official,right]{eurosym} % symbols euro
+\usepackage{gensymb} % symbole degre \degre
+\usepackage{rotating}
+\usepackage{multicol}
+\usepackage{empheq}
+% Bibliographie
+\renewcommand*{\bibfont}{\scriptsize} % Pour avoir la biblio en plus petit
+
+
+
+\justifying %on justifie le texte du document
+
+
+% Pour aligner verticalement du texte dans des latbleaux LaTeX
+\usepackage{array,dcolumn}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+
+
+% -------- %
+% Couleurs %
+% -------- %
+\definecolor{light-gray}{gray}{0.85}
+\definecolor{vert}{RGB}{214, 245, 214}
+\definecolor{gris}{RGB}{230, 247, 255}
+\definecolor{bleu}{RGB}{163, 192, 230}
+\definecolor{grisfonce}{RGB}{220,220,220}
+\definecolor{jaune}{RGB}{255, 243, 199}
+\definecolor{rouge}{RGB}{207, 47, 68}
+\definecolor{oran}{RGB}{255, 161, 0}
+% Couleurs distinctes pour daltoniens et daltoniennes
+\definecolor{wongBlack}{HTML}{000000}
+\definecolor{wongGold}{HTML}{E69F00}
+\definecolor{wongLightBlue}{HTML}{56B4E9}
+\definecolor{wongGreen}{HTML}{009E73}
+\definecolor{wongYellow}{HTML}{F0E442}
+\definecolor{wongBlue}{HTML}{0072B2}
+\definecolor{wongOrange}{HTML}{D55E00}
+\definecolor{wongPurple}{HTML}{CC79A7}
+% Deuxieme set de couleurs pour daltoniens et daltoniennes
+\definecolor{IBMBlue}{HTML}{648FFF}
+\definecolor{IBMPurple}{HTML}{785EF0}
+\definecolor{IBMMagenta}{HTML}{DC267F}
+\definecolor{IBMOrange}{HTML}{FE6100}
+\definecolor{IBMYellow}{HTML}{FFB000}
+
+% Commandes pour ecrire en gras et en couleur
+\newcommand*\grasO[1]{\textbf{\textcolor{wongOrange}{#1}}} 
+\newcommand*\grasR[1]{\textbf{\textcolor{rouge}{#1}}}
+\newcommand*\grasV[1]{\textbf{\textcolor{wongGreen}{#1}}} 
+\newcommand*\grasB[1]{\textbf{\textcolor{wongBlue}{#1}}} 
+\newcommand*\grasJ[1]{\textbf{\textcolor{wongYellow}{#1}}} 
+\newcommand*\grasP[1]{\textbf{\textcolor{wongPurple}{#1}}} 
+
+% ----------------- %
+% Boites de couleur %
+% ----------------- %
+\usepackage{tcolorbox}
+
+
+
+\makeatletter
+\let\@@magyar@captionfix\relax
+\makeatother
+
+% Compteur pour les blocs de remarques
+\newcounter{countremarque}
+
+\newenvironment{remarque}{%
+ \refstepcounter{countremarque}
+    \begin{tcolorbox}[width=\linewidth, colback=blue!3, boxrule=0.5pt,arc=0pt,title = Remarque \thecountremarque]
+    }{\end{tcolorbox}}
+\numberwithin{countremarque}{section}
+
+
+\usepackage{color}
+\usepackage{framed}
+\setlength{\fboxsep}{.8em}
+\setlength{\headheight}{14.5pt}
+
+% Cadre de note (notebox)
+\newenvironment{notebox}{
+	\begin{tcolorbox}[colback=jaune,coltext=black,colframe=grisfonce]}{\end{tcolorbox}
+}
+
+% Cadre de note (greenbox)
+\newenvironment{greenbox}{
+	\begin{tcolorbox}[colback=vert,coltext=black,colframe=grisfonce]}{\end{tcolorbox}
+}
+
+% Cadre de note (bluebox)
+\newenvironment{bluebox}{
+	\begin{tcolorbox}[colback=bleu,coltext=black,colframe=grisfonce]}{\end{tcolorbox}
+}
+
+% Cadre de note (redbox)
+\newenvironment{redbox}{
+	\begin{tcolorbox}[colback=rouge,coltext=white,colframe=grisfonce]}{\end{tcolorbox}
+}
+
+% Cadre de note (orangebox)
+\newenvironment{orangebox}{
+	\begin{tcolorbox}[colback=oran,coltext=white,colframe=grisfonce]}{\end{tcolorbox}
+}
+
+
+% Paramètres des liens hypertextes dans le document
+\hypersetup{
+bookmarks=true,
+pdfauthor={},
+unicode=false,
+pdftoolbar=true,
+pdfmenubar=true,
+pdffitwindow=false
+pdfnewwindow=true,
+colorlinks=true,
+linkcolor=wongBlue,
+citecolor=wongBlue,
+filecolor=wongBlue,
+urlcolor=wongBlue}

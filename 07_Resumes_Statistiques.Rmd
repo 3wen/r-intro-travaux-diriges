@@ -1,0 +1,1061 @@
+# Statistiques descriptives
+
+Ce chapitre vous permet de mobiliser vos connaissances acquises avec le [chapitre sur les tableaux de données](#tableaux-de-données) et le [chapitre sur R Markdown](#markdown) pour produire rapidement des résumés statistiques à partir de données tabulaires.
+
+## Données du chapitre
+
+Dans ce chapitre, vous allez manipuler des données qui proviennent de l'article de @bertrand_2004_AER intitulé _Are Emily and Greg More Employable Than Lakisha and Jamal?_, dans lequel les auteurs se sont penchés sur l'existence de discrimination sur le marché du travail aux États-Unis. Dans leur travail, les chercheurs ont envoyé des faux CVs en réponse à des annonces postées dans des journeaux à Boston et à Chicago. Ces faux CVs ont été réalisés de manière aléatoire, en faisant varier diverses caractéristiques : le genre de la personne qui postule, la qualité de rédaction, l'expérience, le niveau d'études, etc. Ce qui intéresse les auteurs est de mesurer la discrimination raciale. Plutôt que d'indiquer l'ethnicité des personnes sur les CVs, les auteurs ont choisi de donner des noms à consonnance afro-américaine ou caucasienne aux faux CVs, en attribuant de manière aléatoire les noms aux faux CVs.
+
+Le _package_ {AER} fournit les données de l'étude. Si ce _package_ n'est pas installé sur votre machine, vous pouvez l'installer comme suit :
+
+```{r, eval=FALSE}
+install.packages("AER")
+```
+
+Ensuite, vous pouvez charger le jeu de données `ResumeNames` comme suit :
+```{r}
+data(ResumeNames, package = "AER")
+```
+
+Pour afficher la page d'aide du jeu de données `ResumeNames` et ainsi accéder au descriptif des variables, vous pouvez écrire dans la console R :
+```{r, eval=FALSE}
+help("ResumeNames", package = "AER")
+```
+
+Nous allons nous concentrer sur les variables listées dans le Tableau \@ref(tab:resumes-liste-variables) (libre à vous d'en conserver davantage par la suite pour explorer ces données) :
+
+| Variable | Description |
+| :------- | :---------- |
+| `name` | Prénom de la personne qui postule (personne fictive) |
+| `gender` | Genre de la personne qui postule (`female` ou `male`) |
+| `ethnicity` | Ethnicité de la personne qui postule (`cauc`: prénom à consonnance caucasienne ou `afam` : prénom à consonnance afro-américaine) |
+| `call` | La personne qui postule a-t-elle été rappelée ? (`no` ou `yes`) |
+| `city` | Ville concernée par l'annonce (`chicago` ou `boston`) |
+| `jobs` | Nombre d'emplois précédents listés dans le CV |
+| `experience` | Nombre d'années d'expériences listées dans le CV |
+
+Table: (\#tab:resumes-liste-variables) Caractéristiques des fichiers texte avec séparateur de champ
+
+Créons un objet contenant uniquement les colonnes mentionnées dans le Tableau \@ref(tab:resumes-liste-variables).
+
+```{r}
+resumes <- 
+  ResumeNames %>% 
+  select(name, gender, ethnicity, call, city, jobs, experience) %>% 
+  as_tibble()
+resumes
+```
+
+
+## Résumés statistiques à la main
+
+Dans un premier temps, il faut apprendre à connaître le contenu des données, fouiller dedans. Cette étape primordiale dans tout projet permet bien souvent de déceler des erreurs dans les données, ou de soulever des questions nécessitant un traitement spécifique.
+
+
+### Dimensions, résumés grossiers
+
+La première chose à savoir sur un jeu de données est la suivante : **quelles en sont ses dimensions ?** Nous souhaitons connaître le nombre d'observations ($n$) et le nombre de colonnes ($p$). Nous l'avons vu dans le [chapitre portant sur les tableaux de données](#tableaux-de-données), pour ce faire, la fonction `dim()`{.R} est très pratique :
+
+```{r}
+dim(resumes)
+```
+
+Un simple affichage du tableau de données dans la console permet par ailleurs d'avoir accès à ces informations. L'avantage de `dim()`{.R} est que les valeurs peuvent être stockées dans un objet et réutilisées ensuite (dans le cadre de la réalisation de boucles, par exemple).
+
+
+Pour avoir un aperçu grossier du tableau de données, nous pouvons utiliser la fonction `summary()`{.R} :
+
+```{r}
+summary(resumes)
+```
+Pour chaque variable, en fonction de son type, des informations sont proposées :
+
+- pour des variables **numériques** : moyenne, étendue, quartiles ;
+- pour des variables **catégorielles** : la fréquence des 6 premières valeurs les plus présentes.
+
+
+Pour la variable `name` du tableau `resumes`, nous pouvons voir qu'il semble y avoir plus de 6 valeurs. Nous pouvons les lister avec la fonction `unique()`{.R} :
+```{r}
+unique(resumes$name)
+```
+
+
+Pour dénombrer la fréquence de chaque modalité d'une variable catégorielle, on peut utiliser la fonction `table()`{.R} :
+```{r}
+table(resumes$name)
+```
+Rien ne nous empêche de trier les résultats avec la fonction `sort()`{.R} :
+```{r}
+sort(table(resumes$name))
+```
+:::: {.greenbox data-latex=""}
+
+**Exercice**
+
+
+1. En utilisant la fonction `table()`{.R}, affichez le nombre de réponses "_no_" et "_yes_" pour le jeu de données `resumes`. Stockez le résultat dans une variable que vous nommerez `freq_reponses`.
+2. Il est possible d'accéder aux éléments d'un objet de type `table` à l'aide des crochets simples (`[]`). En utilisant les crochets sur l'objet `freq_reponses`, calculez la proportion de "_yes_" dans le jeu de données.
+
+:::
+
+
+### Exploration des valeurs avec des tableaux
+
+#### Tableaux à double entrée
+
+La fonction `table()`{.R} est également très pratique pour faire des tableaux croisés. Pour ce faire, il convient de fournir en argument les vecteurs de valeurs (contenant des variables catégorielles de type _character_ ou _factor_). Par exemple, dans l'article dont les données de ce chapitre sont issues, nous pouvons regarder combien de candidatures ont reçu ou non un retour, selon l'ethnicité :
+```{r}
+call_ethnicity_tb <- 
+  table(resumes$call, resumes$ethnicity)
+call_ethnicity_tb
+```
+
+Pour davantage de lisibilité du tableau, les arguments de la fonction peuvent être nommés ; le tableau croisé affichera ainsi une étiquette pour les lignes et les colonnes :
+```{r}
+call_ethnicity_tb <- table(call = resumes$call, ethnicity = resumes$ethnicity)
+call_ethnicity_tb
+```
+
+
+Les marges peuvent être ajoutées avec la fonction `addmargins()`{.R} :
+
+```{r}
+addmargins(call_ethnicity_tb)
+```
+
+
+
+Pour obtenir les proportions sans avoir à utiliser les crochets comme dans l'exercice plus haut, R propose la fonction `prop.table()`{.R}, que l'on applique au tableau croisé :
+```{r}
+prop.table(table(call = resumes$call, ethnicity = resumes$ethnicity))
+```
+
+Ou en utilisant l'opérateur pipe (` %>% `{.R}) pour davantage de lisibilité  :
+
+```{r}
+table(call = resumes$call, ethnicity = resumes$ethnicity) %>% 
+  prop.table()
+```
+
+
+Il est possible d'appliquer une fonction sur le tableau croisé ; par exemple, on peut vouloir appliquer la fonction `round()`{.R} pour afficher moins de décimales :
+```{r}
+table(call = resumes$call, ethnicity = resumes$ethnicity) %>% 
+  prop.table() %>% 
+  round(digits = 2)
+```
+
+
+Les proportions marginales peuvent être obtenues en précisant l'argument `margin` à la fonction `prop.table()`{.R}. En optant pour `margin = 1`{.R}, on obtient les fréquences relatives à chaque ligne (ici, on peut lire la fréquence marginale des ethnicités selon la réponse obtenue ou non) :
+
+```{r}
+table(call = resumes$call, ethnicity = resumes$ethnicity) %>% 
+  prop.table(margin = 1) %>% 
+  round(2)
+```
+En optant pour `margin = 2`{.R}, on obtient les fréquences relatives à chaque colonne (ici, on peut lire la fréquence marginale des réponses selon l'ethnicité, ce qui est particulièrement intéressant dans la question posée par le papier de recherche) :
+
+
+```{r}
+table(call = resumes$call, ethnicity = resumes$ethnicity) %>% 
+  prop.table(margin = 2) %>% 
+  round(digits = 2)
+```
+
+
+
+
+
+:::: {.greenbox data-latex=""}
+
+**Exercice**
+
+Dans une expérience aléatoire, pour mesurer l'effet d'un traitement, il est important de s'assurer du côté aléatoire du traitement. Si on veut mesurer l'effet de l'ethnicité sur la probabilité d'être contacté lorsque l'on postule à une offre d'emploi, et que l'on veut aussi mesurer l'effet du genre sur cette probabilité, il est important que le genre et l'ethnicité ne soient pas des caractéristiques liées. On doit donc créer l'expérience de sorte que la proportion de CVs de femmes et d'hommes soit statistiquement identique selon que la personne soit afro-américaine ou caucasienne.
+
+1. Affichez la proportion de femmes et d'hommes dans le jeu de données `resumes`.
+2. Idem avec la proportion d'afro-américains et de caucasiens.
+3. Affichez un tableau croisé montant les fréquences de femems et d'hommes selon l'ethnicité.
+4. Affichez ensuite les fréquences marginales permettant de penser que l'ethnicité et le genre ne sont pas liés dans l'expérience.
+
+:::
+
+
+Dans le cours de Statistiques Inférentielles de 2e année, vous avez appris à effectuer un test d'indépendance à l'aide d'une statistique du Khi-deux. 
+
+```{r}
+effectifs_obs <- table(call = resumes$call, ethnicity = resumes$ethnicity) 
+
+prop_table <- 
+  effectifs_obs %>% 
+  prop.table(margin = 2)
+prop_table
+```
+
+Avec ce tableau croisé, on lit que 9,6% des CV de personnes caucasiennes ont obtenu une réponse, tandis que seulement 6,4% des CV de personnes afro-américaines en ont obtenu une. Cette différence de 3,2% est-elle due au hasard ? Sous l'hypothèse nulle du test de Khi-deux, on s'attend à ce que les proportions soient identiques, indépendamment de l'origine ethnique. Si nous rejetons l'hypothèse nulle de ce test, nous serons amenés à penser que la différence de3,2% observée n'est pas due au hasard ; autrement dit, nous pourrons conclure, avec un risque de première espèce donné, que le taux de réponses suite à une candidature pour un emploi à Boston et Chicago est dépendant de l'ethnicité (et qu'il y a donc de la discrimination).
+
+La statistique du test est la suivante :
+
+$$\chi^2 = \sum_{j=1}^{q} \sum_{i=1}^{p} \frac{(n_{ij} - n_{ij}^e)^2}{n_{ij}^e},$$
+
+avec $q$ le nombre de sous-populations (ici, $q=2$ : afro-américains et caucasiens) et $p$ le nombre de modalités du caractère étudié (ici, $p=2$ : rappel ou non), $n_{ij}$ le nombre obseré d'observations dans la sous-population $j$ disposant du caractère $i$ et $n_{ij}^e$ le nombre d'observations théoriques que l'on s'attend à observer dans la sous-population $j$ avec le caractère $i$ si l'hypothèse nulle est vraie.
+
+Les effectifs observés sont les suivants :
+```{r}
+effectifs_obs
+```
+
+Si l'etnicité est indépendante du fait de se faire rappeler suite à un dépot de CV, alors on s'attend aux valeurs suivantes :
+
+
+```{r}
+# caucasien & pas de rappel
+(2200+235) * (2200+2278) / sum(effectifs_obs)
+# caucasien et rappel
+(2200+235) * (235+157) / sum(effectifs_obs)
+
+# afro-américain & pas de rappel
+(2278 + 157) * (2200+2278) / sum(effectifs_obs)
+# afro-américain & rappel
+(2278 + 157) * (235+157) / sum(effectifs_obs)
+```
+
+On peut obtenir ces effectifs théoriques sans entrer à la main une seule valeur :
+```{r}
+# Effectifs selon le caractère (rappelé ou non)
+somme_ligne <- rowSums(effectifs_obs)
+somme_ligne
+
+# Effectifs selon les sous-populations (afam ou cauc)
+somme_colonne <- colSums(effectifs_obs)
+somme_colonne
+
+# Nombre total d'observations
+n <- sum(effectifs_obs)
+n
+```
+
+Reste alors à calculer le produit extérieur (on multiplie chaque élément du vecteur `somme_ligne` par chaque élément du vecteur `somme_colonne`), puis à diviser par l'effectif total :
+
+```{r}
+effectifs_theo <- outer(somme_ligne, somme_colonne, "*")/n
+effectifs_theo
+```
+
+
+On peut de fait calculer la statistique de test :
+```{r}
+statstique <- sum((effectifs_obs - effectifs_theo)^2 / effectifs_theo)
+statstique
+```
+
+
+Cette statistique est à comparer avec le quantile d'ordre $\alpha$, $\chi^{2, \alpha}_{(p-1)(q-1)}$ que l'on peut lire dans une table du Khi-deux à $(p-1)(q-1)$ degrés de liberté... ou que l'on peut obtenir avec R ! La fonction `qchisq()`{.R} permet d'obtenir le quantile $\chi^{2, \alpha}_{(p-1)(q-1)}$ tel que la probabilité d'obtenir une valeur supérieure à ce quantile selon une Khi-deux à $(p-1)(q-1)$ degrés de liberté soit égale à $1-\alpha$.
+
+```{r}
+alpha = 5/100
+p <- 2 ; q <- 2
+qchisq(p = 1-alpha, df = (p-1)*(q-1))
+```
+
+La statistique observée étant largement supérieure au quantile obtenu, on rejette l'hypothèse nulle du test (avec un risque de rejetter l'hypothèse nulle à tort de 5%) d'indépendance de l'ethnicité et de la réponse à une candidature à Boston ou Chicago. Il semble bien qu'il y ait une discrimination à l'accès à l'emploi.
+
+On peut également calculer la probabilité d'observer une valeur au moins aussi grande que celle que nous observons pour notre statistique (16.88) : c'est-à-dire, chercher à calculer la p-value associée au test. La fonction `pchisq()`{.R} nous donne la probailité d'observer une valeur inférieure ou égale à un quantile donné, pour un degré de liberté spécifique. Aussi, ce que nous recherchons est 1 moins cette probabilité :
+```{r}
+1-pchisq(q = statstique, df = (p-1)*(q-1))
+```
+
+Cette p-value est très faible. Grossièrement parlant, il y a une probabilité de $3,98\times 10^{-5}$ d'observer une valeur de la statistique du test qui soit au moins aussi grande que 16.87, si l'hypothèse nulle du test est vraie.
+
+
+Rassurez-vous, pour effectuer un test du Khi-deux, il n'est pas nécessaire de passer par toutes ces étapes avec R. Il existe évidemment une fonction qui vous permette d'effectuer le test en une seule ligne, à partir du moment où vous avez obtenu votre tableau croisé : `chisq.test()`{.R}. On retrouve bien les mêmes valeurs.
+
+```{r}
+res <- chisq.test(effectifs_obs, correct = FALSE)
+res
+res$statistic
+res$parameter
+res$p.value
+```
+
+:::: {.notebox data-latex=""}
+
+**Note** : Par défaut, l'argument `correct`{.R} de la fonction `chisq.test()`{.R} vaut `TRUE`{.R}. Dans ce cas, la correction de continuité de Yates est appliquée. La statistique de test est alors légèrment modifiée :
+
+$$\chi^2 = \sum_{j=1}^{q} \sum_{i=1}^{p} \frac{\left(\left\vert n_{ij} - n_{ij}^e \right\vert - 0,5\right)^2}{n_{ij}^e}.$$
+
+:::
+
+
+
+
+#### Statistiques par sous-groupes
+
+
+Pour obtenir le même type d'informations que ce qui est offert par la fonction `table()`{.R}, nous pouvons effectuer dans un premier temps un regroupement du tableau de données avec la fonction `group_by()`{.R} que nous avons déjà utilisée dans le [chapitre portant sur les tableaux de données](#tableaux-de-données). Ensuite, en appliquant la fonction `count()`{.R} au résultat, nous pouvons obtenir les fréquence pour chacun des sous-groupes.
+
+```{r}
+resumes %>% 
+  group_by(call, ethnicity) %>% 
+  count()
+```
+
+L'argument `name` de la fonction `count()`{.R} permet de spécifier le nom de la colonne dans laquelle les effectifs seront reportés :
+
+```{r}
+resumes %>% 
+  group_by(call, ethnicity) %>% 
+  count(name = "Nombre d'observations")
+```
+
+On peut vérifier, à l'aide de la fonction `filter()`{.R} que le décompte correspond bien au nombre d'observations pour lesquelles la valeur dans la colonne `call` est `"no"`{.R} et pour lesquelles celles dans la colonne `ethnicity` vaut `"cauc"`{.R} :
+```{r}
+resumes %>%
+  filter(call == "no" & ethnicity == "cauc") %>%
+  nrow()
+```
+
+Pour obtenir les fréquences marginales, il suffit d'effectuer un nouveau regroupement après l'appel à la fonction `count()`{.R} :
+
+```{r}
+resumes %>% 
+  group_by(call, ethnicity) %>% 
+  count(name = "Nombre d'observations") %>% 
+  group_by(ethnicity) %>% 
+  mutate(prop = `Nombre d'observations` / sum(`Nombre d'observations`),
+         prop = round(prop, 2))
+```
+
+Pour obtenir des résumés statistiques de variables numériques, on peut utiliser le combo `group_by()`{.R} et `summarise()`{.R} abordé dans le [chapitre portant sur les tableaux de données](#tableaux-de-données) :
+
+```{r}
+resumes %>% 
+  group_by(gender, ethnicity) %>% 
+  summarise(mean_experience = mean(experience),
+            sd_experience = sd(experience),
+            q1_experience = quantile(experience, probs = .25))
+```
+
+
+::: {.greenbox data-latex=""}
+
+**Exercice**
+
+
+1. Calculez le nombre d'observations pour chaque valeur différente de la colonne `name` du tableau `resumes`.
+2. Calculez les proportions de chaque valeur différente de la colonne `name` du tableau `resumes`.
+3. Calculez, pour chaque valeur différente de la colonne `name`, la proportion de réponses positives (`call` valant `"yes"`{R}) et de réponses négatives (`call` valant `"no"`{R}).
+4. Calculez le nombre d'emplois passés (colonne `jobs`) selon le nom et le genre (colonnes `name` et `gender`).
+
+
+:::
+
+
+
+
+
+## Résumés avec gtsummary : vers la communication des résultats
+
+
+Les différentes méthodes abordées jusqu'à présent pour réaliser des résumés statistiques sont très pratiques pour réaliser une fouille grossière des données. Dans cette partie, nous allons explorer quelques possibilités offertes par un _package_ nommé {gtsummary}, qui permet de produire des tableaux formatés pour être communiqués. Il existe de bien nombreux _packages_ qui permettent de réaliser des tableaux prêts pour la communication, mais il me semble que {gtsummary} offre des fonctionnalités particulièrement utiles pour des économètres.
+
+
+Dans un premier temps, si le _package_ n'est pas installé :
+
+```{r, eval=FALSE}
+install.packages(gtsummary)
+```
+
+Ensuite, chargons le _package_ :
+```{r}
+library(gtsummary)
+```
+
+
+La fonction au cœur du package se nomme `tbl_summary()`{.R}. Elle produit un tableau qui s'affiche dans l'onglet "Viewer". Le tableau qui est produit s'adapte en fonction du contenu des colonnes : une détection automatique du type des variables est effectuée. Lorsque les variables sont **discrètes**, la colonne descriptive indique le nombre d'observation et la proportion que chaque modalité représente. Lorsque les variables sont **continues**, la description est la médiane et l'écart interquartile.
+
+```{r, eval=FALSE}
+resumes %>%
+  tbl_summary()
+```
+
+
+```{r, echo=FALSE}
+resumes %>%
+  tbl_summary() %>% 
+  as_kable_extra(booktabs = TRUE, longtable = TRUE)
+```
+
+
+Parmi les arguments de la fonction `tbl_summary()`{.R}, figure `by=`{.R} qui permet de réaliser des sous-groupes dans les données avant de reporter les statistiques descriptives. Les différents groupes sont alors créés en fonction des valeurs distinctes rencontrées dans le colonne dont le nom est indiqué à l'argument `by=`{.R}. Par exemple, pour obtenir des statistiques descriptives du jeu de données `resumes` selon l'origine ethnique (colonne `ethnicity`), on pourra écrire :
+
+
+```{r, eval=FALSE}
+resumes %>%
+  tbl_summary(by = ethnicity)
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  tbl_summary(by = ethnicity) %>% 
+  as_kable_extra(booktabs = TRUE, longtable = TRUE)
+```
+
+
+
+Pour la suite de cette section, nous allons éviter d'afficher les informations pour la colonne `name`, pour gagner un peu en lisibilité. Pour ce faire, il suffit d'exclure du tableau cette colonne avant d'appliquer la fonction `tbl_summary`{.R} :
+```{r, eval=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity)
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity) %>% 
+  as_kable_extra(booktabs = TRUE, longtable = TRUE)
+```
+
+
+Pour réaliser un **test d'indépendance** entre chaque variables et la variable de regroupement, on peut appliquer la fonction `add_p()`{.R} sur le tableau gtsummary. Une colonne est ajoutée à droite avec les p-values.
+
+
+```{r, eval=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity) %>% 
+  add_p()
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity) %>% 
+  add_p() %>% 
+  as_kable_extra(booktabs = TRUE, longtable = TRUE)
+```
+
+Avoir des statistiques pour chacun des sous groupes est très utile, mais il est parfois également intéressant d'afficher les statistiques pour l'échantillon total. Pour ce faire, on peut utiliser la fonction `add_overall()`{.R}, qui ajoutera une colonne à gauche. En fournissant à l'argument `col_label=`{.R} une chaîne de caractère, le nom de la colonne ainsi ajoutée peut être modifié (par défaut, la valeur `"Overall"`{.R} est utilisée) :
+
+
+```{r, eval=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total")
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  as_kable_extra(booktabs = TRUE, longtable = TRUE)
+```
+
+Sur la première colonne, on peut lire en cartouche : **Characteristic**. Pour changer cela, on peut faire appel à la fonction `modify_header()`{.R}, en indiquant la valeur souhaitée à l'argument `label=`{.R}. On peut fournir une valeur rédigée en markdown. Dans l'exemple ci-dessous, pour que la valeur **Variable** soit affichée, on écrit ainsi :
+
+
+```{r, eval=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**")
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  as_kable_extra(booktabs = TRUE, longtable = TRUE)
+```
+
+
+Pour ajouter une étiquette permettant de regrouper visuellement les sous-groupes, le _package_ {gtsummary} propose la fonction `modify_spanning_header()`{.R}. Dans notre exemple, nous avons deux sous-groupes formés selon les modalités de la variable `ethnicity`. Aussi, nous pourrons indiquer que nous souhaitons que les colonnes `stat_1` et `stat_2` (colonne contenant les statistiques descriptives pour le premier et le second sous-groupes) disposent d'une en-tête :
+
+
+```{r, eval=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**")
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  as_kable_extra(booktabs = TRUE, longtable = TRUE)
+```
+
+Lorsque les colonnes du tableau de données fourni à la fonction `tbl_summary()`{.R} contient des étiquettes, ces dernières sont automatiquement utilisées dans le tableau retourné à la place des noms de variables. Pour ajouter des étiquettes à des colonnes, nous pouvons utiliser le _package_ {labelled}, qu'il faut au préalable installer.
+
+```{r, eval=FALSE}
+install.packages("labelled")
+```
+
+Une fois le _package_ installé, il est nécessaire de le charger :
+
+```{r}
+library(labelled)
+```
+
+
+La fonction `set_variable_labels()`{.R} de {labelled} permet d'ajouter les étiquettes aux variables. Il suffit de donner le nom des variables et, après un symbole égal (`=`{.R}), leur étiquette correspondante.
+
+```{r}
+resumes <- 
+  resumes %>% 
+  labelled::set_variable_labels(
+    name = "Prénom",
+    gender = "Genre",
+    ethnicity = "Ethnicité",
+    call = "Entretien",
+    city = "Ville",
+    jobs = "Nombre d'emplois listés",
+    experience = "Nombre d'années d'expérience"
+  )
+```
+
+
+Si on évalue à nouveau notre dernier code permettant d'afficher un tableau de statistiques descriptives pour notre jeu de données, on note que les noms de variables (`gender`, `call`, `city`, etc.) ne s'affichent plus et qu'à la place, l'étiquette est utilisée :
+
+```{r, eval=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**")
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  as_kable_extra(booktabs = TRUE) %>% 
+  kableExtra::kable_styling(latex_options = c("scale_down"), full_width = F)
+```
+
+::: {.notebox data-latex=""}
+
+
+**Note**
+
+Il est possible de fournir à l'argument `label=`{.R} de la fonction `tbl_summary()`{.R} les étiquettes à utiliser pour chaque variable, plutôt que de passer par la définition des étiquettes via l'ajout d'un attribut aux colonnes avec la fonction `set_variable_labels()`{.R}.
+
+
+:::
+
+
+Le nom des différents sous-groupes constitués à l'aide de la variable dont le nom est fourni à l'argument `by=`{.R} de la fonction `tbl_summary()`{.R} sont définis selon les valeurs présentes dans le tableau. Pour recoder les valeurs d'une variable factorielle, nous pouvons utiliser la fonction `recode()`{.R} de {dplyr}. Attention, la syntaxe est assez peu heureuse, dans la mesure où elle est à contre courant de ce que l'on peut trouver avec la fonction `rename()`{.R} (fonction permettant de renommer les colonnes d'un tableau de données) : on écrit l'ancien nomn, puis après un symbole égal (`=`{.R}) le nouveau nom, dans une chaîne de caractères.
+
+
+```{r}
+resumes <- 
+  resumes %>% 
+  mutate(
+    gender = recode(gender, female = "femme", male = "homme"),
+    ethnicity = recode(ethnicity,
+                       cauc = "Caucasien", afam = "Afro-americain"),
+    call = recode(call, no = "Non", yes = "Oui")
+  )
+
+resumes
+```
+
+
+Une fois les valeurs recodées à l'intérieur du tableau, celui qui est produit par la fonction `tbl_summary()`{.R} est également impacté :
+```{r, eval=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**")
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  select(-name) %>% 
+  tbl_summary(by = ethnicity) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  as_kable_extra(booktabs = TRUE) %>% 
+  kableExtra::kable_styling(latex_options = c("scale_down"), full_width = F)
+```
+
+Pour décider qulles variables inclure dans le tableau de statistiques descriptives, on peut utiliser la fonction `select()`{.R} de {dplyr} sur le tableau de l'on fournit à la fonction `tbl_summary()`{.R}, ou bien on peut préciser quelles colonnes inclure à l'aide de l'argument `include=`{.R} de `tbl_summary()`{.R}.
+
+
+```{r, eval=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**")
+```
+
+
+```{r, echo=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  as_kable_extra(booktabs = TRUE) %>% 
+  kableExtra::kable_styling(latex_options = c("scale_down"), full_width = F)
+```
+
+L'argument `statistic=`{.R} de la fonction `tbl_summary()`{.R} permet de changer les statistiques reportées. On fournit une liste dans laquelle on indique des formules spécifiant les types de statistiques descriptives à afficher pour les variables. Nous avons vu plus haut que les valeurs par défaut qui sont utilisées sont la médiane, suivi, entre parenthèses de l'écart interquartile pour les variables continues, et le nombre d'observations suivi de la proportion entre parenthèses, soit :
+```{r, eval=FALSE}
+list(all_continuous() ~ "{median} ({p25}, {p75})",
+     all_categorical() ~ "{n} ({p}%)")
+```
+
+
+Si on désire afficher la moyenne (_mean_) suivie de l'écart-type (_standard deviation_) pour les variables continues, et le nombre d'observations et la proportion pour les variables discrètes, on écrira :
+
+```{r, eval=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    statistic = list(
+      all_continuous() ~ "{mean} ({sd})",
+      all_categorical() ~ "{n} ({p}%)"
+      )
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**")
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    statistic = list(
+      all_continuous() ~ "{mean} ({sd})",
+      all_categorical() ~ "{n} ({p}%)"
+      )
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  as_kable_extra(booktabs = TRUE) %>% 
+  kableExtra::kable_styling(latex_options = c("scale_down"), full_width = F)
+```
+
+Pour afficher des résumés statistiques sur plusieurs lignes pour les variables continues, il faut le préciser, à l'aide de l'argument `type=`{.R} de la fonction `tbl_summary()`{.R}. En écrivant `type = all_continuous() ~ "continuous2"`{.R}, toutes les variables continues disposeront de deux lignes de résumés statistiques. Reste alors à indiquer ce qu'indiquera chaque ligne. Pour cela, ils nous suffit de fournir un vecteur de longueur 2 à l'élément de la liste fournie au pramètre `statistic=`{.R} qui se charge de définir les statistiques à retourner pour les variables continues. Dans l'exemple qui suit, nous reporterons la moyenne et l'écart-type sur la première ligne, et la médiane accompagnée de l'écart interquartile sur la seconde.
+
+
+```{r, eval=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = all_continuous() ~ "continuous2",
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"
+      )
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**")
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = all_continuous() ~ "continuous2",
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"
+      )
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  as_kable_extra(booktabs = TRUE) %>% 
+  kableExtra::kable_styling(latex_options = c("scale_down"), full_width = F)
+```
+Avec la fonction `add_stat_label()`{.R}, nous pouvons préciser, en créant une liste contenant des formules, les indications à faire figurer dans le tableau pour les étiquettes des statistiques qui s'afficheront. Dans l'exemple qui suit, nous demandons à ce que sur la première ligne figure la valeur `Moyenne (Ecart-type)` et sur la deuxième `Médiane (IQR)` lorsque la variables est continue, et `n (%)` lorsqu'elle est discrète.
+
+```{r, eval=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = all_continuous() ~ "continuous2",
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"
+      )
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  add_stat_label(
+    label = list(
+      all_continuous() ~ c("Moyenne (Ecart-type)", "Médiane (IQR)"),
+      all_categorical() ~ "n (%)"
+    )
+  )
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = all_continuous() ~ "continuous2",
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"
+      )
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  add_stat_label(
+    label = list(
+      all_continuous() ~ c("Moyenne (Ecart-type)", "Médiane (IQR)"),
+      all_categorical() ~ "n (%)"
+    )
+  ) %>% 
+  as_kable_extra(booktabs = TRUE) %>% 
+  kableExtra::kable_styling(latex_options = c("scale_down"), full_width = F)
+```
+
+
+Dans l'ensemble des tableaux que nous avons réalisés avec la fonction `tbl_summary()`{.R}, la variable `jobs` qui indique le nombre de précédents emplois occupés a été considérée comme étant discrète. Si nous souhaitons que la fonction considère cette colonne comme étant numérique, il faut l'indiquer à travers l'argument `type`{.R}, en donnant comme élément de liste une formule spécifique pour cette colonne :
+
+```{r, eval=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = list(all_continuous() ~ "continuous2",
+                jobs ~ "continuous2"),
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"
+      )
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  add_stat_label(
+    label = list(
+      all_continuous() ~ c("Moyenne (Ecart-type)", "Médiane (IQR)"),
+      all_categorical() ~ "n (%)"
+    )
+  )
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = list(all_continuous() ~ "continuous2",
+                jobs ~ "continuous2"),
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"
+      )
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  add_stat_label(
+    label = list(
+      all_continuous() ~ c("Moyenne (Ecart-type)", "Médiane (IQR)"),
+      all_categorical() ~ "n (%)"
+    )
+  ) %>% 
+  as_kable_extra(booktabs = TRUE) %>% 
+  kableExtra::kable_styling(latex_options = c("scale_down"), full_width = F)
+```
+
+Le contrôle du nombre de chiffres après la virgule s'effectue via l'argument `digits`. Encore une fois, une liste contenant des formules est donnée. Ici, demandons d'afficher 3 décimales après la virgule pour chaque statistique des variables continues :
+
+```{r, eval=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = list(all_continuous() ~ "continuous2",
+                jobs ~ "continuous2"),
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"
+      ),
+    digits = list(all_continuous() ~ 3)
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  add_stat_label(
+    label = list(
+      all_continuous() ~ c("Moyenne (Ecart-type)", "Médiane (IQR)"),
+      all_categorical() ~ "n (%)"
+    )
+  )
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = list(all_continuous() ~ "continuous2",
+                jobs ~ "continuous2"),
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"
+      ),
+    digits = list(all_continuous() ~ 3)
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  add_stat_label(
+    label = list(
+      all_continuous() ~ c("Moyenne (Ecart-type)", "Médiane (IQR)"),
+      all_categorical() ~ "n (%)"
+    )
+  ) %>% 
+  as_kable_extra(booktabs = TRUE) %>% 
+  kableExtra::kable_styling(latex_options = c("scale_down"), full_width = F)
+```
+
+
+Lorsque de multiples statistiques sont retournées pour une variable, on fournit un vecteur de valeurs à la formule si on désire que le nombre de décimales soit différent d'une statistique à l'autre. La longueur de ce vecteur doit correspondre au nombre de statistiques demandées via l'argument `statistic=`{.R}. Ici, demandons d'afficher 1 décimale pour la moyenne, 3 pour l'écart-type et la médiane, puis 1 pour les premiers et troisièmes quartiles.
+
+```{r, eval=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = list(all_continuous() ~ "continuous2",
+                jobs ~ "continuous2"),
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"
+      ),
+    digits = list(all_continuous() ~ c(1,3, 3,1,1))
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  add_stat_label(
+    label = list(
+      all_continuous() ~ c("Moyenne (Ecart-type)", "Médiane (IQR)"),
+      all_categorical() ~ "n (%)"
+    )
+  )
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = list(all_continuous() ~ "continuous2",
+                jobs ~ "continuous2"),
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"
+      ),
+    digits = list(all_continuous() ~ c(1,3, 3,1,1))
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  add_stat_label(
+    label = list(
+      all_continuous() ~ c("Moyenne (Ecart-type)", "Médiane (IQR)"),
+      all_categorical() ~ "n (%)"
+    )
+  ) %>% 
+  as_kable_extra(booktabs = TRUE) %>% 
+  kableExtra::kable_styling(latex_options = c("scale_down"), full_width = F)
+```
+
+Il est également possible de définir le nombre de décimales spécifiquement pour une ou plusieurs variables, en ajoutant une ou plusieurs formules à la liste fournie à l'argument `digits=`{.R} de la fonction `tbl_summary()`{.R}.
+
+
+```{r, eval=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = list(all_continuous() ~ "continuous2",
+                jobs ~ "continuous2"),
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"
+      ),
+    digits = list(all_continuous() ~ c(1,3, 3,1,1),
+                  jobs ~ c(0, 0, 0, 0, 0))
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  add_stat_label(
+    label = list(
+      all_continuous() ~ c("Moyenne (Ecart-type)", "Médiane (IQR)"),
+      all_categorical() ~ "n (%)"
+    )
+  )
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = list(all_continuous() ~ "continuous2",
+                jobs ~ "continuous2"),
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"
+      ),
+    digits = list(all_continuous() ~ c(1,3, 3,1,1),
+                  jobs ~ c(0, 0, 0, 0, 0))
+    ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label = "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  add_stat_label(
+    label = list(
+      all_continuous() ~ c("Moyenne (Ecart-type)", "Médiane (IQR)"),
+      all_categorical() ~ "n (%)"
+    )
+  ) %>% 
+  as_kable_extra(booktabs = TRUE) %>% 
+  kableExtra::kable_styling(latex_options = c("scale_down"), full_width = F)
+```
+
+Les tableaux produits utilisent par défaut des normes anglo-saxonnes. Pour utiliser des normes françaises, on peut se servir de la fonction `theme_gtsummary_language()`{.R} et indiquer la valeur `"fr"`{.R} à l'argument `language=`{.R} :
+
+```{r}
+theme_gtsummary_language(language = "fr")
+```
+
+
+```{r, eval=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = all_continuous() ~ "continuous2",
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"),
+    digits = list(
+      all_continuous() ~ 2,
+      all_categorical() ~ 0
+    )
+  ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label ~ "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  add_stat_label(
+    label = list(
+      all_continuous() ~ c("Moyenne (Ecart-type)", "Médiane (IQR)"),
+      all_categorical() ~ "n (%)"
+    )
+  )
+```
+
+```{r, echo=FALSE}
+resumes %>%
+  tbl_summary(
+    include = c("gender", "ethnicity", "call", "jobs", "experience"),
+    by = ethnicity,
+    type = all_continuous() ~ "continuous2",
+    statistic = list(
+      all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})"),
+      all_categorical() ~ "{n} ({p}%)"),
+    digits = list(
+      all_continuous() ~ 2,
+      all_categorical() ~ 0
+    )
+  ) %>% 
+  add_p() %>% 
+  add_overall(col_label = "Ech. total") %>% 
+  modify_header(label ~ "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Consonnance du nom**") %>% 
+  add_stat_label(
+    label = list(
+      all_continuous() ~ c("Moyenne (Ecart-type)", "Médiane (IQR)"),
+      all_categorical() ~ "n (%)"
+    )
+  ) %>% 
+  as_kable_extra(booktabs = TRUE) %>% 
+  kableExtra::kable_styling(latex_options = c("scale_down"), full_width = F)
+```
+
+<!-- # Seance 7 -->
+<!-- # regressions -->
+
+<!-- # Seance 8 -->
+<!-- # Fonctions -->
+<!-- # Boucles -->
+
+
+<!-- # Seance 10 -->
+<!-- # Graphiques -->
+
+<!-- # Seance 11 -->
+<!-- # Graphiques -->

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Type des données et première structure | Travaux dirigés d’Informatique</title>
+  <meta name="description" content="2 Type des données et première structure | Travaux dirigés d’Informatique" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Type des données et première structure | Travaux dirigés d’Informatique" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Type des données et première structure | Travaux dirigés d’Informatique" />
+  
+  
+  
+
+<meta name="author" content="Ewen Gallic" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="initiation-à-r.html"/>
+<link rel="next" href="matrices-et-listes.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Register.StartupHook("TeX color Ready", function() {
+	     MathJax.Extension["TeX/color"].colors["wongBlack"] = '#000000';
+		 MathJax.Extension["TeX/color"].colors["wongGold"] = '#E69F00';
+		 MathJax.Extension["TeX/color"].colors["wongLightBlue"] = '#56B4E9';
+		 MathJax.Extension["TeX/color"].colors["wongGreen"] = '#009E73';
+		 MathJax.Extension["TeX/color"].colors["wongYellow"] = '#F0E442';
+		 MathJax.Extension["TeX/color"].colors["wongBlue"] = '#0072B2';
+		 MathJax.Extension["TeX/color"].colors["wongOrange"] = '#D55E00';
+		 MathJax.Extension["TeX/color"].colors["wongPurple"] = '#CC79A7';
+		 
+		 
+		 MathJax.Extension["TeX/color"].colors["IBMBlue"] = '#648FFF';
+		 MathJax.Extension["TeX/color"].colors["IBMPurple"] = '#785EF0';
+		 MathJax.Extension["TeX/color"].colors["IBMMagenta"] = '#DC267F';
+		 MathJax.Extension["TeX/color"].colors["IBMOrange"] = '#FE6100';
+		 MathJax.Extension["TeX/color"].colors["IBMYellow"] = '#FFB000';
+	});
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="initiation-à-r.html"><a href="initiation-à-r.html"><i class="fa fa-check"></i><b>1</b> Initiation à R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="initiation-à-r.html"><a href="initiation-à-r.html#travailler-par-projets"><i class="fa fa-check"></i><b>1.1</b> Travailler par projets</a></li>
+<li class="chapter" data-level="1.2" data-path="initiation-à-r.html"><a href="initiation-à-r.html#création-modification-suppression-dun-objet"><i class="fa fa-check"></i><b>1.2</b> Création, modification, suppression d’un objet</a></li>
+<li class="chapter" data-level="1.3" data-path="initiation-à-r.html"><a href="initiation-à-r.html#lecture-dune-page-daide"><i class="fa fa-check"></i><b>1.3</b> Lecture d’une page d’aide</a></li>
+<li class="chapter" data-level="1.4" data-path="initiation-à-r.html"><a href="initiation-à-r.html#installation-et-chargement-dun-package"><i class="fa fa-check"></i><b>1.4</b> Installation et chargement d’un package</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html"><i class="fa fa-check"></i><b>2</b> Type des données et première structure</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#types-de-données"><i class="fa fa-check"></i><b>2.1</b> Types de données</a></li>
+<li class="chapter" data-level="2.2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#structure-de-données-les-vecteurs"><i class="fa fa-check"></i><b>2.2</b> Structure de données : les vecteurs</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-position"><i class="fa fa-check"></i><b>2.2.1</b> Indexation par position</a></li>
+<li class="chapter" data-level="2.2.2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-nom"><i class="fa fa-check"></i><b>2.2.2</b> Indexation par nom</a></li>
+<li class="chapter" data-level="2.2.3" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-condition"><i class="fa fa-check"></i><b>2.2.3</b> Indexation par condition</a></li>
+<li class="chapter" data-level="2.2.4" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#gestion-des-valeurs-manquantes"><i class="fa fa-check"></i><b>2.2.4</b> Gestion des valeurs manquantes</a></li>
+<li class="chapter" data-level="2.2.5" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#remplacement-et-ajout-de-valeurs"><i class="fa fa-check"></i><b>2.2.5</b> Remplacement et ajout de valeurs</a></li>
+<li class="chapter" data-level="2.2.6" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#exercice-de-synthèse"><i class="fa fa-check"></i><b>2.2.6</b> Exercice de synthèse</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html"><i class="fa fa-check"></i><b>3</b> Matrices et listes</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#matrice"><i class="fa fa-check"></i><b>3.1</b> Matrice</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#accès-aux-éléments-dune-matrice"><i class="fa fa-check"></i><b>3.1.1</b> Accès aux éléments d’une matrice</a></li>
+<li class="chapter" data-level="3.1.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#remplacement-et-ajout-de-valeurs-1"><i class="fa fa-check"></i><b>3.1.2</b> Remplacement et ajout de valeurs</a></li>
+<li class="chapter" data-level="3.1.3" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#calculs-matriciels"><i class="fa fa-check"></i><b>3.1.3</b> Calculs matriciels</a></li>
+<li class="chapter" data-level="3.1.4" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#combiner-des-matrices"><i class="fa fa-check"></i><b>3.1.4</b> Combiner des matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#listes"><i class="fa fa-check"></i><b>3.2</b> Listes</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#accès-aux-éléments"><i class="fa fa-check"></i><b>3.2.1</b> Accès aux éléments</a></li>
+<li class="chapter" data-level="3.2.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#remplacement-et-ajout-déléments"><i class="fa fa-check"></i><b>3.2.2</b> Remplacement et ajout d’éléments</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html"><i class="fa fa-check"></i><b>4</b> Importation et exportation de donnée</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#chargement-de-données-chemins"><i class="fa fa-check"></i><b>4.1</b> Chargement de données : chemins</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#avantages-de-lutilisation-de-chemins-relatifs"><i class="fa fa-check"></i><b>4.1.1</b> Avantages de l’utilisation de chemins relatifs</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#chargement-de-formats-différents"><i class="fa fa-check"></i><b>4.2</b> Chargement de formats différents</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichiers-texte"><i class="fa fa-check"></i><b>4.2.1</b> Fichiers texte</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichier-excel"><i class="fa fa-check"></i><b>4.2.2</b> Fichier Excel</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichiers-r"><i class="fa fa-check"></i><b>4.2.3</b> Fichiers R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#exportation"><i class="fa fa-check"></i><b>4.3</b> Exportation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#format-texte"><i class="fa fa-check"></i><b>4.3.1</b> Format texte</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#format-r"><i class="fa fa-check"></i><b>4.3.2</b> Format R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html"><i class="fa fa-check"></i><b>5</b> Tableaux de données</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#importation-des-données-de-la-séance"><i class="fa fa-check"></i><b>5.1</b> Importation des données de la séance</a></li>
+<li class="chapter" data-level="5.2" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#tibbles"><i class="fa fa-check"></i><b>5.2</b> Tibbles</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#dimensions"><i class="fa fa-check"></i><b>5.2.1</b> Dimensions</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#accès-aux-éléments-1"><i class="fa fa-check"></i><b>5.2.2</b> Accès aux éléments</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#résumés-statistiques-sur-les-colonnes-dun-tableau"><i class="fa fa-check"></i><b>5.3</b> Résumés statistiques sur les colonnes d’un tableau</a></li>
+<li class="chapter" data-level="5.4" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#sélection-dune-ou-plusieurs-colonnes"><i class="fa fa-check"></i><b>5.4</b> Sélection d’une ou plusieurs colonnes</a></li>
+<li class="chapter" data-level="5.5" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#créationmodification-dune-nouvelle-colonne"><i class="fa fa-check"></i><b>5.5</b> Création/Modification d’une nouvelle colonne</a></li>
+<li class="chapter" data-level="5.6" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#renommer-une-colonne"><i class="fa fa-check"></i><b>5.6</b> Renommer une colonne</a></li>
+<li class="chapter" data-level="5.7" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#filtrage"><i class="fa fa-check"></i><b>5.7</b> Filtrage</a></li>
+<li class="chapter" data-level="5.8" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#résumés-statistiques-sur-lensemble-du-tableau"><i class="fa fa-check"></i><b>5.8</b> Résumés statistiques sur l’ensemble du tableau</a></li>
+<li class="chapter" data-level="5.9" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#agrégation-par-groupes"><i class="fa fa-check"></i><b>5.9</b> Agrégation par groupes</a></li>
+<li class="chapter" data-level="5.10" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#tri"><i class="fa fa-check"></i><b>5.10</b> Tri</a></li>
+<li class="chapter" data-level="5.11" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#jointures"><i class="fa fa-check"></i><b>5.11</b> Jointures</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>6</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="r-markdown.html"><a href="r-markdown.html#créer-un-document-r-markdown-avec-rstudio"><i class="fa fa-check"></i><b>6.1</b> Créer un document R Markdown avec RStudio</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="r-markdown.html"><a href="r-markdown.html#yaml"><i class="fa fa-check"></i><b>6.1.1</b> YAML</a></li>
+<li class="chapter" data-level="6.1.2" data-path="r-markdown.html"><a href="r-markdown.html#textes"><i class="fa fa-check"></i><b>6.1.2</b> Textes</a></li>
+<li class="chapter" data-level="6.1.3" data-path="r-markdown.html"><a href="r-markdown.html#morceaux-de-code"><i class="fa fa-check"></i><b>6.1.3</b> Morceaux de code</a></li>
+<li class="chapter" data-level="6.1.4" data-path="r-markdown.html"><a href="r-markdown.html#compilation"><i class="fa fa-check"></i><b>6.1.4</b> Compilation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="r-markdown.html"><a href="r-markdown.html#markdown"><i class="fa fa-check"></i><b>6.2</b> Ecriture du texte : syntaxe en Markdown</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="r-markdown.html"><a href="r-markdown.html#texte"><i class="fa fa-check"></i><b>6.2.1</b> Texte</a></li>
+<li class="chapter" data-level="6.2.2" data-path="r-markdown.html"><a href="r-markdown.html#styles-de-texte"><i class="fa fa-check"></i><b>6.2.2</b> Styles de texte</a></li>
+<li class="chapter" data-level="6.2.3" data-path="r-markdown.html"><a href="r-markdown.html#titres"><i class="fa fa-check"></i><b>6.2.3</b> Titres</a></li>
+<li class="chapter" data-level="6.2.4" data-path="r-markdown.html"><a href="r-markdown.html#citations"><i class="fa fa-check"></i><b>6.2.4</b> Citations</a></li>
+<li class="chapter" data-level="6.2.5" data-path="r-markdown.html"><a href="r-markdown.html#tirets-longs-tirets-moyens"><i class="fa fa-check"></i><b>6.2.5</b> Tirets longs, tirets moyens</a></li>
+<li class="chapter" data-level="6.2.6" data-path="r-markdown.html"><a href="r-markdown.html#lignes-horizontale"><i class="fa fa-check"></i><b>6.2.6</b> Lignes horizontale</a></li>
+<li class="chapter" data-level="6.2.7" data-path="r-markdown.html"><a href="r-markdown.html#points-de-suspension"><i class="fa fa-check"></i><b>6.2.7</b> Points de suspension</a></li>
+<li class="chapter" data-level="6.2.8" data-path="r-markdown.html"><a href="r-markdown.html#liens-hypertextes"><i class="fa fa-check"></i><b>6.2.8</b> Liens hypertextes</a></li>
+<li class="chapter" data-level="6.2.9" data-path="r-markdown.html"><a href="r-markdown.html#notes-de-bas-de-page"><i class="fa fa-check"></i><b>6.2.9</b> Notes de bas de page</a></li>
+<li class="chapter" data-level="6.2.10" data-path="r-markdown.html"><a href="r-markdown.html#listes-1"><i class="fa fa-check"></i><b>6.2.10</b> Listes</a></li>
+<li class="chapter" data-level="6.2.11" data-path="r-markdown.html"><a href="r-markdown.html#listes-imbriquées"><i class="fa fa-check"></i><b>6.2.11</b> Listes imbriquées</a></li>
+<li class="chapter" data-level="6.2.12" data-path="r-markdown.html"><a href="r-markdown.html#images"><i class="fa fa-check"></i><b>6.2.12</b> Images</a></li>
+<li class="chapter" data-level="6.2.13" data-path="r-markdown.html"><a href="r-markdown.html#tableaux"><i class="fa fa-check"></i><b>6.2.13</b> Tableaux</a></li>
+<li class="chapter" data-level="6.2.14" data-path="r-markdown.html"><a href="r-markdown.html#formules-mathématiques-en-latex"><i class="fa fa-check"></i><b>6.2.14</b> Formules mathématiques en LaTeX</a></li>
+<li class="chapter" data-level="6.2.15" data-path="r-markdown.html"><a href="r-markdown.html#md-codes-blocs-codes"><i class="fa fa-check"></i><b>6.2.15</b> Codes et blocs de code</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="r-markdown.html"><a href="r-markdown.html#morceaux-de-code-1"><i class="fa fa-check"></i><b>6.3</b> Morceaux de code</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="r-markdown.html"><a href="r-markdown.html#codes-en-ligne"><i class="fa fa-check"></i><b>6.3.1</b> Codes en ligne</a></li>
+<li class="chapter" data-level="6.3.2" data-path="r-markdown.html"><a href="r-markdown.html#blocs-de-code"><i class="fa fa-check"></i><b>6.3.2</b> Blocs de code</a></li>
+<li class="chapter" data-level="6.3.3" data-path="r-markdown.html"><a href="r-markdown.html#mise-en-cache"><i class="fa fa-check"></i><b>6.3.3</b> Mise en cache</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="r-markdown.html"><a href="r-markdown.html#insertion-dune-bibliographie"><i class="fa fa-check"></i><b>6.4</b> Insertion d’une bibliographie</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="r-markdown.html"><a href="r-markdown.html#création-du-fichier-de-bibliographie"><i class="fa fa-check"></i><b>6.4.1</b> Création du fichier de bibliographie</a></li>
+<li class="chapter" data-level="6.4.2" data-path="r-markdown.html"><a href="r-markdown.html#lier-le-fichier-dentrées-bibliographiques-avec-le-document-rmarkdown"><i class="fa fa-check"></i><b>6.4.2</b> Lier le fichier d’entrées bibliographiques avec le document RMarkdown</a></li>
+<li class="chapter" data-level="6.4.3" data-path="r-markdown.html"><a href="r-markdown.html#citer-les-documents-dans-le-corps-de-texte"><i class="fa fa-check"></i><b>6.4.3</b> Citer les documents dans le corps de texte</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html"><i class="fa fa-check"></i><b>7</b> Statistiques descriptives</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#données-du-chapitre"><i class="fa fa-check"></i><b>7.1</b> Données du chapitre</a></li>
+<li class="chapter" data-level="7.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#résumés-statistiques-à-la-main"><i class="fa fa-check"></i><b>7.2</b> Résumés statistiques à la main</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#dimensions-résumés-grossiers"><i class="fa fa-check"></i><b>7.2.1</b> Dimensions, résumés grossiers</a></li>
+<li class="chapter" data-level="7.2.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#exploration-des-valeurs-avec-des-tableaux"><i class="fa fa-check"></i><b>7.2.2</b> Exploration des valeurs avec des tableaux</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#résumés-avec-gtsummary-vers-la-communication-des-résultats"><i class="fa fa-check"></i><b>7.3</b> Résumés avec gtsummary : vers la communication des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#contexte-et-rappels"><i class="fa fa-check"></i><b>8.1</b> Contexte et rappels</a></li>
+<li class="chapter" data-level="8.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#chargement-du-jeu-de-données"><i class="fa fa-check"></i><b>8.2</b> Chargement du jeu de données</a></li>
+<li class="chapter" data-level="8.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#régression-pas-à-pas"><i class="fa fa-check"></i><b>8.3</b> Régression pas à pas</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#estimation-des-coefficients-de-la-régression-par-moindres-carrés-ordinaires"><i class="fa fa-check"></i><b>8.3.1</b> Estimation des coefficients de la régression par moindres carrés ordinaires</a></li>
+<li class="chapter" data-level="8.3.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#prédiction-des-valeurs"><i class="fa fa-check"></i><b>8.3.2</b> Prédiction des valeurs</a></li>
+<li class="chapter" data-level="8.3.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#les-résidus-de-la-régression"><i class="fa fa-check"></i><b>8.3.3</b> Les résidus de la régression</a></li>
+<li class="chapter" data-level="8.3.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#un-indicateur-de-la-qualité-dajustement-le-coefficient-de-détermination"><i class="fa fa-check"></i><b>8.3.4</b> Un indicateur de la qualité d’ajustement : le coefficient de détermination</a></li>
+<li class="chapter" data-level="8.3.5" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire"><i class="fa fa-check"></i><b>8.3.5</b> Tests de nullité des coefficients de la régression linéaire</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#régression-avec-lm"><i class="fa fa-check"></i><b>8.4</b> Régression avec lm</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#résumé-de-lestimation"><i class="fa fa-check"></i><b>8.4.1</b> Résumé de l’estimation</a></li>
+<li class="chapter" data-level="8.4.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#prédictions-des-valeurs"><i class="fa fa-check"></i><b>8.4.2</b> Prédictions des valeurs</a></li>
+<li class="chapter" data-level="8.4.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire-1"><i class="fa fa-check"></i><b>8.4.3</b> Tests de nullité des coefficients de la régression linéaire</a></li>
+<li class="chapter" data-level="8.4.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#mise-en-forme-des-résultats-avec-modelsummary"><i class="fa fa-check"></i><b>8.4.4</b> Mise en forme des résultats avec modelsummary</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html"><i class="fa fa-check"></i><b>9</b> Instructions conditionnelles et boucles</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instructions-conditionnelles"><i class="fa fa-check"></i><b>9.1</b> Instructions conditionnelles</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instruction-if"><i class="fa fa-check"></i><b>9.1.1</b> Instruction <code>if</code></a></li>
+<li class="chapter" data-level="9.1.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instruction-if-else"><i class="fa fa-check"></i><b>9.1.2</b> Instruction <code>if-else</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles"><i class="fa fa-check"></i><b>9.2</b> Boucles</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles-while"><i class="fa fa-check"></i><b>9.2.1</b> Boucles <code>while()</code></a></li>
+<li class="chapter" data-level="9.2.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles-for"><i class="fa fa-check"></i><b>9.2.2</b> Boucles <code>for()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>10</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Travaux dirigés d’Informatique</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="type-des-données-et-première-structure" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Type des données et première structure<a href="type-des-données-et-première-structure.html#type-des-données-et-première-structure" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="types-de-données" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Types de données<a href="type-des-données-et-première-structure.html#types-de-données" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="orangebox">
+<p>La réalisation de cet exercice nécessite la lecture des sections <a href="http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#types-de-donn%C3%A9es">2.1 Types de données du cours</a> et <a href="http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#structures-de-base">2.2.1.1 Vecteurs</a></p>
+</div>
+<p>R gère des objets qui disposent de 4 caractéristiques :</p>
+<ul>
+<li><p>un nom ;</p></li>
+<li><p>un type : la nature des éléments ; les 4 types principaux sont les suivants :</p>
+<ul>
+<li><em>numeric</em> : des nombres entiers (on ajoute un L majuscule après le nombre pour le déclarer comme entier <code class="sourceCode r">1L</code>) ou réels (<code>1.4</code> ou <code>1</code> ou <code>1.0</code>),</li>
+<li><em>character</em> : des chaînes de caractère (que l’on créé à l’aide de guillemets doubles ou de guillemets simples),</li>
+<li><em>logical</em> : des valeurs logiques (<code class="sourceCode r"><span class="cn">TRUE</span></code>, <code class="sourceCode r"><span class="cn">FALSE</span></code> et <code class="sourceCode r"><span class="cn">NA</span></code>),</li>
+<li><em>complex</em> : des nombres complexes (<code class="sourceCode r"><span class="dv">2</span><span class="sc">+</span>3i</code>);</li>
+</ul></li>
+<li><p>une longueur ;</p></li>
+<li><p>un contenu.</p></li>
+</ul>
+<p>Par ailleurs, R propose un objet <code class="sourceCode r"><span class="cn">NULL</span></code>, de longueur 0 et de type <code class="sourceCode r"><span class="cn">NULL</span></code>. Il représente le vide.</p>
+<p>Enfin, R propose de marquer les valeurs manquantes avec le mot réservé <code class="sourceCode r"><span class="cn">NA</span></code>. Comme indiqué plus haut, il s’agit d’un objet de type logique.</p>
+<p>Il est important de connaître le type des données que l’on manipule : chaque objet dispose d’une classe qui dépend du type. Or, certaines opérations sont réalisables pour certaines classes mais pas pour d’autres. Par exemple, la fonction <code class="sourceCode r"><span class="fu">abs</span>()</code> qui calcule la valeur absolue, est applicable à des objets de type numérique mais ne fonctionne pas pour des chaînes de caractères.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="type-des-données-et-première-structure.html#cb4-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb4-2"><a href="type-des-données-et-première-structure.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(x)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="type-des-données-et-première-structure.html#cb6-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="st">&quot;toto&quot;</span></span>
+<span id="cb6-2"><a href="type-des-données-et-première-structure.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(y)</span></code></pre></div>
+<pre><code>## Error in abs(y): argument non numérique pour une fonction mathématique</code></pre>
+<div class="notebox">
+<p><strong>Note</strong> :</p>
+<p>Quelques fonctions à connaître concernant les types de données :</p>
+<ul>
+<li>Pour savoir le type d’un objet : <code class="sourceCode r"><span class="fu">typeof</span>()</code></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="type-des-données-et-première-structure.html#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb8-2"><a href="type-des-données-et-première-structure.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="type-des-données-et-première-structure.html#cb10-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="st">&quot;hello&quot;</span></span>
+<span id="cb10-2"><a href="type-des-données-et-première-structure.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(y)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<ul>
+<li>Pour savoir si un objet est d’un type spécifique, R propose des fonctions retournant une valeur logique. La syntaxe de ces fonctions est simple : on ajoute le suffixe <code class="sourceCode r">is.</code> au nom du type.</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="type-des-données-et-première-structure.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(x)</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="type-des-données-et-première-structure.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(x)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="type-des-données-et-première-structure.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(x)</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<ul>
+<li><p>La longueur d’un objet est obtenue avec la fonction <code class="sourceCode r"><span class="fu">length</span>()</code>. Pour le moment, les objets que nous créons dans cette sectionsont tous de longueur 1. Nous verrons dans la section suivante qu’il s’agit simplement de vecteurs de longueur 1.</p></li>
+<li><p>Pour forcer le changement de type d’un objet, R propose des fonctions à la syntaxe simple : il suffit d’ajouter le préfixe <code class="sourceCode r">as.</code> au type voulu. Lorsqu’une conversion n’est pas possible, R retourne la valeur <code class="sourceCode r"><span class="cn">NA</span></code></p></li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="type-des-données-et-première-structure.html#cb18-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">as.character</span>(x)</span>
+<span id="cb18-2"><a href="type-des-données-et-première-structure.html#cb18-2" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
+<pre><code>## [1] &quot;3&quot;</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="type-des-données-et-première-structure.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(z)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="type-des-données-et-première-structure.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="st">&quot;hello&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+</div>
+<div class="greenbox">
+<p><strong>Exercice</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Créez les objets suivants :</p>
+<ul>
+<li><code>x_1</code> : un objet contenant la valeur <code class="sourceCode r"><span class="dv">10</span></code>,</li>
+<li><code>x_2</code> : un objet contenant la valeur <code class="sourceCode r"><span class="dv">20</span></code>,</li>
+<li><code>y</code> : un objet contenant la chaîne de caractères <code>10</code>,</li>
+<li><code>z</code> : un objet contenant la valeur <code class="sourceCode r"><span class="cn">NULL</span></code>,</li>
+<li><code>t</code> : un objet contenant la valeur <code class="sourceCode r"><span class="cn">NA</span></code>,</li>
+<li><code>v</code> : un objet contenant la valeur logique <code class="sourceCode r"><span class="cn">TRUE</span></code>,</li>
+<li><code>f</code> : un objet contenant la valeur logique <code class="sourceCode r"><span class="cn">FALSE</span></code>.</li>
+</ul></li>
+<li><p>Dans un objet que vous nommerez <code>s</code>, additionnez <code>x_1</code> et <code>x_2</code>, puis affichez la valeur de <code>s</code> dans la console.</p></li>
+<li><p>Dans un objet que vous nommerez <code>s_2</code>, additionnez <code>x_1</code> et <code>y</code>, puis affichez la valeur de <code>s_2</code> dans la console. Lisez l’erreur.</p></li>
+<li><p>Changez le type de <code>y</code> de sorte que l’objet ne soit plus une chaîne de caractères mais une valeur numérique.</p></li>
+<li><p>Dans un objet que vous nommerez <code>s_3</code>, additionnez <code>x_1</code> et <code>z</code>, puis affichez la valeur de <code>s_3</code> dans la console. Vérifiez, à l’aide de la fonction adéquate, la longueur de <code>s_3</code>.</p></li>
+<li><p>Dans un objet que vous nommerez <code>s_4</code>, additionnez <code>x_1</code> et <code>t</code>, puis affichez la valeur de <code>s_4</code> dans la console.</p></li>
+<li><p>Divisez la valeur <code>x_1</code> par 0 et regardez la valeur retournée.</p></li>
+<li><p>Affichez, sans modifier le contenu de <code>v</code> et <code>f</code>, le résultat de l’application de la fonction <code class="sourceCode r"><span class="fu">as.numeric</span>()</code> aux objets <code>v</code> puis <code>f</code>.</p></li>
+<li><p>Dans un objet que vous nommerez <code>s_5</code>, additionnez <code>v</code> et <code>f</code>, puis affichez la valeur de <code>s_5</code> dans la console.</p></li>
+<li><p>Dans un objet que vous nommerez <code>s_6</code>, additionnez <code>v</code> et <code>v</code>, puis affichez la valeur de <code>s_6</code> dans la console.</p></li>
+<li><p>Dans un objet que vous nommerez <code>s_7</code>, multipliez <code>v</code> et <code>f</code>, puis affichez la valeur de <code>s_7</code> dans la console.</p></li>
+</ol>
+</div>
+</div>
+<div id="structure-de-données-les-vecteurs" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Structure de données : les vecteurs<a href="type-des-données-et-première-structure.html#structure-de-données-les-vecteurs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Les vecteurs sont les objets les plus communs en R. Il s’agit d’une collection d’éléments à une dimension. Les éléments contenus dans un vecteur doivent nécessairement être <strong>de même type</strong>. Lorsque nous avons créé des objets contenant un numérique ou une chaîne de caractère, R a stocké l’information sous la forme d’un vecteur de longueur 1 (vecteur contenant un seul élément).</p>
+<p>La fonction <code class="sourceCode r"><span class="fu">c</span>()</code> (pour <em>combine</em>) permet de créer un vecteur, on lui donne les éléments en argument de la fonction, en les séparant par une virgule (et éventuellement d’une espace).</p>
+<p>Le tableau Table <a href="type-des-données-et-première-structure.html#tab:pib-nominal">2.1</a> reporte les valeurs du PIB nominal de la France, en fréquence annuelle.</p>
+<div class="tableau50">
+<table>
+<caption><span id="tab:pib-nominal">Table 2.1: </span> PIB nominal annuel de la France, en millions d’Euros (série ajustée de la saisonnalité) (Source: <a href="https://fred.stlouisfed.org/series/CPMNACSCAB1GQFR">Fred Economic Data</a>).</caption>
+<thead>
+<tr class="header">
+<th align="left">Année</th>
+<th align="right">PIB</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2015</td>
+<td align="right">549901,2</td>
+</tr>
+<tr class="even">
+<td align="left">2016</td>
+<td align="right">558184,9</td>
+</tr>
+<tr class="odd">
+<td align="left">2017</td>
+<td align="right">574852,5</td>
+</tr>
+<tr class="even">
+<td align="left">2018</td>
+<td align="right">591119,6</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="right">610003,3</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="right">577434,8</td>
+</tr>
+<tr class="odd">
+<td align="left">2021</td>
+<td align="right">624705,6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Utilisons la fonction <code class="sourceCode r"><span class="fu">c</span>()</code> pour créer un vecteur contenant les valeurs du PIB pour les années 2015 à 2019 :</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="type-des-données-et-première-structure.html#cb24-1" aria-hidden="true" tabindex="-1"></a>pib_1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">549901.2</span>, <span class="fl">558184.9</span>, <span class="fl">574852.5</span>, <span class="fl">591119.6</span>, <span class="fl">610003.3</span>)</span>
+<span id="cb24-2"><a href="type-des-données-et-première-structure.html#cb24-2" aria-hidden="true" tabindex="-1"></a>pib_1</span></code></pre></div>
+<pre><code>## [1] 549901.2 558184.9 574852.5 591119.6 610003.3</code></pre>
+<p>L’objet <code>pib_1</code> que nous venons de créer est un vecteur de numériques de longueur 5 :</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="type-des-données-et-première-structure.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(pib_1)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="type-des-données-et-première-structure.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(pib_1)</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>La fonction <code class="sourceCode r"><span class="fu">c</span>()</code> permet également de combiner plusieurs vecteurs :</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="type-des-données-et-première-structure.html#cb30-1" aria-hidden="true" tabindex="-1"></a>pib_2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">577434.8</span>, <span class="fl">624705.6</span>)</span>
+<span id="cb30-2"><a href="type-des-données-et-première-structure.html#cb30-2" aria-hidden="true" tabindex="-1"></a>pib <span class="ot">&lt;-</span> <span class="fu">c</span>(pib_1, pib_2)</span>
+<span id="cb30-3"><a href="type-des-données-et-première-structure.html#cb30-3" aria-hidden="true" tabindex="-1"></a>pib</span></code></pre></div>
+<pre><code>## [1] 549901.2 558184.9 574852.5 591119.6 610003.3 577434.8 624705.6</code></pre>
+<p>Pour <strong>sélectionner</strong> des sous-ensembles dans un vecteur, R propose l’indexation. Trois indexations différentes sont possibles : par position, par nom, et par condition.</p>
+<div id="indexation-par-position" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Indexation par position<a href="type-des-données-et-première-structure.html#indexation-par-position" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Chaque élément d’un vecteur possède une position, qui débute en R à 1. On utilise des crochets dans lesquels les positions des éléments à conserver sont données dans un vecteur. Pour extraire le premier élément de du vecteur de numériques <code>pib</code> :</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="type-des-données-et-première-structure.html#cb32-1" aria-hidden="true" tabindex="-1"></a>pib[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] 549901.2</code></pre>
+<p>Pour extraire le 1er et le 3e éléments :</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="type-des-données-et-première-structure.html#cb34-1" aria-hidden="true" tabindex="-1"></a>pib[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</span></code></pre></div>
+<pre><code>## [1] 549901.2 574852.5</code></pre>
+<p>Il est possible d’exclure les éléments dont les positions sont données dans le vecteur dans les crochets :</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="type-des-données-et-première-structure.html#cb36-1" aria-hidden="true" tabindex="-1"></a>pib[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</span></code></pre></div>
+<pre><code>## [1] 558184.9 591119.6 610003.3 577434.8 624705.6</code></pre>
+<div class="greenbox">
+<p><strong>Exercice</strong></p>
+<ol style="list-style-type: decimal">
+<li>Créez un vecteur que vous nommerez <code>annees</code> qui contiendra les valeurs des années du tableau Table <a href="type-des-données-et-première-structure.html#tab:pib-nominal">2.1</a>.</li>
+<li>En utilisant l’indexation par position, extrayez les années aux positions 2 et 4.</li>
+<li>En utilisant l’indexation par position, récupérez le dernier élément du vecteur <code>annees</code>.</li>
+<li>Si, à la question précédente, vous avez inscrit à la main la valeur de la position du dernier élément, recommencez la question en obtenant la position du dernier élément à l’aide d’une fonction (pour que votre instruction retourne le dernier élément du vecteur, peu importe sa taille).</li>
+</ol>
+</div>
+</div>
+<div id="indexation-par-nom" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Indexation par nom<a href="type-des-données-et-première-structure.html#indexation-par-nom" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il est possible de nommer les éléments d’un vecteur lors de sa création :</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="type-des-données-et-première-structure.html#cb38-1" aria-hidden="true" tabindex="-1"></a>notes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">maths =</span> <span class="dv">10</span>, <span class="at">francais =</span> <span class="dv">12</span>, <span class="at">anglais =</span> <span class="dv">15</span>)</span>
+<span id="cb38-2"><a href="type-des-données-et-première-structure.html#cb38-2" aria-hidden="true" tabindex="-1"></a>notes</span></code></pre></div>
+<pre><code>##    maths francais  anglais 
+##       10       12       15</code></pre>
+<p>Ou bien une fois que le vecteur a été créé, en utilisant la fonction <code class="sourceCode r"><span class="fu">name</span>()</code> :</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="type-des-données-et-première-structure.html#cb40-1" aria-hidden="true" tabindex="-1"></a>notes_2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">15</span>)</span>
+<span id="cb40-2"><a href="type-des-données-et-première-structure.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(notes_2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;maths&quot;</span>, <span class="st">&quot;francais&quot;</span>, <span class="st">&quot;anglais&quot;</span>)</span>
+<span id="cb40-3"><a href="type-des-données-et-première-structure.html#cb40-3" aria-hidden="true" tabindex="-1"></a>notes_2</span></code></pre></div>
+<pre><code>##    maths francais  anglais 
+##       10       12       15</code></pre>
+<p>La fonction <code class="sourceCode r"><span class="fu">names</span>()</code> permet d’obtenir la liste des noms (et dans l’intruction précédente, les noms ont été remplacés avec une nouvelle assignation) :</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="type-des-données-et-première-structure.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(notes_2)</span></code></pre></div>
+<pre><code>## [1] &quot;maths&quot;    &quot;francais&quot; &quot;anglais&quot;</code></pre>
+<p>Pour extraire des sous-éléments d’un vecteur à l’aide des noms, le fonctionnement est similaire à l’indexation par position :</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="type-des-données-et-première-structure.html#cb44-1" aria-hidden="true" tabindex="-1"></a>notes_2[<span class="st">&quot;maths&quot;</span>]</span></code></pre></div>
+<pre><code>## maths 
+##    10</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="type-des-données-et-première-structure.html#cb46-1" aria-hidden="true" tabindex="-1"></a>notes_2[<span class="fu">c</span>(<span class="st">&quot;maths&quot;</span>, <span class="st">&quot;anglais&quot;</span>)]</span></code></pre></div>
+<pre><code>##   maths anglais 
+##      10      15</code></pre>
+</div>
+<div id="indexation-par-condition" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Indexation par condition<a href="type-des-données-et-première-structure.html#indexation-par-condition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Plutôt que d’indiquer les positions ou les noms des éléments, il est possible de fournir un vecteur de logique précisant, pour chaque élément, si celui-ci doit être inclus (<code class="sourceCode r"><span class="cn">TRUE</span></code>) ou exclus (<code class="sourceCode r"><span class="cn">FALSE</span></code>) :</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="type-des-données-et-première-structure.html#cb48-1" aria-hidden="true" tabindex="-1"></a>pib[<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)]</span></code></pre></div>
+<pre><code>## [1] 549901.2 558184.9 591119.6 624705.6</code></pre>
+<p>Evidemment, écrire un vecteur de logique à la main est assez fastidieux. Imaginons que nous disposons d’un vecteur indiquant pour chaque année correspondant à nos observations de PIB s’il s’agit d’une année touchée par une crise économique :</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="type-des-données-et-première-structure.html#cb50-1" aria-hidden="true" tabindex="-1"></a>crise <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Ce vecteur peut être utilisé pour filtrer les valeurs du PIB lors des crises :</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="type-des-données-et-première-structure.html#cb51-1" aria-hidden="true" tabindex="-1"></a>pib[crise]</span></code></pre></div>
+<pre><code>## [1] 577434.8 624705.6</code></pre>
+<p>Les vecteurs de logiques peuvent de surcroit être obtenus en faisant appel à des opérateurs de comparaison reportés dans le tableau ci-dessous.</p>
+<div class="tableau50">
+<table>
+<caption><span id="tab:operateurs-comparaison">Table 2.2: </span> Opérateurs de comparaison</caption>
+<thead>
+<tr class="header">
+<th align="left">Opérateur</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>&lt;</code></td>
+<td align="right">inférieur à</td>
+</tr>
+<tr class="even">
+<td align="left"><code>&lt;=</code></td>
+<td align="right">inféfieur ou égal à</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>&gt;</code></td>
+<td align="right">supérieur à</td>
+</tr>
+<tr class="even">
+<td align="left"><code>&gt;=</code></td>
+<td align="right">supérieur ou égal à</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>==</code></td>
+<td align="right">égal à</td>
+</tr>
+<tr class="even">
+<td align="left"><code>!=</code></td>
+<td align="right">différent de</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Par exemple, pour obtenir un vecteur qui indique pour chaque élément contenu dans le vecteur numérique <code>pib</code> si la valeur est inférieure à 560 000:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="type-des-données-et-première-structure.html#cb53-1" aria-hidden="true" tabindex="-1"></a>pib <span class="sc">&lt;</span> <span class="dv">560000</span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>Aussi, pour obtenir les éléments de <code>pib</code> dont les valeurs sont inférieures à 560 000, on peut écrire :</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="type-des-données-et-première-structure.html#cb55-1" aria-hidden="true" tabindex="-1"></a>pib[pib <span class="sc">&lt;</span> <span class="dv">560000</span>]</span></code></pre></div>
+<pre><code>## [1] 549901.2 558184.9</code></pre>
+<div class="greenbox">
+<p><strong>Exercice</strong></p>
+<ol style="list-style-type: decimal">
+<li>Créez un vecteur de logiques à partir du vecteur <code>annees</code> créé lors du précédent exercice indiquant si chaque valeur du vecteur <code>annees</code> est égale à 2017.</li>
+<li>Utilisez le vecteur de logiques de la question précédente pour extraire la valeur du vecteur <code>pib</code> correspondant à l’année 2017.</li>
+<li>En consultant un moteur de recherche, cherchez l’opérateur mathématique permettant de calculer le modulo d’un nombre.</li>
+<li>En utilisant l’opérateur trouvé en première question, créez un vecteur logique permettant d’obtenir les années paires du vecteur <code>annees</code>.</li>
+</ol>
+</div>
+<p>Les vecteurs de logiques peuvent être le résultat de l’évaluation de plusieurs conditions logiques, en s’appuyant sur les opérateurs logiques.</p>
+<div class="tableau50">
+<table>
+<caption><span id="tab:operateurs-logiques">Table 2.3: </span> Opérateurs logiques</caption>
+<thead>
+<tr class="header">
+<th align="left">Opérateur</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>&amp;</code></td>
+<td align="right">et logique</td>
+</tr>
+<tr class="even">
+<td align="left"><code>|</code></td>
+<td align="right">ou logique</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>!</code></td>
+<td align="right">négation logique</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="type-des-données-et-première-structure.html#cb57-1" aria-hidden="true" tabindex="-1"></a>pib <span class="sc">&lt;</span> <span class="dv">560000</span> <span class="sc">|</span> pib <span class="sc">&gt;</span> <span class="dv">600000</span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="type-des-données-et-première-structure.html#cb59-1" aria-hidden="true" tabindex="-1"></a>pib[pib <span class="sc">&lt;</span> <span class="dv">560000</span> <span class="sc">|</span> pib <span class="sc">&gt;</span> <span class="dv">600000</span>]</span></code></pre></div>
+<pre><code>## [1] 549901.2 558184.9 610003.3 624705.6</code></pre>
+<div class="greenbox">
+<p><strong>Exercice</strong></p>
+<ol style="list-style-type: decimal">
+<li>À l’aide d’une condition logique multiple, extrayez les valeurs du vecteur <code>pib</code> pour lesquelles les deux conditions suivantes sont remplies : l’année est inférieure ou égale à 2018, et la valeur est inférieure à 560 000.</li>
+<li>À quelles années les valeurs extraites correspondent-elles ?</li>
+</ol>
+</div>
+<div class="notebox">
+<p><strong>Notes</strong> :</p>
+<p>Il existe en R un opérateur permettant de tester l’appartenance à un ensemble discret de valeurs : <code class="sourceCode r"><span class="sc">%in%</span></code>.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="type-des-données-et-première-structure.html#cb61-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)</span>
+<span id="cb61-2"><a href="type-des-données-et-première-structure.html#cb61-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;D&quot;</span>, <span class="st">&quot;B&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="type-des-données-et-première-structure.html#cb63-1" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;D&quot;</span>, <span class="st">&quot;B&quot;</span>)]</span></code></pre></div>
+<pre><code>## [1] &quot;B&quot; &quot;D&quot;</code></pre>
+<p>Par ailleurs, R propose deux fonctions très pratiques pour les vecteurs de logiques :</p>
+<ul>
+<li><code class="sourceCode r"><span class="fu">any</span>()</code> : au moins un des éléments du vecteur vaut <code class="sourceCode r"><span class="cn">TRUE</span></code> ;</li>
+<li><code class="sourceCode r"><span class="fu">all</span>()</code> : tous les éléments du vecteur valent <code class="sourceCode r"><span class="cn">TRUE</span></code>.</li>
+</ul>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="type-des-données-et-première-structure.html#cb65-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb65-2"><a href="type-des-données-et-première-structure.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(x)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="type-des-données-et-première-structure.html#cb67-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb67-2"><a href="type-des-données-et-première-structure.html#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(<span class="sc">!</span>y)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Enfin, la fonction <code class="sourceCode r"><span class="fu">which</span>()</code> permet d’obtenir les positions des valeurs <code class="sourceCode r"><span class="cn">TRUE</span></code> dans un vecteur de logiques :</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="type-des-données-et-première-structure.html#cb69-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb69-2"><a href="type-des-données-et-première-structure.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(z)</span></code></pre></div>
+<pre><code>## [1] 1 4 5</code></pre>
+</div>
+</div>
+<div id="gestion-des-valeurs-manquantes" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> Gestion des valeurs manquantes<a href="type-des-données-et-première-structure.html#gestion-des-valeurs-manquantes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Admettons que nous disposions d’une valeur manquante pour une des années.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="type-des-données-et-première-structure.html#cb71-1" aria-hidden="true" tabindex="-1"></a>pib <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">549901.2</span>, <span class="fl">558184.9</span>, <span class="cn">NA</span>, <span class="fl">591119.6</span>, </span>
+<span id="cb71-2"><a href="type-des-données-et-première-structure.html#cb71-2" aria-hidden="true" tabindex="-1"></a>         <span class="fl">610003.3</span>, <span class="fl">577434.8</span>, <span class="fl">624705.6</span>)</span>
+<span id="cb71-3"><a href="type-des-données-et-première-structure.html#cb71-3" aria-hidden="true" tabindex="-1"></a>pib</span></code></pre></div>
+<pre><code>## [1] 549901.2 558184.9       NA 591119.6 610003.3 577434.8 624705.6</code></pre>
+<p>Lorsque l’on fait un test logique sur une valeur <code class="sourceCode r"><span class="cn">NA</span></code>, le résultat est <code class="sourceCode r"><span class="cn">NA</span></code>:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="type-des-données-et-première-structure.html#cb73-1" aria-hidden="true" tabindex="-1"></a>pib <span class="sc">&gt;</span> <span class="dv">550000</span></span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE    NA  TRUE  TRUE  TRUE  TRUE</code></pre>
+<p>Les valeurs <code class="sourceCode r"><span class="cn">NA</span></code> d’un vecteur de logiques utilisé dans le cadre d’une indexation par condition retournent <code class="sourceCode r"><span class="cn">NA</span></code></p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="type-des-données-et-première-structure.html#cb75-1" aria-hidden="true" tabindex="-1"></a>pib[pib <span class="sc">&gt;</span> <span class="dv">550000</span>]</span></code></pre></div>
+<pre><code>## [1] 558184.9       NA 591119.6 610003.3 577434.8 624705.6</code></pre>
+<p>Ce qui peut être pénible… Si on souhaite obtenir les années pour lesquelles le PIB est supérieur à 550 000 :</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="type-des-données-et-première-structure.html#cb77-1" aria-hidden="true" tabindex="-1"></a>annees <span class="ot">&lt;-</span> <span class="dv">2015</span><span class="sc">:</span><span class="dv">2022</span></span>
+<span id="cb77-2"><a href="type-des-données-et-première-structure.html#cb77-2" aria-hidden="true" tabindex="-1"></a>annees</span></code></pre></div>
+<pre><code>## [1] 2015 2016 2017 2018 2019 2020 2021 2022</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="type-des-données-et-première-structure.html#cb79-1" aria-hidden="true" tabindex="-1"></a>annees[pib <span class="sc">&gt;</span> <span class="dv">550000</span>]</span></code></pre></div>
+<pre><code>## [1] 2016   NA 2018 2019 2020 2021</code></pre>
+<p>On note que l’année pour laquelle la valeur du PIB est manquante a été transformée en <code class="sourceCode r"><span class="cn">NA</span></code>.</p>
+<p>Si on souhaite exclure les valeurs manquantes, on peut utiliser la fonction <code class="sourceCode r"><span class="fu">is.na</span>()</code> à laquelle on applique l’opérateur de négation logique :</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="type-des-données-et-première-structure.html#cb81-1" aria-hidden="true" tabindex="-1"></a>annees[pib <span class="sc">&gt;</span> <span class="dv">550000</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(pib)]</span></code></pre></div>
+<pre><code>## [1] 2016 2018 2019 2020 2021</code></pre>
+</div>
+<div id="remplacement-et-ajout-de-valeurs" class="section level3 hasAnchor" number="2.2.5">
+<h3><span class="header-section-number">2.2.5</span> Remplacement et ajout de valeurs<a href="type-des-données-et-première-structure.html#remplacement-et-ajout-de-valeurs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour effectuer un remplacement de valeurs à l’intérieur d’un vecteur, on peut utiliser la fonction crochet (<code class="sourceCode r"><span class="st">&quot;[&quot;</span>()</code> que nous utilisons dans sa version plus pratique <code class="sourceCode r">[]</code>) et la flèche d’affectation (<code class="sourceCode r"><span class="ot">&lt;-</span></code>).</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="type-des-données-et-première-structure.html#cb83-1" aria-hidden="true" tabindex="-1"></a>pib[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fl">574852.5</span></span></code></pre></div>
+<p>Plusieurs éléments peuvent être modifiés en une seule instruction.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="type-des-données-et-première-structure.html#cb84-1" aria-hidden="true" tabindex="-1"></a>pib[pib <span class="sc">&lt;</span> <span class="dv">560000</span> <span class="sc">|</span> pib <span class="sc">&gt;</span> <span class="dv">600000</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1000</span></span>
+<span id="cb84-2"><a href="type-des-données-et-première-structure.html#cb84-2" aria-hidden="true" tabindex="-1"></a>pib</span></code></pre></div>
+<pre><code>## [1]  -1000.0  -1000.0 574852.5 591119.6  -1000.0 577434.8  -1000.0</code></pre>
+<p>Nous avons vu précédemment que pour ajouter des valeurs, il est possible de combiner plusieurs vecteurs. Il est aussi possible d’utiliser l’indexation.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="type-des-données-et-première-structure.html#cb86-1" aria-hidden="true" tabindex="-1"></a>pib[<span class="dv">8</span>] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb86-2"><a href="type-des-données-et-première-structure.html#cb86-2" aria-hidden="true" tabindex="-1"></a>pib</span></code></pre></div>
+<pre><code>## [1]  -1000.0  -1000.0 574852.5 591119.6  -1000.0 577434.8  -1000.0     10.0</code></pre>
+</div>
+<div id="exercice-de-synthèse" class="section level3 hasAnchor" number="2.2.6">
+<h3><span class="header-section-number">2.2.6</span> Exercice de synthèse<a href="type-des-données-et-première-structure.html#exercice-de-synthèse" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="greenbox">
+<p>Reprenons les données de PIB nominal de la France, en fréquence annuelle:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="type-des-données-et-première-structure.html#cb88-1" aria-hidden="true" tabindex="-1"></a>pib <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">549901.2</span>, <span class="fl">558184.9</span>, <span class="fl">574852.5</span>, <span class="fl">591119.6</span>, </span>
+<span id="cb88-2"><a href="type-des-données-et-première-structure.html#cb88-2" aria-hidden="true" tabindex="-1"></a>         <span class="fl">610003.3</span>, <span class="fl">577434.8</span>, <span class="fl">624705.6</span>)</span>
+<span id="cb88-3"><a href="type-des-données-et-première-structure.html#cb88-3" aria-hidden="true" tabindex="-1"></a>annees <span class="ot">&lt;-</span> <span class="dv">2015</span><span class="sc">:</span><span class="dv">2021</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>En utilisant la fonction appropriée, retournez le nombre d’éléments contenus dans le vecteur numérique <code>pib</code>.</li>
+<li>Donnez la valeur du PIB en milliards plutôt qu’en millions, et placez le resultat dans un vecteur que vous nommerez <code>pib_milliards</code>.</li>
+<li>Quelles sont les années pour lesquelles le PIB est compris entre 560 000 et 590 000 (pensez à effectuer un test logique contenant deux conditions logiques et un opérateur logique).</li>
+<li>Créez un indice pour le PIB, en prenant comme référence l’année 2020 (valeur 100 en 2020). Stockez le résultat dans un objet que vous nommerez <code>pib_ind_2020</code>. Pour ce faire :
+<ul>
+<li>créez un objet que vous nommerez <code>ref</code> qui contiendra la valeur du PIB en 2020 (utilisez une extraction par condition)</li>
+<li>divisez les valeurs de <code>pib</code> par la valeur stockée dans <code>ref</code>, puis multipliez le résultat par 100.</li>
+</ul></li>
+<li>Regardez le fonctionnement de la fonction <code class="sourceCode r"><span class="fu">lag</span>()</code> du <em>package</em> {dplyr} dans le fichier d’aide et en observant le résultat dans la console lorsque vous l’appliquez au vecteur <code>pib</code>.</li>
+<li>En utilisant la fonction <code class="sourceCode r"><span class="fu">lag</span>()</code>, calculez le taux de croissance, en pourcentage du PIB d’une année à l’autre.</li>
+<li>Admettons que la réserve Fédérale de Saint Louis vous informe que la valeur du PIB en 2016 est finalement corrigée et est maintenant estimée à 55963.2. Corrigez la valeur à l’aide d’une affectation de remplacement.</li>
+</ol>
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="initiation-à-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="matrices-et-listes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "night",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Importation et exportation de donnée | Travaux dirigés d’Informatique</title>
+  <meta name="description" content="4 Importation et exportation de donnée | Travaux dirigés d’Informatique" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Importation et exportation de donnée | Travaux dirigés d’Informatique" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Importation et exportation de donnée | Travaux dirigés d’Informatique" />
+  
+  
+  
+
+<meta name="author" content="Ewen Gallic" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="matrices-et-listes.html"/>
+<link rel="next" href="tableaux-de-données.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Register.StartupHook("TeX color Ready", function() {
+	     MathJax.Extension["TeX/color"].colors["wongBlack"] = '#000000';
+		 MathJax.Extension["TeX/color"].colors["wongGold"] = '#E69F00';
+		 MathJax.Extension["TeX/color"].colors["wongLightBlue"] = '#56B4E9';
+		 MathJax.Extension["TeX/color"].colors["wongGreen"] = '#009E73';
+		 MathJax.Extension["TeX/color"].colors["wongYellow"] = '#F0E442';
+		 MathJax.Extension["TeX/color"].colors["wongBlue"] = '#0072B2';
+		 MathJax.Extension["TeX/color"].colors["wongOrange"] = '#D55E00';
+		 MathJax.Extension["TeX/color"].colors["wongPurple"] = '#CC79A7';
+		 
+		 
+		 MathJax.Extension["TeX/color"].colors["IBMBlue"] = '#648FFF';
+		 MathJax.Extension["TeX/color"].colors["IBMPurple"] = '#785EF0';
+		 MathJax.Extension["TeX/color"].colors["IBMMagenta"] = '#DC267F';
+		 MathJax.Extension["TeX/color"].colors["IBMOrange"] = '#FE6100';
+		 MathJax.Extension["TeX/color"].colors["IBMYellow"] = '#FFB000';
+	});
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="initiation-à-r.html"><a href="initiation-à-r.html"><i class="fa fa-check"></i><b>1</b> Initiation à R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="initiation-à-r.html"><a href="initiation-à-r.html#travailler-par-projets"><i class="fa fa-check"></i><b>1.1</b> Travailler par projets</a></li>
+<li class="chapter" data-level="1.2" data-path="initiation-à-r.html"><a href="initiation-à-r.html#création-modification-suppression-dun-objet"><i class="fa fa-check"></i><b>1.2</b> Création, modification, suppression d’un objet</a></li>
+<li class="chapter" data-level="1.3" data-path="initiation-à-r.html"><a href="initiation-à-r.html#lecture-dune-page-daide"><i class="fa fa-check"></i><b>1.3</b> Lecture d’une page d’aide</a></li>
+<li class="chapter" data-level="1.4" data-path="initiation-à-r.html"><a href="initiation-à-r.html#installation-et-chargement-dun-package"><i class="fa fa-check"></i><b>1.4</b> Installation et chargement d’un package</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html"><i class="fa fa-check"></i><b>2</b> Type des données et première structure</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#types-de-données"><i class="fa fa-check"></i><b>2.1</b> Types de données</a></li>
+<li class="chapter" data-level="2.2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#structure-de-données-les-vecteurs"><i class="fa fa-check"></i><b>2.2</b> Structure de données : les vecteurs</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-position"><i class="fa fa-check"></i><b>2.2.1</b> Indexation par position</a></li>
+<li class="chapter" data-level="2.2.2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-nom"><i class="fa fa-check"></i><b>2.2.2</b> Indexation par nom</a></li>
+<li class="chapter" data-level="2.2.3" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-condition"><i class="fa fa-check"></i><b>2.2.3</b> Indexation par condition</a></li>
+<li class="chapter" data-level="2.2.4" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#gestion-des-valeurs-manquantes"><i class="fa fa-check"></i><b>2.2.4</b> Gestion des valeurs manquantes</a></li>
+<li class="chapter" data-level="2.2.5" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#remplacement-et-ajout-de-valeurs"><i class="fa fa-check"></i><b>2.2.5</b> Remplacement et ajout de valeurs</a></li>
+<li class="chapter" data-level="2.2.6" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#exercice-de-synthèse"><i class="fa fa-check"></i><b>2.2.6</b> Exercice de synthèse</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html"><i class="fa fa-check"></i><b>3</b> Matrices et listes</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#matrice"><i class="fa fa-check"></i><b>3.1</b> Matrice</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#accès-aux-éléments-dune-matrice"><i class="fa fa-check"></i><b>3.1.1</b> Accès aux éléments d’une matrice</a></li>
+<li class="chapter" data-level="3.1.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#remplacement-et-ajout-de-valeurs-1"><i class="fa fa-check"></i><b>3.1.2</b> Remplacement et ajout de valeurs</a></li>
+<li class="chapter" data-level="3.1.3" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#calculs-matriciels"><i class="fa fa-check"></i><b>3.1.3</b> Calculs matriciels</a></li>
+<li class="chapter" data-level="3.1.4" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#combiner-des-matrices"><i class="fa fa-check"></i><b>3.1.4</b> Combiner des matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#listes"><i class="fa fa-check"></i><b>3.2</b> Listes</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#accès-aux-éléments"><i class="fa fa-check"></i><b>3.2.1</b> Accès aux éléments</a></li>
+<li class="chapter" data-level="3.2.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#remplacement-et-ajout-déléments"><i class="fa fa-check"></i><b>3.2.2</b> Remplacement et ajout d’éléments</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html"><i class="fa fa-check"></i><b>4</b> Importation et exportation de donnée</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#chargement-de-données-chemins"><i class="fa fa-check"></i><b>4.1</b> Chargement de données : chemins</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#avantages-de-lutilisation-de-chemins-relatifs"><i class="fa fa-check"></i><b>4.1.1</b> Avantages de l’utilisation de chemins relatifs</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#chargement-de-formats-différents"><i class="fa fa-check"></i><b>4.2</b> Chargement de formats différents</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichiers-texte"><i class="fa fa-check"></i><b>4.2.1</b> Fichiers texte</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichier-excel"><i class="fa fa-check"></i><b>4.2.2</b> Fichier Excel</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichiers-r"><i class="fa fa-check"></i><b>4.2.3</b> Fichiers R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#exportation"><i class="fa fa-check"></i><b>4.3</b> Exportation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#format-texte"><i class="fa fa-check"></i><b>4.3.1</b> Format texte</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#format-r"><i class="fa fa-check"></i><b>4.3.2</b> Format R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html"><i class="fa fa-check"></i><b>5</b> Tableaux de données</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#importation-des-données-de-la-séance"><i class="fa fa-check"></i><b>5.1</b> Importation des données de la séance</a></li>
+<li class="chapter" data-level="5.2" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#tibbles"><i class="fa fa-check"></i><b>5.2</b> Tibbles</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#dimensions"><i class="fa fa-check"></i><b>5.2.1</b> Dimensions</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#accès-aux-éléments-1"><i class="fa fa-check"></i><b>5.2.2</b> Accès aux éléments</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#résumés-statistiques-sur-les-colonnes-dun-tableau"><i class="fa fa-check"></i><b>5.3</b> Résumés statistiques sur les colonnes d’un tableau</a></li>
+<li class="chapter" data-level="5.4" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#sélection-dune-ou-plusieurs-colonnes"><i class="fa fa-check"></i><b>5.4</b> Sélection d’une ou plusieurs colonnes</a></li>
+<li class="chapter" data-level="5.5" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#créationmodification-dune-nouvelle-colonne"><i class="fa fa-check"></i><b>5.5</b> Création/Modification d’une nouvelle colonne</a></li>
+<li class="chapter" data-level="5.6" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#renommer-une-colonne"><i class="fa fa-check"></i><b>5.6</b> Renommer une colonne</a></li>
+<li class="chapter" data-level="5.7" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#filtrage"><i class="fa fa-check"></i><b>5.7</b> Filtrage</a></li>
+<li class="chapter" data-level="5.8" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#résumés-statistiques-sur-lensemble-du-tableau"><i class="fa fa-check"></i><b>5.8</b> Résumés statistiques sur l’ensemble du tableau</a></li>
+<li class="chapter" data-level="5.9" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#agrégation-par-groupes"><i class="fa fa-check"></i><b>5.9</b> Agrégation par groupes</a></li>
+<li class="chapter" data-level="5.10" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#tri"><i class="fa fa-check"></i><b>5.10</b> Tri</a></li>
+<li class="chapter" data-level="5.11" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#jointures"><i class="fa fa-check"></i><b>5.11</b> Jointures</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>6</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="r-markdown.html"><a href="r-markdown.html#créer-un-document-r-markdown-avec-rstudio"><i class="fa fa-check"></i><b>6.1</b> Créer un document R Markdown avec RStudio</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="r-markdown.html"><a href="r-markdown.html#yaml"><i class="fa fa-check"></i><b>6.1.1</b> YAML</a></li>
+<li class="chapter" data-level="6.1.2" data-path="r-markdown.html"><a href="r-markdown.html#textes"><i class="fa fa-check"></i><b>6.1.2</b> Textes</a></li>
+<li class="chapter" data-level="6.1.3" data-path="r-markdown.html"><a href="r-markdown.html#morceaux-de-code"><i class="fa fa-check"></i><b>6.1.3</b> Morceaux de code</a></li>
+<li class="chapter" data-level="6.1.4" data-path="r-markdown.html"><a href="r-markdown.html#compilation"><i class="fa fa-check"></i><b>6.1.4</b> Compilation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="r-markdown.html"><a href="r-markdown.html#markdown"><i class="fa fa-check"></i><b>6.2</b> Ecriture du texte : syntaxe en Markdown</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="r-markdown.html"><a href="r-markdown.html#texte"><i class="fa fa-check"></i><b>6.2.1</b> Texte</a></li>
+<li class="chapter" data-level="6.2.2" data-path="r-markdown.html"><a href="r-markdown.html#styles-de-texte"><i class="fa fa-check"></i><b>6.2.2</b> Styles de texte</a></li>
+<li class="chapter" data-level="6.2.3" data-path="r-markdown.html"><a href="r-markdown.html#titres"><i class="fa fa-check"></i><b>6.2.3</b> Titres</a></li>
+<li class="chapter" data-level="6.2.4" data-path="r-markdown.html"><a href="r-markdown.html#citations"><i class="fa fa-check"></i><b>6.2.4</b> Citations</a></li>
+<li class="chapter" data-level="6.2.5" data-path="r-markdown.html"><a href="r-markdown.html#tirets-longs-tirets-moyens"><i class="fa fa-check"></i><b>6.2.5</b> Tirets longs, tirets moyens</a></li>
+<li class="chapter" data-level="6.2.6" data-path="r-markdown.html"><a href="r-markdown.html#lignes-horizontale"><i class="fa fa-check"></i><b>6.2.6</b> Lignes horizontale</a></li>
+<li class="chapter" data-level="6.2.7" data-path="r-markdown.html"><a href="r-markdown.html#points-de-suspension"><i class="fa fa-check"></i><b>6.2.7</b> Points de suspension</a></li>
+<li class="chapter" data-level="6.2.8" data-path="r-markdown.html"><a href="r-markdown.html#liens-hypertextes"><i class="fa fa-check"></i><b>6.2.8</b> Liens hypertextes</a></li>
+<li class="chapter" data-level="6.2.9" data-path="r-markdown.html"><a href="r-markdown.html#notes-de-bas-de-page"><i class="fa fa-check"></i><b>6.2.9</b> Notes de bas de page</a></li>
+<li class="chapter" data-level="6.2.10" data-path="r-markdown.html"><a href="r-markdown.html#listes-1"><i class="fa fa-check"></i><b>6.2.10</b> Listes</a></li>
+<li class="chapter" data-level="6.2.11" data-path="r-markdown.html"><a href="r-markdown.html#listes-imbriquées"><i class="fa fa-check"></i><b>6.2.11</b> Listes imbriquées</a></li>
+<li class="chapter" data-level="6.2.12" data-path="r-markdown.html"><a href="r-markdown.html#images"><i class="fa fa-check"></i><b>6.2.12</b> Images</a></li>
+<li class="chapter" data-level="6.2.13" data-path="r-markdown.html"><a href="r-markdown.html#tableaux"><i class="fa fa-check"></i><b>6.2.13</b> Tableaux</a></li>
+<li class="chapter" data-level="6.2.14" data-path="r-markdown.html"><a href="r-markdown.html#formules-mathématiques-en-latex"><i class="fa fa-check"></i><b>6.2.14</b> Formules mathématiques en LaTeX</a></li>
+<li class="chapter" data-level="6.2.15" data-path="r-markdown.html"><a href="r-markdown.html#md-codes-blocs-codes"><i class="fa fa-check"></i><b>6.2.15</b> Codes et blocs de code</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="r-markdown.html"><a href="r-markdown.html#morceaux-de-code-1"><i class="fa fa-check"></i><b>6.3</b> Morceaux de code</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="r-markdown.html"><a href="r-markdown.html#codes-en-ligne"><i class="fa fa-check"></i><b>6.3.1</b> Codes en ligne</a></li>
+<li class="chapter" data-level="6.3.2" data-path="r-markdown.html"><a href="r-markdown.html#blocs-de-code"><i class="fa fa-check"></i><b>6.3.2</b> Blocs de code</a></li>
+<li class="chapter" data-level="6.3.3" data-path="r-markdown.html"><a href="r-markdown.html#mise-en-cache"><i class="fa fa-check"></i><b>6.3.3</b> Mise en cache</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="r-markdown.html"><a href="r-markdown.html#insertion-dune-bibliographie"><i class="fa fa-check"></i><b>6.4</b> Insertion d’une bibliographie</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="r-markdown.html"><a href="r-markdown.html#création-du-fichier-de-bibliographie"><i class="fa fa-check"></i><b>6.4.1</b> Création du fichier de bibliographie</a></li>
+<li class="chapter" data-level="6.4.2" data-path="r-markdown.html"><a href="r-markdown.html#lier-le-fichier-dentrées-bibliographiques-avec-le-document-rmarkdown"><i class="fa fa-check"></i><b>6.4.2</b> Lier le fichier d’entrées bibliographiques avec le document RMarkdown</a></li>
+<li class="chapter" data-level="6.4.3" data-path="r-markdown.html"><a href="r-markdown.html#citer-les-documents-dans-le-corps-de-texte"><i class="fa fa-check"></i><b>6.4.3</b> Citer les documents dans le corps de texte</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html"><i class="fa fa-check"></i><b>7</b> Statistiques descriptives</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#données-du-chapitre"><i class="fa fa-check"></i><b>7.1</b> Données du chapitre</a></li>
+<li class="chapter" data-level="7.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#résumés-statistiques-à-la-main"><i class="fa fa-check"></i><b>7.2</b> Résumés statistiques à la main</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#dimensions-résumés-grossiers"><i class="fa fa-check"></i><b>7.2.1</b> Dimensions, résumés grossiers</a></li>
+<li class="chapter" data-level="7.2.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#exploration-des-valeurs-avec-des-tableaux"><i class="fa fa-check"></i><b>7.2.2</b> Exploration des valeurs avec des tableaux</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#résumés-avec-gtsummary-vers-la-communication-des-résultats"><i class="fa fa-check"></i><b>7.3</b> Résumés avec gtsummary : vers la communication des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#contexte-et-rappels"><i class="fa fa-check"></i><b>8.1</b> Contexte et rappels</a></li>
+<li class="chapter" data-level="8.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#chargement-du-jeu-de-données"><i class="fa fa-check"></i><b>8.2</b> Chargement du jeu de données</a></li>
+<li class="chapter" data-level="8.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#régression-pas-à-pas"><i class="fa fa-check"></i><b>8.3</b> Régression pas à pas</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#estimation-des-coefficients-de-la-régression-par-moindres-carrés-ordinaires"><i class="fa fa-check"></i><b>8.3.1</b> Estimation des coefficients de la régression par moindres carrés ordinaires</a></li>
+<li class="chapter" data-level="8.3.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#prédiction-des-valeurs"><i class="fa fa-check"></i><b>8.3.2</b> Prédiction des valeurs</a></li>
+<li class="chapter" data-level="8.3.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#les-résidus-de-la-régression"><i class="fa fa-check"></i><b>8.3.3</b> Les résidus de la régression</a></li>
+<li class="chapter" data-level="8.3.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#un-indicateur-de-la-qualité-dajustement-le-coefficient-de-détermination"><i class="fa fa-check"></i><b>8.3.4</b> Un indicateur de la qualité d’ajustement : le coefficient de détermination</a></li>
+<li class="chapter" data-level="8.3.5" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire"><i class="fa fa-check"></i><b>8.3.5</b> Tests de nullité des coefficients de la régression linéaire</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#régression-avec-lm"><i class="fa fa-check"></i><b>8.4</b> Régression avec lm</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#résumé-de-lestimation"><i class="fa fa-check"></i><b>8.4.1</b> Résumé de l’estimation</a></li>
+<li class="chapter" data-level="8.4.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#prédictions-des-valeurs"><i class="fa fa-check"></i><b>8.4.2</b> Prédictions des valeurs</a></li>
+<li class="chapter" data-level="8.4.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire-1"><i class="fa fa-check"></i><b>8.4.3</b> Tests de nullité des coefficients de la régression linéaire</a></li>
+<li class="chapter" data-level="8.4.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#mise-en-forme-des-résultats-avec-modelsummary"><i class="fa fa-check"></i><b>8.4.4</b> Mise en forme des résultats avec modelsummary</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html"><i class="fa fa-check"></i><b>9</b> Instructions conditionnelles et boucles</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instructions-conditionnelles"><i class="fa fa-check"></i><b>9.1</b> Instructions conditionnelles</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instruction-if"><i class="fa fa-check"></i><b>9.1.1</b> Instruction <code>if</code></a></li>
+<li class="chapter" data-level="9.1.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instruction-if-else"><i class="fa fa-check"></i><b>9.1.2</b> Instruction <code>if-else</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles"><i class="fa fa-check"></i><b>9.2</b> Boucles</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles-while"><i class="fa fa-check"></i><b>9.2.1</b> Boucles <code>while()</code></a></li>
+<li class="chapter" data-level="9.2.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles-for"><i class="fa fa-check"></i><b>9.2.2</b> Boucles <code>for()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>10</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Travaux dirigés d’Informatique</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="importation-et-exportation-de-donnée" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Importation et exportation de donnée<a href="importation-et-exportation-de-donnée.html#importation-et-exportation-de-donnée" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="orangebox">
+<p>Ce chapitre s’appuie sur <a href="http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#importation-exportation-et-cr%C3%A9ation-de-donn%C3%A9es">la Section 2.3 Importation, exportation et création de données</a> des notes de cours.</p>
+</div>
+<div id="chargement-de-données-chemins" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Chargement de données : chemins<a href="importation-et-exportation-de-donnée.html#chargement-de-données-chemins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Lorsque l’on souhaite accéder à des données avec Excel, il suffit de double cliquer sur le fichier dans l’explorateur de fichiers pour que le logiciel se lance et que le tableur nous révèle son contenu. Avec R, il est nécessaire de payer un petit coût d’entrée pour pouvoir charger les données. Mais une fois ce coût payé, il nous est possible de réaliser des opérations avancées en fournissant des efforts moindres. Par ailleurs, le traitement des gros volumes de données est facilité avec R, comparativement à Excel.</p>
+<p>Dans cet exercice, vous allez apprendre à importer des données dans R. Cela nécessite au préalable d’avoir connaissance de l’environnement de travail (en anglais, <em>working directory</em>). Lorsqu’on lance RStudio en double cliquant sur un fichier de projet (dont l’extension est <code>.Rproj</code>), comme ce que l’on a fait jusqu’à présent, l’environnement de travail de R est le répertoire dans lequel se situe le fichier <code>.Rproj</code>. Aussi, lorsque nous donnons comme instruction à R d’importer ou d’exporter des informations, R se réfère à ce répertoire comme point d’ancrage, comme répertoire courant.</p>
+<div class="greenbox">
+<ol style="list-style-type: decimal">
+<li>En choisissant l’option “Enregistrer le fichier” (**et non pas en choisissant “Ouvrir avec”), téléchargez l’archive <code>exercice_importation.zip</code> à l’adresse suivante : <a href="https://egallic.fr/Enseignement/R/Exercices/exercice_importation.zip" class="uri">https://egallic.fr/Enseignement/R/Exercices/exercice_importation.zip</a>.</li>
+</ol>
+</div>
+<p>Par défaut, sur les ordinateurs de l’Université, les fichiers téléchargés sont enregistrés dans le dossier <code>Téléchargement</code>. Pour être plus précis, les fichiers téléchargés sont enregistrés sur le disque dur nommé <code>C:</code>, dans un répertoire nommé <code>Downloads</code> qui se situe lui-même dans un répertoire nommé selon votre numéro d’étudiant, situé lui-même dans un répertoire nommé <code>Users</code>. Pour accéder à une ressource, le système d’exploitation utilise des chemins d’accès, qui sont constitués à l’aide des noms de répertoires séparés par des barres obliques inverse sous Windows (<code>\</code>) (et des barres obliques <code>/</code> sous Unix) et qui se terminent soit par un nom de répertoire, soit par un nom de fichier. Le chemin qui permet de localiser le répertoire de téléchargement sur la machine de l’Université s’écrit ainsi : <code>C:\Users\votre_numero_etudiant\Downloads</code>, tandis que le chemin qui permet de localiser le fichier que vous venez de télécharger s’écrit <code>C:\Users\votre_numero_etudiant\Downloads\exercice_importation.zip</code>.</p>
+<div class="greenbox">
+<ol start="2" style="list-style-type: decimal">
+<li>Ouvrez l’explorateur de fichiers et déplacez vous dans le dossier de téléchargement.</li>
+<li>Faites un clic droit sur le fichier <code>exercice_importation.zip</code>, et dans le menu contextuel qui s’affiche, choisissez l’option <code>7-Zip</code>, puis <code>Extraire vers exercice_importation</code>. Un répertoire nommé <code>exercice_importation</code> a alors été extrait.</li>
+</ol>
+</div>
+<div class="notebox">
+<p><strong>Note</strong></p>
+<p>Dans votre répetoire <code>Téléchargement</code> vous pouvez à présent voir deux ressources portant le nom <code>exercice_importation</code>. Si vous faites bien attention, l’icône de ces ressources diffère : l’une représente un porte document jaune ouvert (et désigne le répertoire que vous venez d’extraire de l’archive), tandis que l’autre présente un porte document jaune fermé et muni d’une fermeture éclair (un <em>zip</em>).</p>
+<p>Afin d’éviter de confondre les deux, un moyen simple consiste à afficher l’extension des fichiers. Il sera alors aisé de reconnaître les fichiers des répertoires : les dossiers n’auront pas d’extention. Pour afficher les extensions :</p>
+<ol style="list-style-type: decimal">
+<li>Dans l’explorateur de fichiers, atteignez l’onglet <code>Affichage</code> ;</li>
+<li>Cliquez sur le bouton <code>Afficher/Masquer</code> ;</li>
+<li>Cochez la case <code>Extensions de noms de fichiers</code>.</li>
+</ol>
+<p>À présent, vous pourrez bien voir la différence entre le répertoire <code>exercice_importation</code> et le fichier ZIP <code>exercice_importation.zip</code> (l’archive).</p>
+</div>
+<p>La hiérarchie du répertoire <code>exercice_importation</code> que vous venez d’extraire peut être représentée à l’aide d’un arbre (on parle d’arborescence).</p>
+<pre><code>exercice_importation
+├── Dossier_C
+│   └── fichier_donnees_C.csv
+├── Dossier_D
+│   └── Dossier_D_1
+|   |   └── fichier_donnees_D_1.csv
+├── Exercice
+|   └── Dossier_A
+|   |   └── Dossier_A_1
+|   |   |   └── fichier_donnees_A_1.csv
+|   |   └── Dossier_A_2
+|   |   |   └── fichier_donnees_A_2.csv
+|   |   └── fichier_donnees_A.csv
+|   └── Dossier_B
+|   |   └── fichier_donnees_B.csv
+|   └── fichier_donnees.csv
+|   └── L3_info.Rproj</code></pre>
+<div class="redbox">
+<p><strong>Mise en garde</strong></p>
+<p>Faites attention lorsque vous ouvrez des fichiers CSV avec Excel. Dès lors que vous enregistrerez des modifications, Excel ajoutera des informations dans le fichier. Ces ajouts peuvent rendre vos fichiers illisibles par d’autres logiciels ensuite.</p>
+</div>
+<div class="greenbox">
+<ol start="4" style="list-style-type: decimal">
+<li>Depuis l’explorateur de fichiers, descendez dans le répertoire <code>exercice_importation</code>, puis dans <code>Exercice</code> et ouvrez le fichier <code>L3_info.Rproj</code> en double cliquant dessus.</li>
+</ol>
+<p>En ayant ouvert le fichier <code>L3_info.Rproj</code>, RStudio s’est lancé, en définissant le répertoire <code>Exercice</code> comme répertoire de travail.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Dans la console R de RStudio, évaluez l’instruction suivante : <code>getwd()</code> et observez le chemin retourné.</li>
+<li>Créez un nouveau script R.</li>
+</ol>
+</div>
+<p>Le répertoire courant est donc <code>Exercice</code>. Lorsque nous allons charger ou exporter dans ou depuis R des données, nous pourrons créer des chemins relatifs à ce répertoire courant. Il convient ainsi de noter la distinction entre chemin absolu et chemin relatif:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Chemin absolu</strong> : le chemin absolu décrit l’accès à une ressource sans se référer au chemin courant, mais en se rapportant à la place à la racine du disque ou du serveur.</li>
+</ol>
+<ul>
+<li>exemple : le chemin absolu vers le fichier <code>fichier_donnees.csv</code> sur <strong>windows</strong> sera : <code>C:\Users\votre_numero_etudiant\Downloads\exercice_importation\Exercice\fichier_donnees.csv</code></li>
+<li>Note : sous Unix, la racine du système de fichiers se note simplement <code>/</code>. Le lien absolu vers le fichier ressemblera à celui-ci : <code>/home/votre_nom_user/Downloads/fichier_donnees.csv</code>.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Chemin relatif</strong> : le chemin relatif décrit quant à lui l’accès à une ressource en se rapportant au répertoire courant.</li>
+</ol>
+<ul>
+<li>le répertoire courant étant <code>Exercice</code>, pour accéder au fichier csv, le chemin est le suivant, sous <strong>windows</strong> : <code>fichier_donnees.csv</code> (on peut aussi écrire <code>.\fichier_donnees.csv</code>, où <code>.</code> se réfère au <strong>répertoire courant</strong>)</li>
+<li>sous Unix : <code>fichier_donnees.csv</code> ou <code>./fichier_donnees.csv</code>.</li>
+</ul>
+<div class="notebox">
+<p><strong>Note</strong></p>
+<p>La barre oblique <code>/</code> (inversée <code>\</code> sous Windows) est le séparateur de chemin.</p>
+</div>
+<p>Nous allons à présent importer dans R le contenu du fichier <code>fichier_donnees.csv</code>. Ce fichier contient une première ligne définissant les en-têtes, et une seconde ligne contenant une observation. Dans le fichier, les différents champs sont séparés par un point-virgule (<code>;</code>).</p>
+<p>Pour importer le contenu de ce fichier CSV dans R, nous allons nous appuyer sur la fonction <code class="sourceCode r"><span class="fu">read_csv2</span>()</code> du <em>package</em> {readr}. Nous allons indiquer le chemin vers le fichier à l’argument <code>file</code> de cette fonction. Le tableau de données sera stocké dans un objet que nous allons appeler <code>df_exercice</code> :</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="importation-et-exportation-de-donnée.html#cb215-1" aria-hidden="true" tabindex="-1"></a>df_exercice <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&quot;fichier_donnees.csv&quot;</span>)</span>
+<span id="cb215-2"><a href="importation-et-exportation-de-donnée.html#cb215-2" aria-hidden="true" tabindex="-1"></a>df_exercice</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##   Dossier          Valeur
+##   &lt;chr&gt;            &lt;chr&gt; 
+## 1 Dossier_Exercice Bravo</code></pre>
+<p>L’importation a bien fonctionné, R nous prévient avoir deviné que les valeurs dans les colonnes <code>Dossier</code> et <code>Valeur</code> sont des chaînes de caractères (la fonction <code class="sourceCode r"><span class="fu">col_character</span>()</code> a été utilisée pour ces deux colonnes).</p>
+<p>Nous pouvons obtenir le même résultat en écrivant le chemin absolu vers le fichier :</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="importation-et-exportation-de-donnée.html#cb217-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;C:/Users/votre_numero_etudiant/Downloads/&quot;</span>,</span>
+<span id="cb217-2"><a href="importation-et-exportation-de-donnée.html#cb217-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;exercice_importation/Exercice/fichier_donnees.csv&quot;</span>)</span>
+<span id="cb217-3"><a href="importation-et-exportation-de-donnée.html#cb217-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv2</span>(<span class="at">file =</span> path)</span></code></pre></div>
+<div class="greenbox">
+<p><strong>Note</strong> : le chemin étant trop long pour tenir sur une page PDF, la fonction <code class="sourceCode r">paste0</code> a été utilisée ici pour concaténer deux chaînes de caractères en une seule. Sur votre machine, vous pouvez écrire le chemin complet sans passer par l’utilisation de la fonction <code class="sourceCode r">paste0</code>.</p>
+</div>
+<p>Nous verrons plus loin que l’utilisation des chemins absolus dans les scripts posent des soucis lorsque l’on change d’ordinateur ou que l’on partage son code avec d’autres personnes.</p>
+<p>Le fichier <code>fichier_donnees_A.csv</code> n’est pas situé dans le répertoire courant : il se situe dans le répertoire <code>Dossier_A</code>, contenu dans le répertoire courant (<code>Exercice</code>). Pour pouvoir charger le contenu de ce fichier dans R avec un lien relatif, il faut constuire le chemin en indiquant que l’on souhaite descendre dans le répertoire <code>Dossier_A</code> dans un premier temps :</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="importation-et-exportation-de-donnée.html#cb218-1" aria-hidden="true" tabindex="-1"></a>df_exercice_A <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&quot;Dossier_A/fichier_donnees_A.csv&quot;</span>)</span>
+<span id="cb218-2"><a href="importation-et-exportation-de-donnée.html#cb218-2" aria-hidden="true" tabindex="-1"></a>df_exercice_A</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##   Dossier   Valeur
+##   &lt;chr&gt;     &lt;chr&gt; 
+## 1 Dossier_A Bravo</code></pre>
+<div class="greenbox">
+<ol start="7" style="list-style-type: decimal">
+<li>Dans un objet que vous nommerez <code>df_exercice_A_1</code>, chargez dans R le contenu du fichier <code>fichier_donnees_A_1.csv</code>.</li>
+<li>Dans un objet que vous nommerez <code>df_exercice_A_2</code>, chargez dans R le contenu du fichier <code>fichier_donnees_A_2.csv</code>.</li>
+<li>Dans un objet que vous nommerez <code>df_exercice_B</code>, chargez dans R le contenu du fichier <code>fichier_donnees_B.csv</code>.</li>
+</ol>
+</div>
+<p>Si la ressource que l’on souhaite atteindre nécessite de remonter dans un répertoire parent (un répertoire qui contient un autre est appelé “répertoire parent”), il suffit d’utiliser sa désignation : <code>..</code>. Par exemple, pour accéder au fichier <code>fichier_donnees_C.csv</code>, qui se trouve dans le répertoire <code>Dossier_C</code> contenu dans le répertoire <code>exercice_importation</code> (qui contient le répertoire <code>Exercice</code> et est donc le répertoire parent de <code>Exercice</code>), on peut écrire :</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="importation-et-exportation-de-donnée.html#cb220-1" aria-hidden="true" tabindex="-1"></a>df_exercice_C <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&quot;../Dossier_C/fichier_donnees_C.csv&quot;</span>)</span>
+<span id="cb220-2"><a href="importation-et-exportation-de-donnée.html#cb220-2" aria-hidden="true" tabindex="-1"></a>df_exercice_C</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##   Dossier   Valeur
+##   &lt;chr&gt;     &lt;chr&gt; 
+## 1 Dossier_C Bravo</code></pre>
+<div class="greenbox">
+<ol start="10" style="list-style-type: decimal">
+<li>Dans un objet que vous nommerez <code>df_exercice_D</code>, chargez dans R le contenu du fichier <code>fichier_donnees_D_1.csv</code>.</li>
+<li>Enregistrez votre script dans le répertoire <code>Exercice</code> (en le nommant par exemple <code>importer_donnees.R</code>) et fermez RStudio.</li>
+</ol>
+</div>
+<div id="avantages-de-lutilisation-de-chemins-relatifs" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Avantages de l’utilisation de chemins relatifs<a href="importation-et-exportation-de-donnée.html#avantages-de-lutilisation-de-chemins-relatifs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour finir cette section, nous allons illustrer le grand avantage que confère l’emploi de chemins relatifs.</p>
+<p><strong>Mise en situation</strong> : admettons que vous souhaitez partager votre projet R avec une autre personne. Une manière simple de le faire consiste à créer une archive de l’ensemble de votre projet, pour fournir à la fois les scripts et les données.</p>
+<p>Le répertoire <code>exercice_importation</code> se situe depuis le début de ce chapitre dans votre dossier de téléchargement. Dans l’explorateur de fichiers, allez dans le répertoire de téléchargements et créez une archive du répertoire <code>exercice_importation</code> :</p>
+<div class="greenbox">
+<ol start="12" style="list-style-type: decimal">
+<li>clic droit sur le répertoire <code>exercice_importation</code> ;</li>
+<li>dans le menu contextuel qui s’affiche, cliquez sur <code>7-Zip</code>, puis sur <code>Ajouter à "exercice_importation.zip"</code> ;</li>
+<li>dans votre répetoire du cours d’informatique (dans vos documents), créez un répertoire intitulé <code>TD_4</code> ;</li>
+<li>dans le répetoire <code>TD_4</code>, collez l’archive <code>exercice_importation.zip</code> que vous venez de créer ;</li>
+<li>dans le répertoire de <strong>téléchargement</strong>, <strong>supprimez</strong> le répertoire <code>exercice_importation</code>.</li>
+<li>dans le répetoire <code>TD_4</code>, extrayez le contenu de l’archive (clic droit, <code>7-Zip &gt; Extraire vers "exercice_importation\"</code>).</li>
+<li>descendez dans le répertoire <code>exercice_importation</code> qui vient d’être extrait, puis dans <code>Exercice</code> ;</li>
+<li>Lancez le fichier <code>L3_info.Rproj</code> ;</li>
+<li>Dans la session RStudio qui vient de se lancer, ouvrez le script <code>importer_donnees.R</code> que vous avez créé précédemment.</li>
+</ol>
+</div>
+<p>Si vous avez écrit les chemins vers les fichiers en utilisant des chemins absolus, vous serez obligé de les modifier un à un…</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="importation-et-exportation-de-donnée.html#cb222-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;C:/Users/votre_numero_etudiant/Downloads/&quot;</span>,</span>
+<span id="cb222-2"><a href="importation-et-exportation-de-donnée.html#cb222-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;exercice_importation/Exercice/fichier_donnees.csv&quot;</span>)</span>
+<span id="cb222-3"><a href="importation-et-exportation-de-donnée.html#cb222-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv2</span>(<span class="at">file =</span> path)</span></code></pre></div>
+<p>Cette instruction qui permettait de charger le fichier <code>fichier_donnees.csv</code> ne fonctionne plus. R retourne un message d’erreur indiquant “<em>No such file or directory</em>” (un tel fichier ou répertoire n’existe pas).</p>
+<p>Si vous avez employé des chemins relatifs, vous n’aurez rien à modifier.</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="importation-et-exportation-de-donnée.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&quot;./fichier_donnees.csv&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="chargement-de-formats-différents" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Chargement de formats différents<a href="importation-et-exportation-de-donnée.html#chargement-de-formats-différents" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="orangebox">
+<p>Cet exercice s’appuie sur la section <a href="http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#importation-exportation-et-cr%C3%A9ation-de-donn%C3%A9es">2.3 Importation, exportation et création de données</a> des notes de cours.</p>
+</div>
+<p>Dans cet exercice, vous allez apprendre à importer des données dans R lorsqu’elles proviennent de différents types de fichiers. Au programme :</p>
+<ul>
+<li>des fichiers texte (plus particulièrement, CSV :<em>comma separated values</em>, et TSV, <em>tab-separated values</em>) ;</li>
+<li>des fichiers Excel ;</li>
+<li>des fichiers de données R.</li>
+</ul>
+<div id="fichiers-texte" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Fichiers texte<a href="importation-et-exportation-de-donnée.html#fichiers-texte" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans un premier temps, concentrons-nous sur les fichiers texte contenant des données tabulaires. Chaque ligne de ces fichiers correspond à une ligne d’un tableau, et un caractère spécifique appelé le séparateur de champ permet de séparer les colonnes. À la fin de chaque ligne, un caractère (non visible) permet de passer à la ligne suivante (fin de ligne ou <em>line break</em>). Parfois, les champs sont également placés entre double quotes (<code>"valeur"</code>).</p>
+<p>Un format très répandu de ce type de fichiers s’appelle CSV, ou <em>comma separated values</em> : la virgule sépare les champs. Souvent, la première ligne sert à nommer les colonnes. Voici un exemple :</p>
+<pre><code>&quot;nom&quot;,&quot;prenom&quot;,&quot;id&quot;,&quot;profile&quot;,&quot;matiere&quot;,&quot;note&quot;
+&quot;Amsberry&quot;,&quot;Evan&quot;,1,1,&quot;Microéconomie 1&quot;,11.5
+&quot;Basurto&quot;,&quot;Anthony&quot;,2,2,&quot;Microéconomie 1&quot;,9
+&quot;Begaye&quot;,&quot;Kai&quot;,3,3,&quot;Microéconomie 1&quot;,16.5</code></pre>
+<p>Dans certaines administrations françaises, les données au format CSV sont fournies avec une variante dans laquelle le séparateur de champ est le point-virgule plutôt que la virgule, cette dernière étant utilisée comme séparateur décimal.</p>
+<pre><code>&quot;nom&quot;;&quot;prenom&quot;;&quot;id&quot;;&quot;profile&quot;;&quot;matiere&quot;;&quot;note&quot;
+&quot;Amsberry&quot;;&quot;Evan&quot;;1;1;&quot;Mathématiques 1&quot;;5
+&quot;Basurto&quot;;&quot;Anthony&quot;;2;2;&quot;Mathématiques 1&quot;;6
+&quot;Begaye&quot;;&quot;Kai&quot;;3;3;&quot;Mathématiques 1&quot;;18</code></pre>
+<p>Face à la possibilité d’utiliser différents caractères pour séparer les champs ainsi que pour séparer la partie entière de la partie décimale des nombres, R propose tout un attirail de fonctions. Nous allons en utiliser une qui permet d’être polyvalent : <code class="sourceCode r"><span class="fu">read_delim</span>()</code>. Cette fonction est proposée dans le <em>package</em> {readr}.</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="importation-et-exportation-de-donnée.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code></pre></div>
+<div class="greenbox">
+<ol style="list-style-type: decimal">
+<li>Affichez la page d’aide de la fonction <code>read_delim</code>.</li>
+<li>Lisez les descriptions des arguments suivants : <code>file</code>, <code>delim</code>, <code>col_names</code>, <code>skip</code>, <code>n_max</code>.</li>
+</ol>
+</div>
+<p>Vous allez devoir charger dans R 4 fichiers texte contenant des notes d’étudiants, selon les matières qu’ils et elles ont suivies. Pour les besoins de l’exercice, les séparateurs de champs et les séparateurs décimaux varient d’un fichier à l’autre. Le tableau  <a href="importation-et-exportation-de-donnée.html#tab:caracteristiques-fichiers-importation">4.1</a> reporte les valeurs utilisées.</p>
+<table>
+<caption><span id="tab:caracteristiques-fichiers-importation">Table 4.1: </span> Caractéristiques des fichiers texte avec séparateur de champ</caption>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Nom de fichier</th>
+<th align="left">Séparateur de champs</th>
+<th align="left">Séparateur décimal</th>
+<th align="left">En-têtes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>Microeconomie_1.csv</code></td>
+<td align="left">Virgule (<code>,</code>)</td>
+<td align="left">Point (<code>.</code>)</td>
+<td align="left">Oui</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Macroeconomie_1.csv</code></td>
+<td align="left">Virgule (<code>,</code>)</td>
+<td align="left">Point (<code>.</code>)</td>
+<td align="left">Non</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>Mathematiques_1.csv</code></td>
+<td align="left">Point-virgule (<code>;</code>)</td>
+<td align="left">Virgule (<code>,</code>)</td>
+<td align="left">Oui</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Informatique_1.tsv</code></td>
+<td align="left">Taquet de tabulation (<code>\t</code>)</td>
+<td align="left">Point (<code>.</code>)</td>
+<td align="left">Oui</td>
+</tr>
+</tbody>
+</table>
+<p>Ces fichiers sont disponibles dans une archive disponible à l’adresse suivante : <a href="https://egallic.fr/Enseignement/R/Exercices/importation_formats.zip" class="uri">https://egallic.fr/Enseignement/R/Exercices/importation_formats.zip</a>.</p>
+<div class="greenbox">
+<ol start="3" style="list-style-type: decimal">
+<li>Téléchargez l’archive, extrayez son contenu, puis déplacez le répertoire <code>importation_formats</code> qui vient d’être extrait dans votre répertoire <code>TD_4</code> créé lors du précédent exercice.</li>
+<li>En utilisant la fonction <code>read_delim()</code>, chargez le contenu du fichier <code>Microeconomie_1.csv</code> dans R. Ce fichier est situé dans le répertoire <code>L1</code>. Vous prendrez soin de stocker le tableau qui sera importé dans un objet que vous nommerez <code>microeconomie_1</code>.</li>
+<li>En utilisant la fonction <code>read_delim()</code>, chargez le contenu du fichier <code>Macroeconomie_1.csv</code> dans R. Vous prendrez soin de stocker le tableau qui sera importé dans un objet que vous nommerez <code>macroeconomie_1</code>.</li>
+</ol>
+</div>
+<p>Lorsque le séparateur décimal n’est pas le point, il est nécessaire de renseigner à l’argument <code>locale</code> la valeur <code>locale(decimal_mark = ",")</code>.</p>
+<div class="greenbox">
+<ol start="6" style="list-style-type: decimal">
+<li>En utilisant la fonction <code>read_delim()</code>, chargez le contenu du fichier <code>Mathematiques_1.csv</code> dans R. Vous prendrez soin de stocker le tableau qui sera importé dans un objet que vous nommerez <code>mathematiques_1</code>. Attention, vérifiez bien les valeurs des notes.</li>
+<li>En utilisant la fonction <code>read_delim()</code>, chargez le contenu du fichier <code>Informatique_1.tsv</code> dans R. Vous prendrez soin de stocker le tableau qui sera importé dans un objet que vous nommerez <code>informatique_1</code>.</li>
+</ol>
+</div>
+<div class="notebox">
+<p>Le <em>package</em> {readr} propose également les fonctions <code class="sourceCode r"><span class="fu">read_csv</span>()</code> et <code>read_csv2()</code> qui sont spécifiquement créées pour des fichiers <code>texte/csv</code> répondant exactement au standard anglo-saxon (virgule en séparateur de champs, point en séparateur décimal) et français (point-virgule en séparateur de champs, virgule en séparateur décimal).</p>
+</div>
+</div>
+<div id="fichier-excel" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Fichier Excel<a href="importation-et-exportation-de-donnée.html#fichier-excel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’archive <code>importation_formats.zip</code> contient dans le répertoire <code>L1</code>, un fichier Excel intitulé <code>notes_L1.xlsx</code>.</p>
+<div class="greenbox">
+<ol start="8" style="list-style-type: decimal">
+<li>Ouvrez ce fichier avec Excel, pour observer sa structure : le classeur est composé de 8 feuilles, une feuille par matière. Dans chaque feuille, les notes obtenues par les étudiants dans la matière correspondante sont reportées. La première ligne indique systématiquement les noms de clonnes.</li>
+</ol>
+</div>
+<p>Pour importer le contenu de fichiers Excel dans R, il existe plusieurs <em>packages</em>. Nous allons utiliser {readxl}.</p>
+<div class="greenbox">
+<ol start="9" style="list-style-type: decimal">
+<li>Après avoir chargé le <em>package</em> {readxl}, affichez la page d’aide de la fonction <code class="sourceCode r">read_excel</code>. Lisez les descriptions des arguments suivants : <code>path</code>, <code>sheet</code>, <code>col_names</code>, <code>na</code>, <code>skip</code>, <code>n_max</code>.</li>
+<li>En utilisant le numéro d’index de la feuille <code>info</code> (il s’agit de la 4e feuille), chargez son contenu, à l’aide de la fonction <code class="sourceCode r">read_excel</code> dans un objet que vous nommerez <code>info</code>.</li>
+<li>En utilisant le nom de la feuille <code>stats</code>, chargez son contenu, à l’aide de la fonction <code class="sourceCode r">read_excel</code> dans un objet que vous nommerez <code>stats</code>.</li>
+</ol>
+</div>
+</div>
+<div id="fichiers-r" class="section level3 hasAnchor" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Fichiers R<a href="importation-et-exportation-de-donnée.html#fichiers-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il existe deux formats de fichier de données R : les fichiers <code>.RDS</code> et <code>.RData</code>. Les premiers contiennent un seul objet, tandis que les seconds peuvent en contenir plusieurs.</p>
+<p>Dans le dossier <code>L1</code> de l’archive <code>importation_formats.zip</code> que dont vous avez extrait le contenu se trouve deux fichiers de données R :</p>
+<ul>
+<li><code>anglais.RDS</code> : tableau de données contenant les notes d’anglais` ;</li>
+<li><code>notes.RData</code> : 8 tableaux de données (<code>micro</code>, <code>macro</code>, <code>maths</code>, <code>info</code>, <code>stats</code>, <code>anglais</code>, <code>eco_envir</code>, et <code>finance</code>).</li>
+</ul>
+<p>Pour importer un fichier <code>.RDS</code>, on utilise la fonction <code class="sourceCode r"><span class="fu">readRDS</span>()</code>. De la même manière que pour <code class="sourceCode r"><span class="fu">read_delim</span>()</code>, il est nécessaire de stocker le résultat dans un objet.</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="importation-et-exportation-de-donnée.html#cb227-1" aria-hidden="true" tabindex="-1"></a>notes_anglais <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">&quot;importation_formats/L1/anglais.RDS&quot;</span>)</span>
+<span id="cb227-2"><a href="importation-et-exportation-de-donnée.html#cb227-2" aria-hidden="true" tabindex="-1"></a>notes_anglais</span></code></pre></div>
+<pre><code>## # A tibble: 32 × 5
+##    nom        prenom     id matiere    note
+##    &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
+##  1 Amsberry   Evan        1 Anglais 1   4  
+##  2 Basurto    Anthony     2 Anglais 1   5.5
+##  3 Begaye     Kai         3 Anglais 1  11  
+##  4 Brack      Michael     4 Anglais 1   1.5
+##  5 Burgess    Jamie       5 Anglais 1   7  
+##  6 Christian  Colton      6 Anglais 1   4  
+##  7 Cly        Jesse       7 Anglais 1   5  
+##  8 Coberley   Rebecca     8 Anglais 1   6  
+##  9 De Venecia Madison     9 Anglais 1   6  
+## 10 Gurule     Elliott    12 Anglais 1   6  
+## # … with 22 more rows</code></pre>
+<p>Pour charger les objets d’un fichier <code>.RData</code> dans votre session R, il faut utiliser la fonction <code class="sourceCode r"><span class="fu">load</span>()</code>. Attention, si un objet est nommé <code>x</code> dans votre fichier <code>.RData</code> et qu’un objet existant dans votre session R s’appelle également <code>x</code>, ce dernier sera remplacé par l’objet qui vient d’être chargé avec la fonction <code class="sourceCode r"><span class="fu">load</span>()</code>.</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="importation-et-exportation-de-donnée.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="at">file =</span> <span class="st">&quot;importation_formats/L1/notes.RData&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="exportation" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Exportation<a href="importation-et-exportation-de-donnée.html#exportation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="format-texte" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Format texte<a href="importation-et-exportation-de-donnée.html#format-texte" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour enregistrer des données depuis un tableau de données, un vecteur ou une matrice, la fonction <code class="sourceCode r"><span class="fu">write_delim</span>()</code> peut être utilisée.</p>
+<div class="greenbox">
+<ol start="12" style="list-style-type: decimal">
+<li>Affichez la page d’aide de la fonction <code class="sourceCode r"><span class="fu">write_delim</span>()</code>, et lisez les descriptions des arguments <code>x</code>, <code>file</code>, <code>delim</code> et <code>append</code>.</li>
+<li>Dans un fichier que vous nommerez <code>notes_finance.csv</code>, exportez le tableau de données <code>finance</code> (qui a été chargé avec la fonction <code class="sourceCode r"><span class="fu">load</span>()</code>) dans le dossier <code>L1</code>.</li>
+</ol>
+</div>
+</div>
+<div id="format-r" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Format R<a href="importation-et-exportation-de-donnée.html#format-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour sauvegarder un seul objet, on peut utiliser la fonction <code class="sourceCode r"><span class="fu">saveRDS</span>()</code> et exporter les données au format <code>.RDS</code> :</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="importation-et-exportation-de-donnée.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(maths, <span class="at">file =</span> <span class="st">&quot;importation_formats/L1/maths.RDS&quot;</span>)</span></code></pre></div>
+<p>Pour sauvegarder plusieurs objets, on peut utiliser la fonction <code class="sourceCode r"><span class="fu">save</span>()</code>, en indiquant les noms des objets à sauvegarder en argument de la fonction.</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="importation-et-exportation-de-donnée.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(micro, macro, maths, info, stats, anglais, eco_envir, finance,</span>
+<span id="cb231-2"><a href="importation-et-exportation-de-donnée.html#cb231-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">file =</span> <span class="st">&quot;importation_formats/L1/notes_L1.RData&quot;</span>)</span></code></pre></div>
+<!-- # Seance 4 -->
+<!-- Tableaux -->
+<!-- # Manipulation des tableaux -->
+<!-- # Seance 5 -->
+<!-- # Importation et exportation de données -->
+<!-- # Faire des tableaux de résumés statistiques + exports -->
+<!-- # Seance 6 -->
+<!-- # Markdown -->
+<!-- # Seance 7 -->
+<!-- # regressions -->
+<!-- # Seance 8 -->
+<!-- # Fonctions -->
+<!-- # Boucles -->
+<!-- # Seance 10 -->
+<!-- # Graphiques -->
+<!-- # Seance 11 -->
+<!-- # Graphiques -->
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="matrices-et-listes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tableaux-de-données.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "night",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

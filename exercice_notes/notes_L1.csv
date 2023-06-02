@@ -1,0 +1,225 @@
+nom,prenom,id,matiere,note
+Amsberry,Evan,1,Microéconomie 1,11.5
+Basurto,Anthony,2,Microéconomie 1,9
+Begaye,Kai,3,Microéconomie 1,16.5
+Brack,Michael,4,Microéconomie 1,4
+Burgess,Jamie,5,Microéconomie 1,6.5
+Christian,Colton,6,Microéconomie 1,14.5
+Cly,Jesse,7,Microéconomie 1,2.5
+Coberley,Rebecca,8,Microéconomie 1,20
+De Venecia,Madison,9,Microéconomie 1,6
+Gurule,Elliott,12,Microéconomie 1,7.5
+Israel,Joshua,14,Microéconomie 1,4
+Jacket,Kanae,15,Microéconomie 1,6.5
+Joy,Michael,16,Microéconomie 1,20
+Kinney,Jonah,17,Microéconomie 1,2
+Ledbetter,Conor,18,Microéconomie 1,9
+Lehi,Savannah,19,Microéconomie 1,4.5
+Lenard,Alysha,20,Microéconomie 1,2.5
+Lucero,Cole,21,Microéconomie 1,2.5
+Massey,Taylor,22,Microéconomie 1,15.5
+Medicine Blanket,Robert,23,Microéconomie 1,11
+Mullins,Brenna,24,Microéconomie 1,6
+Olson,Patrick,25,Microéconomie 1,4
+Oyebi,Rachael,26,Microéconomie 1,2.5
+Pereyra,Emilie,27,Microéconomie 1,12.5
+Riley,Paige,28,Microéconomie 1,9
+Rosen,Richard,29,Microéconomie 1,17.5
+Schlaver,Lexa,30,Microéconomie 1,7.5
+Scholer,Julia,31,Microéconomie 1,17
+Slovonsky,Tevin,32,Microéconomie 1,8
+Thiede,Tyler,33,Microéconomie 1,10.5
+Tillman,Tecumseh,34,Microéconomie 1,3.5
+Vinson,Destiny,35,Microéconomie 1,13.5
+Amsberry,Evan,1,Macroéconomie 1,7.5
+Basurto,Anthony,2,Macroéconomie 1,4.5
+Begaye,Kai,3,Macroéconomie 1,7.5
+Brack,Michael,4,Macroéconomie 1,14.5
+Burgess,Jamie,5,Macroéconomie 1,15.5
+Christian,Colton,6,Macroéconomie 1,8
+Cly,Jesse,7,Macroéconomie 1,2
+Coberley,Rebecca,8,Macroéconomie 1,7.5
+De Venecia,Madison,9,Macroéconomie 1,5
+Gurule,Elliott,12,Macroéconomie 1,12
+Israel,Joshua,14,Macroéconomie 1,5
+Jacket,Kanae,15,Macroéconomie 1,6.5
+Joy,Michael,16,Macroéconomie 1,7.5
+Kinney,Jonah,17,Macroéconomie 1,4
+Ledbetter,Conor,18,Macroéconomie 1,14.5
+Lehi,Savannah,19,Macroéconomie 1,6
+Lenard,Alysha,20,Macroéconomie 1,17.5
+Lucero,Cole,21,Macroéconomie 1,6
+Massey,Taylor,22,Macroéconomie 1,13
+Medicine Blanket,Robert,23,Macroéconomie 1,10.5
+Mullins,Brenna,24,Macroéconomie 1,5.5
+Olson,Patrick,25,Macroéconomie 1,7.5
+Oyebi,Rachael,26,Macroéconomie 1,8
+Pereyra,Emilie,27,Macroéconomie 1,11.5
+Riley,Paige,28,Macroéconomie 1,6.5
+Rosen,Richard,29,Macroéconomie 1,17
+Schlaver,Lexa,30,Macroéconomie 1,5
+Scholer,Julia,31,Macroéconomie 1,13
+Slovonsky,Tevin,32,Macroéconomie 1,3.5
+Thiede,Tyler,33,Macroéconomie 1,3.5
+Tillman,Tecumseh,34,Macroéconomie 1,8.5
+Vinson,Destiny,35,Macroéconomie 1,7.5
+Amsberry,Evan,1,Mathématiques 1,5
+Basurto,Anthony,2,Mathématiques 1,6
+Begaye,Kai,3,Mathématiques 1,18
+Brack,Michael,4,Mathématiques 1,7
+Burgess,Jamie,5,Mathématiques 1,5
+Christian,Colton,6,Mathématiques 1,8.5
+Cly,Jesse,7,Mathématiques 1,1.5
+Coberley,Rebecca,8,Mathématiques 1,4.5
+De Venecia,Madison,9,Mathématiques 1,1.5
+Gurule,Elliott,12,Mathématiques 1,4
+Israel,Joshua,14,Mathématiques 1,16.5
+Jacket,Kanae,15,Mathématiques 1,11.5
+Joy,Michael,16,Mathématiques 1,9
+Kinney,Jonah,17,Mathématiques 1,4.5
+Ledbetter,Conor,18,Mathématiques 1,9
+Lehi,Savannah,19,Mathématiques 1,8.5
+Lenard,Alysha,20,Mathématiques 1,4
+Lucero,Cole,21,Mathématiques 1,5.5
+Massey,Taylor,22,Mathématiques 1,20
+Medicine Blanket,Robert,23,Mathématiques 1,20
+Mullins,Brenna,24,Mathématiques 1,17
+Olson,Patrick,25,Mathématiques 1,5
+Oyebi,Rachael,26,Mathématiques 1,12
+Pereyra,Emilie,27,Mathématiques 1,18.5
+Riley,Paige,28,Mathématiques 1,7
+Rosen,Richard,29,Mathématiques 1,18.5
+Schlaver,Lexa,30,Mathématiques 1,12.5
+Scholer,Julia,31,Mathématiques 1,7
+Slovonsky,Tevin,32,Mathématiques 1,4.5
+Thiede,Tyler,33,Mathématiques 1,6
+Tillman,Tecumseh,34,Mathématiques 1,5.5
+Vinson,Destiny,35,Mathématiques 1,6.5
+Amsberry,Evan,1,Informatique 1,5.5
+Basurto,Anthony,2,Informatique 1,3.5
+Begaye,Kai,3,Informatique 1,9.5
+Brack,Michael,4,Informatique 1,4.5
+Burgess,Jamie,5,Informatique 1,15
+Christian,Colton,6,Informatique 1,15.5
+Cly,Jesse,7,Informatique 1,4.5
+Coberley,Rebecca,8,Informatique 1,8.5
+De Venecia,Madison,9,Informatique 1,5
+Gurule,Elliott,12,Informatique 1,9
+Israel,Joshua,14,Informatique 1,9.5
+Jacket,Kanae,15,Informatique 1,3.5
+Joy,Michael,16,Informatique 1,10
+Kinney,Jonah,17,Informatique 1,10
+Ledbetter,Conor,18,Informatique 1,10.5
+Lehi,Savannah,19,Informatique 1,1
+Lenard,Alysha,20,Informatique 1,8
+Lucero,Cole,21,Informatique 1,7.5
+Massey,Taylor,22,Informatique 1,6
+Medicine Blanket,Robert,23,Informatique 1,17.5
+Mullins,Brenna,24,Informatique 1,3.5
+Olson,Patrick,25,Informatique 1,9
+Oyebi,Rachael,26,Informatique 1,7
+Pereyra,Emilie,27,Informatique 1,12.5
+Riley,Paige,28,Informatique 1,6.5
+Rosen,Richard,29,Informatique 1,18.5
+Schlaver,Lexa,30,Informatique 1,10.5
+Scholer,Julia,31,Informatique 1,20
+Slovonsky,Tevin,32,Informatique 1,2
+Thiede,Tyler,33,Informatique 1,2
+Tillman,Tecumseh,34,Informatique 1,7.5
+Vinson,Destiny,35,Informatique 1,5
+Amsberry,Evan,1,Statistiques 1,9
+Basurto,Anthony,2,Statistiques 1,4
+Begaye,Kai,3,Statistiques 1,19
+Brack,Michael,4,Statistiques 1,2
+Burgess,Jamie,5,Statistiques 1,4
+Christian,Colton,6,Statistiques 1,11
+Cly,Jesse,7,Statistiques 1,11
+Coberley,Rebecca,8,Statistiques 1,10
+De Venecia,Madison,9,Statistiques 1,3
+Gurule,Elliott,12,Statistiques 1,7.5
+Israel,Joshua,14,Statistiques 1,8.5
+Jacket,Kanae,15,Statistiques 1,12
+Joy,Michael,16,Statistiques 1,9.5
+Kinney,Jonah,17,Statistiques 1,5
+Ledbetter,Conor,18,Statistiques 1,11
+Lehi,Savannah,19,Statistiques 1,2.5
+Lenard,Alysha,20,Statistiques 1,2.5
+Lucero,Cole,21,Statistiques 1,4
+Massey,Taylor,22,Statistiques 1,5
+Medicine Blanket,Robert,23,Statistiques 1,15
+Mullins,Brenna,24,Statistiques 1,8
+Olson,Patrick,25,Statistiques 1,6.5
+Oyebi,Rachael,26,Statistiques 1,11
+Pereyra,Emilie,27,Statistiques 1,13
+Riley,Paige,28,Statistiques 1,20
+Rosen,Richard,29,Statistiques 1,17
+Schlaver,Lexa,30,Statistiques 1,10.5
+Scholer,Julia,31,Statistiques 1,19
+Slovonsky,Tevin,32,Statistiques 1,8
+Thiede,Tyler,33,Statistiques 1,4.5
+Tillman,Tecumseh,34,Statistiques 1,11
+Vinson,Destiny,35,Statistiques 1,4
+Amsberry,Evan,1,Anglais 1,4
+Basurto,Anthony,2,Anglais 1,5.5
+Begaye,Kai,3,Anglais 1,11
+Brack,Michael,4,Anglais 1,1.5
+Burgess,Jamie,5,Anglais 1,7
+Christian,Colton,6,Anglais 1,4
+Cly,Jesse,7,Anglais 1,5
+Coberley,Rebecca,8,Anglais 1,6
+De Venecia,Madison,9,Anglais 1,6
+Gurule,Elliott,12,Anglais 1,6
+Israel,Joshua,14,Anglais 1,2.5
+Jacket,Kanae,15,Anglais 1,6.5
+Joy,Michael,16,Anglais 1,13.5
+Kinney,Jonah,17,Anglais 1,8.5
+Ledbetter,Conor,18,Anglais 1,6.5
+Lehi,Savannah,19,Anglais 1,6.5
+Lenard,Alysha,20,Anglais 1,3.5
+Lucero,Cole,21,Anglais 1,6.5
+Massey,Taylor,22,Anglais 1,13
+Medicine Blanket,Robert,23,Anglais 1,10.5
+Mullins,Brenna,24,Anglais 1,9.5
+Olson,Patrick,25,Anglais 1,5
+Oyebi,Rachael,26,Anglais 1,4.5
+Pereyra,Emilie,27,Anglais 1,10
+Riley,Paige,28,Anglais 1,5
+Rosen,Richard,29,Anglais 1,20
+Schlaver,Lexa,30,Anglais 1,9
+Scholer,Julia,31,Anglais 1,6
+Slovonsky,Tevin,32,Anglais 1,9.5
+Thiede,Tyler,33,Anglais 1,2.5
+Tillman,Tecumseh,34,Anglais 1,6
+Vinson,Destiny,35,Anglais 1,7
+Amsberry,Evan,1,Economie environnementale 1,6
+Basurto,Anthony,2,Economie environnementale 1,12
+Begaye,Kai,3,Economie environnementale 1,12.5
+Burgess,Jamie,5,Economie environnementale 1,12.5
+De Venecia,Madison,9,Economie environnementale 1,2
+Jacket,Kanae,15,Economie environnementale 1,10
+Joy,Michael,16,Economie environnementale 1,6.5
+Lucero,Cole,21,Economie environnementale 1,1.5
+Mullins,Brenna,24,Economie environnementale 1,10
+Pereyra,Emilie,27,Economie environnementale 1,4.5
+Riley,Paige,28,Economie environnementale 1,10.5
+Rosen,Richard,29,Economie environnementale 1,20
+Schlaver,Lexa,30,Economie environnementale 1,5.5
+Thiede,Tyler,33,Economie environnementale 1,6.5
+Tillman,Tecumseh,34,Economie environnementale 1,8.5
+Vinson,Destiny,35,Economie environnementale 1,8.5
+Brack,Michael,4,Finance 1,1.5
+Christian,Colton,6,Finance 1,10.5
+Cly,Jesse,7,Finance 1,10.5
+Coberley,Rebecca,8,Finance 1,10
+Gurule,Elliott,12,Finance 1,8
+Israel,Joshua,14,Finance 1,8.5
+Kinney,Jonah,17,Finance 1,10
+Ledbetter,Conor,18,Finance 1,5
+Lehi,Savannah,19,Finance 1,4.5
+Lenard,Alysha,20,Finance 1,6
+Massey,Taylor,22,Finance 1,15
+Medicine Blanket,Robert,23,Finance 1,16
+Olson,Patrick,25,Finance 1,9
+Oyebi,Rachael,26,Finance 1,9
+Scholer,Julia,31,Finance 1,10.5
+Slovonsky,Tevin,32,Finance 1,6

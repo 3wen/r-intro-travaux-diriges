@@ -1,0 +1,142 @@
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(DT)
+library(webshot)
+```
+
+# Initiation à R
+
+## Travailler par projets
+
+Durant vos études universitaires, vous allez réaliser des études en vous appuyant sur des données et sur leur analyse statistique. Il convient de prendre de bonnes habitudes en travaillant avec des projets RStudio. Dans cet exercice, vous allez mettre en place un projet pour la première séance de travaux dirigés.
+
+
+En respectant l’arborescence présentée sur l'image ci-dessous, il sera aisé de vous repérer et le partage de vos codes avec vos collaborateurs sera simple.
+
+![Structure basique pour les projets. Source: <https://martinctc.github.io/>.](figs/project_tree_structure.png "Arborescence de fichiers contenant un fichier de projet, des dossiers Data, Script et Output."){width="25%"}
+
+::: {.greenbox data-latex=""}
+**Création d'un projet**
+
+Ouvrez le logiciel RStudio :
+
+- Cliquez sur le menu `File`, puis sur `New Project...`.
+- Cliquez sur `New Directory`, puis sur `New Project`.
+- Donnez un nom au nouveau projet, puis cliquez sur le bouton `Browse...`
+- Choisissez l'emplacement du projet, puis appuyez sur le bouton `Open`.
+- Cliquez sur le bouton `Create Project` pour créer le projet. Une nouvelle session RStudio s'ouvre alors. Le répertoire courant devient celui dans lequel vous avez créé le projet. Un fichier d'extention `.Rproj` a été créé dans ce répertoire. Il suffira d'ouvrir ce fichier à l'avenir pour ouvrir RStudio pour travailler sur ce projet.
+- À présent que le projet est créé, il est temps de créer un fichier de script : dans RStudio, cliquez sur le menu `File`, puis sur `New File` et enfin sur `R Script` (de manière équivalente, vous pouvez cliquer sur l'icône présentant un document blanc et une croix blanche sur fond vert).
+- Enfin, enregistrez votre fichier : menu `File`, puis `Save`.
+:::
+
+
+
+## Création, modification, suppression d'un objet
+
+Pour créer un objet, il est nécessaire de lui donner un nom et un contenu. On écrit le nom en respectant des conventions de nommage. Le nom d’une variable doit être composé de caractères alphanumériques ou du point ou du trait de soulignement uniquement. Il ne doit pas commencer par un chiffre ou contenir d’espace, sauf s’il est entouré par des guillemets. Il est important de noter que ces noms sont sensibles à la casse, c’est à dire qu’une distinction entre les majuscules et les minuscules a lieu.
+
+Dans le cadre de ces travaux dirigés, nous utiliseront une convention supplémentaire, consistant à créer des variables dont on peut facilement deviner le contenu grâce à leur nom, en utilisant uniquement des lettres minuscules, et en ajoutant un trait de soulignement entre les différents termes s'il y a lieu d'utiliser plusieurs termes. Par exemple, une variable qui contiendrait l'année de naissance d'un individu pourrais être nommée `annee_naissance`.
+
+
+L'affectation du contenu à une variable, une fois son nom indiqué, se fait en ajoutant un symbole d'affectation : `<-`{.R} (on peut aussi utiliser le symbole égal (`=`)).
+```{r}
+x <- 1+1
+x
+```
+
+
+
+::::{.greenbox data-latex=""}
+
+**Exercice**
+
+1. Créer un objet que vous nommerez `age` qui contiendra, en valeur numérique, votre âge.
+2. Affichez dans la console la valeur de l'objet `age`.
+3. Créez un objet appelé `annee_naissance` qui, en s'appuyant sur la valeur contenue dans `age`, indiquera votre année de naissance (soustrayez la valeur de `age` à l'année actuelle)
+4. Modifiez le contenu de l'objet `age` en lui ajoutant 10 ans. Affichez dans la console la valeur de l'objet `age` suite à la modification.
+5. Affichez la valeur de l'objet `annee_naissance` : que constatez-vous ?
+6. Modifiez le contenu de l'objet `age` en lui soustrayant 10 ans. Affichez dans la console la valeur de l'objet `age` suite à la modification.
+7. Calculez, sans modifier le contenu de l'objet `age`, le nombre de jours correspondant à votre âge (en multipliant votre âge par 365,25).
+8. En faisant appel à la fonction `ls()`{.R}, affichez le nom des objets existants dans l'environnement global.
+9. À l'aide de la fonction `rm()`{.R} (_remove_), supprimez l'objet `age`, puis tentez d'afficher le contenu de l'objet `age` dans la console.
+10. Affichez à nouveau le nom des objets existants dans l'environnement global.
+11. Affichez la valeur de l'objet `annee_naissance` : que constatez-vous ?
+
+
+:::
+
+## Lecture d'une page d'aide
+
+Dans cet exercice, vous allez calculer la racine carrée d'un nombre. Pour cela, vous allez faire appel à une fonction native en R, dont vous ignorez le nom et le fonctionnement (si c'est la première fois que vous faites du R).
+
+::::{.notebox data-latex=""}
+
+Lorsque vous n'arrivez pas à effectuer une opération avec R, réfléchissez **en anglais** à votre question, puis consultez les pages d'aide ou bien un moteur de recherche en ligne.
+
+:::
+
+
+::::{.greenbox data-latex=""}
+
+**Exercice**
+
+1. Comment dit-on "racine carrée" en anglais ?
+2. Sur le moteur de recherche que vous avez l'habitude d'utiliser, inscrivez la traduction de "racine carrée" en anglais, suivi de "in r".
+3. Repérez le nom de la fonction qui vous permet de calculer une racine carrée en R, puis affichez (et parcourez) la page d'aide de cette fonction dans RStudio.
+4. Calculez la racine carrée de 9 à l'aide de la fonction dont vous venez de consulter la page d'aide.
+
+:::
+
+## Installation et chargement d'un package
+
+Les _packages_ sont des jeux de fonctions, accompagnés de fichiers d’aides, parfois de jeux de données. Pour pouvoir faire appel à une fonction contenue dans un _package_, il faut soit :
+
+- indiquer le nom du _package_ suivi de deux fois deux-points puis du nom de la fonction (_e.g._, `dplyr::select(iris, "Species")`{.R} qui fait appel à la fonction `select()`{.R} du _package_ {dplyr})
+- charger le _package_ en mémoire à l'aide de la fonction `library()`{.R} puis faire appel au nom de la fonction (_e.g._, `library(dplyr)`{.R} puis dans une seconde instruction, `select(iris, "Species")`{.R}).
+
+
+
+::::{.notebox data-latex=""}
+
+- Lorsque l'on charge un _package_ à l'aide de la fonction `library()`{.R}, l'ensemble des fonctions contenues dans ce package sont chargées en mémoire et les pages d'aide associées deviennent consultables.
+- Lorsque l'on quitte R et qu'on le relance, les _packages_ chargés à l'aide de la fonction `library()`{.R} ne sont plus en mémoire, et il faut de nouveau les charger pour pouvoir accéder aux fonctions qu'ils contiennent.
+
+:::
+
+
+Pour pouvoir charger un _package_, il est nécessaire que celui-ci soit installé sur votre machine. Pour installer un package disponible sur le dépôt CRAN (_The Comprehensive R Archive Network_), il suffit d'utiliser la fonction `install.packages()`{.R} et de lui donner le nom du _package_ sous la forme d'une chaîne de caractères (en entourant le nom par des guillemets doubles ou simples).
+
+
+::::{.redbox data-latex=""}
+
+- L'installation d'un _package_ (`install.packages()`{.R}) se fait une seule fois, contrairement au chargement d'un _package_ (`library()`{.R}) qui s'effectue à chaque fois que l'on relance R.
+- L'appel de la fonction `install.packages()`{.R} sert également à mettre à jour un _package_.
+
+:::
+
+
+::::{.greenbox data-latex=""}
+
+**Exercice**
+
+1. Évaluez le coode suivant, et lisez le message d'erreur :
+```{r, error=TRUE, eval=FALSE}
+ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point()
+```
+
+2. Les fonctions `ggplot()`{.R}, `aes()`{.R} et `geom_point()`{.R} sont contenues dans le _package_ {ggplot2}. **Sans charger** le _package_, et en utilisant la syntaxe avec les deux-points (`::`), modifiez l'instruction de la question précédente pour afficher un nuage de point comme ci-dessous :
+```{r, echo=FALSE}
+ggplot2::ggplot(data = iris,
+                mapping = ggplot2::aes(x = Sepal.Length, y = Sepal.Width)) +
+  ggplot2::geom_point()
+```
+3. Chargez le _package_ {ggplot2} à l'aide de la fonction `library()`{.R} et évaluez à nouveau le même code qu'en première question.
+
+:::
+
+
+
+
+
+

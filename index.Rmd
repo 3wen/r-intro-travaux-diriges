@@ -1,0 +1,137 @@
+---
+title: "Travaux dirigés d'Informatique"
+subtitle: "Lience 3 mention Economie et Gestion"
+author: "Ewen Gallic"
+date: "2022-2023"
+knit: "bookdown::render_book"
+documentclass: book
+bibliography: [biblio.bib]
+biblio-style: apa
+link-citations: yes
+colorlinks: yes
+lot: yes
+fontsize: 11pt
+always_allow_html: yes
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook:
+    css: assets/style.css
+    includes:
+        in_header: 
+        - assets/mathjax-color.html
+        - assets/equation_numbering.html
+    highlight: zenburn
+    config:
+      toc_depth: 5
+      toc:
+        collapse: subsection
+        scroll_highlight: yes
+        before: null
+        after: null
+      fontsettings:
+        theme: night
+      search: yes
+  bookdown::pdf_book:
+    latex_engine: xelatex
+    toc_depth: 4
+    highlight: default
+    keep_tex: yes
+    includes:
+      in_header: assets/mystyle_books.tex
+  
+---
+
+```{r knitr_init, echo=FALSE, cache=FALSE, include=FALSE}
+
+library(knitr)
+library(tidyverse)
+
+## Global options
+options(max.print="80")
+opts_chunk$set(echo=TRUE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=FALSE,
+               # comment=NA,
+               message=FALSE,
+               warning=FALSE,
+               size="scriptsize",
+               tidy.opts=list(width.cutoff=75),
+               fig.align='center', fig.pos='H')
+opts_knit$set(width=75)
+
+
+options(bookdown.post.latex = function(x) {
+  # x is the content of the LaTeX output file
+  gsub('^\\\\(begin|end)\\{verbatim\\}$', '\\\\\\1{lstlisting}', x)
+})
+
+colorize <- function(x, color) {
+  if (knitr::is_latex_output()) {
+    
+    if(!str_detect(substitute(color), "^#")){
+      color <- deparse(substitute(color))
+    }
+    
+    sprintf("\\textcolor{%s}{%s}", color, x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'>%s</span>", color,
+      x)
+  } else x
+}
+
+
+wongBlack <- "#000000"
+wongGold <- "#E69F00"
+wongLightBlue <- "#56B4E9"
+wongGreen <- "#009E73"
+wongYellow <- "#F0E442"
+wongBlue <- "#0072B2"
+wongOrange <- "#D55E00"
+wongPurple <- "#CC79A7"
+IBMBlue <- "#648FFF"
+IBMPurple <- "#785EF0"
+IBMMagenta <- "#DC267F"
+IBMOrange <- "#FE6100"
+IBMYellow <- "#FFB000"
+gris <- "#949698"
+
+```
+
+
+# Introduction {-}
+
+Ce livret est conçu pour les séances de travaux dirigés d'Informatique en 3e année de Licence mention Economie et Gestion, à Aix-Marseille Université.
+
+Chaque chapitre correspond à une séance ou deux de travaux dirigés. Le contenu alterne entre des courtes présentations de concepts et des exercices pour apprendre à mettre en pratique les concepts présentés.
+
+Pour appréhender de manière aprofondie le contenu de ce livret, le lecteur ou la lectrice est invité(e) à consulter les notes de cours, disponibles à l'adresse suivantes : <http://egallic.fr/Enseignement/R/Book/avant-propos.html>.
+
+
+Les conventions de lecture suivantes seront adoptées.
+
+::::{.orangebox data-latex=""}
+
+Les boîtes oranges désignent, en début de chapitre, les lectures recommandées des notes de cours.
+
+:::
+
+::::{.notebox data-latex=""}
+
+Les boîtes jaunes indiquent des notes.
+
+:::
+
+
+::::{.redbox data-latex=""}
+
+Les boîtes rouges indiquent des avertissements.
+
+:::
+
+::::{.greenbox data-latex=""}
+
+Les boîtes vertes indiquent des exercices.
+
+:::
+

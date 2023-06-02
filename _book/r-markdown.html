@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 R Markdown | Travaux dirigés d’Informatique</title>
+  <meta name="description" content="6 R Markdown | Travaux dirigés d’Informatique" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 R Markdown | Travaux dirigés d’Informatique" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 R Markdown | Travaux dirigés d’Informatique" />
+  
+  
+  
+
+<meta name="author" content="Ewen Gallic" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="tableaux-de-données.html"/>
+<link rel="next" href="statistiques-descriptives.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Register.StartupHook("TeX color Ready", function() {
+	     MathJax.Extension["TeX/color"].colors["wongBlack"] = '#000000';
+		 MathJax.Extension["TeX/color"].colors["wongGold"] = '#E69F00';
+		 MathJax.Extension["TeX/color"].colors["wongLightBlue"] = '#56B4E9';
+		 MathJax.Extension["TeX/color"].colors["wongGreen"] = '#009E73';
+		 MathJax.Extension["TeX/color"].colors["wongYellow"] = '#F0E442';
+		 MathJax.Extension["TeX/color"].colors["wongBlue"] = '#0072B2';
+		 MathJax.Extension["TeX/color"].colors["wongOrange"] = '#D55E00';
+		 MathJax.Extension["TeX/color"].colors["wongPurple"] = '#CC79A7';
+		 
+		 
+		 MathJax.Extension["TeX/color"].colors["IBMBlue"] = '#648FFF';
+		 MathJax.Extension["TeX/color"].colors["IBMPurple"] = '#785EF0';
+		 MathJax.Extension["TeX/color"].colors["IBMMagenta"] = '#DC267F';
+		 MathJax.Extension["TeX/color"].colors["IBMOrange"] = '#FE6100';
+		 MathJax.Extension["TeX/color"].colors["IBMYellow"] = '#FFB000';
+	});
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="initiation-à-r.html"><a href="initiation-à-r.html"><i class="fa fa-check"></i><b>1</b> Initiation à R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="initiation-à-r.html"><a href="initiation-à-r.html#travailler-par-projets"><i class="fa fa-check"></i><b>1.1</b> Travailler par projets</a></li>
+<li class="chapter" data-level="1.2" data-path="initiation-à-r.html"><a href="initiation-à-r.html#création-modification-suppression-dun-objet"><i class="fa fa-check"></i><b>1.2</b> Création, modification, suppression d’un objet</a></li>
+<li class="chapter" data-level="1.3" data-path="initiation-à-r.html"><a href="initiation-à-r.html#lecture-dune-page-daide"><i class="fa fa-check"></i><b>1.3</b> Lecture d’une page d’aide</a></li>
+<li class="chapter" data-level="1.4" data-path="initiation-à-r.html"><a href="initiation-à-r.html#installation-et-chargement-dun-package"><i class="fa fa-check"></i><b>1.4</b> Installation et chargement d’un package</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html"><i class="fa fa-check"></i><b>2</b> Type des données et première structure</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#types-de-données"><i class="fa fa-check"></i><b>2.1</b> Types de données</a></li>
+<li class="chapter" data-level="2.2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#structure-de-données-les-vecteurs"><i class="fa fa-check"></i><b>2.2</b> Structure de données : les vecteurs</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-position"><i class="fa fa-check"></i><b>2.2.1</b> Indexation par position</a></li>
+<li class="chapter" data-level="2.2.2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-nom"><i class="fa fa-check"></i><b>2.2.2</b> Indexation par nom</a></li>
+<li class="chapter" data-level="2.2.3" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-condition"><i class="fa fa-check"></i><b>2.2.3</b> Indexation par condition</a></li>
+<li class="chapter" data-level="2.2.4" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#gestion-des-valeurs-manquantes"><i class="fa fa-check"></i><b>2.2.4</b> Gestion des valeurs manquantes</a></li>
+<li class="chapter" data-level="2.2.5" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#remplacement-et-ajout-de-valeurs"><i class="fa fa-check"></i><b>2.2.5</b> Remplacement et ajout de valeurs</a></li>
+<li class="chapter" data-level="2.2.6" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#exercice-de-synthèse"><i class="fa fa-check"></i><b>2.2.6</b> Exercice de synthèse</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html"><i class="fa fa-check"></i><b>3</b> Matrices et listes</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#matrice"><i class="fa fa-check"></i><b>3.1</b> Matrice</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#accès-aux-éléments-dune-matrice"><i class="fa fa-check"></i><b>3.1.1</b> Accès aux éléments d’une matrice</a></li>
+<li class="chapter" data-level="3.1.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#remplacement-et-ajout-de-valeurs-1"><i class="fa fa-check"></i><b>3.1.2</b> Remplacement et ajout de valeurs</a></li>
+<li class="chapter" data-level="3.1.3" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#calculs-matriciels"><i class="fa fa-check"></i><b>3.1.3</b> Calculs matriciels</a></li>
+<li class="chapter" data-level="3.1.4" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#combiner-des-matrices"><i class="fa fa-check"></i><b>3.1.4</b> Combiner des matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#listes"><i class="fa fa-check"></i><b>3.2</b> Listes</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#accès-aux-éléments"><i class="fa fa-check"></i><b>3.2.1</b> Accès aux éléments</a></li>
+<li class="chapter" data-level="3.2.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#remplacement-et-ajout-déléments"><i class="fa fa-check"></i><b>3.2.2</b> Remplacement et ajout d’éléments</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html"><i class="fa fa-check"></i><b>4</b> Importation et exportation de donnée</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#chargement-de-données-chemins"><i class="fa fa-check"></i><b>4.1</b> Chargement de données : chemins</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#avantages-de-lutilisation-de-chemins-relatifs"><i class="fa fa-check"></i><b>4.1.1</b> Avantages de l’utilisation de chemins relatifs</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#chargement-de-formats-différents"><i class="fa fa-check"></i><b>4.2</b> Chargement de formats différents</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichiers-texte"><i class="fa fa-check"></i><b>4.2.1</b> Fichiers texte</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichier-excel"><i class="fa fa-check"></i><b>4.2.2</b> Fichier Excel</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichiers-r"><i class="fa fa-check"></i><b>4.2.3</b> Fichiers R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#exportation"><i class="fa fa-check"></i><b>4.3</b> Exportation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#format-texte"><i class="fa fa-check"></i><b>4.3.1</b> Format texte</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#format-r"><i class="fa fa-check"></i><b>4.3.2</b> Format R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html"><i class="fa fa-check"></i><b>5</b> Tableaux de données</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#importation-des-données-de-la-séance"><i class="fa fa-check"></i><b>5.1</b> Importation des données de la séance</a></li>
+<li class="chapter" data-level="5.2" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#tibbles"><i class="fa fa-check"></i><b>5.2</b> Tibbles</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#dimensions"><i class="fa fa-check"></i><b>5.2.1</b> Dimensions</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#accès-aux-éléments-1"><i class="fa fa-check"></i><b>5.2.2</b> Accès aux éléments</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#résumés-statistiques-sur-les-colonnes-dun-tableau"><i class="fa fa-check"></i><b>5.3</b> Résumés statistiques sur les colonnes d’un tableau</a></li>
+<li class="chapter" data-level="5.4" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#sélection-dune-ou-plusieurs-colonnes"><i class="fa fa-check"></i><b>5.4</b> Sélection d’une ou plusieurs colonnes</a></li>
+<li class="chapter" data-level="5.5" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#créationmodification-dune-nouvelle-colonne"><i class="fa fa-check"></i><b>5.5</b> Création/Modification d’une nouvelle colonne</a></li>
+<li class="chapter" data-level="5.6" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#renommer-une-colonne"><i class="fa fa-check"></i><b>5.6</b> Renommer une colonne</a></li>
+<li class="chapter" data-level="5.7" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#filtrage"><i class="fa fa-check"></i><b>5.7</b> Filtrage</a></li>
+<li class="chapter" data-level="5.8" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#résumés-statistiques-sur-lensemble-du-tableau"><i class="fa fa-check"></i><b>5.8</b> Résumés statistiques sur l’ensemble du tableau</a></li>
+<li class="chapter" data-level="5.9" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#agrégation-par-groupes"><i class="fa fa-check"></i><b>5.9</b> Agrégation par groupes</a></li>
+<li class="chapter" data-level="5.10" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#tri"><i class="fa fa-check"></i><b>5.10</b> Tri</a></li>
+<li class="chapter" data-level="5.11" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#jointures"><i class="fa fa-check"></i><b>5.11</b> Jointures</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>6</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="r-markdown.html"><a href="r-markdown.html#créer-un-document-r-markdown-avec-rstudio"><i class="fa fa-check"></i><b>6.1</b> Créer un document R Markdown avec RStudio</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="r-markdown.html"><a href="r-markdown.html#yaml"><i class="fa fa-check"></i><b>6.1.1</b> YAML</a></li>
+<li class="chapter" data-level="6.1.2" data-path="r-markdown.html"><a href="r-markdown.html#textes"><i class="fa fa-check"></i><b>6.1.2</b> Textes</a></li>
+<li class="chapter" data-level="6.1.3" data-path="r-markdown.html"><a href="r-markdown.html#morceaux-de-code"><i class="fa fa-check"></i><b>6.1.3</b> Morceaux de code</a></li>
+<li class="chapter" data-level="6.1.4" data-path="r-markdown.html"><a href="r-markdown.html#compilation"><i class="fa fa-check"></i><b>6.1.4</b> Compilation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="r-markdown.html"><a href="r-markdown.html#markdown"><i class="fa fa-check"></i><b>6.2</b> Ecriture du texte : syntaxe en Markdown</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="r-markdown.html"><a href="r-markdown.html#texte"><i class="fa fa-check"></i><b>6.2.1</b> Texte</a></li>
+<li class="chapter" data-level="6.2.2" data-path="r-markdown.html"><a href="r-markdown.html#styles-de-texte"><i class="fa fa-check"></i><b>6.2.2</b> Styles de texte</a></li>
+<li class="chapter" data-level="6.2.3" data-path="r-markdown.html"><a href="r-markdown.html#titres"><i class="fa fa-check"></i><b>6.2.3</b> Titres</a></li>
+<li class="chapter" data-level="6.2.4" data-path="r-markdown.html"><a href="r-markdown.html#citations"><i class="fa fa-check"></i><b>6.2.4</b> Citations</a></li>
+<li class="chapter" data-level="6.2.5" data-path="r-markdown.html"><a href="r-markdown.html#tirets-longs-tirets-moyens"><i class="fa fa-check"></i><b>6.2.5</b> Tirets longs, tirets moyens</a></li>
+<li class="chapter" data-level="6.2.6" data-path="r-markdown.html"><a href="r-markdown.html#lignes-horizontale"><i class="fa fa-check"></i><b>6.2.6</b> Lignes horizontale</a></li>
+<li class="chapter" data-level="6.2.7" data-path="r-markdown.html"><a href="r-markdown.html#points-de-suspension"><i class="fa fa-check"></i><b>6.2.7</b> Points de suspension</a></li>
+<li class="chapter" data-level="6.2.8" data-path="r-markdown.html"><a href="r-markdown.html#liens-hypertextes"><i class="fa fa-check"></i><b>6.2.8</b> Liens hypertextes</a></li>
+<li class="chapter" data-level="6.2.9" data-path="r-markdown.html"><a href="r-markdown.html#notes-de-bas-de-page"><i class="fa fa-check"></i><b>6.2.9</b> Notes de bas de page</a></li>
+<li class="chapter" data-level="6.2.10" data-path="r-markdown.html"><a href="r-markdown.html#listes-1"><i class="fa fa-check"></i><b>6.2.10</b> Listes</a></li>
+<li class="chapter" data-level="6.2.11" data-path="r-markdown.html"><a href="r-markdown.html#listes-imbriquées"><i class="fa fa-check"></i><b>6.2.11</b> Listes imbriquées</a></li>
+<li class="chapter" data-level="6.2.12" data-path="r-markdown.html"><a href="r-markdown.html#images"><i class="fa fa-check"></i><b>6.2.12</b> Images</a></li>
+<li class="chapter" data-level="6.2.13" data-path="r-markdown.html"><a href="r-markdown.html#tableaux"><i class="fa fa-check"></i><b>6.2.13</b> Tableaux</a></li>
+<li class="chapter" data-level="6.2.14" data-path="r-markdown.html"><a href="r-markdown.html#formules-mathématiques-en-latex"><i class="fa fa-check"></i><b>6.2.14</b> Formules mathématiques en LaTeX</a></li>
+<li class="chapter" data-level="6.2.15" data-path="r-markdown.html"><a href="r-markdown.html#md-codes-blocs-codes"><i class="fa fa-check"></i><b>6.2.15</b> Codes et blocs de code</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="r-markdown.html"><a href="r-markdown.html#morceaux-de-code-1"><i class="fa fa-check"></i><b>6.3</b> Morceaux de code</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="r-markdown.html"><a href="r-markdown.html#codes-en-ligne"><i class="fa fa-check"></i><b>6.3.1</b> Codes en ligne</a></li>
+<li class="chapter" data-level="6.3.2" data-path="r-markdown.html"><a href="r-markdown.html#blocs-de-code"><i class="fa fa-check"></i><b>6.3.2</b> Blocs de code</a></li>
+<li class="chapter" data-level="6.3.3" data-path="r-markdown.html"><a href="r-markdown.html#mise-en-cache"><i class="fa fa-check"></i><b>6.3.3</b> Mise en cache</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="r-markdown.html"><a href="r-markdown.html#insertion-dune-bibliographie"><i class="fa fa-check"></i><b>6.4</b> Insertion d’une bibliographie</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="r-markdown.html"><a href="r-markdown.html#création-du-fichier-de-bibliographie"><i class="fa fa-check"></i><b>6.4.1</b> Création du fichier de bibliographie</a></li>
+<li class="chapter" data-level="6.4.2" data-path="r-markdown.html"><a href="r-markdown.html#lier-le-fichier-dentrées-bibliographiques-avec-le-document-rmarkdown"><i class="fa fa-check"></i><b>6.4.2</b> Lier le fichier d’entrées bibliographiques avec le document RMarkdown</a></li>
+<li class="chapter" data-level="6.4.3" data-path="r-markdown.html"><a href="r-markdown.html#citer-les-documents-dans-le-corps-de-texte"><i class="fa fa-check"></i><b>6.4.3</b> Citer les documents dans le corps de texte</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html"><i class="fa fa-check"></i><b>7</b> Statistiques descriptives</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#données-du-chapitre"><i class="fa fa-check"></i><b>7.1</b> Données du chapitre</a></li>
+<li class="chapter" data-level="7.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#résumés-statistiques-à-la-main"><i class="fa fa-check"></i><b>7.2</b> Résumés statistiques à la main</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#dimensions-résumés-grossiers"><i class="fa fa-check"></i><b>7.2.1</b> Dimensions, résumés grossiers</a></li>
+<li class="chapter" data-level="7.2.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#exploration-des-valeurs-avec-des-tableaux"><i class="fa fa-check"></i><b>7.2.2</b> Exploration des valeurs avec des tableaux</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#résumés-avec-gtsummary-vers-la-communication-des-résultats"><i class="fa fa-check"></i><b>7.3</b> Résumés avec gtsummary : vers la communication des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#contexte-et-rappels"><i class="fa fa-check"></i><b>8.1</b> Contexte et rappels</a></li>
+<li class="chapter" data-level="8.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#chargement-du-jeu-de-données"><i class="fa fa-check"></i><b>8.2</b> Chargement du jeu de données</a></li>
+<li class="chapter" data-level="8.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#régression-pas-à-pas"><i class="fa fa-check"></i><b>8.3</b> Régression pas à pas</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#estimation-des-coefficients-de-la-régression-par-moindres-carrés-ordinaires"><i class="fa fa-check"></i><b>8.3.1</b> Estimation des coefficients de la régression par moindres carrés ordinaires</a></li>
+<li class="chapter" data-level="8.3.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#prédiction-des-valeurs"><i class="fa fa-check"></i><b>8.3.2</b> Prédiction des valeurs</a></li>
+<li class="chapter" data-level="8.3.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#les-résidus-de-la-régression"><i class="fa fa-check"></i><b>8.3.3</b> Les résidus de la régression</a></li>
+<li class="chapter" data-level="8.3.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#un-indicateur-de-la-qualité-dajustement-le-coefficient-de-détermination"><i class="fa fa-check"></i><b>8.3.4</b> Un indicateur de la qualité d’ajustement : le coefficient de détermination</a></li>
+<li class="chapter" data-level="8.3.5" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire"><i class="fa fa-check"></i><b>8.3.5</b> Tests de nullité des coefficients de la régression linéaire</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#régression-avec-lm"><i class="fa fa-check"></i><b>8.4</b> Régression avec lm</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#résumé-de-lestimation"><i class="fa fa-check"></i><b>8.4.1</b> Résumé de l’estimation</a></li>
+<li class="chapter" data-level="8.4.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#prédictions-des-valeurs"><i class="fa fa-check"></i><b>8.4.2</b> Prédictions des valeurs</a></li>
+<li class="chapter" data-level="8.4.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire-1"><i class="fa fa-check"></i><b>8.4.3</b> Tests de nullité des coefficients de la régression linéaire</a></li>
+<li class="chapter" data-level="8.4.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#mise-en-forme-des-résultats-avec-modelsummary"><i class="fa fa-check"></i><b>8.4.4</b> Mise en forme des résultats avec modelsummary</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html"><i class="fa fa-check"></i><b>9</b> Instructions conditionnelles et boucles</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instructions-conditionnelles"><i class="fa fa-check"></i><b>9.1</b> Instructions conditionnelles</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instruction-if"><i class="fa fa-check"></i><b>9.1.1</b> Instruction <code>if</code></a></li>
+<li class="chapter" data-level="9.1.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instruction-if-else"><i class="fa fa-check"></i><b>9.1.2</b> Instruction <code>if-else</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles"><i class="fa fa-check"></i><b>9.2</b> Boucles</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles-while"><i class="fa fa-check"></i><b>9.2.1</b> Boucles <code>while()</code></a></li>
+<li class="chapter" data-level="9.2.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles-for"><i class="fa fa-check"></i><b>9.2.2</b> Boucles <code>for()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>10</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Travaux dirigés d’Informatique</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-markdown" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> R Markdown<a href="r-markdown.html#r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Ce chapitre vise à présenter R Markdown, un environnement de travail permettant de créer des documents en <em>data science</em>.</p>
+<p>Dans un unique fichier R Markdown, il est possible d’écrire du code et de l’exécuter, puis de produire des rapports (mêlant textes, codes, et résultats des évaluations des codes) visant à être partagés. Les codes peuvent être du R, mais pas uniquement : il est possible d’évaluer des instructions d’autres langages tels python ou SQL, entre autres. Les formats de sortie possible sont nombreux. Parmi les plus utilisés : html, pdf, Word, notebook, ioslides.</p>
+<p>Le <em>package</em> {rmarkdown} peut être installé à l’aide de l’instruction suivante.</p>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="r-markdown.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rmarkdown&quot;</span>)</span></code></pre></div>
+<p>Le document de référence principal sur lequel s’appuie cette fiche est l’ouvrage R Markdown Cookbook, rédigé par Yihui Xie, Christophe Dervieux et Emily Riederer (Chapman &amp; Hall/CRC, 2020). Une version électronique est disponible gratuitement à l’adresse suivante : <a href="https://bookdown.org/yihui/rmarkdown-cookbook/" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/</a>.</p>
+<p>Une antisèche de deux pages sur le R Markdown a été réalisée par RStudio : <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a>.</p>
+<div id="créer-un-document-r-markdown-avec-rstudio" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Créer un document R Markdown avec RStudio<a href="r-markdown.html#créer-un-document-r-markdown-avec-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Pour conserver la prise de bonnes habitudes initiée lors des premières séances, créez dans un premier temps un projet RStudio, en respectant l’arborescence présentée sur l’image ci-dessous.</p>
+<div class="figure">
+<img src="figs/project_tree_structure.png" title="Arborescence de fichiers contenant un fichier de projet, des dossiers Data, Script et Output." style="width:25.0%" alt="" />
+<p class="caption">Structure basique pour les projets. Source: <a href="https://martinctc.github.io/" class="uri">https://martinctc.github.io/</a>.</p>
+</div>
+<div class="greenbox">
+<p><strong>Création d’un projet</strong></p>
+<p>Dans RStudio :</p>
+<ul>
+<li>Cliquez sur le menu <code>File</code>, puis sur <code>New Project...</code>.</li>
+<li>Cliquez sur <code>New Directory</code>, puis sur <code>New Project</code>.</li>
+<li>Donnez un nom au nouveau projet, puis cliquez sur le bouton <code>Browse...</code></li>
+<li>Choisissez l’emplacement du projet, puis appuyez sur le bouton <code>Open</code>.</li>
+<li>Cliquez sur le bouton <code>Create Project</code> pour créer le projet. Une nouvelle session RStudio s’ouvre alors. Le répertoire courant devient celui dans lequel vous avez créé le projet. Un fichier d’extention <code>.Rproj</code> a été créé dans ce répertoire. Il suffira d’ouvrir ce fichier à l’avenir pour ouvrir RStudio pour travailler sur ce projet.</li>
+</ul>
+</div>
+<div class="redbox">
+<p>Sur les ordinateurs de l’Université, vous veillerez à créer le projet dans le dossier <code>C:/Workout</code>. La compilation sur les VDI (<em>virtual desktop infrastructure</em>) semble être impossible pour le moment.</p>
+<p>Attention : à la fin de la séance, il faudra penser à copier/coller l’ensemble du répertoire contenant votre projet dans votre dossier <code>Documents</code>. Les contenus du dossier <code>C:/Workout</code> sont effacés à la fermeture de session.</p>
+</div>
+<p>À présent que le projet est créé, il est temps de créer un document R Markdown.</p>
+<div class="greenbox">
+<p><strong>Création d’un document R Markdown</strong></p>
+<p>Dans RStudio :</p>
+<ul>
+<li><p>Cliquez sur le menu <code>File</code>, puis sur <code>New File...</code>.</p></li>
+<li><p>Cliquez sur <code>R Markdown...</code>.</p></li>
+<li><p>Dans la fenêtre qui s’affiche :</p>
+<ul>
+<li>assurez-vous d’être dans l’onglet “Document”</li>
+<li>donnez un titre au document que vous allez créer</li>
+<li>renseignez le champ “Author” avec vos noms et prénom(s)</li>
+<li>laissez le bouton radio sur l’option <code>HTML</code> pour que le rapport qui sera créé après soit un document html (langage conçu pour présenter des pages web).</li>
+<li>créer le document en cliquant sur le bouton <code>OK</code>.</li>
+</ul></li>
+<li><p>Sauvegardez le fichier créé en lui donnant le nom de votre choix (par exemple : `premier_rapport.Rmd``).</p></li>
+</ul>
+<div class="figure">
+<img src="figs/creation_markdown.png" title="Fenêtre de paramétrage du document RMarkdown dans RStudio." style="width:75.0%" alt="" />
+<p class="caption">Fenêtre de création d’un nouveau document R Markdown.</p>
+</div>
+</div>
+<p>Un document R Markdown, dont l’extension est <code>.Rmd</code> est alors créé. Ce document est composé de trois parties :</p>
+<ul>
+<li>du YAML (des méta-données) ;</li>
+<li>du texte ;</li>
+<li>des morceaux de code (<em>code chunks</em>).</li>
+</ul>
+<div id="yaml" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> YAML<a href="r-markdown.html#yaml" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans le document que vous venez de créer, l’en-tête YAML indique :</p>
+<div class="sourceCode" id="cb369"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb369-1"><a href="r-markdown.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Mon premier document R Markdown&quot;</span></span>
+<span id="cb369-2"><a href="r-markdown.html#cb369-2" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Ewen Gallic&quot;</span></span>
+<span id="cb369-3"><a href="r-markdown.html#cb369-3" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;11/2/2022&quot;</span></span>
+<span id="cb369-4"><a href="r-markdown.html#cb369-4" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> html_document</span></span></code></pre></div>
+<p>Le titre du document, l’auteur et la date sont précisés dans cette en-tête. Lors de la conversion du fichier Rmd en fichier html par Pandoc (un logiciel de conversion de documents), ces informations seront stockées dans des variables et apparaîtront à un ou plusieurs endroits du fichier html (selon le modèle – <em>template</em> – utilisé). La ligne <code class="sourceCode yaml"><span class="fu">output</span><span class="kw">:</span><span class="at"> html_document</span></code> indique quant à elle que le document de sortie sera un document html. D’autres éléments peuvent être indiqués, notamment dans la partie <code class="sourceCode yaml"><span class="at">output</span></code> : présence d’une table des matières, numérotation des sections, ajout d’une feuille de style, etc.</p>
+<p>En quelques mots, les étapes de conversion sont les suivantes :</p>
+<ul>
+<li>la fonction <code class="sourceCode r"><span class="fu">knit</span>()</code> du <em>package</em> {<code>knitr</code>} exécute les codes contenus dans les <em>chunks</em> et prépare un fichier Markdow (<code>.md</code>)</li>
+<li>le logiciel Pandoc convertit le fichier <code>.md</code> dans un format de sortie (html, pdf, etc.)</li>
+</ul>
+<p>Si le format de sortie est le pdf, une étape supplémentaire est ajoutée : le fichier <code>.md</code> est converti en un fichier LaTeX (<code>.tex</code>). Une compilation du fichier <code>.tex</code> est alors effectuée par LaTeX pour obtenir le fichier pdf final. Cela nécessite de fait d’installer LaTeX ou TinyTeX sur son système.</p>
+<div class="notebox">
+<p>Dans le cadre de ce cours, nous ne produirons pas de documents au format html sur les ordinateurs de l’Université.</p>
+</div>
+<div id="table-des-matières" class="section level4 hasAnchor" number="6.1.1.1">
+<h4><span class="header-section-number">6.1.1.1</span> Table des matières<a href="r-markdown.html#table-des-matières" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Pour ajouter une table des matières dans un fichier html, on ajoute des paires de clés-valeurs :</p>
+<ul>
+<li><code>toc: yes</code> : on désire la création d’une table des matières (<em>table of contents</em>) ;</li>
+<li><code>toc_depth: 3</code> : l’entier donné en valeur définit la profondeur de la table des matières (1 : uniquement les sections, 2 : sections et sous-sections, 3 : sections, sous-sections et sous-sous sections, etc.)</li>
+<li><code>toc_float: true</code> : la table des matières sera insérée comme objet flotant et visible en permanence tout le long du document.</li>
+</ul>
+<div class="sourceCode" id="cb370"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb370-1"><a href="r-markdown.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb370-2"><a href="r-markdown.html#cb370-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Mon premier document R Markdown&quot;</span></span>
+<span id="cb370-3"><a href="r-markdown.html#cb370-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Ewen Gallic&quot;</span></span>
+<span id="cb370-4"><a href="r-markdown.html#cb370-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;11/7/2022&quot;</span></span>
+<span id="cb370-5"><a href="r-markdown.html#cb370-5" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document:</span></span>
+<span id="cb370-6"><a href="r-markdown.html#cb370-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: yes</span></span>
+<span id="cb370-7"><a href="r-markdown.html#cb370-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc_depth: 3</span></span>
+<span id="cb370-8"><a href="r-markdown.html#cb370-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc_float: true</span></span>
+<span id="cb370-9"><a href="r-markdown.html#cb370-9" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
+<div class="notebox">
+<p>Attention, il faut respecter les indentations, comme dans l’exemple précédent.</p>
+</div>
+<p>Pour une table des matières sur un document final en pdf, le YAML doit contenir les paires <code>toc: yes</code> et <code>toc_depth:3</code>.</p>
+<div class="sourceCode" id="cb371"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb371-1"><a href="r-markdown.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb371-2"><a href="r-markdown.html#cb371-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Mon premier document R Markdown&quot;</span></span>
+<span id="cb371-3"><a href="r-markdown.html#cb371-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Ewen Gallic&quot;</span></span>
+<span id="cb371-4"><a href="r-markdown.html#cb371-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;11/7/2022&quot;</span></span>
+<span id="cb371-5"><a href="r-markdown.html#cb371-5" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> pdf_document:</span></span>
+<span id="cb371-6"><a href="r-markdown.html#cb371-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: yes</span></span>
+<span id="cb371-7"><a href="r-markdown.html#cb371-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc_depth: 3</span></span>
+<span id="cb371-8"><a href="r-markdown.html#cb371-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
+</div>
+</div>
+<div id="textes" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Textes<a href="r-markdown.html#textes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le fichier <code>.Rmd</code> peut contenir du texte que l’on rédige en markdown. Davantage d’informations seront données dans la suite de cette fiche concernant la syntaxe markdown (qui est très simple).</p>
+</div>
+<div id="morceaux-de-code" class="section level3 hasAnchor" number="6.1.3">
+<h3><span class="header-section-number">6.1.3</span> Morceaux de code<a href="r-markdown.html#morceaux-de-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les morceaux de code contiennent deux parties :</p>
+<ul>
+<li>du code à évaluer, dans un langage donné (nous utiliserons du R) ;</li>
+<li>une liste d’options pour le morceau de code.</li>
+</ul>
+<p>Pour être exécuté, le code fait appel à un environnement (dans lequel des variables peuvent être créées). Cet environnement peut être modifié après l’exécution du code.</p>
+</div>
+<div id="compilation" class="section level3 hasAnchor" number="6.1.4">
+<h3><span class="header-section-number">6.1.4</span> Compilation<a href="r-markdown.html#compilation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour compiler un document R Markdown, une fois le YAML bien spécifié, il suffit au choix :</p>
+<ul>
+<li><p>d’appeler la fonction <code class="sourceCode r"><span class="fu">render</span>()</code> du <em>package</em> {<code>rmarkdown</code>} :</p>
+<ul>
+<li>en lui fournissant le chemin vers le fichier <code>Rmd</code> via l’argument <code>input</code>:<br />
+<code class="sourceCode r">rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="at">input =</span> <span class="st">&quot;votre_document_rmarkdown.Rmd&quot;</span>)</code></li>
+<li>il faut ensuite aller dans l’explorateur de fichier / dans Finder pour ouvrir le fichier converti</li>
+</ul></li>
+<li><p>de cliquer sur le bouton <code>Knit</code> (on le repère facilement avec son icone d’aiguille à tricoter et sa pelote de laine) ;</p></li>
+<li><p>d’appuyer simultanément sur les touches du clavier <code>Ctrl / Cmd + Shift + K</code>.</p></li>
+</ul>
+<p>Les deux dernières solutions conduisent à un affichage du résultat dans une fenêtre qui s’ouvre à l’issue de la compilation.</p>
+<div class="greenbox">
+<p>Compilez votre premier fichier R Markdown avec l’une des trois manières indiquées, puis regardez le résultat.</p>
+</div>
+</div>
+</div>
+<div id="markdown" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Ecriture du texte : syntaxe en Markdown<a href="r-markdown.html#markdown" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Les parties textuelles qui permettent d’ajouter une narration aux rapports peuvent être rédigées en markdown. La sytaxe est très simple.</p>
+<div id="texte" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Texte<a href="r-markdown.html#texte" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il suffit d’écrire comme dans un bloc note pour que le texte soit affiché dans le rapport final.<br />
+Terminer une ligne par deux espaces permet d’aller à la ligne.</p>
+<p>Laisser une ligne vide entre deux textes permet de créer un nouveau paragraphe.</p>
+</div>
+<div id="styles-de-texte" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Styles de texte<a href="r-markdown.html#styles-de-texte" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="21%" />
+<col width="30%" />
+<col width="30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Style</th>
+<th align="right">Syntaxe</th>
+<th align="right">Exemple</th>
+<th align="right">Rendu</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gras</td>
+<td align="right"><code>** **</code> ou <code>__ __</code></td>
+<td align="right"><code>Du texte **en gras**</code></td>
+<td align="right">Du texte <strong>en gras</strong></td>
+</tr>
+<tr class="even">
+<td align="left">Italique</td>
+<td align="right"><code>* *</code> ou <code>_ _</code></td>
+<td align="right"><code>Un mot en *italique*</code></td>
+<td align="right">Un mot en <em>italique</em></td>
+</tr>
+<tr class="odd">
+<td align="left">Barré</td>
+<td align="right"><code>~~ ~~</code></td>
+<td align="right"><code>J'~~aime~~ adore R</code></td>
+<td align="right">J’<del>aime</del> adore R</td>
+</tr>
+<tr class="even">
+<td align="left">Une partie en italique dans du gras</td>
+<td align="right"><code>**- -**</code></td>
+<td align="right"><code>Un **texte _très_ important**</code></td>
+<td align="right">Un <strong>texte <em>très</em> important</strong></td>
+</tr>
+<tr class="odd">
+<td align="left">Tout en gras et italique</td>
+<td align="right"><code>*** ***</code></td>
+<td align="right"><code>***新年快樂*** (Xin nian kuai le)</code></td>
+<td align="right"><strong><em>新年快樂</em></strong> (Xin nian kuai le)</td>
+</tr>
+<tr class="even">
+<td align="left">Exposant</td>
+<td align="right"><code>^ ^</code></td>
+<td align="right"><code>Le 1^er^ janvier</code></td>
+<td align="right">Le 1<sup>er</sup> janvier</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="titres" class="section level3 hasAnchor" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> Titres<a href="r-markdown.html#titres" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il existe six niveaux de titres dans les documents R Markdown. On fait précéder le texte du titre par autant de croisillons (<code>#</code>) que de niveau désiré.</p>
+<p><code># Titre de niveau 1</code></p>
+<p><code>## Titre de niveau 2</code></p>
+<p><code>### Titre de niveau 3</code></p>
+<p><code>#### Titre de niveau 4</code></p>
+<p><code>##### Titre de niveau 5</code></p>
+<p><code>###### Titre de niveau 6</code></p>
+<div class="notebox">
+<p><em>Notes</em> :</p>
+<ul>
+<li>il faut bien faire suivre le croisillon d’une espace ;</li>
+<li>il est nécessaire d’insérer une ligne vide avant et après le titre.</li>
+</ul>
+</div>
+</div>
+<div id="citations" class="section level3 hasAnchor" number="6.2.4">
+<h3><span class="header-section-number">6.2.4</span> Citations<a href="r-markdown.html#citations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour effectuer une citation dans un bloc, il convient de faire précéder la citation du symbole &gt;, que l’on place en début de ligne. Exemple avec<code>&gt; chúc mừng năm mới</code> :</p>
+<blockquote>
+<p>chúc mừng năm mới</p>
+</blockquote>
+<p>Pour faire en sorte qu’une citation comporte plusieurs paragraphes, un chevron (<code>&gt;</code>) doit être ajouté au début de lignes vides.</p>
+<div class="sourceCode" id="cb372"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb372-1"><a href="r-markdown.html#cb372-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; “How can two people hate so much without knowing each other?”</span></span>
+<span id="cb372-2"><a href="r-markdown.html#cb372-2" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb372-3"><a href="r-markdown.html#cb372-3" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; --- Alan Moore, _The Killing Joke_</span></span></code></pre></div>
+<blockquote>
+<p>“How can two people hate so much without knowing each other?”</p>
+<p>— Alan Moore, <em>The Killing Joke</em></p>
+</blockquote>
+</div>
+<div id="tirets-longs-tirets-moyens" class="section level3 hasAnchor" number="6.2.5">
+<h3><span class="header-section-number">6.2.5</span> Tirets longs, tirets moyens<a href="r-markdown.html#tirets-longs-tirets-moyens" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour insérer un tiret long (cadratin), on utilise trois tirets : <code>---</code> ; pour un tiret court (ou demi-cadratin), on utilise deux tirets : <code>--</code>.</p>
+<table>
+<colgroup>
+<col width="28%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Symbole voulu</th>
+<th align="right">Syntaxe</th>
+<th align="right">Exemple</th>
+<th align="right">Rendu</th>
+<th align="right"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Tiret long (cadratin)</td>
+<td align="right"><code>---</code></td>
+<td align="right"><code>--- une réplique</code></td>
+<td align="right">— une réplique</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">Tiret moyen (demi-cadratin)</td>
+<td align="right"><code>--</code></td>
+<td align="right"><code>La frontière France--Italie</code></td>
+<td align="right">La frontière France–Italie</td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="lignes-horizontale" class="section level3 hasAnchor" number="6.2.6">
+<h3><span class="header-section-number">6.2.6</span> Lignes horizontale<a href="r-markdown.html#lignes-horizontale" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En inscrivant trois tirets <code>---</code> et en passant immédiatement à la ligne, une ligne horizontale est insérée.</p>
+<hr />
+</div>
+<div id="points-de-suspension" class="section level3 hasAnchor" number="6.2.7">
+<h3><span class="header-section-number">6.2.7</span> Points de suspension<a href="r-markdown.html#points-de-suspension" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour écrire des points de suspension, il suffit d’écrire trois points (<code>...</code>) à la suite…</p>
+</div>
+<div id="liens-hypertextes" class="section level3 hasAnchor" number="6.2.8">
+<h3><span class="header-section-number">6.2.8</span> Liens hypertextes<a href="r-markdown.html#liens-hypertextes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La création d’un lien hypertexte se fait en utilisant deux éléments : un texte sur lequel on clique, qui doit être entouré par des crochets <code>[]</code> et une adresse vers laquelle le lien point, qui doit être entourée par des parenthèses (<code>()</code>).</p>
+<div class="sourceCode" id="cb373"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb373-1"><a href="r-markdown.html#cb373-1" aria-hidden="true" tabindex="-1"></a>Regardez cette <span class="co">[</span><span class="ot">vidéo épatante</span><span class="co">](https://www.youtube.com/watch?v=dQw4w9WgXcQ)</span>.</span></code></pre></div>
+<p>Regardez cette <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">vidéo épatante</a>.</p>
+<p>Pour créer un lien sans définir de texte spécifique en remplacement de l’URL, il est possible de simplement écrire l’URL. Il est toutefois préférable d’encadrer l’URL par des chevrons. Il en va de même pour une adresse email.</p>
+<div class="sourceCode" id="cb374"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb374-1"><a href="r-markdown.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://www.youtube.com/watch?v=oavMtUWDBTM&gt;</span>  </span>
+<span id="cb374-2"><a href="r-markdown.html#cb374-2" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;ewen.gallic@univ-amu.fr&gt;</span></span></code></pre></div>
+<p><a href="https://www.youtube.com/watch?v=oavMtUWDBTM" class="uri">https://www.youtube.com/watch?v=oavMtUWDBTM</a><br />
+<a href="mailto:ewen.gallic@univ-amu.fr" class="email">ewen.gallic@univ-amu.fr</a></p>
+<p>Pour créer une ancre (un lien vers un endroit précis de la page déjà affichée) <strong>vers un titre</strong> du document, il faut connaître la référence vers le <a href="#lien-ancre">point d’ancrage</a>. Un moyen simple consiste à la définir soi-même, en utilisant la syntaxe suivante :</p>
+<div class="sourceCode" id="cb375"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb375-1"><a href="r-markdown.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Le titre {#nom-de-la-reference}</span></span></code></pre></div>
+<p>Le nom de la reference ne doit pas contenir d’espaces ni de traits de soulignement (<code>_</code>). Il peut en revanche, comme dans l’exemple, contenir des tirets (<code>-</code>).</p>
+<p>Dans ce document, la sous section dans laquelle ce texte est inscrit, est définie comme suit :</p>
+<div class="sourceCode" id="cb376"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb376-1"><a href="r-markdown.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Liens hypertextes {#liens-hypertextes}</span></span></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb377-1"><a href="r-markdown.html#cb377-1" aria-hidden="true" tabindex="-1"></a>On peut ainsi faire un lien vers cette <span class="co">[</span><span class="ot">section</span><span class="co">](#liens-hypertextes)</span>.</span></code></pre></div>
+<p>On peut ainsi faire un lien vers cette <a href="r-markdown.html#liens-hypertextes">section</a>.</p>
+</div>
+<div id="notes-de-bas-de-page" class="section level3 hasAnchor" number="6.2.9">
+<h3><span class="header-section-number">6.2.9</span> Notes de bas de page<a href="r-markdown.html#notes-de-bas-de-page" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’insertion de notes de bas de page numérotées s’effectue à l’aide de crochets (<code>[]</code>) contenant un accent circonflèxe et une référence qui peut être soit un nombre, soit un texte (mais sans espace ou autre caractère blanc).</p>
+<p>Le numéro de la note de bas de page est un lien qui renvoie vers la note. Une flèche de retour est proposée pour ramener au texte lorsque le document créé est un document html.</p>
+<div class="sourceCode" id="cb378"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb378-1"><a href="r-markdown.html#cb378-1" aria-hidden="true" tabindex="-1"></a>Une note de bas de page simple<span class="ot">[^1]</span> suivie d&#39;une plus longue<span class="ot">[^longue-note]</span>.</span>
+<span id="cb378-2"><a href="r-markdown.html#cb378-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb378-3"><a href="r-markdown.html#cb378-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>la note de bas de page.</span>
+<span id="cb378-4"><a href="r-markdown.html#cb378-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb378-5"><a href="r-markdown.html#cb378-5" aria-hidden="true" tabindex="-1"></a><span class="ot">[^longue-note]: </span>une note de bas de page plus longue.</span>
+<span id="cb378-6"><a href="r-markdown.html#cb378-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb378-7"><a href="r-markdown.html#cb378-7" aria-hidden="true" tabindex="-1"></a><span class="in">    Dans laquelle on peut écrire un paragraphe.</span></span>
+<span id="cb378-8"><a href="r-markdown.html#cb378-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb378-9"><a href="r-markdown.html#cb378-9" aria-hidden="true" tabindex="-1"></a><span class="in">    `{ du code }`</span></span>
+<span id="cb378-10"><a href="r-markdown.html#cb378-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb378-11"><a href="r-markdown.html#cb378-11" aria-hidden="true" tabindex="-1"></a><span class="in">    Plusieurs paragraphes, même.</span></span></code></pre></div>
+<p>Une note de bas de page simple<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> suivie d’une plus longue<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
+</div>
+<div id="listes-1" class="section level3 hasAnchor" number="6.2.10">
+<h3><span class="header-section-number">6.2.10</span> Listes<a href="r-markdown.html#listes-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>On distingue deux types de listes : les listes ordonnées et les listes non ordonnées.</p>
+<div id="listes-ordonnées" class="section level4 hasAnchor" number="6.2.10.1">
+<h4><span class="header-section-number">6.2.10.1</span> Listes ordonnées<a href="r-markdown.html#listes-ordonnées" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Pour créer une liste ordonnée, on place en début de ligne, devant chaque élément de la lique, un nombre immédiatement suivi d’un point et d’une espace.</p>
+<div class="sourceCode" id="cb379"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb379-1"><a href="r-markdown.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Un premier élément ;</span>
+<span id="cb379-2"><a href="r-markdown.html#cb379-2" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Un deuxième élément ;</span>
+<span id="cb379-3"><a href="r-markdown.html#cb379-3" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Un troisième élément.</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Un premier élément ;</li>
+<li>Un deuxième élément ;</li>
+<li>Un troisième élément.</li>
+</ol>
+<p>Il n’est pas nécessaire de respecter la numérotation :</p>
+<div class="sourceCode" id="cb380"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb380-1"><a href="r-markdown.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Un premier élément ;</span>
+<span id="cb380-2"><a href="r-markdown.html#cb380-2" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span>Un deuxième élément ;</span>
+<span id="cb380-3"><a href="r-markdown.html#cb380-3" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Un troisième élément.</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Un premier élément ;</li>
+<li>Un deuxième élément ;</li>
+<li>Un troisième élément.</li>
+</ol>
+<p>Le numéro du premier élément de la liste ordonnée définit la valeur du compteur :</p>
+<div class="sourceCode" id="cb381"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb381-1"><a href="r-markdown.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Un premier élément ;</span>
+<span id="cb381-2"><a href="r-markdown.html#cb381-2" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span>Un deuxième élément ;</span>
+<span id="cb381-3"><a href="r-markdown.html#cb381-3" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Un troisième élément.</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Un premier élément ;</li>
+<li>Un deuxième élément ;</li>
+<li>Un troisième élément.</li>
+</ol>
+</div>
+<div id="listes-non-ordonnées" class="section level4 hasAnchor" number="6.2.10.2">
+<h4><span class="header-section-number">6.2.10.2</span> Listes non ordonnées<a href="r-markdown.html#listes-non-ordonnées" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Pour insérer une liste non ordonnée, on fait précéder chaque élément du symbole <code>-</code> ou du symbole <code>*</code>.</p>
+<div class="sourceCode" id="cb382"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb382-1"><a href="r-markdown.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="an">Une liste comprenant :</span></span>
+<span id="cb382-2"><a href="r-markdown.html#cb382-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb382-3"><a href="r-markdown.html#cb382-3" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>un premier élément ;</span>
+<span id="cb382-4"><a href="r-markdown.html#cb382-4" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>un deuxième élément ;</span>
+<span id="cb382-5"><a href="r-markdown.html#cb382-5" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>un troisième élément.</span></code></pre></div>
+<p>Une liste comprenant :</p>
+<ul>
+<li>un premier élément ;</li>
+<li>un deuxième élément ;</li>
+<li>un troisième élément.</li>
+</ul>
+</div>
+</div>
+<div id="listes-imbriquées" class="section level3 hasAnchor" number="6.2.11">
+<h3><span class="header-section-number">6.2.11</span> Listes imbriquées<a href="r-markdown.html#listes-imbriquées" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour ajouter une liste à l’intérieur d’une liste, il faut ajouter avant le tiret ou l’étoile soit un taquet de tabulation, soit 4 espaces.</p>
+<div class="sourceCode" id="cb383"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb383-1"><a href="r-markdown.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>un premier élément ;</span>
+<span id="cb383-2"><a href="r-markdown.html#cb383-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>un deuxième élément :</span>
+<span id="cb383-3"><a href="r-markdown.html#cb383-3" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>qui contient un sous-élement,</span>
+<span id="cb383-4"><a href="r-markdown.html#cb383-4" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>ainsi qu&#39;un deuxième sous-élément,</span>
+<span id="cb383-5"><a href="r-markdown.html#cb383-5" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>et un troisième ;</span>
+<span id="cb383-6"><a href="r-markdown.html#cb383-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>puis un troisième élément.</span></code></pre></div>
+<ul>
+<li>un premier élément ;</li>
+<li>un deuxième élément :
+<ul>
+<li>qui contient un sous-élement,</li>
+<li>ainsi qu’un deuxième sous-élément,</li>
+<li>et un troisième ;</li>
+</ul></li>
+<li>puis un troisième élément.</li>
+</ul>
+<p>Pour écrire un paragraphe à l’intérieur d’une liste, une identation (taquet de tabulation ou 4 espaces) doit être ajoutéé, pour préserver la continuité de la liste. Il faut également faire précéder le paragraphe d’une liste vide (on peut aussi ajouter une ligne vide après le paragraphe, mais celle-ci est optionnelle).</p>
+<div class="sourceCode" id="cb384"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb384-1"><a href="r-markdown.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>un premier élément ;</span>
+<span id="cb384-2"><a href="r-markdown.html#cb384-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>un deuxième élément :</span>
+<span id="cb384-3"><a href="r-markdown.html#cb384-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb384-4"><a href="r-markdown.html#cb384-4" aria-hidden="true" tabindex="-1"></a>    qui contient un paragraphe.</span>
+<span id="cb384-5"><a href="r-markdown.html#cb384-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb384-6"><a href="r-markdown.html#cb384-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>puis un troisième élément.</span></code></pre></div>
+<ul>
+<li><p>un premier élément ;</p></li>
+<li><p>un deuxième élément :</p>
+<p>qui contient un paragraphe.</p></li>
+<li><p>puis un troisième élément.</p></li>
+</ul>
+<p>Il est tout à fait possible d’imbriquer une liste ordonnée dans une liste non ordonnée et vice-versa.</p>
+<div class="sourceCode" id="cb385"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb385-1"><a href="r-markdown.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Un premier élément :</span>
+<span id="cb385-2"><a href="r-markdown.html#cb385-2" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>avec un sous-élément ;</span>
+<span id="cb385-3"><a href="r-markdown.html#cb385-3" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Un deuxième élément.</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Un premier élément :
+<ul>
+<li>avec un sous-élément ;</li>
+</ul></li>
+<li>Un deuxième élément.</li>
+</ol>
+<div class="notebox">
+<p>Règles de typographie :</p>
+<p>En français, les listes sont généralement introduites par une phrase se terminant par deux tirets (<code>:</code>). Les éléments de la liste ne commencent alors pas par une majuscule. Les éléments sont séparés par un point virgule (<code>;</code>), et le dernier élément se termine par un point.</p>
+<p>Une liste comprenant :</p>
+<ul>
+<li>un premier élément ;</li>
+<li>un deuxième élément ;</li>
+<li>un troisième élément.</li>
+</ul>
+<p>Lorsque la liste est numérotée, il faut en revanche mettre une majuscule à chaque élément de la liste</p>
+<p>Une liste comprenant :</p>
+<ol style="list-style-type: decimal">
+<li>Un premier élément ;</li>
+<li>Un deuxième élément ;</li>
+<li>Un troisième élément.</li>
+</ol>
+<p>Lorsqu’une liste se compose de plusieurs phrases, chaque élément commence par une majuscule et se termine par un point.</p>
+<p>Les personnes pouvant postuler :</p>
+<ul>
+<li><p>Pour les personnes ayant validé une Licence 2 mention “Économie-Gestion” à Aix-Marseille Université ou dans une autre Université française : entrée de droit dans le parcours.</p></li>
+<li><p>Pour les personnes ayant validé un niveau équivalent à la Licence 2 en Économie ou en Économie-Gestion (Licence 2 mention Économie, DUT, CPGE, etc.) : une commission pédagogique évalue les dossiers notamment sur la base des pré-requis mentionnés plus haut ainsi que sur la base des projets de Master des étudiantes et étudiants.</p></li>
+<li><p>les règles de typographie françaises indiquent qu’il est d’usage de placer un point virgule à la fin des éléments de niveau 1 ou au dernier élément de niveau supérieur à 1 si celui-ci est immédiatement suivi par un élément de niveau 1 ;</p></li>
+<li><p>pour les éléments de niveau 2, une</p></li>
+</ul>
+<p>En cas de listes imbriquées, la virgule est utilisée en fin de ligne, sauf pour le dernier élément de la liste imbriquée qui lui, s’achève par un point virgule ou un point s’il s’agit du dernier élément de la liste.</p>
+<p>Une liste qui comprend :</p>
+<ul>
+<li><p>un élément de niveau 1</p></li>
+<li><p>un autre élément de niveau 1 :</p>
+<ul>
+<li>avec un sous-élément de niveau 2,</li>
+<li>ainsi qu’un autre ;</li>
+</ul></li>
+<li><p>un troisième élément de niveau 1.</p></li>
+</ul>
+</div>
+</div>
+<div id="images" class="section level3 hasAnchor" number="6.2.12">
+<h3><span class="header-section-number">6.2.12</span> Images<a href="r-markdown.html#images" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’ajout d’une image se fait en insérant un point d’exclamation (<code>!</code>), suivi d’une d’un titre entre crochets, puis du chemin vers l’image, entre parenthèses (<code>()</code>). Une description de l’image peut être ajoutée entre guillemets (<code>""</code>) après le chemin, toujours dans les parenthèses (cette description est visible au survol de l’image, lorsque le pointeur de la souris reste quelques secondes au-dessus de l’image, et peut être lue à voix haute par les systèmes destinés aux personnes en situation de handicap). Enfin, pour spécifier des paramètres de taille de l’image, il est possible d’ajouter des informations entre crochets (<code>{}</code>).</p>
+<div class="sourceCode" id="cb386"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb386-1"><a href="r-markdown.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Un tigre](figs/tigre.JPG &quot;Tigre en papier&quot;)</span>{width=&quot;200px&quot;}</span></code></pre></div>
+<div class="figure">
+<img src="figs/tigre.JPG" title="Tigre en papier" width="200" alt="" />
+<p class="caption">Un tigre</p>
+</div>
+</div>
+<div id="tableaux" class="section level3 hasAnchor" number="6.2.13">
+<h3><span class="header-section-number">6.2.13</span> Tableaux<a href="r-markdown.html#tableaux" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La création d’un tableau se fait en distinguant l’en-tête du corps du tableau. Chaque cellule est séparée à l’aide d’une barre verticale (<code>|</code>, <code>Alt gr + 6</code> sur un clavier azerty sous Windows, et Alt + Shift + L` sur Mac Os). On ajoute des barres verticales au début et à la fin de chaque ligne du tableau. Pour délimiter l’en-tête du corps du tableau, trois tirets ou plus doivent être placés entre les barres verticales.</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb387-1"><a href="r-markdown.html#cb387-1" aria-hidden="true" tabindex="-1"></a>| Première colonne | Deuxième colonne | Troisième colonne |</span>
+<span id="cb387-2"><a href="r-markdown.html#cb387-2" aria-hidden="true" tabindex="-1"></a>| ---------------- | ---------------- | ----------------- |</span>
+<span id="cb387-3"><a href="r-markdown.html#cb387-3" aria-hidden="true" tabindex="-1"></a>| cellule 1, ligne 1 | cellule 2, ligne 1 | cellule 3, ligne 1 |</span>
+<span id="cb387-4"><a href="r-markdown.html#cb387-4" aria-hidden="true" tabindex="-1"></a>| cellule 1, ligne 2 | cellule 2, ligne 2 | cellule 3, ligne 2 |</span>
+<span id="cb387-5"><a href="r-markdown.html#cb387-5" aria-hidden="true" tabindex="-1"></a>| cellule 1, ligne 3 | cellule 2, ligne 3 | cellule 3, ligne 3 |</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>Première colonne</th>
+<th>Deuxième colonne</th>
+<th>Troisième colonne</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cellule 1, ligne 1</td>
+<td>cellule 2, ligne 1</td>
+<td>cellule 3, ligne 1</td>
+</tr>
+<tr class="even">
+<td>cellule 1, ligne 2</td>
+<td>cellule 2, ligne 2</td>
+<td>cellule 3, ligne 2</td>
+</tr>
+<tr class="odd">
+<td>cellule 1, ligne 3</td>
+<td>cellule 2, ligne 3</td>
+<td>cellule 3, ligne 3</td>
+</tr>
+</tbody>
+</table>
+<div id="alignement" class="section level4 hasAnchor" number="6.2.13.1">
+<h4><span class="header-section-number">6.2.13.1</span> Alignement<a href="r-markdown.html#alignement" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>La gestion de l’alignement des colonnes se fait à l’aide de la deuxième ligne, celle composée des tirets. Pour un alignement à gauche, on ajoute deux points (<code>:</code>) à gauche des tirets, pour un alignement à droite, on ajoute ces deux points à droite des tirets, et pour une colonne centrée, on ajoute les deux points à la fois à gauche et à droite.</p>
+<div class="sourceCode" id="cb388"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb388-1"><a href="r-markdown.html#cb388-1" aria-hidden="true" tabindex="-1"></a>| Colonne alignée à gauche | Colonne centrée | Colonne alignée à droite |</span>
+<span id="cb388-2"><a href="r-markdown.html#cb388-2" aria-hidden="true" tabindex="-1"></a>| :---------------- | :----------------: | -----------------: |</span>
+<span id="cb388-3"><a href="r-markdown.html#cb388-3" aria-hidden="true" tabindex="-1"></a>| cellule 1, ligne 1 | cellule 2, ligne 1 | cellule 3, ligne 1 |</span>
+<span id="cb388-4"><a href="r-markdown.html#cb388-4" aria-hidden="true" tabindex="-1"></a>| cellule 1, ligne 2 | cellule 2, ligne 2 | cellule 3, ligne 2 |</span>
+<span id="cb388-5"><a href="r-markdown.html#cb388-5" aria-hidden="true" tabindex="-1"></a>| cellule 1, ligne 3 | cellule 2, ligne 3 | cellule 3, ligne 3 |  </span></code></pre></div>
+<table>
+<colgroup>
+<col width="32%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Colonne alignée à gauche</th>
+<th align="center">Colonne centrée</th>
+<th align="right">Colonne alignée à droite</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">cellule 1, ligne 1</td>
+<td align="center">cellule 2, ligne 1</td>
+<td align="right">cellule 3, ligne 1</td>
+</tr>
+<tr class="even">
+<td align="left">cellule 1, ligne 2</td>
+<td align="center">cellule 2, ligne 2</td>
+<td align="right">cellule 3, ligne 2</td>
+</tr>
+<tr class="odd">
+<td align="left">cellule 1, ligne 3</td>
+<td align="center">cellule 2, ligne 3</td>
+<td align="right">cellule 3, ligne 3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="formules-mathématiques-en-latex" class="section level3 hasAnchor" number="6.2.14">
+<h3><span class="header-section-number">6.2.14</span> Formules mathématiques en LaTeX<a href="r-markdown.html#formules-mathématiques-en-latex" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il est possible d’utiliser du LaTeX pour écrure des équations mathématiques en Markdown. On distingue deux types de formules :</p>
+<ol style="list-style-type: decimal">
+<li>les formules en ligne : en entourant l’expression des symboles dollar (<code>$equation$</code>)</li>
+<li>les formules en mode <em>display</em> : en entourant l’expression de deux symboles dollar de chaque côté (<code>$$equation$$</code>).</li>
+</ol>
+<div class="sourceCode" id="cb389"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb389-1"><a href="r-markdown.html#cb389-1" aria-hidden="true" tabindex="-1"></a>Les formules en ligne, $f(x)=x^2+3x+4, x\in\mathbb{R}$, permettent</span>
+<span id="cb389-2"><a href="r-markdown.html#cb389-2" aria-hidden="true" tabindex="-1"></a>d&#39;insérer des formules dans un paragraphe, tandis que les formules en mode</span>
+<span id="cb389-3"><a href="r-markdown.html#cb389-3" aria-hidden="true" tabindex="-1"></a>_display_ permettent d&#39;insérer des formules dans un bloc à part $$X\sim\mathcal{N}(0,1).$$</span></code></pre></div>
+<p>Les formules en ligne, <span class="math inline">\(f(x)=x^2+3x+4, x\in\mathbb{R}\)</span>, permettent d’insérer des formules dans un paragraphe, tandis que les formules en mode <em>display</em> permettent d’insérer des formules dans un bloc à part <span class="math display">\[X\sim\mathcal{N}(0,1).\]</span></p>
+<p>Une antisèche réalisée par Jim Hefferon, permettant de rédiger des formules en LaTeX est disponible sur le réseau complet d’archives TeX (CTAN) : <a href="http://tug.ctan.org/info/undergradmath/undergradmath.pdf" class="uri">http://tug.ctan.org/info/undergradmath/undergradmath.pdf</a>.</p>
+</div>
+<div id="md-codes-blocs-codes" class="section level3 hasAnchor" number="6.2.15">
+<h3><span class="header-section-number">6.2.15</span> Codes et blocs de code<a href="r-markdown.html#md-codes-blocs-codes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour présenter du code, il existe deux manières en RMarkdown : soit des codes en ligne, directement insérés dans le texte, soit des blocs de code. Pour écrire des codes en ligne, on écrit le code entre deux accents graves (<code>` `</code>, <code>Alt gr + 7</code> sur un clavier azerty sous Windows, touche <code>`</code> sous Mac Os). Si on désire avoir une coloration syntaxique, il faut de surcroît indiquer le langage entre crochets (<code>{}</code>), après un point (<code>{.nom-du-langage}</code>) :</p>
+<div class="sourceCode" id="cb390"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb390-1"><a href="r-markdown.html#cb390-1" aria-hidden="true" tabindex="-1"></a>La fonction <span class="in">`mean(x)`</span>{.R} permet de calculer la moyenen de <span class="in">`x`</span>.  </span>
+<span id="cb390-2"><a href="r-markdown.html#cb390-2" aria-hidden="true" tabindex="-1"></a>L&#39;instruction <span class="in">`SELECT * FROM base`</span>{.SQL} permet de récupérer</span>
+<span id="cb390-3"><a href="r-markdown.html#cb390-3" aria-hidden="true" tabindex="-1"></a>l&#39;ensemble des colonnes de la base <span class="in">`base`</span> en SQL.</span></code></pre></div>
+<p>La fonction <code class="sourceCode r"><span class="fu">mean</span>(x)</code> permet de calculer la moyenen de <code>x</code>.<br />
+L’instruction <code class="sourceCode sql"><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> base</code> permet de récupérer l’ensemble des colonnes de la base <code>base</code> en SQL.</p>
+<p>Pour insérer des blocs de code, on utilise trois accents grave (<code>```</code>) avant et après le code :</p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb391-1"><a href="r-markdown.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb391-2"><a href="r-markdown.html#cb391-2" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- mean(ventes$Sales, na.rm=TRUE)</span></span>
+<span id="cb391-3"><a href="r-markdown.html#cb391-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>Ce qui produira :</p>
+<pre><code>x &lt;- mean(ventes$Sales, na.rm=TRUE)</code></pre>
+<p>À nouveau, si le langage du code contenu dans le bloc est spécifié, on obtient une coloration syntaxique. Le nom du langage est donné immédiatement après les trois accents graves.</p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb393-1"><a href="r-markdown.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb393-2"><a href="r-markdown.html#cb393-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mean</span>(ventes<span class="sc">$</span>Sales, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb393-3"><a href="r-markdown.html#cb393-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>Donnera :</p>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="r-markdown.html#cb394-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mean</span>(ventes<span class="sc">$</span>Sales, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="morceaux-de-code-1" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Morceaux de code<a href="r-markdown.html#morceaux-de-code-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Les codes et blocs de codes rédigés dans la <a href="r-markdown.html#md-codes-blocs-codes">section “Codes et blocs de code”</a> ne sont jamais exécutés. Un des intérêts du RMarkdown réside dans la possibilité d’évaluer des codes (nous n’exécuterons ici que du R, mais il est possible d’exécuter d’autres langages dans un ficher RMarkdown), de les afficher, et d’afficher les résultats et sorties résultants de l’évaluation.</p>
+<p>À nouveau, on peut distinguer deux types de codes : ceux en ligne et les blocs ou <em>chunks</em> de code.</p>
+<div id="codes-en-ligne" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Codes en ligne<a href="r-markdown.html#codes-en-ligne" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les codes en ligne sont délimités avec un accent grave au début et un à la fin, comme en markdown. La seule différence est que le nom du langage figure immédiatement après le premier accent grave. Le code ne sera pas retourné, seul son résultat apparaîtra dans le document final. Prenons un exemple simple.</p>
+<div class="sourceCode" id="cb395"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb395-1"><a href="r-markdown.html#cb395-1" aria-hidden="true" tabindex="-1"></a>La moyenne des notes est de <span class="in">`r mean(c(20, 18, 15, 16))`</span>.</span></code></pre></div>
+<p>La moyenne des notes est de 17.25.</p>
+</div>
+<div id="blocs-de-code" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Blocs de code<a href="r-markdown.html#blocs-de-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour insérer des blocs de code, on utilise comme en markdown les trois accents graves avant et après le code. On fait suivre le troisième accent grave du début par le nom du langage, entre crochets ({r}) :</p>
+<div class="sourceCode" id="cb396"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb396-1"><a href="r-markdown.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb396-2"><a href="r-markdown.html#cb396-2" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- c(20, 18, 15, 16)</span></span>
+<span id="cb396-3"><a href="r-markdown.html#cb396-3" aria-hidden="true" tabindex="-1"></a><span class="in">x</span></span>
+<span id="cb396-4"><a href="r-markdown.html#cb396-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>Le résultat est le suivant :</p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="r-markdown.html#cb397-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">15</span>, <span class="dv">16</span>)</span>
+<span id="cb397-2"><a href="r-markdown.html#cb397-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 20 18 15 16</code></pre>
+<p>On note que par défaut, le code est présent dans le document final ainsi que le résultat de son évaluation (tel qu’affiché dans la console).</p>
+<p><em>Note</em> : nous venons de créer l’objet <code>x</code> dans l’environnement. Nous pouvons le réutiliser dans un nouveau code, qu’il soit en ligne (<code>`r `</code>) : 20, 18, 15, 16 ou dans un <em>chunk</em> (<code>```{r} ```</code>):</p>
+<div class="sourceCode" id="cb399"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb399-1"><a href="r-markdown.html#cb399-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb399-2"><a href="r-markdown.html#cb399-2" aria-hidden="true" tabindex="-1"></a><span class="in">x</span></span>
+<span id="cb399-3"><a href="r-markdown.html#cb399-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>qui donne ensuite :</p>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="r-markdown.html#cb400-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 20 18 15 16</code></pre>
+<div class="notebox">
+<p><strong>Note</strong> : pour insérer un <em>chunk</em>, on peut utiliser le raccourci <code>Ctrl + Alt + I</code> sous Windows ou bien <code>cmd + alt/option + I</code> sous Mac Os.</p>
+</div>
+<div id="paramètres-des-chunks" class="section level4 hasAnchor" number="6.3.2.1">
+<h4><span class="header-section-number">6.3.2.1</span> Paramètres des chunks<a href="r-markdown.html#paramètres-des-chunks" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Lorsqu’on définit un <em>chunk</em>, il est possible d’ajouter de nombreuses options qui auront un impact sur le fonctionnement du <em>chunk</em>. Par exemple, on peut demander d’afficher le code sans l’exécuter, d’afficher le résultat en masquant le code, ou bien de contrôler les paramètres d’affichage des figures si le code en produit. Il existe plus de 50 paramétrages. La liste est disponible sur le site du créateur du <em>package</em> {<code>knitr</code>} : <a href="https://yihui.org/knitr/options/" class="uri">https://yihui.org/knitr/options/</a>.</p>
+<p>La syntaxe est la suivante :</p>
+<div class="sourceCode" id="cb402"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb402-1"><a href="r-markdown.html#cb402-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, options}</span></span>
+<span id="cb402-2"><a href="r-markdown.html#cb402-2" aria-hidden="true" tabindex="-1"></a><span class="in">code</span></span>
+<span id="cb402-3"><a href="r-markdown.html#cb402-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>Une bonne pratique consiste à attribuer un identifiant unique à chaque <em>chunk</em>.</p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb403-1"><a href="r-markdown.html#cb403-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r identifiant-du-chunk, options}</span></span>
+<span id="cb403-2"><a href="r-markdown.html#cb403-2" aria-hidden="true" tabindex="-1"></a><span class="in">x</span></span>
+<span id="cb403-3"><a href="r-markdown.html#cb403-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>Voici quelques options pratiques.</p>
+<table>
+<colgroup>
+<col width="58%" />
+<col width="41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Syntaxe</th>
+<th align="right">Effet</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>include = FALSE</code></td>
+<td align="right">Ni le code ni les éventuels résultats affichés dans la console n’apparaitront dans le document final.</td>
+</tr>
+<tr class="even">
+<td align="left"><code>echo = FALSE</code></td>
+<td align="right">Le code n’apparaîtra pas dans le résultat final, tandis que les résultats seront visibles.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>eval = FALSE</code></td>
+<td align="right">Le code apparaîtra dans le document final mais ne sera pas exécuté.</td>
+</tr>
+<tr class="even">
+<td align="left"><code>message = FALSE</code></td>
+<td align="right">Les messages générés par l’excution du code n’apparaîtront pas dans le document final.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>warning = FALSE</code></td>
+<td align="right">Les messages d’avertissement générés par l’excution du code n’apparaîtront pas dans le document final.</td>
+</tr>
+<tr class="even">
+<td align="left"><code>fig.cap = "titre"</code></td>
+<td align="right">Si le code produit une image, le titre indiqué entre les guillemets sera utilisé comme titre de la figure</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>fig.width = "2"</code>, <code>figh.height="4</code></td>
+<td align="right">Si le code produit une image, permet de définir sa largeur et sa hauteur, respectivement. Les valeurs sont données en pouces (<em>inches</em>).</td>
+</tr>
+<tr class="even">
+<td align="left"><code>out.width='50%'</code>, <code>out.height='75%'</code></td>
+<td align="right">Si le code produit ou affiche une image, permet de définir, en pourcentages, la taille de l’image.</td>
+</tr>
+</tbody>
+</table>
+<p>Voici un exemple avec une image :</p>
+<div class="sourceCode" id="cb404"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb404-1"><a href="r-markdown.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r plot-iris, out.width=&#39;75%&#39;,</span></span>
+<span id="cb404-2"><a href="r-markdown.html#cb404-2" aria-hidden="true" tabindex="-1"></a><span class="in">fig.cap = &quot;Largeur des sépals en fonction de leur longueur.&quot;}</span></span>
+<span id="cb404-3"><a href="r-markdown.html#cb404-3" aria-hidden="true" tabindex="-1"></a><span class="in">plot(iris$Sepal.Length, iris$Sepal.Width)</span></span>
+<span id="cb404-4"><a href="r-markdown.html#cb404-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<p>Ce qui donne :</p>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="r-markdown.html#cb405-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Sepal.Length, iris<span class="sc">$</span>Sepal.Width)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:plot-iris"></span>
+<img src="_main_files/figure-html/plot-iris-1.png" alt="Largeur des sépals en fonction de leur longueur." width="75%" />
+<p class="caption">
+Figure 6.1: Largeur des sépals en fonction de leur longueur.
+</p>
+</div>
+<p>Le paramétrage de l’<strong>ensemble</strong> des <em>chunks</em> est réglé par une liste (<code class="sourceCode r">knitr<span class="sc">::</span>opts_chunk</code>). En modifiant les valeurs de cette liste comme dans l’exemple ci-dessous, et en plaçant cette instruction dans un <em>chunk</em> positionné juste après l’en-tête en YAML, tous les <em>chunks</em> adopteront le comportement spécifié.</p>
+<p>Dans l’exemple ci-dessous, tous les codes des <em>chunks</em> seront visibles (<code class="sourceCode r">echo <span class="ot">=</span> <span class="cn">TRUE</span></code>), les messages et les avertissements retournés lors de l’exécution des codes seront masqués (<code class="sourceCode r">message <span class="ot">=</span> <span class="cn">FALSE</span></code> et <code class="sourceCode r">warning <span class="ot">=</span> <span class="cn">FALSE</span></code>), les figures produites en R seront centrées (<code class="sourceCode r">fig.align <span class="ot">=</span> <span class="st">&quot;center&quot;</span></code>)</p>
+<div class="sourceCode" id="cb406"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb406-1"><a href="r-markdown.html#cb406-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r chunks-settings, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE}</span></span>
+<span id="cb406-2"><a href="r-markdown.html#cb406-2" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE,</span></span>
+<span id="cb406-3"><a href="r-markdown.html#cb406-3" aria-hidden="true" tabindex="-1"></a><span class="in">                      message = FALSE,</span></span>
+<span id="cb406-4"><a href="r-markdown.html#cb406-4" aria-hidden="true" tabindex="-1"></a><span class="in">                      warning = FALSE,</span></span>
+<span id="cb406-5"><a href="r-markdown.html#cb406-5" aria-hidden="true" tabindex="-1"></a><span class="in">                      fig.align = &quot;center&quot;)</span></span>
+<span id="cb406-6"><a href="r-markdown.html#cb406-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="notebox">
+<p><strong>Note</strong> : le paramétrage du comportement général des <em>chunks</em> peut ensuite être modifié pour certains <em>chunks</em> spécifiques. Pour ce faire, il suffit d’ajouter dans les paramètres des <em>chunks</em> à modifier le comportement désiré. Par exemple, si <code class="sourceCode r">echo <span class="ot">=</span> <span class="cn">TRUE</span></code> est défini dans la liste des paramètres de la liste <code class="sourceCode r">knitr<span class="sc">::</span>opts_chunk</code>, si on souhaite masquer le code d’un <em>chunk</em> spécifique, il suffit de lui ajouter l’option <code class="sourceCode r">echo <span class="ot">=</span> <span class="cn">FALSE</span></code> :</p>
+<div class="sourceCode" id="cb407"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb407-1"><a href="r-markdown.html#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb407-2"><a href="r-markdown.html#cb407-2" aria-hidden="true" tabindex="-1"></a><span class="in"># code du chunk</span></span>
+<span id="cb407-3"><a href="r-markdown.html#cb407-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="mise-en-cache" class="section level3 hasAnchor" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Mise en cache<a href="r-markdown.html#mise-en-cache" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lorsqu’un document RMarkdown comprend des calculs qui prennent beaucoup de temps à s’effectuer lors de la compilation, il est possible de mettre en cache les résultats de tout ou partie des <em>chunks</em>. Pour ce faire, il suffit d’indiquer le paramètre <code>cache = TRUE</code> dans le ou les <em>chunks</em> que l(on souhaite mettre en cache.</p>
+<p>Lors de la compilation du document, les <em>chunks</em> ayant été mis en cache ne seront pas exécutés par {<code>knitr</code>} s’ils ont été exécutés lors de la précédente compilation et qu’aucune modification ne leur a été apportée. Si le code à l’intérieur d’un <em>chunk</em> a été modifié entre le moment où il a été exécuté par {<code>knitr</code>} lors d’une compilation et une nouvelle compilation (ou si un paramètre du <em>chunk</em> autre que <code class="sourceCode r">include</code> a été modifié), alors il sera de nouveau réévalué et remis en cache.</p>
+<p>Il est risqué de paramétrer l’ensemble des <em>chunks</em> de sorte qu’ils soient tous mis en cache. Si le j<sup>e</sup> <em>chunks</em> est modifié, il sera réévalué par {<code>knitr</code>} lors de la compilation. Or, si l’évaluation dépend de variables définies avant le j<sup>e</sup> <em>chunk</em> mais ayant été modifiées <em>après</em>, les résultats retournés par la nouvelle évaluation du j<sup>e</sup> <em>chunk</em> risquent de ne pas être reproductibles…</p>
+<p>Il est parfois utile de vider le cache pour éviter les erreurs mentionnées précédemment. Pour ce faire, on peut cliquer sur la flèche pointant vers le bas située à droite du bouton <code>Knit</code>, puis cliquer sur la ligne commençant par l’emoji ballet <code>Clear Knitr Cache...</code>.</p>
+<div class="notebox">
+<p><strong>Note</strong> : la mise en cache est surtout utile lordque l’on charge des résultats d’estimation de modèles longs à calculer (des modèles de machine-learning par exemple).</p>
+</div>
+</div>
+</div>
+<div id="insertion-dune-bibliographie" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Insertion d’une bibliographie<a href="r-markdown.html#insertion-dune-bibliographie" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Citer une source répond à des normes. Une des normes fréquemment rencontrées en économie est celle de l’association américaine de psychologie (American Psychological Association). Elle reprend l’acronyme de l’association : APA.</p>
+<p>Des explications en français sur ces normes sont proposées sur le site des bibliothèques de l’Université de Montréal à l’adresse suivante <a href="https://bib.umontreal.ca/citer/styles-bibliographiques/apa" class="uri">https://bib.umontreal.ca/citer/styles-bibliographiques/apa</a>.</p>
+<p>On distingue deux manières de citer des références : dans le texte et en bibliographie.</p>
+<p>Avec RMarkdown, nous n’avons qu’à nous soucier de la citation dans le texte. L’ajout des références citées en bibliographie se fait ensuite automatiquement, en respectant la norme utilisée. Pour cela, il faut :</p>
+<ol style="list-style-type: decimal">
+<li>créer un fichier contenant les références, en les distinguant à l’aide d’un identifiant unique ;</li>
+<li>créer le lien entre ce fichier et le document RMarkdown, en le renseignant dans l’en-tête YAML ;</li>
+<li>insérer les références aux documents, dans la partie narrative (texte) du document RMarkdown.</li>
+</ol>
+<div id="création-du-fichier-de-bibliographie" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> Création du fichier de bibliographie<a href="r-markdown.html#création-du-fichier-de-bibliographie" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Un fichier de bibliographie au format <code>.bib</code> (BibTeX) doit dans un premier temps être créé. Ce fichier contient les références, formatées selon le standard attendu des fichiers bib. Sur le site bibtex.com, la page suivante propose un guide sur les formats BibTeX. <a href="https://www.bibtex.com/g/bibtex-format/" class="uri">https://www.bibtex.com/g/bibtex-format/</a>.</p>
+<p>Chaque entrée dans le fichier BibTeX correspons à une référence bibliographique. Elle est composée de trois parties :</p>
+<ol style="list-style-type: decimal">
+<li>le type de document : book (livre), article, inbook (un chapitre de livre), inproceedings (un article de colloque), techreport (un rapport technique), etc ;</li>
+<li>un identifiant unique (que l’on utilise ensuite dans le fichier RMarkdown pour faire référence à cette entrée) ;</li>
+<li>une liste de paires de clés-valeurs, où les éléments de la référence sont stockés (titre, auteurs, année de publication, nom de la revue, nom de l’éditeur, etc.).</li>
+</ol>
+<p>Prenons un exemple :</p>
+<div class="sourceCode" id="cb408"><pre class="sourceCode bib"><code class="sourceCode bibtex"><span id="cb408-1"><a href="r-markdown.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="va">@book</span>{<span class="ot">xie_2018_rmarkdown</span>,</span>
+<span id="cb408-2"><a href="r-markdown.html#cb408-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>={R markdown: The definitive guide},</span>
+<span id="cb408-3"><a href="r-markdown.html#cb408-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>={Xie, Yihui and Allaire, Joseph J and Grolemund, Garrett},</span>
+<span id="cb408-4"><a href="r-markdown.html#cb408-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>={2018},</span>
+<span id="cb408-5"><a href="r-markdown.html#cb408-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">publisher</span>={Chapman and Hall/CRC}</span>
+<span id="cb408-6"><a href="r-markdown.html#cb408-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Il s’agit d’un livre, donc le type de document est indiqué à l’aide de <code class="sourceCode bibtex"><span class="va">@book</span></code>. La référence unique est <code>xie_2018_rmarkdown</code>, et les paires de clés-valeurs sont renseignées dans une liste où chaque clé est donnée avant le symbole égal et chaque valeur est donnée après le symbole égal. Les paires sont séparées par une virgule.</p>
+<div class="greenbox">
+<p>À votre tour : créez un nouveau fichier de script R dans RStudio. Dans ce fichier, collez l’entrée bibliographique du livre de Yihui Xie et al. Enregistrez le document en le nommant <code>biblio.bib</code>.</p>
+<p>Il vous sera demandé si vous souhaitez changer l’extension du fichier pour effectivement utiliser <code>.bib</code> plutôt que <code>.R</code> : dites oui.</p>
+</div>
+<p>Afin d’éviter de devoir rédiger à la main l’ensemble des entrées du fichier BibTeX, il existe de nombreux outils pour nous faciliter le travail. Nous allons en voir quelques-uns.</p>
+<div id="crossref" class="section level4 hasAnchor" number="6.4.1.1">
+<h4><span class="header-section-number">6.4.1.1</span> Crossref<a href="r-markdown.html#crossref" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Dans un premier temps, on peut vérifier si la référence existe sur <a href="https://www.crossref.org/">Crossref</a>. Ce site est très pratique pour obtenir des citations généralement propres, mais il a un inconvénient : il faut parfois être patient, le site rencontre fréquemment des erreurs 500 (<em>Internal Server Error</em>).</p>
+<p>Essayons de chercher la référence pour l’article de Susan Athey intitulé “The State of Applied Econometrics: Causality and Policy Evaluation”, publié dans “The Journal of economic perspectives” (JEP) en 2017.</p>
+<p>Après avoir cliqué sur le bouton “Search metadata”, on peut coller le titre de l’article : <code>The State of Applied Econometrics: Causality and Policy Evaluation</code>, puis lancer la recherche en appuyant sur la touche <code>Enter</code> du clavier.</p>
+<div class="figure">
+<img src="figs/crossref_01.png" style="width:30.0%" alt="" />
+<p class="caption">Chercher l’article.</p>
+</div>
+<p>Parmi les références proposées, lorsqu’on a identifié celle qui correspond effectivement à celle que l’on recherche, on récupère les métadonnées en cliquant sur le lien <code>Actions</code> puis sur <code>Cite</code>.</p>
+<div class="figure">
+<img src="figs/crossref_02.png" style="width:75.0%" alt="" />
+<p class="caption">Identifier le bon résultat.</p>
+</div>
+<p>L’entrée bibliographique au format BibTeX est alors affichée, il ne reste plus qu’à la copier et à la coller dans notre fichier bib.</p>
+<div class="figure">
+<img src="figs/crossref_03.png" style="width:75.0%" alt="" />
+<p class="caption">L’entrée au format BibTeX.</p>
+</div>
+<div class="greenbox">
+<p>À votre tour : recherchez la référence de l’article de Susan Athey publié dans le JEP en 2017 et collez l’entrée dans votre fichier BibTeX.</p>
+</div>
+<p>Votre fichier BibTeX doit à présent contenir deux entrées (n’oubliez pas de le sauvegarder) :</p>
+<div class="sourceCode" id="cb409"><pre class="sourceCode bib"><code class="sourceCode bibtex"><span id="cb409-1"><a href="r-markdown.html#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="va">@book</span>{<span class="ot">xie_2018_rmarkdown</span>,</span>
+<span id="cb409-2"><a href="r-markdown.html#cb409-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>={R markdown: The definitive guide},</span>
+<span id="cb409-3"><a href="r-markdown.html#cb409-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>={Xie, Yihui and Allaire, Joseph J and Grolemund, Garrett},</span>
+<span id="cb409-4"><a href="r-markdown.html#cb409-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>={2018},</span>
+<span id="cb409-5"><a href="r-markdown.html#cb409-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">publisher</span>={Chapman and Hall/CRC}</span>
+<span id="cb409-6"><a href="r-markdown.html#cb409-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb409-7"><a href="r-markdown.html#cb409-7" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">Athey_2017</span>,</span>
+<span id="cb409-8"><a href="r-markdown.html#cb409-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">doi</span> = {10.1257/jep.31.2.3},</span>
+<span id="cb409-9"><a href="r-markdown.html#cb409-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">url</span> = {https://doi.org/10.1257%2Fjep.31.2.3},</span>
+<span id="cb409-10"><a href="r-markdown.html#cb409-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year</span> = 2017,</span>
+<span id="cb409-11"><a href="r-markdown.html#cb409-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">month</span> = {may},</span>
+<span id="cb409-12"><a href="r-markdown.html#cb409-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">publisher</span> = {American Economic Association},</span>
+<span id="cb409-13"><a href="r-markdown.html#cb409-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">volume</span> = {31},</span>
+<span id="cb409-14"><a href="r-markdown.html#cb409-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">number</span> = {2},</span>
+<span id="cb409-15"><a href="r-markdown.html#cb409-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">pages</span> = {3--32},</span>
+<span id="cb409-16"><a href="r-markdown.html#cb409-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">author</span> = {Susan Athey and Guido W. Imbens},</span>
+<span id="cb409-17"><a href="r-markdown.html#cb409-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">title</span> = {The State of Applied Econometrics:</span>
+<span id="cb409-18"><a href="r-markdown.html#cb409-18" aria-hidden="true" tabindex="-1"></a>    Causality and Policy Evaluation},</span>
+<span id="cb409-19"><a href="r-markdown.html#cb409-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">journal</span> = {Journal of Economic Perspectives}</span>
+<span id="cb409-20"><a href="r-markdown.html#cb409-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="google-scholar" class="section level4 hasAnchor" number="6.4.1.2">
+<h4><span class="header-section-number">6.4.1.2</span> Google Scholar<a href="r-markdown.html#google-scholar" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Parfois, on ne trouve pas l’information désirée sur Crossref. Il peut alors être une bonne idée d’aller chercher sur <a href="https://scholar.google.fr/schhp?hl=fr">Google Scholar</a> si la référence existe. Pour l’heure, les références sur Google Scholar ont l’air d’être moins bien renseignées que sur Crossref.</p>
+<p>Essayons de retrouver la référence du papier d’Olivier Deschênes et de Michael Greenstone publié dans l’American Economic Review (AER) en 2007. Cherchons le papier par son titre :</p>
+<blockquote>
+<p>The economic impacts of climate change: evidence from agricultural output and random fluctuations in weather</p>
+</blockquote>
+<p>Une fois l’article identifié dans les résultats, il suffit de cliquer sur le lien <code>Citer</code>.</p>
+<div class="figure">
+<img src="figs/google_scholar_1.png" style="width:75.0%" alt="" />
+<p class="caption">L’article de Deschênes et Greenstone sur Google Scholar.</p>
+</div>
+<p>Une fenêtre surgit. Les citations pré-formatées selon différents styles sont données. Pour récupérer les métadonnées au format BibTeX, il faut cliquer sur le lien <code>BibTeX</code>.</p>
+<div class="figure">
+<img src="figs/google_scholar_2.png" style="width:75.0%" alt="" />
+<p class="caption">L’article de Deschênes et Greenstone sur Google Scholar.</p>
+</div>
+<p>Les métadonnées s’affichent dans une page web. Il ne reste plus qu’à effectuer un copier/coller dans le fichier BibTeX.</p>
+<div class="greenbox">
+<p>À votre tour : recherchez la référence de l’article d’Olivier Deschênes et de Michael Greenstone publié dans l’AER en 2007 et collez l’entrée dans votre fichier BibTeX.</p>
+</div>
+<p>Votre fichier BibTeX doit à présent contenir trois entrées (n’oubliez pas de le sauvegarder) :</p>
+<div class="sourceCode" id="cb410"><pre class="sourceCode bib"><code class="sourceCode bibtex"><span id="cb410-1"><a href="r-markdown.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="va">@book</span>{<span class="ot">xie_2018_rmarkdown</span>,</span>
+<span id="cb410-2"><a href="r-markdown.html#cb410-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>={R markdown: The definitive guide},</span>
+<span id="cb410-3"><a href="r-markdown.html#cb410-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>={Xie, Yihui and Allaire, Joseph J and Grolemund, Garrett},</span>
+<span id="cb410-4"><a href="r-markdown.html#cb410-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>={2018},</span>
+<span id="cb410-5"><a href="r-markdown.html#cb410-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">publisher</span>={Chapman and Hall/CRC}</span>
+<span id="cb410-6"><a href="r-markdown.html#cb410-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb410-7"><a href="r-markdown.html#cb410-7" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">Athey_2017</span>,</span>
+<span id="cb410-8"><a href="r-markdown.html#cb410-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">doi</span> = {10.1257/jep.31.2.3},</span>
+<span id="cb410-9"><a href="r-markdown.html#cb410-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">url</span> = {https://doi.org/10.1257%2Fjep.31.2.3},</span>
+<span id="cb410-10"><a href="r-markdown.html#cb410-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year</span> = 2017,</span>
+<span id="cb410-11"><a href="r-markdown.html#cb410-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">month</span> = {may},</span>
+<span id="cb410-12"><a href="r-markdown.html#cb410-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">publisher</span> = {American Economic Association},</span>
+<span id="cb410-13"><a href="r-markdown.html#cb410-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">volume</span> = {31},</span>
+<span id="cb410-14"><a href="r-markdown.html#cb410-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">number</span> = {2},</span>
+<span id="cb410-15"><a href="r-markdown.html#cb410-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">pages</span> = {3--32},</span>
+<span id="cb410-16"><a href="r-markdown.html#cb410-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">author</span> = {Susan Athey and Guido W. Imbens},</span>
+<span id="cb410-17"><a href="r-markdown.html#cb410-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">title</span> = {The State of Applied Econometrics:</span>
+<span id="cb410-18"><a href="r-markdown.html#cb410-18" aria-hidden="true" tabindex="-1"></a>    Causality and Policy Evaluation},</span>
+<span id="cb410-19"><a href="r-markdown.html#cb410-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">journal</span> = {Journal of Economic Perspectives}</span>
+<span id="cb410-20"><a href="r-markdown.html#cb410-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb410-21"><a href="r-markdown.html#cb410-21" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">deschenes2007economic</span>,</span>
+<span id="cb410-22"><a href="r-markdown.html#cb410-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>={The economic impacts of climate change:</span>
+<span id="cb410-23"><a href="r-markdown.html#cb410-23" aria-hidden="true" tabindex="-1"></a>  evidence from agricultural output and random fluctuations in weather},</span>
+<span id="cb410-24"><a href="r-markdown.html#cb410-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>={Desch{<span class="ch">\^</span>e}nes, Olivier and Greenstone, Michael},</span>
+<span id="cb410-25"><a href="r-markdown.html#cb410-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">journal</span>={American economic review},</span>
+<span id="cb410-26"><a href="r-markdown.html#cb410-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">volume</span>={97},</span>
+<span id="cb410-27"><a href="r-markdown.html#cb410-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">number</span>={1},</span>
+<span id="cb410-28"><a href="r-markdown.html#cb410-28" aria-hidden="true" tabindex="-1"></a>  <span class="dt">pages</span>={354--385},</span>
+<span id="cb410-29"><a href="r-markdown.html#cb410-29" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>={2007}</span>
+<span id="cb410-30"><a href="r-markdown.html#cb410-30" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="un-générateur-de-citations" class="section level4 hasAnchor" number="6.4.1.3">
+<h4><span class="header-section-number">6.4.1.3</span> Un générateur de citations<a href="r-markdown.html#un-générateur-de-citations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Si jamais la référence que l’on cherche n’est disponible ni sur le site du journal ou de l’éditeur, ni sur crossref, ni sur Google Scholar, il reste la possibilité d’utiliser un générateur de citations comme celui proposé sur ce site : <a href="https://www.bibme.org/bibtex" class="uri">https://www.bibme.org/bibtex</a>. Il est également évidemment possible de rentrer l’ensemble des informations à la main (mais gare aux erreurs !).</p>
+</div>
+</div>
+<div id="lier-le-fichier-dentrées-bibliographiques-avec-le-document-rmarkdown" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> Lier le fichier d’entrées bibliographiques avec le document RMarkdown<a href="r-markdown.html#lier-le-fichier-dentrées-bibliographiques-avec-le-document-rmarkdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Une fois le fichier BibTeX créé, il faut renseigner dans l’en-tête YAML (en-tête de métadonnées) :</p>
+<ol style="list-style-type: decimal">
+<li>un chemin vers le fichier de bibliographie (dans l’exemple ci-dessous, on suppose que le fichier <code>biblio.bib</code> se trouve dans le même répertoire que le fichier RMarkdown) ;</li>
+<li>éventuellement, on peut préciser le style voulu (ici, nous utilisons la norme APA) ;</li>
+<li>éventuellement, on peut indiquer que nous souhaitons que les citations soient cliquables et renvoient vers la bibliographie</li>
+</ol>
+<div class="sourceCode" id="cb411"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb411-1"><a href="r-markdown.html#cb411-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb411-2"><a href="r-markdown.html#cb411-2" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb411-3"><a href="r-markdown.html#cb411-3" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> biblio.bib</span></span>
+<span id="cb411-4"><a href="r-markdown.html#cb411-4" aria-hidden="true" tabindex="-1"></a><span class="an">biblio-style:</span><span class="co"> apalike</span></span>
+<span id="cb411-5"><a href="r-markdown.html#cb411-5" aria-hidden="true" tabindex="-1"></a><span class="an">link-citations:</span><span class="co"> yes</span></span>
+<span id="cb411-6"><a href="r-markdown.html#cb411-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
+</div>
+<div id="citer-les-documents-dans-le-corps-de-texte" class="section level3 hasAnchor" number="6.4.3">
+<h3><span class="header-section-number">6.4.3</span> Citer les documents dans le corps de texte<a href="r-markdown.html#citer-les-documents-dans-le-corps-de-texte" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Nous disposons à présent d’un fichier BibTeX contenant 3 entrées, l’en-tête du document RMarkdown précise où se situe ce fichier d’entrées bibliographiques. Reste à présent à citer les entrées dans le texte.</p>
+<p>Pour citer un document, on doit utilise son identifiant unique que l’on place entre crochets, après un symbole arobase : <code>[@identifiant]</code>.</p>
+<table>
+<colgroup>
+<col width="35%" />
+<col width="35%" />
+<col width="30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Description</th>
+<th align="right">Syntaxe</th>
+<th align="right">Affichage dans le texte</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Citation entre parenthèses</td>
+<td align="right"><code>[@xie_2018_rmarkdown]</code></td>
+<td align="right"><span class="citation">(<a href="#ref-xie_2018_rmarkdown" role="doc-biblioref">Xie, Allaire, and Grolemund 2018</a>)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Supprimer la mention de l’auteur</td>
+<td align="right"><code>[-@xie_2018_rmarkdown]</code></td>
+<td align="right"><span class="citation">(<a href="#ref-xie_2018_rmarkdown" role="doc-biblioref">2018</a>)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Ajout d’informations supplémentaires</td>
+<td align="right"><code>[voir @xie_2018_rmarkdown, pp. 10--12]</code></td>
+<td align="right"><span class="citation">(voir <a href="#ref-xie_2018_rmarkdown" role="doc-biblioref">Xie, Allaire, and Grolemund 2018, 10–12</a>)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Citation multiple</td>
+<td align="right"><code>[@xie_2018_rmarkdown;Athey_2017]</code></td>
+<td align="right"><span class="citation">(<a href="#ref-xie_2018_rmarkdown" role="doc-biblioref">Xie, Allaire, and Grolemund 2018</a>; <a href="#ref-Athey_2017" role="doc-biblioref">Athey and Imbens 2017</a>)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Citation sans les parenthèses pour les auteurs</td>
+<td align="right"><code>@xie_2018_rmarkdown</code></td>
+<td align="right"><span class="citation">Xie, Allaire, and Grolemund (<a href="#ref-xie_2018_rmarkdown" role="doc-biblioref">2018</a>)</span></td>
+</tr>
+</tbody>
+</table>
+<p>La bibliographie à la fin du document sera automatiquement ajoutée. On peut placer une section <code># Références</code> à la fin du document pour faire une rupture avec la section précédente. Cette section ne sera pas numérotée.</p>
+<!-- # Seance 6 -->
+<!-- # Faire des tableaux de résumés statistiques + exports -->
+<!-- # Markdown -->
+<!-- # Seance 7 -->
+<!-- # regressions -->
+<!-- # Seance 8 -->
+<!-- # Fonctions -->
+<!-- # Boucles -->
+<!-- # Seance 10 -->
+<!-- # Graphiques -->
+<!-- # Seance 11 -->
+<!-- # Graphiques -->
+
+</div>
+</div>
+</div>
+<h3> References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Athey_2017" class="csl-entry">
+Athey, Susan, and Guido W. Imbens. 2017. <span>“The State of Applied Econometrics: Causality and Policy Evaluation.”</span> <em>Journal of Economic Perspectives</em> 31 (2): 3–32. <a href="https://doi.org/10.1257/jep.31.2.3">https://doi.org/10.1257/jep.31.2.3</a>.
+</div>
+<div id="ref-xie_2018_rmarkdown" class="csl-entry">
+Xie, Yihui, Joseph J Allaire, and Garrett Grolemund. 2018. <em>R Markdown: The Definitive Guide</em>. Chapman; Hall/CRC.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>la note de bas de page.<a href="r-markdown.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>une note de bas de page plus longue.</p>
+<p>Dans laquelle on peut écrire un paragraphe.</p>
+<p><code>{ du code }</code></p>
+<p>Plusieurs paragraphes, même.<a href="r-markdown.html#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tableaux-de-données.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistiques-descriptives.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "night",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

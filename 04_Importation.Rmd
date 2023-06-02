@@ -1,0 +1,448 @@
+# Importation et exportation de donnée
+
+::::{.orangebox data-latex=""}
+
+Ce chapitre s'appuie sur [la Section 2.3 Importation, exportation et création de données]( http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#importation-exportation-et-cr%C3%A9ation-de-donn%C3%A9es) des notes de cours.
+
+:::
+
+
+## Chargement de données : chemins
+
+
+Lorsque l'on souhaite accéder à des données avec Excel, il suffit de double cliquer sur le fichier dans l'explorateur de fichiers pour que le logiciel se lance et que le tableur nous révèle son contenu. Avec R, il est nécessaire de payer un petit coût d'entrée pour pouvoir charger les données. Mais une fois ce coût payé, il nous est possible de réaliser des opérations avancées en fournissant des efforts moindres. Par ailleurs, le traitement des gros volumes de données est facilité avec R, comparativement à Excel.
+
+
+Dans cet exercice, vous allez apprendre à importer des données dans R. Cela nécessite au préalable d'avoir connaissance de l'environnement de travail (en anglais, _working directory_). Lorsqu'on lance RStudio en double cliquant sur un fichier de projet (dont l'extension est `.Rproj`), comme ce que l'on a fait jusqu'à présent, l'environnement de travail de R est le répertoire dans lequel se situe le fichier `.Rproj`. Aussi, lorsque nous donnons comme instruction à R d'importer ou d'exporter des informations, R se réfère à ce répertoire comme point d'ancrage, comme répertoire courant.
+
+
+:::: {.greenbox data-latex=""}
+
+1. En choisissant l'option "Enregistrer le fichier" (**et non pas en choisissant "Ouvrir avec"), téléchargez l'archive `exercice_importation.zip` à l'adresse suivante : <https://egallic.fr/Enseignement/R/Exercices/exercice_importation.zip>.
+
+:::
+
+
+Par défaut, sur les ordinateurs de l'Université, les fichiers téléchargés sont enregistrés dans le dossier `Téléchargement`. Pour être plus précis, les fichiers téléchargés sont enregistrés sur le disque dur nommé `C:`, dans un répertoire nommé `Downloads` qui se situe lui-même dans un répertoire nommé selon votre numéro d'étudiant, situé lui-même dans un répertoire nommé `Users`. Pour accéder à une ressource, le système d'exploitation utilise des chemins d'accès, qui sont constitués à l'aide des noms de répertoires séparés par des barres obliques inverse sous Windows (`\`) (et des barres obliques `/` sous Unix) et qui se terminent soit par un nom de répertoire, soit par un nom de fichier. Le chemin qui permet de localiser le répertoire de téléchargement sur la machine de l'Université s'écrit ainsi : `C:\Users\votre_numero_etudiant\Downloads`, tandis que le chemin qui permet de localiser le fichier que vous venez de télécharger s'écrit `C:\Users\votre_numero_etudiant\Downloads\exercice_importation.zip`.
+
+
+:::: {.greenbox data-latex=""}
+
+2. Ouvrez l'explorateur de fichiers et déplacez vous dans le dossier de téléchargement.
+3. Faites un clic droit sur le fichier `exercice_importation.zip`, et dans le menu contextuel qui s'affiche, choisissez l'option `7-Zip`, puis `Extraire vers exercice_importation`. Un répertoire nommé `exercice_importation` a alors été extrait.
+
+:::
+
+
+:::: {.notebox data-latex=""}
+
+**Note**
+
+Dans votre répetoire `Téléchargement` vous pouvez à présent voir deux ressources portant le nom `exercice_importation`. Si vous faites bien attention, l'icône de ces ressources diffère : l'une représente un porte document jaune ouvert (et désigne le répertoire que vous venez d'extraire de l'archive), tandis que l'autre présente un porte document jaune fermé et muni d'une fermeture éclair (un _zip_).
+
+Afin d'éviter de confondre les deux, un moyen simple consiste à afficher l'extension des fichiers. Il sera alors aisé de reconnaître les fichiers des répertoires : les dossiers n'auront pas d'extention. Pour afficher les extensions :
+
+1. Dans l'explorateur de fichiers, atteignez l'onglet `Affichage` ;
+2. Cliquez sur le bouton `Afficher/Masquer` ;
+3. Cochez la case `Extensions de noms de fichiers`.
+
+À présent, vous pourrez bien voir la différence entre le répertoire `exercice_importation` et le fichier ZIP `exercice_importation.zip` (l'archive).
+
+:::
+
+
+La hiérarchie du répertoire `exercice_importation` que vous venez d'extraire peut être représentée à l'aide d'un arbre (on parle d'arborescence).
+
+```
+exercice_importation
+├── Dossier_C
+│   └── fichier_donnees_C.csv
+├── Dossier_D
+│   └── Dossier_D_1
+|   |   └── fichier_donnees_D_1.csv
+├── Exercice
+|   └── Dossier_A
+|   |   └── Dossier_A_1
+|   |   |   └── fichier_donnees_A_1.csv
+|   |   └── Dossier_A_2
+|   |   |   └── fichier_donnees_A_2.csv
+|   |   └── fichier_donnees_A.csv
+|   └── Dossier_B
+|   |   └── fichier_donnees_B.csv
+|   └── fichier_donnees.csv
+|   └── L3_info.Rproj
+```
+
+:::: {.redbox data-latex=""}
+
+**Mise en garde**
+
+Faites attention lorsque vous ouvrez des fichiers CSV avec Excel. Dès lors que vous enregistrerez des modifications, Excel ajoutera des informations dans le fichier. Ces ajouts peuvent rendre vos fichiers illisibles par d'autres logiciels ensuite.
+
+:::
+
+
+:::: {.greenbox data-latex=""}
+
+4. Depuis l'explorateur de fichiers, descendez dans le répertoire `exercice_importation`, puis dans `Exercice` et ouvrez le fichier `L3_info.Rproj` en double cliquant dessus.
+
+En ayant ouvert le fichier `L3_info.Rproj`, RStudio s'est lancé, en définissant le répertoire `Exercice` comme répertoire de travail.
+
+5. Dans la console R de RStudio, évaluez l'instruction suivante : `getwd()` et observez le chemin retourné.
+6. Créez un nouveau script R.
+
+:::
+
+
+Le répertoire courant est donc `Exercice`. Lorsque nous allons charger ou exporter dans ou depuis R des données, nous pourrons créer des chemins relatifs à ce répertoire courant. Il convient ainsi de noter la distinction entre chemin absolu et chemin relatif:
+
+1. **Chemin absolu** : le chemin absolu décrit l'accès à une ressource sans se référer au chemin courant, mais en se rapportant à la place à la racine du disque ou du serveur.
+
+- exemple : le chemin absolu vers le fichier `fichier_donnees.csv` sur **windows** sera : `C:\Users\votre_numero_etudiant\Downloads\exercice_importation\Exercice\fichier_donnees.csv`
+- Note : sous Unix, la racine du système de fichiers se note simplement `/`. Le lien absolu vers le fichier ressemblera à celui-ci : `/home/votre_nom_user/Downloads/fichier_donnees.csv`.
+2. **Chemin relatif** : le chemin relatif décrit quant à lui l'accès à une ressource en se rapportant au répertoire courant.
+
+- le répertoire courant étant `Exercice`, pour accéder au fichier csv, le chemin est le suivant, sous **windows** : `fichier_donnees.csv` (on peut aussi écrire `.\fichier_donnees.csv`, où `.` se réfère au **répertoire courant**)
+- sous Unix : `fichier_donnees.csv` ou `./fichier_donnees.csv`.
+
+
+:::: {.notebox data-latex=""}
+
+**Note**
+
+La barre oblique `/` (inversée `\` sous Windows) est le séparateur de chemin.
+
+:::
+
+
+Nous allons à présent importer dans R le contenu du fichier `fichier_donnees.csv`. Ce fichier contient une première ligne définissant les en-têtes, et une seconde ligne contenant une observation. Dans le fichier, les différents champs sont séparés par un point-virgule (`;`).
+
+Pour importer le contenu de ce fichier CSV dans R, nous allons nous appuyer sur la fonction `read_csv2()`{.R} du _package_ {readr}. Nous allons indiquer le chemin vers le fichier à l'argument `file` de cette fonction. Le tableau de données sera stocké dans un objet que nous allons appeler `df_exercice` :
+
+```{r, eval=FALSE}
+df_exercice <- read_csv2(file = "fichier_donnees.csv")
+df_exercice
+```
+
+
+```{r, echo=FALSE}
+df_exercice <- read_csv2(file = "exercice_importation/Exercice/fichier_donnees.csv")
+df_exercice
+```
+
+L'importation a bien fonctionné, R nous prévient avoir deviné que les valeurs dans les colonnes `Dossier` et `Valeur` sont des chaînes de caractères (la fonction `col_character()`{.R} a été utilisée pour ces deux colonnes).
+
+Nous pouvons obtenir le même résultat en écrivant le chemin absolu vers le fichier :
+
+```{r, eval=FALSE}
+path <- paste0("C:/Users/votre_numero_etudiant/Downloads/",
+               "exercice_importation/Exercice/fichier_donnees.csv")
+read_csv2(file = path)
+```
+
+:::: {.greenbox data-latex=""}
+
+**Note** : le chemin étant trop long pour tenir sur une page PDF, la fonction `paste0`{.R} a été utilisée ici pour concaténer deux chaînes de caractères en une seule. Sur votre machine, vous pouvez écrire le chemin complet sans passer par l'utilisation de la fonction `paste0`{.R}.
+
+:::
+
+Nous verrons plus loin que l'utilisation des chemins absolus dans les scripts posent des soucis lorsque l'on change d'ordinateur ou que l'on partage son code avec d'autres personnes.
+
+
+Le fichier `fichier_donnees_A.csv` n'est pas situé dans le répertoire courant : il se situe dans le répertoire `Dossier_A`, contenu dans le répertoire courant (`Exercice`). Pour pouvoir charger le contenu de ce fichier dans R avec un lien relatif, il faut constuire le chemin en indiquant que l'on souhaite descendre dans le répertoire `Dossier_A` dans un premier temps :
+```{r, eval=FALSE}
+df_exercice_A <- read_csv2(file = "Dossier_A/fichier_donnees_A.csv")
+df_exercice_A
+```
+
+```{r, echo=FALSE}
+df_exercice_A <- read_csv2(file = "exercice_importation/Exercice/Dossier_A/fichier_donnees_A.csv")
+df_exercice_A
+```
+
+
+
+:::: {.greenbox data-latex=""}
+
+7. Dans un objet que vous nommerez `df_exercice_A_1`, chargez dans R le contenu du fichier `fichier_donnees_A_1.csv`.
+8. Dans un objet que vous nommerez `df_exercice_A_2`, chargez dans R le contenu du fichier `fichier_donnees_A_2.csv`.
+9. Dans un objet que vous nommerez `df_exercice_B`, chargez dans R le contenu du fichier `fichier_donnees_B.csv`.
+
+:::
+
+
+
+Si la ressource que l'on souhaite atteindre nécessite de remonter dans un répertoire parent (un répertoire qui contient un autre est appelé "répertoire parent"), il suffit d'utiliser sa désignation : `..`. Par exemple, pour accéder au fichier `fichier_donnees_C.csv`, qui se trouve dans le répertoire `Dossier_C` contenu dans le répertoire `exercice_importation` (qui contient le répertoire `Exercice` et est donc le répertoire parent de `Exercice`), on peut écrire :
+```{r, eval=FALSE}
+df_exercice_C <- read_csv2(file = "../Dossier_C/fichier_donnees_C.csv")
+df_exercice_C
+```
+
+```{r, echo=FALSE}
+df_exercice_C <- read_csv2(file = "exercice_importation/Dossier_C/fichier_donnees_C.csv")
+df_exercice_C
+```
+
+:::: {.greenbox data-latex=""}
+
+10. Dans un objet que vous nommerez `df_exercice_D`, chargez dans R le contenu du fichier `fichier_donnees_D_1.csv`.
+11. Enregistrez votre script dans le répertoire `Exercice` (en le nommant par exemple `importer_donnees.R`) et fermez RStudio.
+
+:::
+
+
+### Avantages de l'utilisation de chemins relatifs
+
+Pour finir cette section, nous allons illustrer le grand avantage que confère l'emploi de chemins relatifs.
+
+**Mise en situation** : admettons que vous souhaitez partager votre projet R avec une autre personne. Une manière simple de le faire consiste à créer une archive de l'ensemble de votre projet, pour fournir à la fois les scripts et les données.
+
+Le répertoire `exercice_importation` se situe depuis le début de ce chapitre dans votre dossier de téléchargement. Dans l'explorateur de fichiers, allez dans le répertoire de téléchargements et créez une archive du répertoire `exercice_importation` : 
+
+:::: {.greenbox data-latex=""}
+
+12. clic droit sur le répertoire `exercice_importation` ;
+13. dans le menu contextuel qui s'affiche, cliquez sur `7-Zip`, puis sur `Ajouter à "exercice_importation.zip"` ;
+14. dans votre répetoire du cours d'informatique (dans vos documents), créez un répertoire intitulé `TD_4` ;
+15. dans le répetoire `TD_4`, collez l'archive `exercice_importation.zip` que vous venez de créer ;
+16. dans le répertoire de **téléchargement**, **supprimez** le répertoire `exercice_importation`.
+17. dans le répetoire `TD_4`, extrayez le contenu de l'archive (clic droit, `7-Zip > Extraire vers "exercice_importation\"`).
+18. descendez dans le répertoire `exercice_importation` qui vient d'être extrait, puis dans `Exercice` ;
+19. Lancez le fichier `L3_info.Rproj` ;
+20. Dans la session RStudio qui vient de se lancer, ouvrez le script `importer_donnees.R` que vous avez créé précédemment.
+
+:::
+
+
+Si vous avez écrit les chemins vers les fichiers en utilisant des chemins absolus, vous serez obligé de les modifier un à un...
+
+```{r, eval=FALSE}
+path <- paste0("C:/Users/votre_numero_etudiant/Downloads/",
+               "exercice_importation/Exercice/fichier_donnees.csv")
+read_csv2(file = path)
+```
+
+Cette instruction qui permettait de charger le fichier `fichier_donnees.csv` ne fonctionne plus. R retourne un message d'erreur indiquant "_No such file or directory_" (un tel fichier ou répertoire n'existe pas).
+
+Si vous avez employé des chemins relatifs, vous n'aurez rien à modifier.
+```{r, eval=FALSE}
+read_csv2(file = "./fichier_donnees.csv")
+```
+
+
+## Chargement de formats différents
+
+
+:::: {.orangebox data-latex=""}
+
+Cet exercice s'appuie sur la section [2.3 Importation, exportation et création de données](http://egallic.fr/Enseignement/R/Book/donn%C3%A9es.html#importation-exportation-et-cr%C3%A9ation-de-donn%C3%A9es) des notes de cours.
+
+:::
+
+Dans cet exercice, vous allez apprendre à importer des données dans R lorsqu'elles proviennent de différents types de fichiers. Au programme : 
+
+- des fichiers texte (plus particulièrement, CSV :_comma separated values_, et TSV, _tab-separated values_) ;
+- des fichiers Excel ;
+- des fichiers de données R.
+
+
+
+### Fichiers texte
+
+
+Dans un premier temps, concentrons-nous sur les fichiers texte contenant des données tabulaires. Chaque ligne de ces fichiers correspond à une ligne d'un tableau, et un caractère spécifique appelé le séparateur de champ permet de séparer les colonnes. À la fin de chaque ligne, un caractère (non visible) permet de passer à la ligne suivante (fin de ligne ou _line break_). Parfois, les champs sont également placés entre double quotes (`"valeur"`).
+
+Un format très répandu de ce type de fichiers s'appelle CSV, ou _comma separated values_ : la virgule sépare les champs. Souvent, la première ligne sert à nommer les colonnes. Voici un exemple :
+
+```
+"nom","prenom","id","profile","matiere","note"
+"Amsberry","Evan",1,1,"Microéconomie 1",11.5
+"Basurto","Anthony",2,2,"Microéconomie 1",9
+"Begaye","Kai",3,3,"Microéconomie 1",16.5
+```
+
+Dans certaines administrations françaises, les données au format CSV sont fournies avec une variante dans laquelle le séparateur de champ est le point-virgule plutôt que la virgule, cette dernière étant utilisée comme séparateur décimal.
+
+```
+"nom";"prenom";"id";"profile";"matiere";"note"
+"Amsberry";"Evan";1;1;"Mathématiques 1";5
+"Basurto";"Anthony";2;2;"Mathématiques 1";6
+"Begaye";"Kai";3;3;"Mathématiques 1";18
+```
+
+
+Face à la possibilité d'utiliser différents caractères pour séparer les champs ainsi que pour séparer la partie entière de la partie décimale des nombres, R propose tout un attirail de fonctions. Nous allons en utiliser une qui permet d'être polyvalent : `read_delim()`{.R}. Cette fonction est proposée dans le _package_ {readr}.
+
+```{r}
+library(readr)
+```
+
+
+:::: {.greenbox data-latex=""}
+
+1. Affichez la page d'aide de la fonction `read_delim`.
+2. Lisez les descriptions des arguments suivants : `file`, `delim`, `col_names`, `skip`, `n_max`.
+
+:::
+
+
+Vous allez devoir charger dans R 4 fichiers texte contenant des notes d'étudiants, selon les matières qu'ils et elles ont suivies. Pour les besoins de l'exercice, les séparateurs de champs et les séparateurs décimaux varient d'un fichier à l'autre. Le tableau  \@ref(tab:caracteristiques-fichiers-importation) reporte les valeurs utilisées.
+
+
+| Nom de fichier | Séparateur de champs | Séparateur décimal | En-têtes |
+| :--- | :--- | :--- | :--- |
+| `Microeconomie_1.csv` | Virgule (`,`) | Point (`.`) | Oui |
+| `Macroeconomie_1.csv` | Virgule (`,`) | Point (`.`) | Non |
+| `Mathematiques_1.csv` | Point-virgule (`;`) | Virgule (`,`) | Oui |
+| `Informatique_1.tsv` | Taquet de tabulation (`\t`) | Point (`.`) | Oui |
+
+
+Table: (\#tab:caracteristiques-fichiers-importation) Caractéristiques des fichiers texte avec séparateur de champ
+
+
+Ces fichiers sont disponibles dans une archive disponible à l'adresse suivante : <https://egallic.fr/Enseignement/R/Exercices/importation_formats.zip>.
+
+
+:::: {.greenbox data-latex=""}
+
+3. Téléchargez l'archive, extrayez son contenu, puis déplacez le répertoire `importation_formats` qui vient d'être extrait dans votre répertoire `TD_4` créé lors du précédent exercice.
+4. En utilisant la fonction `read_delim()`, chargez le contenu du fichier `Microeconomie_1.csv` dans R. Ce fichier est situé dans le répertoire `L1`. Vous prendrez soin de stocker le tableau qui sera importé dans un objet que vous nommerez `microeconomie_1`.
+5. En utilisant la fonction `read_delim()`, chargez le contenu du fichier `Macroeconomie_1.csv` dans R. Vous prendrez soin de stocker le tableau qui sera importé dans un objet que vous nommerez `macroeconomie_1`.
+
+:::
+
+
+Lorsque le séparateur décimal n'est pas le point, il est nécessaire de renseigner à l'argument `locale` la valeur `locale(decimal_mark = ",")`.
+
+
+:::: {.greenbox data-latex=""}
+
+6. En utilisant la fonction `read_delim()`, chargez le contenu du fichier `Mathematiques_1.csv` dans R. Vous prendrez soin de stocker le tableau qui sera importé dans un objet que vous nommerez `mathematiques_1`. Attention, vérifiez bien les valeurs des notes.
+7. En utilisant la fonction `read_delim()`, chargez le contenu du fichier `Informatique_1.tsv` dans R. Vous prendrez soin de stocker le tableau qui sera importé dans un objet que vous nommerez `informatique_1`.
+
+:::
+
+
+
+:::: {.notebox data-latex=""}
+
+
+Le _package_ {readr} propose également les fonctions `read_csv()`{.R} et `read_csv2()` qui sont spécifiquement créées pour des fichiers `texte/csv` répondant exactement au standard anglo-saxon (virgule en séparateur de champs, point en séparateur décimal) et français (point-virgule en séparateur de champs, virgule en séparateur décimal).
+
+:::
+
+
+
+### Fichier Excel
+
+
+L'archive `importation_formats.zip` contient dans le répertoire `L1`, un fichier Excel intitulé `notes_L1.xlsx`.
+
+
+:::: {.greenbox data-latex=""}
+
+8. Ouvrez ce fichier avec Excel, pour observer sa structure : le classeur est composé de 8 feuilles, une feuille par matière. Dans chaque feuille, les notes obtenues par les étudiants dans la matière correspondante sont reportées. La première ligne indique systématiquement les noms de clonnes.
+
+:::
+
+
+Pour importer le contenu de fichiers Excel dans R, il existe plusieurs _packages_. Nous allons utiliser {readxl}.
+
+
+:::: {.greenbox data-latex=""}
+
+9. Après avoir chargé le _package_ {readxl}, affichez la page d'aide de la fonction `read_excel`{.R}. Lisez les descriptions des arguments suivants : `path`, `sheet`, `col_names`, `na`, `skip`, `n_max`.
+10. En utilisant le numéro d'index de la feuille `info` (il s'agit de la 4e feuille), chargez son contenu, à l'aide de la fonction `read_excel`{.R} dans un objet que vous nommerez `info`.
+11. En utilisant le nom de la feuille `stats`, chargez son contenu, à l'aide de la fonction `read_excel`{.R} dans un objet que vous nommerez `stats`.
+
+:::
+
+### Fichiers R
+
+Il existe deux formats de fichier de données R : les fichiers `.RDS` et `.RData`. Les premiers contiennent un seul objet, tandis que les seconds peuvent en contenir plusieurs.
+
+
+Dans le dossier `L1` de l'archive `importation_formats.zip` que dont vous avez extrait le contenu se trouve deux fichiers de données R : 
+
+- `anglais.RDS` : tableau de données contenant les notes d'anglais` ;
+- `notes.RData` : 8 tableaux de données (`micro`, `macro`, `maths`, `info`, `stats`, `anglais`, `eco_envir`, et `finance`).
+
+Pour importer un fichier `.RDS`, on utilise la fonction `readRDS()`{.R}. De la même manière que pour `read_delim()`{.R}, il est nécessaire de stocker le résultat dans un objet.
+
+
+```{r}
+notes_anglais <- readRDS(file = "importation_formats/L1/anglais.RDS")
+notes_anglais
+```
+
+Pour charger les objets d'un fichier `.RData` dans votre session R, il faut utiliser la fonction `load()`{.R}. Attention, si un objet est nommé `x` dans votre fichier `.RData` et qu'un objet existant dans votre session R s'appelle également `x`, ce dernier sera remplacé par l'objet qui vient d'être chargé avec la fonction `load()`{.R}.
+
+
+```{r}
+load(file = "importation_formats/L1/notes.RData")
+```
+
+
+
+
+## Exportation
+
+
+### Format texte
+
+Pour enregistrer des données depuis un tableau de données, un vecteur ou une matrice, la fonction `write_delim()`{.R} peut être utilisée.
+
+
+
+:::: {.greenbox data-latex=""}
+
+12. Affichez la page d'aide de la fonction `write_delim()`{.R}, et lisez les descriptions des arguments `x`, `file`, `delim` et `append`.
+13. Dans un fichier que vous nommerez `notes_finance.csv`, exportez le tableau de données `finance` (qui a été chargé avec la fonction `load()`{.R}) dans le dossier `L1`.
+
+:::
+
+
+
+
+### Format R
+
+
+Pour sauvegarder un seul objet, on peut utiliser la fonction `saveRDS()`{.R} et exporter les données au format `.RDS` :
+```{r, eval=FALSE}
+saveRDS(maths, file = "importation_formats/L1/maths.RDS")
+```
+
+Pour sauvegarder plusieurs objets, on peut utiliser la fonction `save()`{.R}, en indiquant les noms des objets à sauvegarder en argument de la fonction.
+
+```{r, eval=FALSE}
+save(micro, macro, maths, info, stats, anglais, eco_envir, finance,
+     file = "importation_formats/L1/notes_L1.RData")
+```
+
+
+
+<!-- # Seance 4 -->
+
+<!-- Tableaux -->
+<!-- # Manipulation des tableaux -->
+
+<!-- # Seance 5 -->
+<!-- # Importation et exportation de données -->
+<!-- # Faire des tableaux de résumés statistiques + exports -->
+
+<!-- # Seance 6 -->
+<!-- # Markdown -->
+
+<!-- # Seance 7 -->
+<!-- # regressions -->
+
+<!-- # Seance 8 -->
+<!-- # Fonctions -->
+<!-- # Boucles -->
+
+
+<!-- # Seance 10 -->
+<!-- # Graphiques -->
+
+<!-- # Seance 11 -->
+<!-- # Graphiques -->

@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9 Instructions conditionnelles et boucles | Travaux dirigés d’Informatique</title>
+  <meta name="description" content="9 Instructions conditionnelles et boucles | Travaux dirigés d’Informatique" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9 Instructions conditionnelles et boucles | Travaux dirigés d’Informatique" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9 Instructions conditionnelles et boucles | Travaux dirigés d’Informatique" />
+  
+  
+  
+
+<meta name="author" content="Ewen Gallic" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="régressions-linéaires.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Register.StartupHook("TeX color Ready", function() {
+	     MathJax.Extension["TeX/color"].colors["wongBlack"] = '#000000';
+		 MathJax.Extension["TeX/color"].colors["wongGold"] = '#E69F00';
+		 MathJax.Extension["TeX/color"].colors["wongLightBlue"] = '#56B4E9';
+		 MathJax.Extension["TeX/color"].colors["wongGreen"] = '#009E73';
+		 MathJax.Extension["TeX/color"].colors["wongYellow"] = '#F0E442';
+		 MathJax.Extension["TeX/color"].colors["wongBlue"] = '#0072B2';
+		 MathJax.Extension["TeX/color"].colors["wongOrange"] = '#D55E00';
+		 MathJax.Extension["TeX/color"].colors["wongPurple"] = '#CC79A7';
+		 
+		 
+		 MathJax.Extension["TeX/color"].colors["IBMBlue"] = '#648FFF';
+		 MathJax.Extension["TeX/color"].colors["IBMPurple"] = '#785EF0';
+		 MathJax.Extension["TeX/color"].colors["IBMMagenta"] = '#DC267F';
+		 MathJax.Extension["TeX/color"].colors["IBMOrange"] = '#FE6100';
+		 MathJax.Extension["TeX/color"].colors["IBMYellow"] = '#FFB000';
+	});
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="initiation-à-r.html"><a href="initiation-à-r.html"><i class="fa fa-check"></i><b>1</b> Initiation à R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="initiation-à-r.html"><a href="initiation-à-r.html#travailler-par-projets"><i class="fa fa-check"></i><b>1.1</b> Travailler par projets</a></li>
+<li class="chapter" data-level="1.2" data-path="initiation-à-r.html"><a href="initiation-à-r.html#création-modification-suppression-dun-objet"><i class="fa fa-check"></i><b>1.2</b> Création, modification, suppression d’un objet</a></li>
+<li class="chapter" data-level="1.3" data-path="initiation-à-r.html"><a href="initiation-à-r.html#lecture-dune-page-daide"><i class="fa fa-check"></i><b>1.3</b> Lecture d’une page d’aide</a></li>
+<li class="chapter" data-level="1.4" data-path="initiation-à-r.html"><a href="initiation-à-r.html#installation-et-chargement-dun-package"><i class="fa fa-check"></i><b>1.4</b> Installation et chargement d’un package</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html"><i class="fa fa-check"></i><b>2</b> Type des données et première structure</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#types-de-données"><i class="fa fa-check"></i><b>2.1</b> Types de données</a></li>
+<li class="chapter" data-level="2.2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#structure-de-données-les-vecteurs"><i class="fa fa-check"></i><b>2.2</b> Structure de données : les vecteurs</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-position"><i class="fa fa-check"></i><b>2.2.1</b> Indexation par position</a></li>
+<li class="chapter" data-level="2.2.2" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-nom"><i class="fa fa-check"></i><b>2.2.2</b> Indexation par nom</a></li>
+<li class="chapter" data-level="2.2.3" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#indexation-par-condition"><i class="fa fa-check"></i><b>2.2.3</b> Indexation par condition</a></li>
+<li class="chapter" data-level="2.2.4" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#gestion-des-valeurs-manquantes"><i class="fa fa-check"></i><b>2.2.4</b> Gestion des valeurs manquantes</a></li>
+<li class="chapter" data-level="2.2.5" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#remplacement-et-ajout-de-valeurs"><i class="fa fa-check"></i><b>2.2.5</b> Remplacement et ajout de valeurs</a></li>
+<li class="chapter" data-level="2.2.6" data-path="type-des-données-et-première-structure.html"><a href="type-des-données-et-première-structure.html#exercice-de-synthèse"><i class="fa fa-check"></i><b>2.2.6</b> Exercice de synthèse</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html"><i class="fa fa-check"></i><b>3</b> Matrices et listes</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#matrice"><i class="fa fa-check"></i><b>3.1</b> Matrice</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#accès-aux-éléments-dune-matrice"><i class="fa fa-check"></i><b>3.1.1</b> Accès aux éléments d’une matrice</a></li>
+<li class="chapter" data-level="3.1.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#remplacement-et-ajout-de-valeurs-1"><i class="fa fa-check"></i><b>3.1.2</b> Remplacement et ajout de valeurs</a></li>
+<li class="chapter" data-level="3.1.3" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#calculs-matriciels"><i class="fa fa-check"></i><b>3.1.3</b> Calculs matriciels</a></li>
+<li class="chapter" data-level="3.1.4" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#combiner-des-matrices"><i class="fa fa-check"></i><b>3.1.4</b> Combiner des matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#listes"><i class="fa fa-check"></i><b>3.2</b> Listes</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#accès-aux-éléments"><i class="fa fa-check"></i><b>3.2.1</b> Accès aux éléments</a></li>
+<li class="chapter" data-level="3.2.2" data-path="matrices-et-listes.html"><a href="matrices-et-listes.html#remplacement-et-ajout-déléments"><i class="fa fa-check"></i><b>3.2.2</b> Remplacement et ajout d’éléments</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html"><i class="fa fa-check"></i><b>4</b> Importation et exportation de donnée</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#chargement-de-données-chemins"><i class="fa fa-check"></i><b>4.1</b> Chargement de données : chemins</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#avantages-de-lutilisation-de-chemins-relatifs"><i class="fa fa-check"></i><b>4.1.1</b> Avantages de l’utilisation de chemins relatifs</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#chargement-de-formats-différents"><i class="fa fa-check"></i><b>4.2</b> Chargement de formats différents</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichiers-texte"><i class="fa fa-check"></i><b>4.2.1</b> Fichiers texte</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichier-excel"><i class="fa fa-check"></i><b>4.2.2</b> Fichier Excel</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#fichiers-r"><i class="fa fa-check"></i><b>4.2.3</b> Fichiers R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#exportation"><i class="fa fa-check"></i><b>4.3</b> Exportation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#format-texte"><i class="fa fa-check"></i><b>4.3.1</b> Format texte</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importation-et-exportation-de-donnée.html"><a href="importation-et-exportation-de-donnée.html#format-r"><i class="fa fa-check"></i><b>4.3.2</b> Format R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html"><i class="fa fa-check"></i><b>5</b> Tableaux de données</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#importation-des-données-de-la-séance"><i class="fa fa-check"></i><b>5.1</b> Importation des données de la séance</a></li>
+<li class="chapter" data-level="5.2" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#tibbles"><i class="fa fa-check"></i><b>5.2</b> Tibbles</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#dimensions"><i class="fa fa-check"></i><b>5.2.1</b> Dimensions</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#accès-aux-éléments-1"><i class="fa fa-check"></i><b>5.2.2</b> Accès aux éléments</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#résumés-statistiques-sur-les-colonnes-dun-tableau"><i class="fa fa-check"></i><b>5.3</b> Résumés statistiques sur les colonnes d’un tableau</a></li>
+<li class="chapter" data-level="5.4" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#sélection-dune-ou-plusieurs-colonnes"><i class="fa fa-check"></i><b>5.4</b> Sélection d’une ou plusieurs colonnes</a></li>
+<li class="chapter" data-level="5.5" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#créationmodification-dune-nouvelle-colonne"><i class="fa fa-check"></i><b>5.5</b> Création/Modification d’une nouvelle colonne</a></li>
+<li class="chapter" data-level="5.6" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#renommer-une-colonne"><i class="fa fa-check"></i><b>5.6</b> Renommer une colonne</a></li>
+<li class="chapter" data-level="5.7" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#filtrage"><i class="fa fa-check"></i><b>5.7</b> Filtrage</a></li>
+<li class="chapter" data-level="5.8" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#résumés-statistiques-sur-lensemble-du-tableau"><i class="fa fa-check"></i><b>5.8</b> Résumés statistiques sur l’ensemble du tableau</a></li>
+<li class="chapter" data-level="5.9" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#agrégation-par-groupes"><i class="fa fa-check"></i><b>5.9</b> Agrégation par groupes</a></li>
+<li class="chapter" data-level="5.10" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#tri"><i class="fa fa-check"></i><b>5.10</b> Tri</a></li>
+<li class="chapter" data-level="5.11" data-path="tableaux-de-données.html"><a href="tableaux-de-données.html#jointures"><i class="fa fa-check"></i><b>5.11</b> Jointures</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>6</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="r-markdown.html"><a href="r-markdown.html#créer-un-document-r-markdown-avec-rstudio"><i class="fa fa-check"></i><b>6.1</b> Créer un document R Markdown avec RStudio</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="r-markdown.html"><a href="r-markdown.html#yaml"><i class="fa fa-check"></i><b>6.1.1</b> YAML</a></li>
+<li class="chapter" data-level="6.1.2" data-path="r-markdown.html"><a href="r-markdown.html#textes"><i class="fa fa-check"></i><b>6.1.2</b> Textes</a></li>
+<li class="chapter" data-level="6.1.3" data-path="r-markdown.html"><a href="r-markdown.html#morceaux-de-code"><i class="fa fa-check"></i><b>6.1.3</b> Morceaux de code</a></li>
+<li class="chapter" data-level="6.1.4" data-path="r-markdown.html"><a href="r-markdown.html#compilation"><i class="fa fa-check"></i><b>6.1.4</b> Compilation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="r-markdown.html"><a href="r-markdown.html#markdown"><i class="fa fa-check"></i><b>6.2</b> Ecriture du texte : syntaxe en Markdown</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="r-markdown.html"><a href="r-markdown.html#texte"><i class="fa fa-check"></i><b>6.2.1</b> Texte</a></li>
+<li class="chapter" data-level="6.2.2" data-path="r-markdown.html"><a href="r-markdown.html#styles-de-texte"><i class="fa fa-check"></i><b>6.2.2</b> Styles de texte</a></li>
+<li class="chapter" data-level="6.2.3" data-path="r-markdown.html"><a href="r-markdown.html#titres"><i class="fa fa-check"></i><b>6.2.3</b> Titres</a></li>
+<li class="chapter" data-level="6.2.4" data-path="r-markdown.html"><a href="r-markdown.html#citations"><i class="fa fa-check"></i><b>6.2.4</b> Citations</a></li>
+<li class="chapter" data-level="6.2.5" data-path="r-markdown.html"><a href="r-markdown.html#tirets-longs-tirets-moyens"><i class="fa fa-check"></i><b>6.2.5</b> Tirets longs, tirets moyens</a></li>
+<li class="chapter" data-level="6.2.6" data-path="r-markdown.html"><a href="r-markdown.html#lignes-horizontale"><i class="fa fa-check"></i><b>6.2.6</b> Lignes horizontale</a></li>
+<li class="chapter" data-level="6.2.7" data-path="r-markdown.html"><a href="r-markdown.html#points-de-suspension"><i class="fa fa-check"></i><b>6.2.7</b> Points de suspension</a></li>
+<li class="chapter" data-level="6.2.8" data-path="r-markdown.html"><a href="r-markdown.html#liens-hypertextes"><i class="fa fa-check"></i><b>6.2.8</b> Liens hypertextes</a></li>
+<li class="chapter" data-level="6.2.9" data-path="r-markdown.html"><a href="r-markdown.html#notes-de-bas-de-page"><i class="fa fa-check"></i><b>6.2.9</b> Notes de bas de page</a></li>
+<li class="chapter" data-level="6.2.10" data-path="r-markdown.html"><a href="r-markdown.html#listes-1"><i class="fa fa-check"></i><b>6.2.10</b> Listes</a></li>
+<li class="chapter" data-level="6.2.11" data-path="r-markdown.html"><a href="r-markdown.html#listes-imbriquées"><i class="fa fa-check"></i><b>6.2.11</b> Listes imbriquées</a></li>
+<li class="chapter" data-level="6.2.12" data-path="r-markdown.html"><a href="r-markdown.html#images"><i class="fa fa-check"></i><b>6.2.12</b> Images</a></li>
+<li class="chapter" data-level="6.2.13" data-path="r-markdown.html"><a href="r-markdown.html#tableaux"><i class="fa fa-check"></i><b>6.2.13</b> Tableaux</a></li>
+<li class="chapter" data-level="6.2.14" data-path="r-markdown.html"><a href="r-markdown.html#formules-mathématiques-en-latex"><i class="fa fa-check"></i><b>6.2.14</b> Formules mathématiques en LaTeX</a></li>
+<li class="chapter" data-level="6.2.15" data-path="r-markdown.html"><a href="r-markdown.html#md-codes-blocs-codes"><i class="fa fa-check"></i><b>6.2.15</b> Codes et blocs de code</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="r-markdown.html"><a href="r-markdown.html#morceaux-de-code-1"><i class="fa fa-check"></i><b>6.3</b> Morceaux de code</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="r-markdown.html"><a href="r-markdown.html#codes-en-ligne"><i class="fa fa-check"></i><b>6.3.1</b> Codes en ligne</a></li>
+<li class="chapter" data-level="6.3.2" data-path="r-markdown.html"><a href="r-markdown.html#blocs-de-code"><i class="fa fa-check"></i><b>6.3.2</b> Blocs de code</a></li>
+<li class="chapter" data-level="6.3.3" data-path="r-markdown.html"><a href="r-markdown.html#mise-en-cache"><i class="fa fa-check"></i><b>6.3.3</b> Mise en cache</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="r-markdown.html"><a href="r-markdown.html#insertion-dune-bibliographie"><i class="fa fa-check"></i><b>6.4</b> Insertion d’une bibliographie</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="r-markdown.html"><a href="r-markdown.html#création-du-fichier-de-bibliographie"><i class="fa fa-check"></i><b>6.4.1</b> Création du fichier de bibliographie</a></li>
+<li class="chapter" data-level="6.4.2" data-path="r-markdown.html"><a href="r-markdown.html#lier-le-fichier-dentrées-bibliographiques-avec-le-document-rmarkdown"><i class="fa fa-check"></i><b>6.4.2</b> Lier le fichier d’entrées bibliographiques avec le document RMarkdown</a></li>
+<li class="chapter" data-level="6.4.3" data-path="r-markdown.html"><a href="r-markdown.html#citer-les-documents-dans-le-corps-de-texte"><i class="fa fa-check"></i><b>6.4.3</b> Citer les documents dans le corps de texte</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html"><i class="fa fa-check"></i><b>7</b> Statistiques descriptives</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#données-du-chapitre"><i class="fa fa-check"></i><b>7.1</b> Données du chapitre</a></li>
+<li class="chapter" data-level="7.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#résumés-statistiques-à-la-main"><i class="fa fa-check"></i><b>7.2</b> Résumés statistiques à la main</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#dimensions-résumés-grossiers"><i class="fa fa-check"></i><b>7.2.1</b> Dimensions, résumés grossiers</a></li>
+<li class="chapter" data-level="7.2.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#exploration-des-valeurs-avec-des-tableaux"><i class="fa fa-check"></i><b>7.2.2</b> Exploration des valeurs avec des tableaux</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#résumés-avec-gtsummary-vers-la-communication-des-résultats"><i class="fa fa-check"></i><b>7.3</b> Résumés avec gtsummary : vers la communication des résultats</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html"><i class="fa fa-check"></i><b>8</b> Régressions linéaires</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#contexte-et-rappels"><i class="fa fa-check"></i><b>8.1</b> Contexte et rappels</a></li>
+<li class="chapter" data-level="8.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#chargement-du-jeu-de-données"><i class="fa fa-check"></i><b>8.2</b> Chargement du jeu de données</a></li>
+<li class="chapter" data-level="8.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#régression-pas-à-pas"><i class="fa fa-check"></i><b>8.3</b> Régression pas à pas</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#estimation-des-coefficients-de-la-régression-par-moindres-carrés-ordinaires"><i class="fa fa-check"></i><b>8.3.1</b> Estimation des coefficients de la régression par moindres carrés ordinaires</a></li>
+<li class="chapter" data-level="8.3.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#prédiction-des-valeurs"><i class="fa fa-check"></i><b>8.3.2</b> Prédiction des valeurs</a></li>
+<li class="chapter" data-level="8.3.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#les-résidus-de-la-régression"><i class="fa fa-check"></i><b>8.3.3</b> Les résidus de la régression</a></li>
+<li class="chapter" data-level="8.3.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#un-indicateur-de-la-qualité-dajustement-le-coefficient-de-détermination"><i class="fa fa-check"></i><b>8.3.4</b> Un indicateur de la qualité d’ajustement : le coefficient de détermination</a></li>
+<li class="chapter" data-level="8.3.5" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire"><i class="fa fa-check"></i><b>8.3.5</b> Tests de nullité des coefficients de la régression linéaire</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#régression-avec-lm"><i class="fa fa-check"></i><b>8.4</b> Régression avec lm</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#résumé-de-lestimation"><i class="fa fa-check"></i><b>8.4.1</b> Résumé de l’estimation</a></li>
+<li class="chapter" data-level="8.4.2" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#prédictions-des-valeurs"><i class="fa fa-check"></i><b>8.4.2</b> Prédictions des valeurs</a></li>
+<li class="chapter" data-level="8.4.3" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#tests-de-nullité-des-coefficients-de-la-régression-linéaire-1"><i class="fa fa-check"></i><b>8.4.3</b> Tests de nullité des coefficients de la régression linéaire</a></li>
+<li class="chapter" data-level="8.4.4" data-path="régressions-linéaires.html"><a href="régressions-linéaires.html#mise-en-forme-des-résultats-avec-modelsummary"><i class="fa fa-check"></i><b>8.4.4</b> Mise en forme des résultats avec modelsummary</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html"><i class="fa fa-check"></i><b>9</b> Instructions conditionnelles et boucles</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instructions-conditionnelles"><i class="fa fa-check"></i><b>9.1</b> Instructions conditionnelles</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instruction-if"><i class="fa fa-check"></i><b>9.1.1</b> Instruction <code>if</code></a></li>
+<li class="chapter" data-level="9.1.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#instruction-if-else"><i class="fa fa-check"></i><b>9.1.2</b> Instruction <code>if-else</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles"><i class="fa fa-check"></i><b>9.2</b> Boucles</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles-while"><i class="fa fa-check"></i><b>9.2.1</b> Boucles <code>while()</code></a></li>
+<li class="chapter" data-level="9.2.2" data-path="instructions-conditionnelles-et-boucles.html"><a href="instructions-conditionnelles-et-boucles.html#boucles-for"><i class="fa fa-check"></i><b>9.2.2</b> Boucles <code>for()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>10</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Travaux dirigés d’Informatique</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="instructions-conditionnelles-et-boucles" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> Instructions conditionnelles et boucles<a href="instructions-conditionnelles-et-boucles.html#instructions-conditionnelles-et-boucles" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="orangebox">
+<p>Ce chapitre s’appuie sur les notes de cours concernant les <a href="http://egallic.fr/Enseignement/R/Book/boucles.html">boucles</a>.</p>
+</div>
+<p>Lorsqu’une ou plusieurs instructions doivent être répétées jusqu’à ce qu’une condition soit atteinte, plutôt que d’évaluer manuellement chaque itération du processus de répétition, nous pouvons utiliser des boucles. Dans ce chapitre, nous allons dans un premier temps aborder la notion d’instructions conditionnelles, puis nous verrons deux types de boucles.</p>
+<div id="instructions-conditionnelles" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Instructions conditionnelles<a href="instructions-conditionnelles-et-boucles.html#instructions-conditionnelles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dans le <a href="type-des-données-et-première-structure.html#types-de-données">chapitre 2</a>, nous avons rencontré les données de type logique (<code class="sourceCode r"><span class="cn">TRUE</span></code>, <code class="sourceCode r"><span class="cn">FALSE</span></code> et <code class="sourceCode r"><span class="cn">NA</span></code>). Lorsque nous avons réalisé des indexations d’objets par condition, nous avons fait appel à des valeurs logiques retournées par l’évaluation <strong>d’instructions conditionnelles</strong>. Dans ce chapitre, nous allons également nous appuyer sur des valeurs logiques retournées par l’évaluation d’instructions conditionnelles, pour savoir si un morceau de code doit être évalué ou non. La compréhension du fonctionnement des intructions conditionnelles nous permettra par la suite de pouvoir utiliser des boucles, pour savoir si le processur itératif doit continuer ou s’arrêter.</p>
+<div id="instruction-if" class="section level3 hasAnchor" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Instruction <code>if</code><a href="instructions-conditionnelles-et-boucles.html#instruction-if" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Avec une instruction <code>if</code>, une action sera prise seulement si une condition particulière est vérifiée. La syntaxe est simple :</p>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="instructions-conditionnelles-et-boucles.html#cb581-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(instruction_conditionnelle) action</span></code></pre></div>
+<p>avec <code>instruction_conditionnelle</code> une instruction conditionnelle retournant une valeur logique, et <code>action</code> une instruction qui sera évaluée uniquement si le logique retourné par l’instruction conditionnelle vaut <code class="sourceCode r"><span class="cn">TRUE</span></code>.</p>
+<p>Voici un exemple simple. Admettons que nous disposons d’un objet <code>x</code> contenant un entier naturel. Par xemple, supposons que <code>x</code> contient l’âge d’une personne, et que nous soyons amenés à divulguer une information à cette personne que si celle-ci a 13 ans ou plus. L’information peut être par exemple l’affichage du message suivant : “La fée des dents n’existe pas”.</p>
+<p>Admettons que la personne nous ait indiqué avoir 22 ans.</p>
+<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="instructions-conditionnelles-et-boucles.html#cb582-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">22</span></span></code></pre></div>
+<p>Pour vérifier si la personne a 13 ans ou plus, on peut écrire l’instruction conditionnelle suivante, qui nous retourne <code class="sourceCode r"><span class="cn">TRUE</span></code> ici :</p>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="instructions-conditionnelles-et-boucles.html#cb583-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;=</span> <span class="dv">13</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Écrivons à présent notre instruction conditionnelle. Si la personne a 13 ans ou plus, nous afficherons un message dans la console, à l’aide de la fonction <code class="sourceCode r"><span class="fu">print</span>()</code> :</p>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="instructions-conditionnelles-et-boucles.html#cb585-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;=</span> <span class="dv">13</span>) <span class="fu">print</span>(<span class="st">&quot;La fée des dents n&#39;existe pas&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;La fée des dents n&#39;existe pas&quot;</code></pre>
+<p>Admettons à présent que la personne à qui nous faisons face n’est âgée que de 5 ans.</p>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="instructions-conditionnelles-et-boucles.html#cb587-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
+<p>Cette fois-ci, lorsqu’on évalue notre instruction conditionnelle, la valeur logique retournée est <code class="sourceCode r"><span class="cn">FALSE</span></code> :</p>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="instructions-conditionnelles-et-boucles.html#cb588-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;=</span> <span class="dv">13</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Aussi, l’évaluation de notre instruction <code>if</code> ne donnera pas lieu à l’évaluation de l’action :</p>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="instructions-conditionnelles-et-boucles.html#cb590-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;=</span> <span class="dv">13</span>) <span class="fu">print</span>(<span class="st">&quot;La fée des dents n&#39;existe pas&quot;</span>)</span></code></pre></div>
+<p>Si l’action à réaliser est composée de plusieurs instructions, la syntaxe de l’instruction <code>if</code> est légèrement modifiée : l’action est simplement placée à l’intérieur d’accolades <code class="sourceCode r">{}</code>.</p>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="instructions-conditionnelles-et-boucles.html#cb591-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(instruction_conditionnelle) {</span>
+<span id="cb591-2"><a href="instructions-conditionnelles-et-boucles.html#cb591-2" aria-hidden="true" tabindex="-1"></a>  action_1</span>
+<span id="cb591-3"><a href="instructions-conditionnelles-et-boucles.html#cb591-3" aria-hidden="true" tabindex="-1"></a>  action_2</span>
+<span id="cb591-4"><a href="instructions-conditionnelles-et-boucles.html#cb591-4" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb591-5"><a href="instructions-conditionnelles-et-boucles.html#cb591-5" aria-hidden="true" tabindex="-1"></a>  action_n</span>
+<span id="cb591-6"><a href="instructions-conditionnelles-et-boucles.html#cb591-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Retournons à notre exemple pour illustrer cela. Admettons que nous souhaitons afficher la carré de l’âge de la personne en plus du message.</p>
+<p>Retournons à notre individu de 22 ans :</p>
+<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="instructions-conditionnelles-et-boucles.html#cb592-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">22</span></span></code></pre></div>
+<p>L’instruction <code>if</code> :</p>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="instructions-conditionnelles-et-boucles.html#cb593-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;=</span> <span class="dv">13</span>) {</span>
+<span id="cb593-2"><a href="instructions-conditionnelles-et-boucles.html#cb593-2" aria-hidden="true" tabindex="-1"></a>  age_carre <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb593-3"><a href="instructions-conditionnelles-et-boucles.html#cb593-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Votre age au carré vaut :&quot;</span>, age_carre))</span>
+<span id="cb593-4"><a href="instructions-conditionnelles-et-boucles.html#cb593-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;La fée des dents n&#39;existe pas&quot;</span>)</span>
+<span id="cb593-5"><a href="instructions-conditionnelles-et-boucles.html#cb593-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Votre age au carré vaut : 484&quot;
+## [1] &quot;La fée des dents n&#39;existe pas&quot;</code></pre>
+<div class="notebox">
+<p><strong>Note</strong></p>
+<p>L’instruction conditionnelle a été évaluée et la valeur logique <code class="sourceCode r"><span class="cn">TRUE</span></code> a été retournée :</p>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="instructions-conditionnelles-et-boucles.html#cb595-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;=</span> <span class="dv">13</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Comme l’instruction logique vaut <code class="sourceCode r"><span class="cn">TRUE</span></code>, les instructions à l’intérieur des accoldes ont été exécutées. Dans un premier temps, la variable <code>age_carre</code> a été créée. On peut noter que cette variable existe encore après l’évaluation de l’instruction <code>if</code> :</p>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="instructions-conditionnelles-et-boucles.html#cb597-1" aria-hidden="true" tabindex="-1"></a>age_carre</span></code></pre></div>
+<pre><code>## [1] 484</code></pre>
+<p>Ensuite, les deux instructions suivantes permettant d’afficher des messages dans la console ont été évaluées.</p>
+</div>
+<p>Si notre individu est plus jeune :</p>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="instructions-conditionnelles-et-boucles.html#cb599-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
+<p>Le test <code class="sourceCode r">x <span class="sc">&gt;=</span><span class="dv">13</span></code> retourne <code class="sourceCode r"><span class="cn">FALSE</span></code> et les actions à l’intérieur des accolades ne sont pas réalisées.</p>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="instructions-conditionnelles-et-boucles.html#cb600-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(x <span class="sc">&gt;=</span> <span class="dv">13</span>) {</span>
+<span id="cb600-2"><a href="instructions-conditionnelles-et-boucles.html#cb600-2" aria-hidden="true" tabindex="-1"></a>  age_carre <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb600-3"><a href="instructions-conditionnelles-et-boucles.html#cb600-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Votre age au carré vaut :&quot;</span>, age_carre))</span>
+<span id="cb600-4"><a href="instructions-conditionnelles-et-boucles.html#cb600-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;La fée des dents n&#39;existe pas&quot;</span>)</span>
+<span id="cb600-5"><a href="instructions-conditionnelles-et-boucles.html#cb600-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="notebox">
+<p><strong>Note</strong></p>
+<p>L’instruction conditionnelle <code class="sourceCode r">x <span class="sc">&gt;=</span><span class="dv">13</span></code> ayant retourné la valeur logique <code class="sourceCode r"><span class="cn">FALSE</span></code>, la valeur de la variable <code>age_carre</code> calculée précédemment n’a pas été modifiée :</p>
+<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="instructions-conditionnelles-et-boucles.html#cb601-1" aria-hidden="true" tabindex="-1"></a>age_carre</span></code></pre></div>
+<pre><code>## [1] 484</code></pre>
+</div>
+<div class="greenbox">
+<ol style="list-style-type: decimal">
+<li><p>La fonction <code class="sourceCode r"><span class="fu">readline</span>()</code> permet de demander à un utilisateur de rentrer une valeur dans la console. En affectant la valeur lue dans la console dans une variable, l’information donnée par l’utilisateur peut être stockée. Évaluez l’instruction suivante, et écrivez votre âge dans la console, puis validez en appuyant sur la touche <code>Entrée</code> :</p>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="instructions-conditionnelles-et-boucles.html#cb603-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">readline</span>(<span class="at">prompt=</span><span class="st">&quot;Votre âge : &quot;</span>)</span></code></pre></div></li>
+<li><p>Rédigez une instruction conditionnelle qui retourne la racine carrée de l’âge renseigné par l’utilisateur (stockée dans l’objet <code>age</code>) uniquement si la valeur stockée dans <code>age</code> est comprise entre 20 et 25.</p></li>
+<li><p>Essayez d’évaluer votre instruction en renseignant différentes valeurs pour âge : 18 ans, 22 ans, 27 ans.</p></li>
+</ol>
+</div>
+</div>
+<div id="instruction-if-else" class="section level3 hasAnchor" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> Instruction <code>if-else</code><a href="instructions-conditionnelles-et-boucles.html#instruction-if-else" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans notre exemple, si l’individu est âgé de 13 ans ou plus, nous lui retournons une information. Dans le cas contraire, aucune action n’est menée. Si nous souhaitons réaliser une action dans les deux cas, que notre individu soit âgé de moins de 13 ans ou qu’il ait 13 ans ou plus, nous pouvons utiliser une instruction <code>if-else</code>. La syntaxe est la suivante :</p>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="instructions-conditionnelles-et-boucles.html#cb604-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(instruction_conditionnelle) {</span>
+<span id="cb604-2"><a href="instructions-conditionnelles-et-boucles.html#cb604-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Si instruction_conditionnelle retourne TRUE</span></span>
+<span id="cb604-3"><a href="instructions-conditionnelles-et-boucles.html#cb604-3" aria-hidden="true" tabindex="-1"></a>  action_1</span>
+<span id="cb604-4"><a href="instructions-conditionnelles-et-boucles.html#cb604-4" aria-hidden="true" tabindex="-1"></a>  action_2</span>
+<span id="cb604-5"><a href="instructions-conditionnelles-et-boucles.html#cb604-5" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb604-6"><a href="instructions-conditionnelles-et-boucles.html#cb604-6" aria-hidden="true" tabindex="-1"></a>  action_n</span>
+<span id="cb604-7"><a href="instructions-conditionnelles-et-boucles.html#cb604-7" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span> {</span>
+<span id="cb604-8"><a href="instructions-conditionnelles-et-boucles.html#cb604-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sinon</span></span>
+<span id="cb604-9"><a href="instructions-conditionnelles-et-boucles.html#cb604-9" aria-hidden="true" tabindex="-1"></a>  action_a</span>
+<span id="cb604-10"><a href="instructions-conditionnelles-et-boucles.html#cb604-10" aria-hidden="true" tabindex="-1"></a>  action_b</span>
+<span id="cb604-11"><a href="instructions-conditionnelles-et-boucles.html#cb604-11" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb604-12"><a href="instructions-conditionnelles-et-boucles.html#cb604-12" aria-hidden="true" tabindex="-1"></a>  action_x</span>
+<span id="cb604-13"><a href="instructions-conditionnelles-et-boucles.html#cb604-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Pour notre individu, s’il est âgé de 13 ans ou plus, nous lui afficherons son âge au carré et le message d’information. Si en revanche l’individu est trop jeune, nous lui indiquerons un autre message. Admettons que l’utilisateur soit âgé de 22 ans :</p>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="instructions-conditionnelles-et-boucles.html#cb605-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">22</span></span></code></pre></div>
+<p>Notre instructions <code>if-else</code> sera :</p>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="instructions-conditionnelles-et-boucles.html#cb606-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(age <span class="sc">&gt;=</span> <span class="dv">13</span>){</span>
+<span id="cb606-2"><a href="instructions-conditionnelles-et-boucles.html#cb606-2" aria-hidden="true" tabindex="-1"></a>  age_carre <span class="ot">&lt;-</span> age<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb606-3"><a href="instructions-conditionnelles-et-boucles.html#cb606-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Votre age au carré vaut :&quot;</span>, age_carre))</span>
+<span id="cb606-4"><a href="instructions-conditionnelles-et-boucles.html#cb606-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;La fée des dents n&#39;existe pas&quot;</span>)</span>
+<span id="cb606-5"><a href="instructions-conditionnelles-et-boucles.html#cb606-5" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb606-6"><a href="instructions-conditionnelles-et-boucles.html#cb606-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;La fée des dents passera-t-elle cette nuit ?&quot;</span>)</span>
+<span id="cb606-7"><a href="instructions-conditionnelles-et-boucles.html#cb606-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Votre age au carré vaut : 484&quot;
+## [1] &quot;La fée des dents n&#39;existe pas&quot;</code></pre>
+<p>Seules les instructions dans le bloc de code correspondant aux actions à conduire si l’âge est supérieur ou égal à 13 sont évaluées. Si à présent notre individu est âgé de 5 ans :</p>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="instructions-conditionnelles-et-boucles.html#cb608-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
+<p>L’instruction logique <code class="sourceCode r">age <span class="sc">&gt;=</span> <span class="dv">13</span></code> retournera <code class="sourceCode r"><span class="cn">FALSE</span></code>. Les actions à mener si l’instruction logique retourne <code class="sourceCode r"><span class="cn">TRUE</span></code> ne seront pas évaluées. En revanche, l’instruction à conduire dans le cas où l’instruction logique retourne <code class="sourceCode r"><span class="cn">FALSE</span></code> sera bien évaluée :</p>
+<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="instructions-conditionnelles-et-boucles.html#cb609-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(age <span class="sc">&gt;=</span> <span class="dv">13</span>){</span>
+<span id="cb609-2"><a href="instructions-conditionnelles-et-boucles.html#cb609-2" aria-hidden="true" tabindex="-1"></a>  age_carre <span class="ot">&lt;-</span> age<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb609-3"><a href="instructions-conditionnelles-et-boucles.html#cb609-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Votre age au carré vaut :&quot;</span>, age_carre))</span>
+<span id="cb609-4"><a href="instructions-conditionnelles-et-boucles.html#cb609-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;La fée des dents n&#39;existe pas&quot;</span>)</span>
+<span id="cb609-5"><a href="instructions-conditionnelles-et-boucles.html#cb609-5" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb609-6"><a href="instructions-conditionnelles-et-boucles.html#cb609-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;La fée des dents passera-t-elle cette nuit ?&quot;</span>)</span>
+<span id="cb609-7"><a href="instructions-conditionnelles-et-boucles.html#cb609-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;La fée des dents passera-t-elle cette nuit ?&quot;</code></pre>
+<p>Il est possible d’imbriquer des conditions <code>if</code> ou <code>if-else</code> à l’intérieure de conditions <code>if</code> et <code>if-else</code>. Par</p>
+<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb611-1"><a href="instructions-conditionnelles-et-boucles.html#cb611-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">22</span></span>
+<span id="cb611-2"><a href="instructions-conditionnelles-et-boucles.html#cb611-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb611-3"><a href="instructions-conditionnelles-et-boucles.html#cb611-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(age <span class="sc">&gt;=</span> <span class="dv">13</span>){</span>
+<span id="cb611-4"><a href="instructions-conditionnelles-et-boucles.html#cb611-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb611-5"><a href="instructions-conditionnelles-et-boucles.html#cb611-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(age <span class="sc">&gt;=</span> <span class="dv">18</span>){</span>
+<span id="cb611-6"><a href="instructions-conditionnelles-et-boucles.html#cb611-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Vous êtes majeur(e)&quot;</span>)</span>
+<span id="cb611-7"><a href="instructions-conditionnelles-et-boucles.html#cb611-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb611-8"><a href="instructions-conditionnelles-et-boucles.html#cb611-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb611-9"><a href="instructions-conditionnelles-et-boucles.html#cb611-9" aria-hidden="true" tabindex="-1"></a>  age_carre <span class="ot">&lt;-</span> age<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb611-10"><a href="instructions-conditionnelles-et-boucles.html#cb611-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Votre age au carré vaut :&quot;</span>, age_carre))</span>
+<span id="cb611-11"><a href="instructions-conditionnelles-et-boucles.html#cb611-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;La fée des dents n&#39;existe pas&quot;</span>)</span>
+<span id="cb611-12"><a href="instructions-conditionnelles-et-boucles.html#cb611-12" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb611-13"><a href="instructions-conditionnelles-et-boucles.html#cb611-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb611-14"><a href="instructions-conditionnelles-et-boucles.html#cb611-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(age <span class="sc">&lt;</span> <span class="dv">7</span>){</span>
+<span id="cb611-15"><a href="instructions-conditionnelles-et-boucles.html#cb611-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Vous n&#39;avez pas atteint l&#39;âge de raison&quot;</span>)</span>
+<span id="cb611-16"><a href="instructions-conditionnelles-et-boucles.html#cb611-16" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb611-17"><a href="instructions-conditionnelles-et-boucles.html#cb611-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Vous avez atteint l&#39;âge de raison&quot;</span>)</span>
+<span id="cb611-18"><a href="instructions-conditionnelles-et-boucles.html#cb611-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb611-19"><a href="instructions-conditionnelles-et-boucles.html#cb611-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb611-20"><a href="instructions-conditionnelles-et-boucles.html#cb611-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;La fée des dents passera-t-elle cette nuit ?&quot;</span>)</span>
+<span id="cb611-21"><a href="instructions-conditionnelles-et-boucles.html#cb611-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Vous êtes majeur(e)&quot;
+## [1] &quot;Votre age au carré vaut : 484&quot;
+## [1] &quot;La fée des dents n&#39;existe pas&quot;</code></pre>
+<p>Dans le code précédent :</p>
+<ul>
+<li><p>Si la valeur de l’objet <code>age</code> est supérieure ou égale à 13 :</p>
+<ul>
+<li>Si la valeur de l’objet <code>age</code> est supérieure ou égale à 18 : le message “Vous êtes majeur(e)” s’affiche</li>
+<li>Si la valeur de l’objet <code>age</code> est n’est pas supérieure ou égale à 18, le message “Vous êtes majeur(e)” ne s’affiche pas</li>
+<li>Que la valeur de l’objet <code>age</code> soit supérieure ou égal à 18 ou non, du moment qu’elle est supérieure ou égale à 13, le carré de l’âge est calculé et les deux messages indiquant la valeur de l’âge au carré et la terrible vérité au sujet de l’existance de la fée des dents s’affichent.</li>
+</ul></li>
+<li><p>Si la valeur de l’objet <code>age</code> n’est pas supérieure ou égale à 13 :</p>
+<ul>
+<li>Si de surcroît la valeur de l’objet <code>age</code> est inférieure à 7 : le message “Vous n’avez pas atteint l’âge de raison” s’affiche</li>
+<li>Si en revanche la valeur de l’objet <code>age</code> n’est pas inférieure à 7 (mais bien inférieure à 13) : le message “Vous avez atteint l’âge de raison” s’affiche.</li>
+<li>Que la valeur de l’objet <code>age</code> soit inférieure ou non à 7 (du moment qu’elle est inférieure à 13), le message “La fée des dents passera-t-elle cette nuit ?” s’affiche.</li>
+</ul></li>
+</ul>
+<div class="greenbox">
+<ol style="list-style-type: decimal">
+<li><p>Demandez à l’utilisateur de renseigner sa moyenne dans les deux Éléments Constitutifs de l’Unité d’Enseignement d’Economie et Finance internationales :</p>
+<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb613-1"><a href="instructions-conditionnelles-et-boucles.html#cb613-1" aria-hidden="true" tabindex="-1"></a>finance_inter <span class="ot">&lt;-</span> </span>
+<span id="cb613-2"><a href="instructions-conditionnelles-et-boucles.html#cb613-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">readline</span>(<span class="at">prompt=</span><span class="st">&quot;Votre moyenne en Finance internationale : &quot;</span>)</span>
+<span id="cb613-3"><a href="instructions-conditionnelles-et-boucles.html#cb613-3" aria-hidden="true" tabindex="-1"></a>eco_inter <span class="ot">&lt;-</span> </span>
+<span id="cb613-4"><a href="instructions-conditionnelles-et-boucles.html#cb613-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">readline</span>(<span class="at">prompt=</span><span class="st">&quot;Votre moyenne en Economie internationale : &quot;</span>)</span></code></pre></div></li>
+<li><p>Si la moyenne à l’Unité d’Enseignement est supérieure ou égale à 10, affichez dans la console le message suivant : “Vous validez l’UE”. Si en revanche la moyenne est inférieure à 10, affichez dans la console le message “Vous ne validez pas l’UE”.</p></li>
+<li><p>Reprenez le code de la question précédente, et ajoutez la fonctionnalité suivantes :</p>
+<ul>
+<li>Si la personne ne valide pas l’Unité d’Enseignement (moyenne aux deux épreuves inférieure à 10), indiquez-lui quelles sont les matières à repasser (uniquement celles pour lesquelles la note est strictement inférieure à 10).</li>
+</ul></li>
+</ol>
+</div>
+<p>Il est possible de vérifier successivement des instructions conditionnelles et d’effectuer une action dès lors qu’une des instructions est évaluée à <code class="sourceCode r"><span class="cn">TRUE</span></code>. Pour notre exemple de message à afficher en fonction de l’âge de l’utilisateur, on peut dans un premier temps regarder si l’individu a moins de 13 ans et lui adresser un message adapté ; puis, s’il n’a pas moins de 13 ans, s’il a moins de 18 ans et lui adresser un autre message ; et enfin, s’il n’a pas moins de 18, lui retourner un message encore différent. La syntaxe de ce type d’expression sera la suivante :</p>
+<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="instructions-conditionnelles-et-boucles.html#cb614-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(instruction_conditionnelle_1){</span>
+<span id="cb614-2"><a href="instructions-conditionnelles-et-boucles.html#cb614-2" aria-hidden="true" tabindex="-1"></a>  actions_1</span>
+<span id="cb614-3"><a href="instructions-conditionnelles-et-boucles.html#cb614-3" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span> <span class="cf">if</span>(instruction_conditionnelle_2){</span>
+<span id="cb614-4"><a href="instructions-conditionnelles-et-boucles.html#cb614-4" aria-hidden="true" tabindex="-1"></a>  actions_2</span>
+<span id="cb614-5"><a href="instructions-conditionnelles-et-boucles.html#cb614-5" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb614-6"><a href="instructions-conditionnelles-et-boucles.html#cb614-6" aria-hidden="true" tabindex="-1"></a>  actions_3</span>
+<span id="cb614-7"><a href="instructions-conditionnelles-et-boucles.html#cb614-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Si notre individu a 7 ans :</p>
+<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="instructions-conditionnelles-et-boucles.html#cb615-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb615-2"><a href="instructions-conditionnelles-et-boucles.html#cb615-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb615-3"><a href="instructions-conditionnelles-et-boucles.html#cb615-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(age <span class="sc">&lt;</span> <span class="dv">13</span>){</span>
+<span id="cb615-4"><a href="instructions-conditionnelles-et-boucles.html#cb615-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;L&#39;âge que vous avez indiqué :&quot;</span>, age, <span class="st">&quot;ans&quot;</span>))</span>
+<span id="cb615-5"><a href="instructions-conditionnelles-et-boucles.html#cb615-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;L&#39;âge minimum pour s&#39;inscrire est de 13 ans.&quot;</span>)</span>
+<span id="cb615-6"><a href="instructions-conditionnelles-et-boucles.html#cb615-6" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span> <span class="cf">if</span>(age <span class="sc">&lt;</span> <span class="dv">18</span>){</span>
+<span id="cb615-7"><a href="instructions-conditionnelles-et-boucles.html#cb615-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;L&#39;âge que vous avez indiqué :&quot;</span>, age, <span class="st">&quot;ans&quot;</span>))</span>
+<span id="cb615-8"><a href="instructions-conditionnelles-et-boucles.html#cb615-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Contenus sensibles masqués.&quot;</span>)</span>
+<span id="cb615-9"><a href="instructions-conditionnelles-et-boucles.html#cb615-9" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb615-10"><a href="instructions-conditionnelles-et-boucles.html#cb615-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;L&#39;âge que vous avez indiqué :&quot;</span>, age, <span class="st">&quot;ans&quot;</span>))</span>
+<span id="cb615-11"><a href="instructions-conditionnelles-et-boucles.html#cb615-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Contenus sensibles non masqués.&quot;</span>)</span>
+<span id="cb615-12"><a href="instructions-conditionnelles-et-boucles.html#cb615-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;L&#39;âge que vous avez indiqué : 7 ans&quot;
+## [1] &quot;L&#39;âge minimum pour s&#39;inscrire est de 13 ans.&quot;</code></pre>
+<p>La valeur de l’objet <code>age</code> étant <code class="sourceCode r"><span class="dv">7</span></code>, l’instruction <code class="sourceCode r">age <span class="sc">&lt;</span> <span class="dv">13</span></code> retourne <code class="sourceCode r"><span class="cn">TRUE</span></code> et seules les instructions à l’intérieur du premier bloc défini par les accolades sont exécutées.</p>
+<p>Si notre individu a 22 ans :</p>
+<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="instructions-conditionnelles-et-boucles.html#cb617-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">22</span></span>
+<span id="cb617-2"><a href="instructions-conditionnelles-et-boucles.html#cb617-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb617-3"><a href="instructions-conditionnelles-et-boucles.html#cb617-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(age <span class="sc">&lt;=</span> <span class="dv">13</span>){</span>
+<span id="cb617-4"><a href="instructions-conditionnelles-et-boucles.html#cb617-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;L&#39;âge que vous avez indiqué :&quot;</span>, age, <span class="st">&quot;ans&quot;</span>))</span>
+<span id="cb617-5"><a href="instructions-conditionnelles-et-boucles.html#cb617-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;L&#39;âge minimum pour s&#39;inscrire est de 13 ans.&quot;</span>)</span>
+<span id="cb617-6"><a href="instructions-conditionnelles-et-boucles.html#cb617-6" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span> <span class="cf">if</span>(age <span class="sc">&lt;</span> <span class="dv">18</span>){</span>
+<span id="cb617-7"><a href="instructions-conditionnelles-et-boucles.html#cb617-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;L&#39;âge que vous avez indiqué :&quot;</span>, age, <span class="st">&quot;ans&quot;</span>))</span>
+<span id="cb617-8"><a href="instructions-conditionnelles-et-boucles.html#cb617-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Contenus sensibles masqués.&quot;</span>)</span>
+<span id="cb617-9"><a href="instructions-conditionnelles-et-boucles.html#cb617-9" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
+<span id="cb617-10"><a href="instructions-conditionnelles-et-boucles.html#cb617-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;L&#39;âge que vous avez indiqué :&quot;</span>, age, <span class="st">&quot;ans&quot;</span>))</span>
+<span id="cb617-11"><a href="instructions-conditionnelles-et-boucles.html#cb617-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Contenus sensibles non masqués.&quot;</span>)</span>
+<span id="cb617-12"><a href="instructions-conditionnelles-et-boucles.html#cb617-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;L&#39;âge que vous avez indiqué : 22 ans&quot;
+## [1] &quot;Contenus sensibles non masqués.&quot;</code></pre>
+<p>La valeur de l’objet <code>age</code> étant <code class="sourceCode r"><span class="dv">7</span></code>, l’instruction <code class="sourceCode r">age <span class="sc">&lt;</span> <span class="dv">13</span></code> retourne <code class="sourceCode r"><span class="cn">FALSE</span></code>. Les instructions à l’intérieur du premier bloc défini par les accolades ne sont pas exécutées. La deuxième instruction conditionnelle, <code class="sourceCode r">age <span class="sc">&lt;</span> <span class="dv">18</span></code>, est évaluée et retourne <code class="sourceCode r"><span class="cn">FALSE</span></code>. Les instructions à l’intérieur du deuxième bloc défini par les accolades ne sont pas exécutées. Il n’y a pas d’autres instruction conditionnelle avant le mot clé <code class="sourceCode r"><span class="cf">else</span></code>, donc le code à l’intérieur du bloc défini par les accolades associées à <code class="sourceCode r"><span class="cf">else</span></code> est évalué.</p>
+</div>
+</div>
+<div id="boucles" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Boucles<a href="instructions-conditionnelles-et-boucles.html#boucles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Il existe deux sortes de boucles dans R. Celles pour lesquelles les itérations continuent tant qu’une condition n’est pas invalidée (<code class="sourceCode r"><span class="cf">while</span>()</code>), et celles pour lesquelles le nombre d’itérations est défini au moment de lancer la boucle (<code class="sourceCode r"><span class="cf">for</span>()</code>).</p>
+<div id="boucles-while" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Boucles <code>while()</code><a href="instructions-conditionnelles-et-boucles.html#boucles-while" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les codes à l’intérieur d’une boucle <code>while</code> seront évaluées de manière itérative. Avant chaque itération, une instruction conditionnelle est évaluée. Si cette instruction retourne le logique <code class="sourceCode r"><span class="cn">TRUE</span></code>, le code est évalué. Puis débute une nouvelle itération. Si en revanche l’instruction conditionnelle retourne le logique <code class="sourceCode r"><span class="cn">FALSE</span></code>, le code n’est pas évalué et le processus itératif cesse. Le schéma de la Figure <a href="instructions-conditionnelles-et-boucles.html#fig:boucle-while">9.1</a> illustre le fonctionnement d’une boucle <code class="sourceCode r"><span class="cf">while</span>()</code>.</p>
+<div class="figure"><span style="display:block;" id="fig:boucle-while"></span>
+<img src="figs/boucle_while.png" title="La diagramme montre comment fonctionne une boucle while" style="width:75.0%" alt="" />
+<p class="caption">Figure 9.1:  Fonctionnement d’une boucle while.</p>
+</div>
+<p>La syntaxte est la suivante :</p>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="instructions-conditionnelles-et-boucles.html#cb619-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(condition) instruction</span></code></pre></div>
+<p>Ou encore, si plusieurs instructions doivent être évaluées à chaque itération :</p>
+<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="instructions-conditionnelles-et-boucles.html#cb620-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(condition){</span>
+<span id="cb620-2"><a href="instructions-conditionnelles-et-boucles.html#cb620-2" aria-hidden="true" tabindex="-1"></a>  instruction_1</span>
+<span id="cb620-3"><a href="instructions-conditionnelles-et-boucles.html#cb620-3" aria-hidden="true" tabindex="-1"></a>  instruction_2</span>
+<span id="cb620-4"><a href="instructions-conditionnelles-et-boucles.html#cb620-4" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb620-5"><a href="instructions-conditionnelles-et-boucles.html#cb620-5" aria-hidden="true" tabindex="-1"></a>  instruction_n</span>
+<span id="cb620-6"><a href="instructions-conditionnelles-et-boucles.html#cb620-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Prenons un exemple. Soit un entier <code>x</code> contenant une valeur qui peut varier. Admettons que cette valeur vaille 50 :</p>
+<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="instructions-conditionnelles-et-boucles.html#cb621-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">50</span></span></code></pre></div>
+<p>Créons une boucle <code>while</code> dans laquelle chaque itération vient diviser la valeur de <code>x</code> par 3, puis remplace l’ancienne de valeur de <code>x</code> par le résultat de la division :</p>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="instructions-conditionnelles-et-boucles.html#cb622-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(x <span class="sc">/</span> <span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">1</span>){</span>
+<span id="cb622-2"><a href="instructions-conditionnelles-et-boucles.html#cb622-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(x <span class="sc">/</span> <span class="dv">3</span>)</span>
+<span id="cb622-3"><a href="instructions-conditionnelles-et-boucles.html#cb622-3" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> x<span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb622-4"><a href="instructions-conditionnelles-et-boucles.html#cb622-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] 16.66667
+## [1] 5.555556
+## [1] 1.851852</code></pre>
+<div class="notebox">
+<p>Regardons pas-à-pas les étapes du processus itératif précédent.
+Lors de l’initialisation, la valeur de <code>x</code> vaut 50.</p>
+<p>L’instruction conditionnelle <code class="sourceCode r">x <span class="sc">/</span> <span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">1</span></code> est évaluée et retourne le logique <code class="sourceCode r"><span class="cn">TRUE</span></code>. En effet, 50/3 ~ 16.66667 est bien strictement supérieur à 1.</p>
+<ul>
+<li>La <em>première itération</em> commence.</li>
+<li>Le bloc de code de la boucle, défini par les accolades, peut alors être évalué.</li>
+<li>La valeur <code>x/3</code> est affichée avec la fonction <code class="sourceCode r"><span class="fu">print</span>()</code> : la valeur <code class="sourceCode r"><span class="fl">16.66667</span></code> s’affiche dans la console.</li>
+<li>Puis, la valeur de <code>x</code> est remplacée par le tiers de sa valeur (<code class="sourceCode r">x <span class="ot">&lt;-</span> x<span class="sc">/</span><span class="dv">3</span></code>).</li>
+<li>La nouvelle valeur de <code>x</code> est donc <code class="sourceCode r"><span class="fl">16.66667</span></code>.</li>
+<li>La première itération s’achève.</li>
+</ul>
+<p>Ensuite, l’instruction conditionnelle <code class="sourceCode r">x <span class="sc">/</span> <span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">1</span></code> est évaluée et retourne le logique <code class="sourceCode r"><span class="cn">TRUE</span></code>. En effet, 16.66667/3 ~ 5.555556 est bien strictement supérieur à 1.</p>
+<ul>
+<li>La <em>deuxième itération</em> commence.</li>
+<li>Le bloc de code de la boucle, défini par les accolades, peut alors être évalué.</li>
+<li>La valeur <code>x/3</code> est affichée avec la fonction <code class="sourceCode r"><span class="fu">print</span>()</code> : la valeur <code class="sourceCode r"><span class="fl">5.555556</span></code> s’affiche dans la console.</li>
+<li>Puis, la valeur de <code>x</code> est remplacée par le tiers de sa valeur (<code class="sourceCode r">x <span class="ot">&lt;-</span> x<span class="sc">/</span><span class="dv">3</span></code>).</li>
+<li>La nouvelle valeur de <code>x</code> est donc <code class="sourceCode r"><span class="fl">5.555556</span></code>.</li>
+<li>La deuxième itération s’achève.</li>
+</ul>
+<p>L’instruction conditionnelle <code class="sourceCode r">x <span class="sc">/</span> <span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">1</span></code> est évaluée et retourne le logique <code class="sourceCode r"><span class="cn">TRUE</span></code>. En effet, 5.555556/3 ~ 1.851852 est bien strictement supérieur à 1.</p>
+<ul>
+<li>La <em>troisième itération</em> commence.</li>
+<li>Le bloc de code de la boucle, défini par les accolades, peut alors être évalué.</li>
+<li>La valeur <code>x/3</code> est affichée avec la fonction <code class="sourceCode r"><span class="fu">print</span>()</code> : la valeur <code class="sourceCode r"><span class="fl">1.851852</span></code> s’affiche dans la console.</li>
+<li>Puis, la valeur de <code>x</code> est remplacée par le tiers de sa valeur (<code class="sourceCode r">x <span class="ot">&lt;-</span> x<span class="sc">/</span><span class="dv">3</span></code>).</li>
+<li>La nouvelle valeur de <code>x</code> est donc <code class="sourceCode r"><span class="fl">1.851852</span></code>.</li>
+<li>La troisième itération s’achève.</li>
+</ul>
+<p>L’instruction conditionnelle <code class="sourceCode r">x <span class="sc">/</span> <span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">1</span></code> est évaluée et retourne le logique <code class="sourceCode r"><span class="cn">FALSE</span></code>. En effet, 1.851852/3 ~ 0.617284 et n’est donc pas strictement supérieur à 1. Le processus itératif s’arrête. La valeur contenue dans <code>x</code> est donc <code class="sourceCode r"><span class="fl">1.851852</span></code>.</p>
+</div>
+<div class="notebox">
+<p>Il n’existe pas qu’une seule manière de rédiger des boucles. Il est parfois utile, avec une boucle <code>while</code>, de créer une variable (que l’on peut appeler <code>continuer</code> par exemple) contenant une valeur logique <code class="sourceCode r"><span class="cn">TRUE</span></code> et d’utiliser cette variable comme instruction conditionnelle pour continuer les itérations. Le code à l’intérieur de la boucle se chargera de venir changer la valeur de cette variable au moment opportun. Par exemple, pour obtenir le même résultat dans <code>x</code> que dans l’exemple précédent, on pourra écrire :</p>
+<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="instructions-conditionnelles-et-boucles.html#cb624-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb624-2"><a href="instructions-conditionnelles-et-boucles.html#cb624-2" aria-hidden="true" tabindex="-1"></a>continuer <span class="ot">&lt;-</span> (x <span class="sc">/</span> <span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb624-3"><a href="instructions-conditionnelles-et-boucles.html#cb624-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb624-4"><a href="instructions-conditionnelles-et-boucles.html#cb624-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(continuer){</span>
+<span id="cb624-5"><a href="instructions-conditionnelles-et-boucles.html#cb624-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(x <span class="sc">/</span> <span class="dv">3</span>)</span>
+<span id="cb624-6"><a href="instructions-conditionnelles-et-boucles.html#cb624-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb624-7"><a href="instructions-conditionnelles-et-boucles.html#cb624-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(x <span class="sc">/</span> <span class="dv">3</span> <span class="sc">&lt;</span> <span class="dv">1</span>){</span>
+<span id="cb624-8"><a href="instructions-conditionnelles-et-boucles.html#cb624-8" aria-hidden="true" tabindex="-1"></a>    continuer <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb624-9"><a href="instructions-conditionnelles-et-boucles.html#cb624-9" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb624-10"><a href="instructions-conditionnelles-et-boucles.html#cb624-10" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x<span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb624-11"><a href="instructions-conditionnelles-et-boucles.html#cb624-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb624-12"><a href="instructions-conditionnelles-et-boucles.html#cb624-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] 16.66667
+## [1] 5.555556
+## [1] 1.851852
+## [1] 0.617284</code></pre>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="instructions-conditionnelles-et-boucles.html#cb626-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 1.851852</code></pre>
+<p>Pour éviter de créer la variable <code>continuer</code>, nous pouvons utiliser le mot clé <code class="sourceCode r"><span class="cf">break</span></code> à l’intérieur de la boucle pour stopper la boucle au moment opportun.</p>
+<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="instructions-conditionnelles-et-boucles.html#cb628-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb628-2"><a href="instructions-conditionnelles-et-boucles.html#cb628-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(<span class="cn">TRUE</span>){</span>
+<span id="cb628-3"><a href="instructions-conditionnelles-et-boucles.html#cb628-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(x <span class="sc">/</span> <span class="dv">3</span>)</span>
+<span id="cb628-4"><a href="instructions-conditionnelles-et-boucles.html#cb628-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb628-5"><a href="instructions-conditionnelles-et-boucles.html#cb628-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(x <span class="sc">/</span> <span class="dv">3</span> <span class="sc">&lt;</span> <span class="dv">1</span>){</span>
+<span id="cb628-6"><a href="instructions-conditionnelles-et-boucles.html#cb628-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb628-7"><a href="instructions-conditionnelles-et-boucles.html#cb628-7" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb628-8"><a href="instructions-conditionnelles-et-boucles.html#cb628-8" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x<span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb628-9"><a href="instructions-conditionnelles-et-boucles.html#cb628-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb628-10"><a href="instructions-conditionnelles-et-boucles.html#cb628-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] 16.66667
+## [1] 5.555556
+## [1] 1.851852
+## [1] 0.617284</code></pre>
+<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="instructions-conditionnelles-et-boucles.html#cb630-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 1.851852</code></pre>
+</div>
+<div class="greenbox">
+<p><strong>Exercice</strong></p>
+<p>À l’aide de la fonction <code>while()</code>, créez une boucle qui permet de calculer la factorielle d’un nombre.</p>
+</div>
+<div class="greenbox">
+<p><strong>Exercice bonus</strong></p>
+<p>À l’aide d’une boucle <code>while</code>, créez un code dans lequel vous devrez tenter de faire deviner un nombre magique tiré aléatoirement entre 1 et 100.</p>
+<p>Dans une première étape, un nombre magique est tiré aléatoirement :</p>
+<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="instructions-conditionnelles-et-boucles.html#cb632-1" aria-hidden="true" tabindex="-1"></a>nombre_magique <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>Votre code doit demander à l’utilisateur d’entrer une réponse :</p>
+<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="instructions-conditionnelles-et-boucles.html#cb633-1" aria-hidden="true" tabindex="-1"></a>tentative <span class="ot">&lt;-</span> </span>
+<span id="cb633-2"><a href="instructions-conditionnelles-et-boucles.html#cb633-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">readline</span>(<span class="at">prompt=</span><span class="st">&quot;Nombre entier compris entre 1 et 100 : &quot;</span>)</span></code></pre></div>
+<p>Vous devez ensuite indiquer, à l’aide d’instructions conditionnelles si le nombre donné par l’utilisateur est inférieur, supérieur, ou égal au nombre magique.</p>
+</div>
+</div>
+<div id="boucles-for" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Boucles <code>for()</code><a href="instructions-conditionnelles-et-boucles.html#boucles-for" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lorsqu’on connaît <em>a priori</em> le nombre d’itérations que l’on souhaite faire, il est coutume de faire appel à une boucle <code class="sourceCode r"><span class="cf">for</span>()</code>. On définit un itérateur qui prendra successivement des valeurs dans un ensemble donné jusqu’à ce que toutes les valeurs de l’ensemble auront été utilisées comme itérateur. La syntaxe est la suivante :</p>
+<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb634-1"><a href="instructions-conditionnelles-et-boucles.html#cb634-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(iterateur <span class="cf">in</span> ensemble){</span>
+<span id="cb634-2"><a href="instructions-conditionnelles-et-boucles.html#cb634-2" aria-hidden="true" tabindex="-1"></a>  instruction_1</span>
+<span id="cb634-3"><a href="instructions-conditionnelles-et-boucles.html#cb634-3" aria-hidden="true" tabindex="-1"></a>  instruction_2</span>
+<span id="cb634-4"><a href="instructions-conditionnelles-et-boucles.html#cb634-4" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb634-5"><a href="instructions-conditionnelles-et-boucles.html#cb634-5" aria-hidden="true" tabindex="-1"></a>  instruction_n</span>
+<span id="cb634-6"><a href="instructions-conditionnelles-et-boucles.html#cb634-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Le schéma de la Figure <a href="instructions-conditionnelles-et-boucles.html#fig:boucle-for">9.2</a> illustre le fonctionnement d’une boucle <code class="sourceCode r"><span class="cf">for</span>()</code>.</p>
+<div class="figure"><span style="display:block;" id="fig:boucle-for"></span>
+<img src="figs/boucle_for.png" title="La diagramme montre comment fonctionne une boucle for" style="width:75.0%" alt="" />
+<p class="caption">Figure 9.2:  Fonctionnement d’une boucle for</p>
+</div>
+<p>Illustrons par ailleurs le fonctionnement à l’aide d’un exemple simple. Considérons un itérateur que l’on nommera <code>i</code> et l’ensemble des entiers naturels de 1 à 10. À chaque itération, <code>i</code> prendra une des valeurs de l’ensemble :</p>
+<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="instructions-conditionnelles-et-boucles.html#cb635-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb635-2"><a href="instructions-conditionnelles-et-boucles.html#cb635-2" aria-hidden="true" tabindex="-1"></a>  carre <span class="ot">&lt;-</span> i<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb635-3"><a href="instructions-conditionnelles-et-boucles.html#cb635-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Le carré de&quot;</span>, i, <span class="st">&quot;est :&quot;</span>, carre))</span>
+<span id="cb635-4"><a href="instructions-conditionnelles-et-boucles.html#cb635-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Le carré de 1 est : 1&quot;
+## [1] &quot;Le carré de 2 est : 4&quot;
+## [1] &quot;Le carré de 3 est : 9&quot;
+## [1] &quot;Le carré de 4 est : 16&quot;
+## [1] &quot;Le carré de 5 est : 25&quot;
+## [1] &quot;Le carré de 6 est : 36&quot;
+## [1] &quot;Le carré de 7 est : 49&quot;
+## [1] &quot;Le carré de 8 est : 64&quot;
+## [1] &quot;Le carré de 9 est : 81&quot;
+## [1] &quot;Le carré de 10 est : 100&quot;</code></pre>
+<div class="notebox">
+<p>Regardons en détail ce qu’il s’est passé lors de l’éxécution de ce bout de code.</p>
+<ul>
+<li>À la <em>première itération</em>, l’objet <code>i</code> est créé et la valeur <code class="sourceCode r"><span class="dv">1</span></code> lui est affectée (si un objet <code>i</code> existait déjà, sa valeur eut été remplacée par la valeur <code>1</code>).</li>
+<li>L’objet <code>carre</code> est créé et le carré de <code>i</code>, c’est à dire <span class="math inline">\(1^2=1\)</span> lui est affecté.</li>
+<li>La chaîne de caractère indiquant la valeur de <code>i</code> et de son carré est ensuite affichée dans la console.</li>
+<li>La première itération prend fin.</li>
+<li>L’ensemble des valeurs des entiers de 1 à 10 n’a pas encore été utilisé lors du processus itératif ; ce dernier se poursuit donc.</li>
+<li>La <em>deuxième itération</em> débute, et la valeur de l’objet <code>i</code> devient la valeur suivante de l’ensemble <code class="sourceCode r"><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></code>, c’est-à-dire 2.</li>
+<li>La valeur du carré de <code>i</code>, c’est-à-dire <span class="math inline">\(2^2=4\)</span> est affectée à l’objet <code>carré</code>.</li>
+<li>La chaîne de caractère indiquant la valeur de <code>i</code> et de son carré est ensuite affichée dans la console.</li>
+<li>La deuxième itération prend fin.</li>
+<li>L’ensemble des valeurs des entiers de 1 à 10 n’a pas encore été utilisé lors du processus itératif ; ce dernier se poursuit donc.</li>
+<li>…</li>
+<li>La <em>dixième itération</em> débute, et la valeur de l’objet <code>i</code> devient la valeur suivante de l’ensemble <code class="sourceCode r"><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></code>, c’est-à-dire 10.</li>
+<li>La valeur du carré de <code>i</code>, c’est-à-dire <span class="math inline">\(10^2=100\)</span> est affectée à l’objet <code>carré</code>.</li>
+<li>La chaîne de caractère indiquant la valeur de <code>i</code> et de son carré est ensuite affichée dans la console.</li>
+<li>La dixième itération prend fin.</li>
+<li>L’ensemble des valeurs des entiers de 1 à 10 a été utilisé lors du processus itératif ; ce dernier s’achève.</li>
+</ul>
+</div>
+<div class="notebox">
+<p><strong>Note</strong></p>
+<p>À l’issue des itérations, l’objet <code>i</code> contient la dernière valeur de l’ensemble.</p>
+</div>
+<div class="notebox">
+<p><strong>Note</strong></p>
+<p>Nous pouvons utiliser une boucle <code class="sourceCode r"><span class="cf">while</span>()</code> pour obtenir le même résultat. Le code est un tout petit moins lisible.</p>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="instructions-conditionnelles-et-boucles.html#cb637-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb637-2"><a href="instructions-conditionnelles-et-boucles.html#cb637-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(i <span class="sc">&lt;</span> <span class="dv">10</span>){</span>
+<span id="cb637-3"><a href="instructions-conditionnelles-et-boucles.html#cb637-3" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb637-4"><a href="instructions-conditionnelles-et-boucles.html#cb637-4" aria-hidden="true" tabindex="-1"></a>  carre <span class="ot">&lt;-</span> i<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb637-5"><a href="instructions-conditionnelles-et-boucles.html#cb637-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Le carré de&quot;</span>, i, <span class="st">&quot;est :&quot;</span>, carre))</span>
+<span id="cb637-6"><a href="instructions-conditionnelles-et-boucles.html#cb637-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Le carré de 1 est : 1&quot;
+## [1] &quot;Le carré de 2 est : 4&quot;
+## [1] &quot;Le carré de 3 est : 9&quot;
+## [1] &quot;Le carré de 4 est : 16&quot;
+## [1] &quot;Le carré de 5 est : 25&quot;
+## [1] &quot;Le carré de 6 est : 36&quot;
+## [1] &quot;Le carré de 7 est : 49&quot;
+## [1] &quot;Le carré de 8 est : 64&quot;
+## [1] &quot;Le carré de 9 est : 81&quot;
+## [1] &quot;Le carré de 10 est : 100&quot;</code></pre>
+</div>
+<p>L’ensemble de valeurs n’est pas nécessairement composé d’entiers. Il peut s’agir de n’importe quel élément contenu dans une structure sur laquelle il est possible d’itérer :</p>
+<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="instructions-conditionnelles-et-boucles.html#cb639-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)){</span>
+<span id="cb639-2"><a href="instructions-conditionnelles-et-boucles.html#cb639-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;La valeur courante de i vaut :&quot;</span>, i))</span>
+<span id="cb639-3"><a href="instructions-conditionnelles-et-boucles.html#cb639-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;La valeur courante de i vaut : A&quot;
+## [1] &quot;La valeur courante de i vaut : B&quot;
+## [1] &quot;La valeur courante de i vaut : C&quot;</code></pre>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="instructions-conditionnelles-et-boucles.html#cb641-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">list</span>(<span class="at">toto=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">titi=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>))){</span>
+<span id="cb641-2"><a href="instructions-conditionnelles-et-boucles.html#cb641-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb641-3"><a href="instructions-conditionnelles-et-boucles.html#cb641-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] 1 2
+## [1] &quot;A&quot; &quot;B&quot;</code></pre>
+<div class="greenbox">
+<p><strong>Exercice</strong></p>
+<p>Si vous avez quelques interrogations quant à l’utilité des boucles dans le cadre de vos études en économie, cet exercice devrait vous permettre d’apprécier le gain de temps potentiel que celles-ci peuvent vous faire gagner.</p>
+<p>Il s’agit d’importer une multitude de fichiers CSV (en l’occurence, 35) présentant une structure similaire. Ces fichiers contiennent des observations de commptage de vélos à des points spécifiques de la ville de Paris, en 2018. Chaque fichier correspond à une localisation donnée, la localisation est utilisée comme nom de fichier.</p>
+<p>Les 35 fichiers CSV sont contenus dans une archive Zip disponible à l’adresse suivante : <a href="https://egallic.fr/Enseignement/R/Exercices/Boucles/velo.zip" class="uri">https://egallic.fr/Enseignement/R/Exercices/Boucles/velo.zip</a>. (<em>Note</em> : Les données brutes sont disponible sur le <a href="https://opendata.paris.fr/explore/dataset/comptage-velo-historique-donnees-compteurs/information/">site de l’open data de la ville de Paris</a>.)</p>
+<ol style="list-style-type: decimal">
+<li>Téléchargez l’archive contenant les 35 fichiers CSV, puis extrayez son contenu dans le dossier <code>Data</code> de votre répertoire de projet.</li>
+<li>Créez un objet que vous nommerez <code>df_velo</code> qui contiendra la valeur <code class="sourceCode r"><span class="cn">NULL</span></code>.</li>
+<li>Importez le fichier <code>Voie_Georges_Pompidou.csv</code> dans R, dans un objet que vous nommerez <code>df_tmp</code>.</li>
+<li>Utilisez la fonction <code class="sourceCode r"><span class="fu">bind_rows</span>()</code> pour empiler les données du tableau <code>df_tmp</code> sur <code>df_velo</code>. Le résultat doit venir écraser l’objet <code>df_velo</code> pour que son contenu devienne le résultat de l’application de la fonction <code class="sourceCode r"><span class="fu">bind_rows</span>()</code>. Le tableau <code>df_velo</code> contiendra alors 17 473 observations.</li>
+<li>Importez le fichier <code>106_Avenue_Denfert_Rochereau_NE-SO.csv</code> dans R, dans un objet que vous nommerez <code>df_tmp</code>.</li>
+<li>Utilisez la fonction <code class="sourceCode r"><span class="fu">bind_rows</span>()</code> pour empiler les données du tableau <code>df_tmp</code> sur <code>df_velo</code>. Le résultat doit venir écraser l’objet <code>df_velo</code> pour que son contenu devienne le résultat de l’application de la fonction <code class="sourceCode r"><span class="fu">bind_rows</span>()</code>. Votre tableau <code>df_velo</code> contiendra alors les 17 473 observations du premier fichier et les 8 737 du deuxième, soit 26 210 observations.</li>
+<li>Importez le fichier <code>28_Boulevard_Diderot.csv</code> dans R, dans un objet que vous nommerez <code>df_tmp</code>.</li>
+<li>Utilisez la fonction <code class="sourceCode r"><span class="fu">bind_rows</span>()</code> pour empiler les données du tableau <code>df_tmp</code> sur <code>df_velo</code>. Le résultat doit venir écraser l’objet <code>df_velo</code> pour que son contenu devienne le résultat de l’application de la fonction <code class="sourceCode r"><span class="fu">bind_rows</span>()</code>. Votre tableau <code>df_velo</code> contiendra alors les 17 473 observations du premier fichier, les 8 737 du deuxième, et les 17 473 du troisième, soit 43 684 observations.</li>
+<li>Prenez le temps d’imginer à quel point il serait pénible d’empiler les 35 fichiers.</li>
+</ol>
+<p>À présent, tentons de réfléchir à l’utilisation d’une boucle pour effectuer la tâche. Les premières questions devraient vous laisser apercevoir que vous avez réalisé une tâche répétitive qui consiste à chaque itération à charger un fichier et à ajouter son contenu à un tableau existant. Vous avez donc besoin dans un premier temps de récupérer dans un vecteur le lien de chacun des fichiers. Pour ce faire, vous allez utiliser la fonction <code class="sourceCode r"><span class="fu">list.files</span>()</code>, qui permet de lister le contenu d’un répertoire.</p>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="instructions-conditionnelles-et-boucles.html#cb643-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;Data/velo/&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb643-2"><a href="instructions-conditionnelles-et-boucles.html#cb643-2" aria-hidden="true" tabindex="-1"></a>N</span></code></pre></div>
+<pre><code>##  [1] &quot;Data/velo//10_avenue_de_la_Grande_Armée_SE-NO.csv&quot;          
+##  [2] &quot;Data/velo//10_Bd_Auguste_Blanqui_NE-SO.csv&quot;                 
+##  [3] &quot;Data/velo//100_Rue_La_Fayette_O-E.csv&quot;                      
+##  [4] &quot;Data/velo//102_Bd_magenta_SE-NO.csv&quot;                        
+##  [5] &quot;Data/velo//105_Rue_La_Fayette_E-O.csv&quot;                      
+##  [6] &quot;Data/velo//106_Avenue_Denfert_Rochereau_NE-SO.csv&quot;          
+##  [7] &quot;Data/velo//135_Avenue_Daumesnil_SE-NO.csv&quot;                  
+##  [8] &quot;Data/velo//152_Boulevard_du_Montparnasse.csv&quot;               
+##  [9] &quot;Data/velo//16_Avenue_de_la_Porte_des_Ternes_E-O.csv&quot;        
+## [10] &quot;Data/velo//18_quai_de_l&#39;hotel_de_ville.csv&quot;                 
+## [11] &quot;Data/velo//21_Boulevard_Auguste_Blanqui_SO-NE.csv&quot;          
+## [12] &quot;Data/velo//243_Boulevard_Saint_Germain_NO-SE.csv&quot;           
+## [13] &quot;Data/velo//26_Boulevard_de_Ménilmontant_SE-NO.csv&quot;          
+## [14] &quot;Data/velo//27_Boulevard_Diderot_E-O.csv&quot;                    
+## [15] &quot;Data/velo//28_Boulevard_Diderot.csv&quot;                        
+## [16] &quot;Data/velo//35_Boulevard_de_Menilmontant_NO-SE.csv&quot;          
+## [17] &quot;Data/velo//39_Quai_François_Mauriac.csv&quot;                    
+## [18] &quot;Data/velo//6_rue_Julia_Bartet.csv&quot;                          
+## [19] &quot;Data/velo//67_boulevard_Voltaire_SE-NO.csv&quot;                 
+## [20] &quot;Data/velo//7_Avenue_de_la_Grande_Armée_NO-SE.csv&quot;           
+## [21] &quot;Data/velo//72_Bd_Richard_Lenoir_S-N.csv&quot;                    
+## [22] &quot;Data/velo//72_boulevard_Voltaire_NO-SE.csv&quot;                 
+## [23] &quot;Data/velo//77_Bd_Richard_Lenoir_N-S.csv&quot;                    
+## [24] &quot;Data/velo//89_boulevard_de_Magenta_NO-SE.csv&quot;               
+## [25] &quot;Data/velo//97_Avenue_Denfert_Rochereau_SO-NE.csv&quot;           
+## [26] &quot;Data/velo//Face_104_Rue_d&#39;Aubervilliers.csv&quot;                
+## [27] &quot;Data/velo//Face_au_16_Avenue_de_la_Porte_des_Ternes_O-E.csv&quot;
+## [28] &quot;Data/velo//Face_au_25_quai_de_l&#39;Oise.csv&quot;                   
+## [29] &quot;Data/velo//Face_au_48_quai_de_la_marne.csv&quot;                 
+## [30] &quot;Data/velo//face_au_70_Quai_de_Bercy.csv&quot;                    
+## [31] &quot;Data/velo//Pont_du_Garigliano_NO-SE.csv&quot;                    
+## [32] &quot;Data/velo//Pont_du_Garigliano_SE-NO.csv&quot;                    
+## [33] &quot;Data/velo//Pont_National_NE-SO.csv&quot;                         
+## [34] &quot;Data/velo//Pont_National_SO-NE.csv&quot;                         
+## [35] &quot;Data/velo//Voie_Georges_Pompidou.csv&quot;</code></pre>
+<p>L’objet <code>N</code> consistera votre ensemble sur lequel itérer.</p>
+<ol start="10" style="list-style-type: decimal">
+<li>À l’aide d’une boucle <code class="sourceCode r"><span class="cf">for</span>()</code>, chargez l’ensemble des 35 fichiers CSV du répertoire <code>velo</code> et placez leur contenu dans un tableau de données que vous nommerez <code>df_velo</code>.</li>
+</ol>
+</div>
+<div class="greenbox">
+<p><strong>Exercice bonus</strong></p>
+<p>Utilisez une boucle <code class="sourceCode r"><span class="cf">for</span>()</code> pour reproduire la suite de Fibonacci jusqu’à son dixième terme (la séquence <span class="math inline">\(F_n\)</span> est définie par la relation de récurrence suivante : <span class="math inline">\(F_n=F_n−1+F_n−2\)</span> ; les valeurs initiales sont : <span class="math inline">\(F_0=0\)</span> et <span class="math inline">\(F_1=1\)</span>).</p>
+</div>
+<!-- # Seance 8 -->
+<!-- # Fonctions -->
+<!-- # Boucles -->
+<!-- # Seance 10 -->
+<!-- # Graphiques -->
+<!-- # Seance 11 -->
+<!-- # Graphiques -->
+<p>Des compléments sur les fonctions de type <code class="sourceCode r"><span class="fu">lapply</span>()</code> ou <code class="sourceCode r"><span class="fu">map</span>()</code> vous permettront de réaliser des opérations répétées. Nous n’aurons malheureusement pas le temps de les aborder dans le cadre de ces travaux dirigés. En revanche, vous êtes invité(e) à consulter la <a href="http://egallic.fr/Enseignement/R/Book/boucles.html">section consacrée à la vectorisation</a> sur les notes de cours.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="régressions-linéaires.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "night",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
