@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 R Markdown | Travaux dirigés d’Informatique</title>
   <meta name="description" content="6 R Markdown | Travaux dirigés d’Informatique" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 R Markdown | Travaux dirigés d’Informatique" />
   <meta property="og:type" content="book" />
@@ -360,15 +360,15 @@ div.csl-indent {
 <p>Ce chapitre vise à présenter R Markdown, un environnement de travail permettant de créer des documents en <em>data science</em>.</p>
 <p>Dans un unique fichier R Markdown, il est possible d’écrire du code et de l’exécuter, puis de produire des rapports (mêlant textes, codes, et résultats des évaluations des codes) visant à être partagés. Les codes peuvent être du R, mais pas uniquement : il est possible d’évaluer des instructions d’autres langages tels python ou SQL, entre autres. Les formats de sortie possible sont nombreux. Parmi les plus utilisés : html, pdf, Word, notebook, ioslides.</p>
 <p>Le <em>package</em> {rmarkdown} peut être installé à l’aide de l’instruction suivante.</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="r-markdown.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rmarkdown&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="r-markdown.html#cb368-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rmarkdown&quot;</span>)</span></code></pre></div>
 <p>Le document de référence principal sur lequel s’appuie cette fiche est l’ouvrage R Markdown Cookbook, rédigé par Yihui Xie, Christophe Dervieux et Emily Riederer (Chapman &amp; Hall/CRC, 2020). Une version électronique est disponible gratuitement à l’adresse suivante : <a href="https://bookdown.org/yihui/rmarkdown-cookbook/" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/</a>.</p>
 <p>Une antisèche de deux pages sur le R Markdown a été réalisée par RStudio : <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a>.</p>
 <div id="créer-un-document-r-markdown-avec-rstudio" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Créer un document R Markdown avec RStudio<a href="r-markdown.html#créer-un-document-r-markdown-avec-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Pour conserver la prise de bonnes habitudes initiée lors des premières séances, créez dans un premier temps un projet RStudio, en respectant l’arborescence présentée sur l’image ci-dessous.</p>
-<div class="figure">
-<img src="figs/project_tree_structure.png" title="Arborescence de fichiers contenant un fichier de projet, des dossiers Data, Script et Output." style="width:25.0%" alt="" />
-<p class="caption">Structure basique pour les projets. Source: <a href="https://martinctc.github.io/" class="uri">https://martinctc.github.io/</a>.</p>
+<div class="float">
+<img src="figs/project_tree_structure.png" title="Arborescence de fichiers contenant un fichier de projet, des dossiers Data, Script et Output." style="width:25.0%" alt="Structure basique pour les projets. Source: https://martinctc.github.io/." />
+<div class="figcaption">Structure basique pour les projets. Source: <a href="https://martinctc.github.io/" class="uri">https://martinctc.github.io/</a>.</div>
 </div>
 <div class="greenbox">
 <p><strong>Création d’un projet</strong></p>
@@ -402,9 +402,9 @@ div.csl-indent {
 </ul></li>
 <li><p>Sauvegardez le fichier créé en lui donnant le nom de votre choix (par exemple : `premier_rapport.Rmd``).</p></li>
 </ul>
-<div class="figure">
-<img src="figs/creation_markdown.png" title="Fenêtre de paramétrage du document RMarkdown dans RStudio." style="width:75.0%" alt="" />
-<p class="caption">Fenêtre de création d’un nouveau document R Markdown.</p>
+<div class="float">
+<img src="figs/creation_markdown.png" title="Fenêtre de paramétrage du document RMarkdown dans RStudio." style="width:75.0%" alt="Fenêtre de création d’un nouveau document R Markdown." />
+<div class="figcaption">Fenêtre de création d’un nouveau document R Markdown.</div>
 </div>
 </div>
 <p>Un document R Markdown, dont l’extension est <code>.Rmd</code> est alors créé. Ce document est composé de trois parties :</p>
@@ -416,10 +416,10 @@ div.csl-indent {
 <div id="yaml" class="section level3 hasAnchor" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> YAML<a href="r-markdown.html#yaml" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Dans le document que vous venez de créer, l’en-tête YAML indique :</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb369-1"><a href="r-markdown.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Mon premier document R Markdown&quot;</span></span>
-<span id="cb369-2"><a href="r-markdown.html#cb369-2" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Ewen Gallic&quot;</span></span>
-<span id="cb369-3"><a href="r-markdown.html#cb369-3" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;11/2/2022&quot;</span></span>
-<span id="cb369-4"><a href="r-markdown.html#cb369-4" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> html_document</span></span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb369-1"><a href="r-markdown.html#cb369-1" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Mon premier document R Markdown&quot;</span></span>
+<span id="cb369-2"><a href="r-markdown.html#cb369-2" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Ewen Gallic&quot;</span></span>
+<span id="cb369-3"><a href="r-markdown.html#cb369-3" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;11/2/2022&quot;</span></span>
+<span id="cb369-4"><a href="r-markdown.html#cb369-4" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> html_document</span></span></code></pre></div>
 <p>Le titre du document, l’auteur et la date sont précisés dans cette en-tête. Lors de la conversion du fichier Rmd en fichier html par Pandoc (un logiciel de conversion de documents), ces informations seront stockées dans des variables et apparaîtront à un ou plusieurs endroits du fichier html (selon le modèle – <em>template</em> – utilisé). La ligne <code class="sourceCode yaml"><span class="fu">output</span><span class="kw">:</span><span class="at"> html_document</span></code> indique quant à elle que le document de sortie sera un document html. D’autres éléments peuvent être indiqués, notamment dans la partie <code class="sourceCode yaml"><span class="at">output</span></code> : présence d’une table des matières, numérotation des sections, ajout d’une feuille de style, etc.</p>
 <p>En quelques mots, les étapes de conversion sont les suivantes :</p>
 <ul>
@@ -438,27 +438,27 @@ div.csl-indent {
 <li><code>toc_depth: 3</code> : l’entier donné en valeur définit la profondeur de la table des matières (1 : uniquement les sections, 2 : sections et sous-sections, 3 : sections, sous-sections et sous-sous sections, etc.)</li>
 <li><code>toc_float: true</code> : la table des matières sera insérée comme objet flotant et visible en permanence tout le long du document.</li>
 </ul>
-<div class="sourceCode" id="cb370"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb370-1"><a href="r-markdown.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb370-2"><a href="r-markdown.html#cb370-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Mon premier document R Markdown&quot;</span></span>
-<span id="cb370-3"><a href="r-markdown.html#cb370-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Ewen Gallic&quot;</span></span>
-<span id="cb370-4"><a href="r-markdown.html#cb370-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;11/7/2022&quot;</span></span>
-<span id="cb370-5"><a href="r-markdown.html#cb370-5" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document:</span></span>
-<span id="cb370-6"><a href="r-markdown.html#cb370-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: yes</span></span>
-<span id="cb370-7"><a href="r-markdown.html#cb370-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc_depth: 3</span></span>
-<span id="cb370-8"><a href="r-markdown.html#cb370-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc_float: true</span></span>
-<span id="cb370-9"><a href="r-markdown.html#cb370-9" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb370-1"><a href="r-markdown.html#cb370-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb370-2"><a href="r-markdown.html#cb370-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Mon premier document R Markdown&quot;</span></span>
+<span id="cb370-3"><a href="r-markdown.html#cb370-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Ewen Gallic&quot;</span></span>
+<span id="cb370-4"><a href="r-markdown.html#cb370-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;11/7/2022&quot;</span></span>
+<span id="cb370-5"><a href="r-markdown.html#cb370-5" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document:</span></span>
+<span id="cb370-6"><a href="r-markdown.html#cb370-6" tabindex="-1"></a><span class="co">    toc: yes</span></span>
+<span id="cb370-7"><a href="r-markdown.html#cb370-7" tabindex="-1"></a><span class="co">    toc_depth: 3</span></span>
+<span id="cb370-8"><a href="r-markdown.html#cb370-8" tabindex="-1"></a><span class="co">    toc_float: true</span></span>
+<span id="cb370-9"><a href="r-markdown.html#cb370-9" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
 <div class="notebox">
 <p>Attention, il faut respecter les indentations, comme dans l’exemple précédent.</p>
 </div>
 <p>Pour une table des matières sur un document final en pdf, le YAML doit contenir les paires <code>toc: yes</code> et <code>toc_depth:3</code>.</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb371-1"><a href="r-markdown.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb371-2"><a href="r-markdown.html#cb371-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Mon premier document R Markdown&quot;</span></span>
-<span id="cb371-3"><a href="r-markdown.html#cb371-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Ewen Gallic&quot;</span></span>
-<span id="cb371-4"><a href="r-markdown.html#cb371-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;11/7/2022&quot;</span></span>
-<span id="cb371-5"><a href="r-markdown.html#cb371-5" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> pdf_document:</span></span>
-<span id="cb371-6"><a href="r-markdown.html#cb371-6" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: yes</span></span>
-<span id="cb371-7"><a href="r-markdown.html#cb371-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc_depth: 3</span></span>
-<span id="cb371-8"><a href="r-markdown.html#cb371-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb371-1"><a href="r-markdown.html#cb371-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb371-2"><a href="r-markdown.html#cb371-2" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Mon premier document R Markdown&quot;</span></span>
+<span id="cb371-3"><a href="r-markdown.html#cb371-3" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Ewen Gallic&quot;</span></span>
+<span id="cb371-4"><a href="r-markdown.html#cb371-4" tabindex="-1"></a><span class="an">date:</span><span class="co"> &quot;11/7/2022&quot;</span></span>
+<span id="cb371-5"><a href="r-markdown.html#cb371-5" tabindex="-1"></a><span class="an">output:</span><span class="co"> pdf_document:</span></span>
+<span id="cb371-6"><a href="r-markdown.html#cb371-6" tabindex="-1"></a><span class="co">    toc: yes</span></span>
+<span id="cb371-7"><a href="r-markdown.html#cb371-7" tabindex="-1"></a><span class="co">    toc_depth: 3</span></span>
+<span id="cb371-8"><a href="r-markdown.html#cb371-8" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
 </div>
 </div>
 <div id="textes" class="section level3 hasAnchor" number="6.1.2">
@@ -583,9 +583,9 @@ Terminer une ligne par deux espaces permet d’aller à la ligne.</p>
 <p>chúc mừng năm mới</p>
 </blockquote>
 <p>Pour faire en sorte qu’une citation comporte plusieurs paragraphes, un chevron (<code>&gt;</code>) doit être ajouté au début de lignes vides.</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb372-1"><a href="r-markdown.html#cb372-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; “How can two people hate so much without knowing each other?”</span></span>
-<span id="cb372-2"><a href="r-markdown.html#cb372-2" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
-<span id="cb372-3"><a href="r-markdown.html#cb372-3" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; --- Alan Moore, _The Killing Joke_</span></span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb372-1"><a href="r-markdown.html#cb372-1" tabindex="-1"></a><span class="at">&gt; “How can two people hate so much without knowing each other?”</span></span>
+<span id="cb372-2"><a href="r-markdown.html#cb372-2" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb372-3"><a href="r-markdown.html#cb372-3" tabindex="-1"></a><span class="at">&gt; --- Alan Moore, _The Killing Joke_</span></span></code></pre></div>
 <blockquote>
 <p>“How can two people hate so much without knowing each other?”</p>
 <p>— Alan Moore, <em>The Killing Joke</em></p>
@@ -641,36 +641,36 @@ Terminer une ligne par deux espaces permet d’aller à la ligne.</p>
 <div id="liens-hypertextes" class="section level3 hasAnchor" number="6.2.8">
 <h3><span class="header-section-number">6.2.8</span> Liens hypertextes<a href="r-markdown.html#liens-hypertextes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La création d’un lien hypertexte se fait en utilisant deux éléments : un texte sur lequel on clique, qui doit être entouré par des crochets <code>[]</code> et une adresse vers laquelle le lien point, qui doit être entourée par des parenthèses (<code>()</code>).</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb373-1"><a href="r-markdown.html#cb373-1" aria-hidden="true" tabindex="-1"></a>Regardez cette <span class="co">[</span><span class="ot">vidéo épatante</span><span class="co">](https://www.youtube.com/watch?v=dQw4w9WgXcQ)</span>.</span></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb373-1"><a href="r-markdown.html#cb373-1" tabindex="-1"></a>Regardez cette <span class="co">[</span><span class="ot">vidéo épatante</span><span class="co">](https://www.youtube.com/watch?v=dQw4w9WgXcQ)</span>.</span></code></pre></div>
 <p>Regardez cette <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">vidéo épatante</a>.</p>
 <p>Pour créer un lien sans définir de texte spécifique en remplacement de l’URL, il est possible de simplement écrire l’URL. Il est toutefois préférable d’encadrer l’URL par des chevrons. Il en va de même pour une adresse email.</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb374-1"><a href="r-markdown.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://www.youtube.com/watch?v=oavMtUWDBTM&gt;</span>  </span>
-<span id="cb374-2"><a href="r-markdown.html#cb374-2" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;ewen.gallic@univ-amu.fr&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb374-1"><a href="r-markdown.html#cb374-1" tabindex="-1"></a><span class="ot">&lt;https://www.youtube.com/watch?v=oavMtUWDBTM&gt;</span>  </span>
+<span id="cb374-2"><a href="r-markdown.html#cb374-2" tabindex="-1"></a><span class="ot">&lt;ewen.gallic@univ-amu.fr&gt;</span></span></code></pre></div>
 <p><a href="https://www.youtube.com/watch?v=oavMtUWDBTM" class="uri">https://www.youtube.com/watch?v=oavMtUWDBTM</a><br />
 <a href="mailto:ewen.gallic@univ-amu.fr" class="email">ewen.gallic@univ-amu.fr</a></p>
 <p>Pour créer une ancre (un lien vers un endroit précis de la page déjà affichée) <strong>vers un titre</strong> du document, il faut connaître la référence vers le <a href="#lien-ancre">point d’ancrage</a>. Un moyen simple consiste à la définir soi-même, en utilisant la syntaxe suivante :</p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb375-1"><a href="r-markdown.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Le titre {#nom-de-la-reference}</span></span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb375-1"><a href="r-markdown.html#cb375-1" tabindex="-1"></a><span class="fu"># Le titre {#nom-de-la-reference}</span></span></code></pre></div>
 <p>Le nom de la reference ne doit pas contenir d’espaces ni de traits de soulignement (<code>_</code>). Il peut en revanche, comme dans l’exemple, contenir des tirets (<code>-</code>).</p>
 <p>Dans ce document, la sous section dans laquelle ce texte est inscrit, est définie comme suit :</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb376-1"><a href="r-markdown.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Liens hypertextes {#liens-hypertextes}</span></span></code></pre></div>
-<div class="sourceCode" id="cb377"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb377-1"><a href="r-markdown.html#cb377-1" aria-hidden="true" tabindex="-1"></a>On peut ainsi faire un lien vers cette <span class="co">[</span><span class="ot">section</span><span class="co">](#liens-hypertextes)</span>.</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb376-1"><a href="r-markdown.html#cb376-1" tabindex="-1"></a><span class="fu">## Liens hypertextes {#liens-hypertextes}</span></span></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb377-1"><a href="r-markdown.html#cb377-1" tabindex="-1"></a>On peut ainsi faire un lien vers cette <span class="co">[</span><span class="ot">section</span><span class="co">](#liens-hypertextes)</span>.</span></code></pre></div>
 <p>On peut ainsi faire un lien vers cette <a href="r-markdown.html#liens-hypertextes">section</a>.</p>
 </div>
 <div id="notes-de-bas-de-page" class="section level3 hasAnchor" number="6.2.9">
 <h3><span class="header-section-number">6.2.9</span> Notes de bas de page<a href="r-markdown.html#notes-de-bas-de-page" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>L’insertion de notes de bas de page numérotées s’effectue à l’aide de crochets (<code>[]</code>) contenant un accent circonflèxe et une référence qui peut être soit un nombre, soit un texte (mais sans espace ou autre caractère blanc).</p>
 <p>Le numéro de la note de bas de page est un lien qui renvoie vers la note. Une flèche de retour est proposée pour ramener au texte lorsque le document créé est un document html.</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb378-1"><a href="r-markdown.html#cb378-1" aria-hidden="true" tabindex="-1"></a>Une note de bas de page simple<span class="ot">[^1]</span> suivie d&#39;une plus longue<span class="ot">[^longue-note]</span>.</span>
-<span id="cb378-2"><a href="r-markdown.html#cb378-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb378-3"><a href="r-markdown.html#cb378-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>la note de bas de page.</span>
-<span id="cb378-4"><a href="r-markdown.html#cb378-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb378-5"><a href="r-markdown.html#cb378-5" aria-hidden="true" tabindex="-1"></a><span class="ot">[^longue-note]: </span>une note de bas de page plus longue.</span>
-<span id="cb378-6"><a href="r-markdown.html#cb378-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb378-7"><a href="r-markdown.html#cb378-7" aria-hidden="true" tabindex="-1"></a><span class="in">    Dans laquelle on peut écrire un paragraphe.</span></span>
-<span id="cb378-8"><a href="r-markdown.html#cb378-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb378-9"><a href="r-markdown.html#cb378-9" aria-hidden="true" tabindex="-1"></a><span class="in">    `{ du code }`</span></span>
-<span id="cb378-10"><a href="r-markdown.html#cb378-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb378-11"><a href="r-markdown.html#cb378-11" aria-hidden="true" tabindex="-1"></a><span class="in">    Plusieurs paragraphes, même.</span></span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb378-1"><a href="r-markdown.html#cb378-1" tabindex="-1"></a>Une note de bas de page simple<span class="ot">[^1]</span> suivie d&#39;une plus longue<span class="ot">[^longue-note]</span>.</span>
+<span id="cb378-2"><a href="r-markdown.html#cb378-2" tabindex="-1"></a></span>
+<span id="cb378-3"><a href="r-markdown.html#cb378-3" tabindex="-1"></a><span class="ot">[^1]: </span>la note de bas de page.</span>
+<span id="cb378-4"><a href="r-markdown.html#cb378-4" tabindex="-1"></a></span>
+<span id="cb378-5"><a href="r-markdown.html#cb378-5" tabindex="-1"></a><span class="ot">[^longue-note]: </span>une note de bas de page plus longue.</span>
+<span id="cb378-6"><a href="r-markdown.html#cb378-6" tabindex="-1"></a></span>
+<span id="cb378-7"><a href="r-markdown.html#cb378-7" tabindex="-1"></a><span class="in">    Dans laquelle on peut écrire un paragraphe.</span></span>
+<span id="cb378-8"><a href="r-markdown.html#cb378-8" tabindex="-1"></a></span>
+<span id="cb378-9"><a href="r-markdown.html#cb378-9" tabindex="-1"></a><span class="in">    `{ du code }`</span></span>
+<span id="cb378-10"><a href="r-markdown.html#cb378-10" tabindex="-1"></a></span>
+<span id="cb378-11"><a href="r-markdown.html#cb378-11" tabindex="-1"></a><span class="in">    Plusieurs paragraphes, même.</span></span></code></pre></div>
 <p>Une note de bas de page simple<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> suivie d’une plus longue<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
 </div>
 <div id="listes-1" class="section level3 hasAnchor" number="6.2.10">
@@ -679,27 +679,27 @@ Terminer une ligne par deux espaces permet d’aller à la ligne.</p>
 <div id="listes-ordonnées" class="section level4 hasAnchor" number="6.2.10.1">
 <h4><span class="header-section-number">6.2.10.1</span> Listes ordonnées<a href="r-markdown.html#listes-ordonnées" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Pour créer une liste ordonnée, on place en début de ligne, devant chaque élément de la lique, un nombre immédiatement suivi d’un point et d’une espace.</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb379-1"><a href="r-markdown.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Un premier élément ;</span>
-<span id="cb379-2"><a href="r-markdown.html#cb379-2" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Un deuxième élément ;</span>
-<span id="cb379-3"><a href="r-markdown.html#cb379-3" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Un troisième élément.</span></code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb379-1"><a href="r-markdown.html#cb379-1" tabindex="-1"></a><span class="ss">1. </span>Un premier élément ;</span>
+<span id="cb379-2"><a href="r-markdown.html#cb379-2" tabindex="-1"></a><span class="ss">2. </span>Un deuxième élément ;</span>
+<span id="cb379-3"><a href="r-markdown.html#cb379-3" tabindex="-1"></a><span class="ss">3. </span>Un troisième élément.</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Un premier élément ;</li>
 <li>Un deuxième élément ;</li>
 <li>Un troisième élément.</li>
 </ol>
 <p>Il n’est pas nécessaire de respecter la numérotation :</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb380-1"><a href="r-markdown.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Un premier élément ;</span>
-<span id="cb380-2"><a href="r-markdown.html#cb380-2" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span>Un deuxième élément ;</span>
-<span id="cb380-3"><a href="r-markdown.html#cb380-3" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Un troisième élément.</span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb380-1"><a href="r-markdown.html#cb380-1" tabindex="-1"></a><span class="ss">1. </span>Un premier élément ;</span>
+<span id="cb380-2"><a href="r-markdown.html#cb380-2" tabindex="-1"></a><span class="ss">10. </span>Un deuxième élément ;</span>
+<span id="cb380-3"><a href="r-markdown.html#cb380-3" tabindex="-1"></a><span class="ss">5. </span>Un troisième élément.</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Un premier élément ;</li>
 <li>Un deuxième élément ;</li>
 <li>Un troisième élément.</li>
 </ol>
 <p>Le numéro du premier élément de la liste ordonnée définit la valeur du compteur :</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb381-1"><a href="r-markdown.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Un premier élément ;</span>
-<span id="cb381-2"><a href="r-markdown.html#cb381-2" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span>Un deuxième élément ;</span>
-<span id="cb381-3"><a href="r-markdown.html#cb381-3" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Un troisième élément.</span></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb381-1"><a href="r-markdown.html#cb381-1" tabindex="-1"></a><span class="ss">4. </span>Un premier élément ;</span>
+<span id="cb381-2"><a href="r-markdown.html#cb381-2" tabindex="-1"></a><span class="ss">10. </span>Un deuxième élément ;</span>
+<span id="cb381-3"><a href="r-markdown.html#cb381-3" tabindex="-1"></a><span class="ss">5. </span>Un troisième élément.</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Un premier élément ;</li>
 <li>Un deuxième élément ;</li>
@@ -709,11 +709,11 @@ Terminer une ligne par deux espaces permet d’aller à la ligne.</p>
 <div id="listes-non-ordonnées" class="section level4 hasAnchor" number="6.2.10.2">
 <h4><span class="header-section-number">6.2.10.2</span> Listes non ordonnées<a href="r-markdown.html#listes-non-ordonnées" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Pour insérer une liste non ordonnée, on fait précéder chaque élément du symbole <code>-</code> ou du symbole <code>*</code>.</p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb382-1"><a href="r-markdown.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="an">Une liste comprenant :</span></span>
-<span id="cb382-2"><a href="r-markdown.html#cb382-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb382-3"><a href="r-markdown.html#cb382-3" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>un premier élément ;</span>
-<span id="cb382-4"><a href="r-markdown.html#cb382-4" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>un deuxième élément ;</span>
-<span id="cb382-5"><a href="r-markdown.html#cb382-5" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>un troisième élément.</span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb382-1"><a href="r-markdown.html#cb382-1" tabindex="-1"></a><span class="an">Une liste comprenant :</span></span>
+<span id="cb382-2"><a href="r-markdown.html#cb382-2" tabindex="-1"></a></span>
+<span id="cb382-3"><a href="r-markdown.html#cb382-3" tabindex="-1"></a><span class="ss">* </span>un premier élément ;</span>
+<span id="cb382-4"><a href="r-markdown.html#cb382-4" tabindex="-1"></a><span class="ss">* </span>un deuxième élément ;</span>
+<span id="cb382-5"><a href="r-markdown.html#cb382-5" tabindex="-1"></a><span class="ss">* </span>un troisième élément.</span></code></pre></div>
 <p>Une liste comprenant :</p>
 <ul>
 <li>un premier élément ;</li>
@@ -725,12 +725,12 @@ Terminer une ligne par deux espaces permet d’aller à la ligne.</p>
 <div id="listes-imbriquées" class="section level3 hasAnchor" number="6.2.11">
 <h3><span class="header-section-number">6.2.11</span> Listes imbriquées<a href="r-markdown.html#listes-imbriquées" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Pour ajouter une liste à l’intérieur d’une liste, il faut ajouter avant le tiret ou l’étoile soit un taquet de tabulation, soit 4 espaces.</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb383-1"><a href="r-markdown.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>un premier élément ;</span>
-<span id="cb383-2"><a href="r-markdown.html#cb383-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>un deuxième élément :</span>
-<span id="cb383-3"><a href="r-markdown.html#cb383-3" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>qui contient un sous-élement,</span>
-<span id="cb383-4"><a href="r-markdown.html#cb383-4" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>ainsi qu&#39;un deuxième sous-élément,</span>
-<span id="cb383-5"><a href="r-markdown.html#cb383-5" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>et un troisième ;</span>
-<span id="cb383-6"><a href="r-markdown.html#cb383-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>puis un troisième élément.</span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb383-1"><a href="r-markdown.html#cb383-1" tabindex="-1"></a><span class="ss">- </span>un premier élément ;</span>
+<span id="cb383-2"><a href="r-markdown.html#cb383-2" tabindex="-1"></a><span class="ss">- </span>un deuxième élément :</span>
+<span id="cb383-3"><a href="r-markdown.html#cb383-3" tabindex="-1"></a><span class="ss">    - </span>qui contient un sous-élement,</span>
+<span id="cb383-4"><a href="r-markdown.html#cb383-4" tabindex="-1"></a><span class="ss">    - </span>ainsi qu&#39;un deuxième sous-élément,</span>
+<span id="cb383-5"><a href="r-markdown.html#cb383-5" tabindex="-1"></a><span class="ss">    - </span>et un troisième ;</span>
+<span id="cb383-6"><a href="r-markdown.html#cb383-6" tabindex="-1"></a><span class="ss">- </span>puis un troisième élément.</span></code></pre></div>
 <ul>
 <li>un premier élément ;</li>
 <li>un deuxième élément :
@@ -742,12 +742,12 @@ Terminer une ligne par deux espaces permet d’aller à la ligne.</p>
 <li>puis un troisième élément.</li>
 </ul>
 <p>Pour écrire un paragraphe à l’intérieur d’une liste, une identation (taquet de tabulation ou 4 espaces) doit être ajoutéé, pour préserver la continuité de la liste. Il faut également faire précéder le paragraphe d’une liste vide (on peut aussi ajouter une ligne vide après le paragraphe, mais celle-ci est optionnelle).</p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb384-1"><a href="r-markdown.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>un premier élément ;</span>
-<span id="cb384-2"><a href="r-markdown.html#cb384-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>un deuxième élément :</span>
-<span id="cb384-3"><a href="r-markdown.html#cb384-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb384-4"><a href="r-markdown.html#cb384-4" aria-hidden="true" tabindex="-1"></a>    qui contient un paragraphe.</span>
-<span id="cb384-5"><a href="r-markdown.html#cb384-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb384-6"><a href="r-markdown.html#cb384-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>puis un troisième élément.</span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb384-1"><a href="r-markdown.html#cb384-1" tabindex="-1"></a><span class="ss">- </span>un premier élément ;</span>
+<span id="cb384-2"><a href="r-markdown.html#cb384-2" tabindex="-1"></a><span class="ss">- </span>un deuxième élément :</span>
+<span id="cb384-3"><a href="r-markdown.html#cb384-3" tabindex="-1"></a></span>
+<span id="cb384-4"><a href="r-markdown.html#cb384-4" tabindex="-1"></a>    qui contient un paragraphe.</span>
+<span id="cb384-5"><a href="r-markdown.html#cb384-5" tabindex="-1"></a>    </span>
+<span id="cb384-6"><a href="r-markdown.html#cb384-6" tabindex="-1"></a><span class="ss">- </span>puis un troisième élément.</span></code></pre></div>
 <ul>
 <li><p>un premier élément ;</p></li>
 <li><p>un deuxième élément :</p>
@@ -755,9 +755,9 @@ Terminer une ligne par deux espaces permet d’aller à la ligne.</p>
 <li><p>puis un troisième élément.</p></li>
 </ul>
 <p>Il est tout à fait possible d’imbriquer une liste ordonnée dans une liste non ordonnée et vice-versa.</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb385-1"><a href="r-markdown.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Un premier élément :</span>
-<span id="cb385-2"><a href="r-markdown.html#cb385-2" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>avec un sous-élément ;</span>
-<span id="cb385-3"><a href="r-markdown.html#cb385-3" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Un deuxième élément.</span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb385-1"><a href="r-markdown.html#cb385-1" tabindex="-1"></a><span class="ss">1. </span>Un premier élément :</span>
+<span id="cb385-2"><a href="r-markdown.html#cb385-2" tabindex="-1"></a><span class="ss">    - </span>avec un sous-élément ;</span>
+<span id="cb385-3"><a href="r-markdown.html#cb385-3" tabindex="-1"></a><span class="ss">2. </span>Un deuxième élément.</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Un premier élément :
 <ul>
@@ -805,20 +805,20 @@ Terminer une ligne par deux espaces permet d’aller à la ligne.</p>
 <div id="images" class="section level3 hasAnchor" number="6.2.12">
 <h3><span class="header-section-number">6.2.12</span> Images<a href="r-markdown.html#images" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>L’ajout d’une image se fait en insérant un point d’exclamation (<code>!</code>), suivi d’une d’un titre entre crochets, puis du chemin vers l’image, entre parenthèses (<code>()</code>). Une description de l’image peut être ajoutée entre guillemets (<code>""</code>) après le chemin, toujours dans les parenthèses (cette description est visible au survol de l’image, lorsque le pointeur de la souris reste quelques secondes au-dessus de l’image, et peut être lue à voix haute par les systèmes destinés aux personnes en situation de handicap). Enfin, pour spécifier des paramètres de taille de l’image, il est possible d’ajouter des informations entre crochets (<code>{}</code>).</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb386-1"><a href="r-markdown.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Un tigre](figs/tigre.JPG &quot;Tigre en papier&quot;)</span>{width=&quot;200px&quot;}</span></code></pre></div>
-<div class="figure">
-<img src="figs/tigre.JPG" title="Tigre en papier" width="200" alt="" />
-<p class="caption">Un tigre</p>
+<div class="sourceCode" id="cb386"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb386-1"><a href="r-markdown.html#cb386-1" tabindex="-1"></a><span class="al">![Un tigre](figs/tigre.JPG &quot;Tigre en papier&quot;)</span>{width=&quot;200px&quot;}</span></code></pre></div>
+<div class="float">
+<img src="figs/tigre.JPG" title="Tigre en papier" width="200" alt="Un tigre" />
+<div class="figcaption">Un tigre</div>
 </div>
 </div>
 <div id="tableaux" class="section level3 hasAnchor" number="6.2.13">
 <h3><span class="header-section-number">6.2.13</span> Tableaux<a href="r-markdown.html#tableaux" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La création d’un tableau se fait en distinguant l’en-tête du corps du tableau. Chaque cellule est séparée à l’aide d’une barre verticale (<code>|</code>, <code>Alt gr + 6</code> sur un clavier azerty sous Windows, et Alt + Shift + L` sur Mac Os). On ajoute des barres verticales au début et à la fin de chaque ligne du tableau. Pour délimiter l’en-tête du corps du tableau, trois tirets ou plus doivent être placés entre les barres verticales.</p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb387-1"><a href="r-markdown.html#cb387-1" aria-hidden="true" tabindex="-1"></a>| Première colonne | Deuxième colonne | Troisième colonne |</span>
-<span id="cb387-2"><a href="r-markdown.html#cb387-2" aria-hidden="true" tabindex="-1"></a>| ---------------- | ---------------- | ----------------- |</span>
-<span id="cb387-3"><a href="r-markdown.html#cb387-3" aria-hidden="true" tabindex="-1"></a>| cellule 1, ligne 1 | cellule 2, ligne 1 | cellule 3, ligne 1 |</span>
-<span id="cb387-4"><a href="r-markdown.html#cb387-4" aria-hidden="true" tabindex="-1"></a>| cellule 1, ligne 2 | cellule 2, ligne 2 | cellule 3, ligne 2 |</span>
-<span id="cb387-5"><a href="r-markdown.html#cb387-5" aria-hidden="true" tabindex="-1"></a>| cellule 1, ligne 3 | cellule 2, ligne 3 | cellule 3, ligne 3 |</span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb387-1"><a href="r-markdown.html#cb387-1" tabindex="-1"></a>| Première colonne | Deuxième colonne | Troisième colonne |</span>
+<span id="cb387-2"><a href="r-markdown.html#cb387-2" tabindex="-1"></a>| ---------------- | ---------------- | ----------------- |</span>
+<span id="cb387-3"><a href="r-markdown.html#cb387-3" tabindex="-1"></a>| cellule 1, ligne 1 | cellule 2, ligne 1 | cellule 3, ligne 1 |</span>
+<span id="cb387-4"><a href="r-markdown.html#cb387-4" tabindex="-1"></a>| cellule 1, ligne 2 | cellule 2, ligne 2 | cellule 3, ligne 2 |</span>
+<span id="cb387-5"><a href="r-markdown.html#cb387-5" tabindex="-1"></a>| cellule 1, ligne 3 | cellule 2, ligne 3 | cellule 3, ligne 3 |</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -848,11 +848,11 @@ Terminer une ligne par deux espaces permet d’aller à la ligne.</p>
 <div id="alignement" class="section level4 hasAnchor" number="6.2.13.1">
 <h4><span class="header-section-number">6.2.13.1</span> Alignement<a href="r-markdown.html#alignement" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>La gestion de l’alignement des colonnes se fait à l’aide de la deuxième ligne, celle composée des tirets. Pour un alignement à gauche, on ajoute deux points (<code>:</code>) à gauche des tirets, pour un alignement à droite, on ajoute ces deux points à droite des tirets, et pour une colonne centrée, on ajoute les deux points à la fois à gauche et à droite.</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb388-1"><a href="r-markdown.html#cb388-1" aria-hidden="true" tabindex="-1"></a>| Colonne alignée à gauche | Colonne centrée | Colonne alignée à droite |</span>
-<span id="cb388-2"><a href="r-markdown.html#cb388-2" aria-hidden="true" tabindex="-1"></a>| :---------------- | :----------------: | -----------------: |</span>
-<span id="cb388-3"><a href="r-markdown.html#cb388-3" aria-hidden="true" tabindex="-1"></a>| cellule 1, ligne 1 | cellule 2, ligne 1 | cellule 3, ligne 1 |</span>
-<span id="cb388-4"><a href="r-markdown.html#cb388-4" aria-hidden="true" tabindex="-1"></a>| cellule 1, ligne 2 | cellule 2, ligne 2 | cellule 3, ligne 2 |</span>
-<span id="cb388-5"><a href="r-markdown.html#cb388-5" aria-hidden="true" tabindex="-1"></a>| cellule 1, ligne 3 | cellule 2, ligne 3 | cellule 3, ligne 3 |  </span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb388-1"><a href="r-markdown.html#cb388-1" tabindex="-1"></a>| Colonne alignée à gauche | Colonne centrée | Colonne alignée à droite |</span>
+<span id="cb388-2"><a href="r-markdown.html#cb388-2" tabindex="-1"></a>| :---------------- | :----------------: | -----------------: |</span>
+<span id="cb388-3"><a href="r-markdown.html#cb388-3" tabindex="-1"></a>| cellule 1, ligne 1 | cellule 2, ligne 1 | cellule 3, ligne 1 |</span>
+<span id="cb388-4"><a href="r-markdown.html#cb388-4" tabindex="-1"></a>| cellule 1, ligne 2 | cellule 2, ligne 2 | cellule 3, ligne 2 |</span>
+<span id="cb388-5"><a href="r-markdown.html#cb388-5" tabindex="-1"></a>| cellule 1, ligne 3 | cellule 2, ligne 3 | cellule 3, ligne 3 |  </span></code></pre></div>
 <table>
 <colgroup>
 <col width="32%" />
@@ -893,32 +893,32 @@ Terminer une ligne par deux espaces permet d’aller à la ligne.</p>
 <li>les formules en ligne : en entourant l’expression des symboles dollar (<code>$equation$</code>)</li>
 <li>les formules en mode <em>display</em> : en entourant l’expression de deux symboles dollar de chaque côté (<code>$$equation$$</code>).</li>
 </ol>
-<div class="sourceCode" id="cb389"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb389-1"><a href="r-markdown.html#cb389-1" aria-hidden="true" tabindex="-1"></a>Les formules en ligne, $f(x)=x^2+3x+4, x\in\mathbb{R}$, permettent</span>
-<span id="cb389-2"><a href="r-markdown.html#cb389-2" aria-hidden="true" tabindex="-1"></a>d&#39;insérer des formules dans un paragraphe, tandis que les formules en mode</span>
-<span id="cb389-3"><a href="r-markdown.html#cb389-3" aria-hidden="true" tabindex="-1"></a>_display_ permettent d&#39;insérer des formules dans un bloc à part $$X\sim\mathcal{N}(0,1).$$</span></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb389-1"><a href="r-markdown.html#cb389-1" tabindex="-1"></a>Les formules en ligne, $f(x)=x^2+3x+4, x\in\mathbb{R}$, permettent</span>
+<span id="cb389-2"><a href="r-markdown.html#cb389-2" tabindex="-1"></a>d&#39;insérer des formules dans un paragraphe, tandis que les formules en mode</span>
+<span id="cb389-3"><a href="r-markdown.html#cb389-3" tabindex="-1"></a>_display_ permettent d&#39;insérer des formules dans un bloc à part $$X\sim\mathcal{N}(0,1).$$</span></code></pre></div>
 <p>Les formules en ligne, <span class="math inline">\(f(x)=x^2+3x+4, x\in\mathbb{R}\)</span>, permettent d’insérer des formules dans un paragraphe, tandis que les formules en mode <em>display</em> permettent d’insérer des formules dans un bloc à part <span class="math display">\[X\sim\mathcal{N}(0,1).\]</span></p>
 <p>Une antisèche réalisée par Jim Hefferon, permettant de rédiger des formules en LaTeX est disponible sur le réseau complet d’archives TeX (CTAN) : <a href="http://tug.ctan.org/info/undergradmath/undergradmath.pdf" class="uri">http://tug.ctan.org/info/undergradmath/undergradmath.pdf</a>.</p>
 </div>
 <div id="md-codes-blocs-codes" class="section level3 hasAnchor" number="6.2.15">
 <h3><span class="header-section-number">6.2.15</span> Codes et blocs de code<a href="r-markdown.html#md-codes-blocs-codes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Pour présenter du code, il existe deux manières en RMarkdown : soit des codes en ligne, directement insérés dans le texte, soit des blocs de code. Pour écrire des codes en ligne, on écrit le code entre deux accents graves (<code>` `</code>, <code>Alt gr + 7</code> sur un clavier azerty sous Windows, touche <code>`</code> sous Mac Os). Si on désire avoir une coloration syntaxique, il faut de surcroît indiquer le langage entre crochets (<code>{}</code>), après un point (<code>{.nom-du-langage}</code>) :</p>
-<div class="sourceCode" id="cb390"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb390-1"><a href="r-markdown.html#cb390-1" aria-hidden="true" tabindex="-1"></a>La fonction <span class="in">`mean(x)`</span>{.R} permet de calculer la moyenen de <span class="in">`x`</span>.  </span>
-<span id="cb390-2"><a href="r-markdown.html#cb390-2" aria-hidden="true" tabindex="-1"></a>L&#39;instruction <span class="in">`SELECT * FROM base`</span>{.SQL} permet de récupérer</span>
-<span id="cb390-3"><a href="r-markdown.html#cb390-3" aria-hidden="true" tabindex="-1"></a>l&#39;ensemble des colonnes de la base <span class="in">`base`</span> en SQL.</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb390-1"><a href="r-markdown.html#cb390-1" tabindex="-1"></a>La fonction <span class="in">`mean(x)`</span>{.R} permet de calculer la moyenen de <span class="in">`x`</span>.  </span>
+<span id="cb390-2"><a href="r-markdown.html#cb390-2" tabindex="-1"></a>L&#39;instruction <span class="in">`SELECT * FROM base`</span>{.SQL} permet de récupérer</span>
+<span id="cb390-3"><a href="r-markdown.html#cb390-3" tabindex="-1"></a>l&#39;ensemble des colonnes de la base <span class="in">`base`</span> en SQL.</span></code></pre></div>
 <p>La fonction <code class="sourceCode r"><span class="fu">mean</span>(x)</code> permet de calculer la moyenen de <code>x</code>.<br />
 L’instruction <code class="sourceCode sql"><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> base</code> permet de récupérer l’ensemble des colonnes de la base <code>base</code> en SQL.</p>
 <p>Pour insérer des blocs de code, on utilise trois accents grave (<code>```</code>) avant et après le code :</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb391-1"><a href="r-markdown.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb391-2"><a href="r-markdown.html#cb391-2" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- mean(ventes$Sales, na.rm=TRUE)</span></span>
-<span id="cb391-3"><a href="r-markdown.html#cb391-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb391-1"><a href="r-markdown.html#cb391-1" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb391-2"><a href="r-markdown.html#cb391-2" tabindex="-1"></a><span class="in">x &lt;- mean(ventes$Sales, na.rm=TRUE)</span></span>
+<span id="cb391-3"><a href="r-markdown.html#cb391-3" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>Ce qui produira :</p>
 <pre><code>x &lt;- mean(ventes$Sales, na.rm=TRUE)</code></pre>
 <p>À nouveau, si le langage du code contenu dans le bloc est spécifié, on obtient une coloration syntaxique. Le nom du langage est donné immédiatement après les trois accents graves.</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb393-1"><a href="r-markdown.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb393-2"><a href="r-markdown.html#cb393-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mean</span>(ventes<span class="sc">$</span>Sales, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb393-3"><a href="r-markdown.html#cb393-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb393-1"><a href="r-markdown.html#cb393-1" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb393-2"><a href="r-markdown.html#cb393-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mean</span>(ventes<span class="sc">$</span>Sales, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb393-3"><a href="r-markdown.html#cb393-3" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>Donnera :</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="r-markdown.html#cb394-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mean</span>(ventes<span class="sc">$</span>Sales, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="r-markdown.html#cb394-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mean</span>(ventes<span class="sc">$</span>Sales, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="morceaux-de-code-1" class="section level2 hasAnchor" number="6.3">
@@ -928,27 +928,27 @@ L’instruction <code class="sourceCode sql"><span class="kw">SELECT</span> <spa
 <div id="codes-en-ligne" class="section level3 hasAnchor" number="6.3.1">
 <h3><span class="header-section-number">6.3.1</span> Codes en ligne<a href="r-markdown.html#codes-en-ligne" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Les codes en ligne sont délimités avec un accent grave au début et un à la fin, comme en markdown. La seule différence est que le nom du langage figure immédiatement après le premier accent grave. Le code ne sera pas retourné, seul son résultat apparaîtra dans le document final. Prenons un exemple simple.</p>
-<div class="sourceCode" id="cb395"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb395-1"><a href="r-markdown.html#cb395-1" aria-hidden="true" tabindex="-1"></a>La moyenne des notes est de <span class="in">`r mean(c(20, 18, 15, 16))`</span>.</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb395-1"><a href="r-markdown.html#cb395-1" tabindex="-1"></a>La moyenne des notes est de <span class="in">`r mean(c(20, 18, 15, 16))`</span>.</span></code></pre></div>
 <p>La moyenne des notes est de 17.25.</p>
 </div>
 <div id="blocs-de-code" class="section level3 hasAnchor" number="6.3.2">
 <h3><span class="header-section-number">6.3.2</span> Blocs de code<a href="r-markdown.html#blocs-de-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Pour insérer des blocs de code, on utilise comme en markdown les trois accents graves avant et après le code. On fait suivre le troisième accent grave du début par le nom du langage, entre crochets ({r}) :</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb396-1"><a href="r-markdown.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb396-2"><a href="r-markdown.html#cb396-2" aria-hidden="true" tabindex="-1"></a><span class="in">x &lt;- c(20, 18, 15, 16)</span></span>
-<span id="cb396-3"><a href="r-markdown.html#cb396-3" aria-hidden="true" tabindex="-1"></a><span class="in">x</span></span>
-<span id="cb396-4"><a href="r-markdown.html#cb396-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb396-1"><a href="r-markdown.html#cb396-1" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb396-2"><a href="r-markdown.html#cb396-2" tabindex="-1"></a><span class="in">x &lt;- c(20, 18, 15, 16)</span></span>
+<span id="cb396-3"><a href="r-markdown.html#cb396-3" tabindex="-1"></a><span class="in">x</span></span>
+<span id="cb396-4"><a href="r-markdown.html#cb396-4" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>Le résultat est le suivant :</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="r-markdown.html#cb397-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">15</span>, <span class="dv">16</span>)</span>
-<span id="cb397-2"><a href="r-markdown.html#cb397-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="r-markdown.html#cb397-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">15</span>, <span class="dv">16</span>)</span>
+<span id="cb397-2"><a href="r-markdown.html#cb397-2" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 20 18 15 16</code></pre>
 <p>On note que par défaut, le code est présent dans le document final ainsi que le résultat de son évaluation (tel qu’affiché dans la console).</p>
 <p><em>Note</em> : nous venons de créer l’objet <code>x</code> dans l’environnement. Nous pouvons le réutiliser dans un nouveau code, qu’il soit en ligne (<code>`r `</code>) : 20, 18, 15, 16 ou dans un <em>chunk</em> (<code>```{r} ```</code>):</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb399-1"><a href="r-markdown.html#cb399-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb399-2"><a href="r-markdown.html#cb399-2" aria-hidden="true" tabindex="-1"></a><span class="in">x</span></span>
-<span id="cb399-3"><a href="r-markdown.html#cb399-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb399-1"><a href="r-markdown.html#cb399-1" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb399-2"><a href="r-markdown.html#cb399-2" tabindex="-1"></a><span class="in">x</span></span>
+<span id="cb399-3"><a href="r-markdown.html#cb399-3" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>qui donne ensuite :</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="r-markdown.html#cb400-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="r-markdown.html#cb400-1" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 20 18 15 16</code></pre>
 <div class="notebox">
 <p><strong>Note</strong> : pour insérer un <em>chunk</em>, on peut utiliser le raccourci <code>Ctrl + Alt + I</code> sous Windows ou bien <code>cmd + alt/option + I</code> sous Mac Os.</p>
@@ -957,13 +957,13 @@ L’instruction <code class="sourceCode sql"><span class="kw">SELECT</span> <spa
 <h4><span class="header-section-number">6.3.2.1</span> Paramètres des chunks<a href="r-markdown.html#paramètres-des-chunks" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Lorsqu’on définit un <em>chunk</em>, il est possible d’ajouter de nombreuses options qui auront un impact sur le fonctionnement du <em>chunk</em>. Par exemple, on peut demander d’afficher le code sans l’exécuter, d’afficher le résultat en masquant le code, ou bien de contrôler les paramètres d’affichage des figures si le code en produit. Il existe plus de 50 paramétrages. La liste est disponible sur le site du créateur du <em>package</em> {<code>knitr</code>} : <a href="https://yihui.org/knitr/options/" class="uri">https://yihui.org/knitr/options/</a>.</p>
 <p>La syntaxe est la suivante :</p>
-<div class="sourceCode" id="cb402"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb402-1"><a href="r-markdown.html#cb402-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, options}</span></span>
-<span id="cb402-2"><a href="r-markdown.html#cb402-2" aria-hidden="true" tabindex="-1"></a><span class="in">code</span></span>
-<span id="cb402-3"><a href="r-markdown.html#cb402-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb402-1"><a href="r-markdown.html#cb402-1" tabindex="-1"></a><span class="in">```{r, options}</span></span>
+<span id="cb402-2"><a href="r-markdown.html#cb402-2" tabindex="-1"></a><span class="in">code</span></span>
+<span id="cb402-3"><a href="r-markdown.html#cb402-3" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>Une bonne pratique consiste à attribuer un identifiant unique à chaque <em>chunk</em>.</p>
-<div class="sourceCode" id="cb403"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb403-1"><a href="r-markdown.html#cb403-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r identifiant-du-chunk, options}</span></span>
-<span id="cb403-2"><a href="r-markdown.html#cb403-2" aria-hidden="true" tabindex="-1"></a><span class="in">x</span></span>
-<span id="cb403-3"><a href="r-markdown.html#cb403-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb403-1"><a href="r-markdown.html#cb403-1" tabindex="-1"></a><span class="in">```{r identifiant-du-chunk, options}</span></span>
+<span id="cb403-2"><a href="r-markdown.html#cb403-2" tabindex="-1"></a><span class="in">x</span></span>
+<span id="cb403-3"><a href="r-markdown.html#cb403-3" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>Voici quelques options pratiques.</p>
 <table>
 <colgroup>
@@ -1012,12 +1012,12 @@ L’instruction <code class="sourceCode sql"><span class="kw">SELECT</span> <spa
 </tbody>
 </table>
 <p>Voici un exemple avec une image :</p>
-<div class="sourceCode" id="cb404"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb404-1"><a href="r-markdown.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r plot-iris, out.width=&#39;75%&#39;,</span></span>
-<span id="cb404-2"><a href="r-markdown.html#cb404-2" aria-hidden="true" tabindex="-1"></a><span class="in">fig.cap = &quot;Largeur des sépals en fonction de leur longueur.&quot;}</span></span>
-<span id="cb404-3"><a href="r-markdown.html#cb404-3" aria-hidden="true" tabindex="-1"></a><span class="in">plot(iris$Sepal.Length, iris$Sepal.Width)</span></span>
-<span id="cb404-4"><a href="r-markdown.html#cb404-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb404"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb404-1"><a href="r-markdown.html#cb404-1" tabindex="-1"></a><span class="in">```{r plot-iris, out.width=&#39;75%&#39;,</span></span>
+<span id="cb404-2"><a href="r-markdown.html#cb404-2" tabindex="-1"></a><span class="in">fig.cap = &quot;Largeur des sépals en fonction de leur longueur.&quot;}</span></span>
+<span id="cb404-3"><a href="r-markdown.html#cb404-3" tabindex="-1"></a><span class="in">plot(iris$Sepal.Length, iris$Sepal.Width)</span></span>
+<span id="cb404-4"><a href="r-markdown.html#cb404-4" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>Ce qui donne :</p>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="r-markdown.html#cb405-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Sepal.Length, iris<span class="sc">$</span>Sepal.Width)</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="r-markdown.html#cb405-1" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Sepal.Length, iris<span class="sc">$</span>Sepal.Width)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:plot-iris"></span>
 <img src="_main_files/figure-html/plot-iris-1.png" alt="Largeur des sépals en fonction de leur longueur." width="75%" />
 <p class="caption">
@@ -1026,17 +1026,17 @@ Figure 6.1: Largeur des sépals en fonction de leur longueur.
 </div>
 <p>Le paramétrage de l’<strong>ensemble</strong> des <em>chunks</em> est réglé par une liste (<code class="sourceCode r">knitr<span class="sc">::</span>opts_chunk</code>). En modifiant les valeurs de cette liste comme dans l’exemple ci-dessous, et en plaçant cette instruction dans un <em>chunk</em> positionné juste après l’en-tête en YAML, tous les <em>chunks</em> adopteront le comportement spécifié.</p>
 <p>Dans l’exemple ci-dessous, tous les codes des <em>chunks</em> seront visibles (<code class="sourceCode r">echo <span class="ot">=</span> <span class="cn">TRUE</span></code>), les messages et les avertissements retournés lors de l’exécution des codes seront masqués (<code class="sourceCode r">message <span class="ot">=</span> <span class="cn">FALSE</span></code> et <code class="sourceCode r">warning <span class="ot">=</span> <span class="cn">FALSE</span></code>), les figures produites en R seront centrées (<code class="sourceCode r">fig.align <span class="ot">=</span> <span class="st">&quot;center&quot;</span></code>)</p>
-<div class="sourceCode" id="cb406"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb406-1"><a href="r-markdown.html#cb406-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r chunks-settings, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE}</span></span>
-<span id="cb406-2"><a href="r-markdown.html#cb406-2" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE,</span></span>
-<span id="cb406-3"><a href="r-markdown.html#cb406-3" aria-hidden="true" tabindex="-1"></a><span class="in">                      message = FALSE,</span></span>
-<span id="cb406-4"><a href="r-markdown.html#cb406-4" aria-hidden="true" tabindex="-1"></a><span class="in">                      warning = FALSE,</span></span>
-<span id="cb406-5"><a href="r-markdown.html#cb406-5" aria-hidden="true" tabindex="-1"></a><span class="in">                      fig.align = &quot;center&quot;)</span></span>
-<span id="cb406-6"><a href="r-markdown.html#cb406-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb406-1"><a href="r-markdown.html#cb406-1" tabindex="-1"></a><span class="in">```{r chunks-settings, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE}</span></span>
+<span id="cb406-2"><a href="r-markdown.html#cb406-2" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE,</span></span>
+<span id="cb406-3"><a href="r-markdown.html#cb406-3" tabindex="-1"></a><span class="in">                      message = FALSE,</span></span>
+<span id="cb406-4"><a href="r-markdown.html#cb406-4" tabindex="-1"></a><span class="in">                      warning = FALSE,</span></span>
+<span id="cb406-5"><a href="r-markdown.html#cb406-5" tabindex="-1"></a><span class="in">                      fig.align = &quot;center&quot;)</span></span>
+<span id="cb406-6"><a href="r-markdown.html#cb406-6" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <div class="notebox">
 <p><strong>Note</strong> : le paramétrage du comportement général des <em>chunks</em> peut ensuite être modifié pour certains <em>chunks</em> spécifiques. Pour ce faire, il suffit d’ajouter dans les paramètres des <em>chunks</em> à modifier le comportement désiré. Par exemple, si <code class="sourceCode r">echo <span class="ot">=</span> <span class="cn">TRUE</span></code> est défini dans la liste des paramètres de la liste <code class="sourceCode r">knitr<span class="sc">::</span>opts_chunk</code>, si on souhaite masquer le code d’un <em>chunk</em> spécifique, il suffit de lui ajouter l’option <code class="sourceCode r">echo <span class="ot">=</span> <span class="cn">FALSE</span></code> :</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb407-1"><a href="r-markdown.html#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb407-2"><a href="r-markdown.html#cb407-2" aria-hidden="true" tabindex="-1"></a><span class="in"># code du chunk</span></span>
-<span id="cb407-3"><a href="r-markdown.html#cb407-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb407"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb407-1"><a href="r-markdown.html#cb407-1" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb407-2"><a href="r-markdown.html#cb407-2" tabindex="-1"></a><span class="in"># code du chunk</span></span>
+<span id="cb407-3"><a href="r-markdown.html#cb407-3" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1072,12 +1072,12 @@ Figure 6.1: Largeur des sépals en fonction de leur longueur.
 <li>une liste de paires de clés-valeurs, où les éléments de la référence sont stockés (titre, auteurs, année de publication, nom de la revue, nom de l’éditeur, etc.).</li>
 </ol>
 <p>Prenons un exemple :</p>
-<div class="sourceCode" id="cb408"><pre class="sourceCode bib"><code class="sourceCode bibtex"><span id="cb408-1"><a href="r-markdown.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="va">@book</span>{<span class="ot">xie_2018_rmarkdown</span>,</span>
-<span id="cb408-2"><a href="r-markdown.html#cb408-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>={R markdown: The definitive guide},</span>
-<span id="cb408-3"><a href="r-markdown.html#cb408-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>={Xie, Yihui and Allaire, Joseph J and Grolemund, Garrett},</span>
-<span id="cb408-4"><a href="r-markdown.html#cb408-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>={2018},</span>
-<span id="cb408-5"><a href="r-markdown.html#cb408-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">publisher</span>={Chapman and Hall/CRC}</span>
-<span id="cb408-6"><a href="r-markdown.html#cb408-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode bib"><code class="sourceCode bibtex"><span id="cb408-1"><a href="r-markdown.html#cb408-1" tabindex="-1"></a><span class="va">@book</span>{<span class="ot">xie_2018_rmarkdown</span>,</span>
+<span id="cb408-2"><a href="r-markdown.html#cb408-2" tabindex="-1"></a>  <span class="dt">title</span>={R markdown: The definitive guide},</span>
+<span id="cb408-3"><a href="r-markdown.html#cb408-3" tabindex="-1"></a>  <span class="dt">author</span>={Xie, Yihui and Allaire, Joseph J and Grolemund, Garrett},</span>
+<span id="cb408-4"><a href="r-markdown.html#cb408-4" tabindex="-1"></a>  <span class="dt">year</span>={2018},</span>
+<span id="cb408-5"><a href="r-markdown.html#cb408-5" tabindex="-1"></a>  <span class="dt">publisher</span>={Chapman and Hall/CRC}</span>
+<span id="cb408-6"><a href="r-markdown.html#cb408-6" tabindex="-1"></a>}</span></code></pre></div>
 <p>Il s’agit d’un livre, donc le type de document est indiqué à l’aide de <code class="sourceCode bibtex"><span class="va">@book</span></code>. La référence unique est <code>xie_2018_rmarkdown</code>, et les paires de clés-valeurs sont renseignées dans une liste où chaque clé est donnée avant le symbole égal et chaque valeur est donnée après le symbole égal. Les paires sont séparées par une virgule.</p>
 <div class="greenbox">
 <p>À votre tour : créez un nouveau fichier de script R dans RStudio. Dans ce fichier, collez l’entrée bibliographique du livre de Yihui Xie et al. Enregistrez le document en le nommant <code>biblio.bib</code>.</p>
@@ -1089,44 +1089,44 @@ Figure 6.1: Largeur des sépals en fonction de leur longueur.
 <p>Dans un premier temps, on peut vérifier si la référence existe sur <a href="https://www.crossref.org/">Crossref</a>. Ce site est très pratique pour obtenir des citations généralement propres, mais il a un inconvénient : il faut parfois être patient, le site rencontre fréquemment des erreurs 500 (<em>Internal Server Error</em>).</p>
 <p>Essayons de chercher la référence pour l’article de Susan Athey intitulé “The State of Applied Econometrics: Causality and Policy Evaluation”, publié dans “The Journal of economic perspectives” (JEP) en 2017.</p>
 <p>Après avoir cliqué sur le bouton “Search metadata”, on peut coller le titre de l’article : <code>The State of Applied Econometrics: Causality and Policy Evaluation</code>, puis lancer la recherche en appuyant sur la touche <code>Enter</code> du clavier.</p>
-<div class="figure">
-<img src="figs/crossref_01.png" style="width:30.0%" alt="" />
-<p class="caption">Chercher l’article.</p>
+<div class="float">
+<img src="figs/crossref_01.png" style="width:30.0%" alt="Chercher l’article." />
+<div class="figcaption">Chercher l’article.</div>
 </div>
 <p>Parmi les références proposées, lorsqu’on a identifié celle qui correspond effectivement à celle que l’on recherche, on récupère les métadonnées en cliquant sur le lien <code>Actions</code> puis sur <code>Cite</code>.</p>
-<div class="figure">
-<img src="figs/crossref_02.png" style="width:75.0%" alt="" />
-<p class="caption">Identifier le bon résultat.</p>
+<div class="float">
+<img src="figs/crossref_02.png" style="width:75.0%" alt="Identifier le bon résultat." />
+<div class="figcaption">Identifier le bon résultat.</div>
 </div>
 <p>L’entrée bibliographique au format BibTeX est alors affichée, il ne reste plus qu’à la copier et à la coller dans notre fichier bib.</p>
-<div class="figure">
-<img src="figs/crossref_03.png" style="width:75.0%" alt="" />
-<p class="caption">L’entrée au format BibTeX.</p>
+<div class="float">
+<img src="figs/crossref_03.png" style="width:75.0%" alt="L’entrée au format BibTeX." />
+<div class="figcaption">L’entrée au format BibTeX.</div>
 </div>
 <div class="greenbox">
 <p>À votre tour : recherchez la référence de l’article de Susan Athey publié dans le JEP en 2017 et collez l’entrée dans votre fichier BibTeX.</p>
 </div>
 <p>Votre fichier BibTeX doit à présent contenir deux entrées (n’oubliez pas de le sauvegarder) :</p>
-<div class="sourceCode" id="cb409"><pre class="sourceCode bib"><code class="sourceCode bibtex"><span id="cb409-1"><a href="r-markdown.html#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="va">@book</span>{<span class="ot">xie_2018_rmarkdown</span>,</span>
-<span id="cb409-2"><a href="r-markdown.html#cb409-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>={R markdown: The definitive guide},</span>
-<span id="cb409-3"><a href="r-markdown.html#cb409-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>={Xie, Yihui and Allaire, Joseph J and Grolemund, Garrett},</span>
-<span id="cb409-4"><a href="r-markdown.html#cb409-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>={2018},</span>
-<span id="cb409-5"><a href="r-markdown.html#cb409-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">publisher</span>={Chapman and Hall/CRC}</span>
-<span id="cb409-6"><a href="r-markdown.html#cb409-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb409-7"><a href="r-markdown.html#cb409-7" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">Athey_2017</span>,</span>
-<span id="cb409-8"><a href="r-markdown.html#cb409-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">doi</span> = {10.1257/jep.31.2.3},</span>
-<span id="cb409-9"><a href="r-markdown.html#cb409-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">url</span> = {https://doi.org/10.1257%2Fjep.31.2.3},</span>
-<span id="cb409-10"><a href="r-markdown.html#cb409-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year</span> = 2017,</span>
-<span id="cb409-11"><a href="r-markdown.html#cb409-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">month</span> = {may},</span>
-<span id="cb409-12"><a href="r-markdown.html#cb409-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">publisher</span> = {American Economic Association},</span>
-<span id="cb409-13"><a href="r-markdown.html#cb409-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">volume</span> = {31},</span>
-<span id="cb409-14"><a href="r-markdown.html#cb409-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">number</span> = {2},</span>
-<span id="cb409-15"><a href="r-markdown.html#cb409-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">pages</span> = {3--32},</span>
-<span id="cb409-16"><a href="r-markdown.html#cb409-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">author</span> = {Susan Athey and Guido W. Imbens},</span>
-<span id="cb409-17"><a href="r-markdown.html#cb409-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">title</span> = {The State of Applied Econometrics:</span>
-<span id="cb409-18"><a href="r-markdown.html#cb409-18" aria-hidden="true" tabindex="-1"></a>    Causality and Policy Evaluation},</span>
-<span id="cb409-19"><a href="r-markdown.html#cb409-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">journal</span> = {Journal of Economic Perspectives}</span>
-<span id="cb409-20"><a href="r-markdown.html#cb409-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="sourceCode bib"><code class="sourceCode bibtex"><span id="cb409-1"><a href="r-markdown.html#cb409-1" tabindex="-1"></a><span class="va">@book</span>{<span class="ot">xie_2018_rmarkdown</span>,</span>
+<span id="cb409-2"><a href="r-markdown.html#cb409-2" tabindex="-1"></a>  <span class="dt">title</span>={R markdown: The definitive guide},</span>
+<span id="cb409-3"><a href="r-markdown.html#cb409-3" tabindex="-1"></a>  <span class="dt">author</span>={Xie, Yihui and Allaire, Joseph J and Grolemund, Garrett},</span>
+<span id="cb409-4"><a href="r-markdown.html#cb409-4" tabindex="-1"></a>  <span class="dt">year</span>={2018},</span>
+<span id="cb409-5"><a href="r-markdown.html#cb409-5" tabindex="-1"></a>  <span class="dt">publisher</span>={Chapman and Hall/CRC}</span>
+<span id="cb409-6"><a href="r-markdown.html#cb409-6" tabindex="-1"></a>}</span>
+<span id="cb409-7"><a href="r-markdown.html#cb409-7" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">Athey_2017</span>,</span>
+<span id="cb409-8"><a href="r-markdown.html#cb409-8" tabindex="-1"></a>    <span class="dt">doi</span> = {10.1257/jep.31.2.3},</span>
+<span id="cb409-9"><a href="r-markdown.html#cb409-9" tabindex="-1"></a>    <span class="dt">url</span> = {https://doi.org/10.1257%2Fjep.31.2.3},</span>
+<span id="cb409-10"><a href="r-markdown.html#cb409-10" tabindex="-1"></a>    <span class="dt">year</span> = 2017,</span>
+<span id="cb409-11"><a href="r-markdown.html#cb409-11" tabindex="-1"></a>    <span class="dt">month</span> = {may},</span>
+<span id="cb409-12"><a href="r-markdown.html#cb409-12" tabindex="-1"></a>    <span class="dt">publisher</span> = {American Economic Association},</span>
+<span id="cb409-13"><a href="r-markdown.html#cb409-13" tabindex="-1"></a>    <span class="dt">volume</span> = {31},</span>
+<span id="cb409-14"><a href="r-markdown.html#cb409-14" tabindex="-1"></a>    <span class="dt">number</span> = {2},</span>
+<span id="cb409-15"><a href="r-markdown.html#cb409-15" tabindex="-1"></a>    <span class="dt">pages</span> = {3--32},</span>
+<span id="cb409-16"><a href="r-markdown.html#cb409-16" tabindex="-1"></a>    <span class="dt">author</span> = {Susan Athey and Guido W. Imbens},</span>
+<span id="cb409-17"><a href="r-markdown.html#cb409-17" tabindex="-1"></a>    <span class="dt">title</span> = {The State of Applied Econometrics:</span>
+<span id="cb409-18"><a href="r-markdown.html#cb409-18" tabindex="-1"></a>    Causality and Policy Evaluation},</span>
+<span id="cb409-19"><a href="r-markdown.html#cb409-19" tabindex="-1"></a>    <span class="dt">journal</span> = {Journal of Economic Perspectives}</span>
+<span id="cb409-20"><a href="r-markdown.html#cb409-20" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="google-scholar" class="section level4 hasAnchor" number="6.4.1.2">
 <h4><span class="header-section-number">6.4.1.2</span> Google Scholar<a href="r-markdown.html#google-scholar" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1136,50 +1136,50 @@ Figure 6.1: Largeur des sépals en fonction de leur longueur.
 <p>The economic impacts of climate change: evidence from agricultural output and random fluctuations in weather</p>
 </blockquote>
 <p>Une fois l’article identifié dans les résultats, il suffit de cliquer sur le lien <code>Citer</code>.</p>
-<div class="figure">
-<img src="figs/google_scholar_1.png" style="width:75.0%" alt="" />
-<p class="caption">L’article de Deschênes et Greenstone sur Google Scholar.</p>
+<div class="float">
+<img src="figs/google_scholar_1.png" style="width:75.0%" alt="L’article de Deschênes et Greenstone sur Google Scholar." />
+<div class="figcaption">L’article de Deschênes et Greenstone sur Google Scholar.</div>
 </div>
 <p>Une fenêtre surgit. Les citations pré-formatées selon différents styles sont données. Pour récupérer les métadonnées au format BibTeX, il faut cliquer sur le lien <code>BibTeX</code>.</p>
-<div class="figure">
-<img src="figs/google_scholar_2.png" style="width:75.0%" alt="" />
-<p class="caption">L’article de Deschênes et Greenstone sur Google Scholar.</p>
+<div class="float">
+<img src="figs/google_scholar_2.png" style="width:75.0%" alt="L’article de Deschênes et Greenstone sur Google Scholar." />
+<div class="figcaption">L’article de Deschênes et Greenstone sur Google Scholar.</div>
 </div>
 <p>Les métadonnées s’affichent dans une page web. Il ne reste plus qu’à effectuer un copier/coller dans le fichier BibTeX.</p>
 <div class="greenbox">
 <p>À votre tour : recherchez la référence de l’article d’Olivier Deschênes et de Michael Greenstone publié dans l’AER en 2007 et collez l’entrée dans votre fichier BibTeX.</p>
 </div>
 <p>Votre fichier BibTeX doit à présent contenir trois entrées (n’oubliez pas de le sauvegarder) :</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode bib"><code class="sourceCode bibtex"><span id="cb410-1"><a href="r-markdown.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="va">@book</span>{<span class="ot">xie_2018_rmarkdown</span>,</span>
-<span id="cb410-2"><a href="r-markdown.html#cb410-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>={R markdown: The definitive guide},</span>
-<span id="cb410-3"><a href="r-markdown.html#cb410-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>={Xie, Yihui and Allaire, Joseph J and Grolemund, Garrett},</span>
-<span id="cb410-4"><a href="r-markdown.html#cb410-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>={2018},</span>
-<span id="cb410-5"><a href="r-markdown.html#cb410-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">publisher</span>={Chapman and Hall/CRC}</span>
-<span id="cb410-6"><a href="r-markdown.html#cb410-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb410-7"><a href="r-markdown.html#cb410-7" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">Athey_2017</span>,</span>
-<span id="cb410-8"><a href="r-markdown.html#cb410-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">doi</span> = {10.1257/jep.31.2.3},</span>
-<span id="cb410-9"><a href="r-markdown.html#cb410-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">url</span> = {https://doi.org/10.1257%2Fjep.31.2.3},</span>
-<span id="cb410-10"><a href="r-markdown.html#cb410-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year</span> = 2017,</span>
-<span id="cb410-11"><a href="r-markdown.html#cb410-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">month</span> = {may},</span>
-<span id="cb410-12"><a href="r-markdown.html#cb410-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">publisher</span> = {American Economic Association},</span>
-<span id="cb410-13"><a href="r-markdown.html#cb410-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">volume</span> = {31},</span>
-<span id="cb410-14"><a href="r-markdown.html#cb410-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">number</span> = {2},</span>
-<span id="cb410-15"><a href="r-markdown.html#cb410-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">pages</span> = {3--32},</span>
-<span id="cb410-16"><a href="r-markdown.html#cb410-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">author</span> = {Susan Athey and Guido W. Imbens},</span>
-<span id="cb410-17"><a href="r-markdown.html#cb410-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">title</span> = {The State of Applied Econometrics:</span>
-<span id="cb410-18"><a href="r-markdown.html#cb410-18" aria-hidden="true" tabindex="-1"></a>    Causality and Policy Evaluation},</span>
-<span id="cb410-19"><a href="r-markdown.html#cb410-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">journal</span> = {Journal of Economic Perspectives}</span>
-<span id="cb410-20"><a href="r-markdown.html#cb410-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb410-21"><a href="r-markdown.html#cb410-21" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">deschenes2007economic</span>,</span>
-<span id="cb410-22"><a href="r-markdown.html#cb410-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>={The economic impacts of climate change:</span>
-<span id="cb410-23"><a href="r-markdown.html#cb410-23" aria-hidden="true" tabindex="-1"></a>  evidence from agricultural output and random fluctuations in weather},</span>
-<span id="cb410-24"><a href="r-markdown.html#cb410-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>={Desch{<span class="ch">\^</span>e}nes, Olivier and Greenstone, Michael},</span>
-<span id="cb410-25"><a href="r-markdown.html#cb410-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">journal</span>={American economic review},</span>
-<span id="cb410-26"><a href="r-markdown.html#cb410-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">volume</span>={97},</span>
-<span id="cb410-27"><a href="r-markdown.html#cb410-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">number</span>={1},</span>
-<span id="cb410-28"><a href="r-markdown.html#cb410-28" aria-hidden="true" tabindex="-1"></a>  <span class="dt">pages</span>={354--385},</span>
-<span id="cb410-29"><a href="r-markdown.html#cb410-29" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>={2007}</span>
-<span id="cb410-30"><a href="r-markdown.html#cb410-30" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="sourceCode bib"><code class="sourceCode bibtex"><span id="cb410-1"><a href="r-markdown.html#cb410-1" tabindex="-1"></a><span class="va">@book</span>{<span class="ot">xie_2018_rmarkdown</span>,</span>
+<span id="cb410-2"><a href="r-markdown.html#cb410-2" tabindex="-1"></a>  <span class="dt">title</span>={R markdown: The definitive guide},</span>
+<span id="cb410-3"><a href="r-markdown.html#cb410-3" tabindex="-1"></a>  <span class="dt">author</span>={Xie, Yihui and Allaire, Joseph J and Grolemund, Garrett},</span>
+<span id="cb410-4"><a href="r-markdown.html#cb410-4" tabindex="-1"></a>  <span class="dt">year</span>={2018},</span>
+<span id="cb410-5"><a href="r-markdown.html#cb410-5" tabindex="-1"></a>  <span class="dt">publisher</span>={Chapman and Hall/CRC}</span>
+<span id="cb410-6"><a href="r-markdown.html#cb410-6" tabindex="-1"></a>}</span>
+<span id="cb410-7"><a href="r-markdown.html#cb410-7" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">Athey_2017</span>,</span>
+<span id="cb410-8"><a href="r-markdown.html#cb410-8" tabindex="-1"></a>    <span class="dt">doi</span> = {10.1257/jep.31.2.3},</span>
+<span id="cb410-9"><a href="r-markdown.html#cb410-9" tabindex="-1"></a>    <span class="dt">url</span> = {https://doi.org/10.1257%2Fjep.31.2.3},</span>
+<span id="cb410-10"><a href="r-markdown.html#cb410-10" tabindex="-1"></a>    <span class="dt">year</span> = 2017,</span>
+<span id="cb410-11"><a href="r-markdown.html#cb410-11" tabindex="-1"></a>    <span class="dt">month</span> = {may},</span>
+<span id="cb410-12"><a href="r-markdown.html#cb410-12" tabindex="-1"></a>    <span class="dt">publisher</span> = {American Economic Association},</span>
+<span id="cb410-13"><a href="r-markdown.html#cb410-13" tabindex="-1"></a>    <span class="dt">volume</span> = {31},</span>
+<span id="cb410-14"><a href="r-markdown.html#cb410-14" tabindex="-1"></a>    <span class="dt">number</span> = {2},</span>
+<span id="cb410-15"><a href="r-markdown.html#cb410-15" tabindex="-1"></a>    <span class="dt">pages</span> = {3--32},</span>
+<span id="cb410-16"><a href="r-markdown.html#cb410-16" tabindex="-1"></a>    <span class="dt">author</span> = {Susan Athey and Guido W. Imbens},</span>
+<span id="cb410-17"><a href="r-markdown.html#cb410-17" tabindex="-1"></a>    <span class="dt">title</span> = {The State of Applied Econometrics:</span>
+<span id="cb410-18"><a href="r-markdown.html#cb410-18" tabindex="-1"></a>    Causality and Policy Evaluation},</span>
+<span id="cb410-19"><a href="r-markdown.html#cb410-19" tabindex="-1"></a>    <span class="dt">journal</span> = {Journal of Economic Perspectives}</span>
+<span id="cb410-20"><a href="r-markdown.html#cb410-20" tabindex="-1"></a>}</span>
+<span id="cb410-21"><a href="r-markdown.html#cb410-21" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">deschenes2007economic</span>,</span>
+<span id="cb410-22"><a href="r-markdown.html#cb410-22" tabindex="-1"></a>  <span class="dt">title</span>={The economic impacts of climate change:</span>
+<span id="cb410-23"><a href="r-markdown.html#cb410-23" tabindex="-1"></a>  evidence from agricultural output and random fluctuations in weather},</span>
+<span id="cb410-24"><a href="r-markdown.html#cb410-24" tabindex="-1"></a>  <span class="dt">author</span>={Desch{<span class="ch">\^</span>e}nes, Olivier and Greenstone, Michael},</span>
+<span id="cb410-25"><a href="r-markdown.html#cb410-25" tabindex="-1"></a>  <span class="dt">journal</span>={American economic review},</span>
+<span id="cb410-26"><a href="r-markdown.html#cb410-26" tabindex="-1"></a>  <span class="dt">volume</span>={97},</span>
+<span id="cb410-27"><a href="r-markdown.html#cb410-27" tabindex="-1"></a>  <span class="dt">number</span>={1},</span>
+<span id="cb410-28"><a href="r-markdown.html#cb410-28" tabindex="-1"></a>  <span class="dt">pages</span>={354--385},</span>
+<span id="cb410-29"><a href="r-markdown.html#cb410-29" tabindex="-1"></a>  <span class="dt">year</span>={2007}</span>
+<span id="cb410-30"><a href="r-markdown.html#cb410-30" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="un-générateur-de-citations" class="section level4 hasAnchor" number="6.4.1.3">
 <h4><span class="header-section-number">6.4.1.3</span> Un générateur de citations<a href="r-markdown.html#un-générateur-de-citations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1194,12 +1194,12 @@ Figure 6.1: Largeur des sépals en fonction de leur longueur.
 <li>éventuellement, on peut préciser le style voulu (ici, nous utilisons la norme APA) ;</li>
 <li>éventuellement, on peut indiquer que nous souhaitons que les citations soient cliquables et renvoient vers la bibliographie</li>
 </ol>
-<div class="sourceCode" id="cb411"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb411-1"><a href="r-markdown.html#cb411-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb411-2"><a href="r-markdown.html#cb411-2" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
-<span id="cb411-3"><a href="r-markdown.html#cb411-3" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> biblio.bib</span></span>
-<span id="cb411-4"><a href="r-markdown.html#cb411-4" aria-hidden="true" tabindex="-1"></a><span class="an">biblio-style:</span><span class="co"> apalike</span></span>
-<span id="cb411-5"><a href="r-markdown.html#cb411-5" aria-hidden="true" tabindex="-1"></a><span class="an">link-citations:</span><span class="co"> yes</span></span>
-<span id="cb411-6"><a href="r-markdown.html#cb411-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb411-1"><a href="r-markdown.html#cb411-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb411-2"><a href="r-markdown.html#cb411-2" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb411-3"><a href="r-markdown.html#cb411-3" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> biblio.bib</span></span>
+<span id="cb411-4"><a href="r-markdown.html#cb411-4" tabindex="-1"></a><span class="an">biblio-style:</span><span class="co"> apalike</span></span>
+<span id="cb411-5"><a href="r-markdown.html#cb411-5" tabindex="-1"></a><span class="an">link-citations:</span><span class="co"> yes</span></span>
+<span id="cb411-6"><a href="r-markdown.html#cb411-6" tabindex="-1"></a><span class="co">---</span></span></code></pre></div>
 </div>
 <div id="citer-les-documents-dans-le-corps-de-texte" class="section level3 hasAnchor" number="6.4.3">
 <h3><span class="header-section-number">6.4.3</span> Citer les documents dans le corps de texte<a href="r-markdown.html#citer-les-documents-dans-le-corps-de-texte" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1222,27 +1222,27 @@ Figure 6.1: Largeur des sépals en fonction de leur longueur.
 <tr class="odd">
 <td align="left">Citation entre parenthèses</td>
 <td align="right"><code>[@xie_2018_rmarkdown]</code></td>
-<td align="right"><span class="citation">(<a href="#ref-xie_2018_rmarkdown" role="doc-biblioref">Xie, Allaire, and Grolemund 2018</a>)</span></td>
+<td align="right"><span class="citation">(<a href="#ref-xie_2018_rmarkdown">Xie, Allaire, and Grolemund 2018</a>)</span></td>
 </tr>
 <tr class="even">
 <td align="left">Supprimer la mention de l’auteur</td>
 <td align="right"><code>[-@xie_2018_rmarkdown]</code></td>
-<td align="right"><span class="citation">(<a href="#ref-xie_2018_rmarkdown" role="doc-biblioref">2018</a>)</span></td>
+<td align="right"><span class="citation">(<a href="#ref-xie_2018_rmarkdown">2018</a>)</span></td>
 </tr>
 <tr class="odd">
 <td align="left">Ajout d’informations supplémentaires</td>
 <td align="right"><code>[voir @xie_2018_rmarkdown, pp. 10--12]</code></td>
-<td align="right"><span class="citation">(voir <a href="#ref-xie_2018_rmarkdown" role="doc-biblioref">Xie, Allaire, and Grolemund 2018, 10–12</a>)</span></td>
+<td align="right"><span class="citation">(voir <a href="#ref-xie_2018_rmarkdown">Xie, Allaire, and Grolemund 2018, 10–12</a>)</span></td>
 </tr>
 <tr class="even">
 <td align="left">Citation multiple</td>
 <td align="right"><code>[@xie_2018_rmarkdown;Athey_2017]</code></td>
-<td align="right"><span class="citation">(<a href="#ref-xie_2018_rmarkdown" role="doc-biblioref">Xie, Allaire, and Grolemund 2018</a>; <a href="#ref-Athey_2017" role="doc-biblioref">Athey and Imbens 2017</a>)</span></td>
+<td align="right"><span class="citation">(<a href="#ref-xie_2018_rmarkdown">Xie, Allaire, and Grolemund 2018</a>; <a href="#ref-Athey_2017">Athey and Imbens 2017</a>)</span></td>
 </tr>
 <tr class="odd">
 <td align="left">Citation sans les parenthèses pour les auteurs</td>
 <td align="right"><code>@xie_2018_rmarkdown</code></td>
-<td align="right"><span class="citation">Xie, Allaire, and Grolemund (<a href="#ref-xie_2018_rmarkdown" role="doc-biblioref">2018</a>)</span></td>
+<td align="right"><span class="citation">Xie, Allaire, and Grolemund (<a href="#ref-xie_2018_rmarkdown">2018</a>)</span></td>
 </tr>
 </tbody>
 </table>
@@ -1330,7 +1330,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null

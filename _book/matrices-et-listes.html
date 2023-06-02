@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Matrices et listes | Travaux dirigés d’Informatique</title>
   <meta name="description" content="3 Matrices et listes | Travaux dirigés d’Informatique" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Matrices et listes | Travaux dirigés d’Informatique" />
   <meta property="og:type" content="book" />
@@ -365,8 +365,8 @@ div.csl-indent {
 <p>En R, les matrices sont des vecteurs auxquels un attridut <code>dim</code> de dimension est ajouté (cet attribut est de longueur 2). La fonction <code class="sourceCode r"><span class="fu">matrix</span>()</code> permet de créer une matrice. Son premier argument, <code>data</code> reçoit un vecteur de valeurs. Les arguments <code>ncol</code> et <code>nrow</code> reçoivent quant à eux le nombre de colonnes et de lignes, respectivement. Il est possible de ne préciser qu’un seul de ces deux derniers arguments (en fonction de la longueur du vecteur donné à l’argument <code>data</code>, R devine).</p>
 <p>Créons la matrice suivante en R:</p>
 <p><span class="math display">\[A = \begin{bmatrix}1 &amp; 4 &amp; 7 &amp; 10\\2 &amp; 5 &amp; 8 &amp; 11\\ 3 &amp; 6 &amp; 9 &amp; 12\end{bmatrix}\]</span></p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="matrices-et-listes.html#cb89-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>), <span class="at">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb89-2"><a href="matrices-et-listes.html#cb89-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="matrices-et-listes.html#cb89-1" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>), <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb89-2"><a href="matrices-et-listes.html#cb89-2" tabindex="-1"></a>A</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    4    7   10
 ## [2,]    2    5    8   11
@@ -381,7 +381,7 @@ div.csl-indent {
 </ul>
 </div>
 <p>Pour remplir la matrice en procédant ligne par ligne plutôt que colonne par colonne, on peut ajouter <code class="sourceCode r">byrow <span class="ot">=</span> <span class="cn">TRUE</span></code> en argument à la fonction <code class="sourceCode r"><span class="fu">matrix</span>()</code></p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="matrices-et-listes.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="matrices-et-listes.html#cb91-1" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    2    3    4
 ## [2,]    5    6    7    8
@@ -392,24 +392,24 @@ div.csl-indent {
 <h4><span class="header-section-number">3.1.1.1</span> Indexation par position<a href="matrices-et-listes.html#indexation-par-position-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Avec les vecteurs, nous avons extrait des sous-ensembles à l’aide de la fonction crochet, en utilisant l’indexation. Les vecteurs étant des objets en dimension 1, nous n’avons donné à la fonction crochet qu’un seul argument : <code class="sourceCode r">x[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)]</code> permet d’extraire les éléments aux positions 2 et 3 de <code>x</code>. Les matrices étant des objets à deux dimensions, il convient de fournir deux arguments à la fonction crochet, en les séparant par une virgule : <code>x[i,j]</code>. Le premier argument, <code>i</code> correspond aux indices de la première dimension (les lignes) et <code>j</code> aux indices de la deuxième dimension (les colonnes).</p>
 <p>Revenons à notre matrice <code>A</code>. Extrayons les observations des lignes 1 et 3 aux colonnes 2 et 4 :</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="matrices-et-listes.html#cb93-1" aria-hidden="true" tabindex="-1"></a>A[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="matrices-et-listes.html#cb93-1" tabindex="-1"></a>A[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    4   10
 ## [2,]    6   12</code></pre>
 <p>En ommettant l’argument <code>i</code> ou l’argument <code>j</code>, l’ensemble des lignes ou des colonnes respectivement est retourné.</p>
 <p>Les éléments de l’ensemble des lignes aux colonnes 2 et 4 :</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="matrices-et-listes.html#cb95-1" aria-hidden="true" tabindex="-1"></a>A[, <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="matrices-et-listes.html#cb95-1" tabindex="-1"></a>A[, <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    4   10
 ## [2,]    5   11
 ## [3,]    6   12</code></pre>
 <p>Les éléments des lignes 1 et 3 pour l’ensemble des colonnes :</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="matrices-et-listes.html#cb97-1" aria-hidden="true" tabindex="-1"></a>A[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), ]</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="matrices-et-listes.html#cb97-1" tabindex="-1"></a>A[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), ]</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    4    7   10
 ## [2,]    3    6    9   12</code></pre>
 <p>Pour exclure des éléments, comme pour les vecteurs, on utilise le symbole moins (<code>-</code>). Par exemple, pour extraire les éléments pour toutes les lignes, pour toutes les colonnes sauf la 2e et la 4e :</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="matrices-et-listes.html#cb99-1" aria-hidden="true" tabindex="-1"></a>A[, <span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="matrices-et-listes.html#cb99-1" tabindex="-1"></a>A[, <span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    7
 ## [2,]    2    8
@@ -417,7 +417,7 @@ div.csl-indent {
 <div class="notebox">
 <p><strong>Note</strong></p>
 <p>Rappelez-vous que les matrices sont stockés sous forme de vecteurs. Il est donc possible d’utiliser la fonction crochet en lui fournissant uniquement l’argument <code>i</code>. L’instruction suivante retourne, sous la forme d’un vecteur, les éléments aux positions 1, 4, et 3 :</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="matrices-et-listes.html#cb101-1" aria-hidden="true" tabindex="-1"></a>A[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="matrices-et-listes.html#cb101-1" tabindex="-1"></a>A[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>)]</span></code></pre></div>
 <pre><code>## [1] 1 4 3</code></pre>
 </div>
 <div class="greenbox">
@@ -434,24 +434,24 @@ div.csl-indent {
 <div id="indexation-par-condition-1" class="section level4 hasAnchor" number="3.1.1.2">
 <h4><span class="header-section-number">3.1.1.2</span> Indexation par condition<a href="matrices-et-listes.html#indexation-par-condition-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Comme pour les vecteur, nous pouvons utiliser une matrice de logique indiquant si les éléments doivent être retournés (<code class="sourceCode r"><span class="cn">TRUE</span></code>) ou non(<code class="sourceCode r"><span class="cn">FALSE</span></code>).</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="matrices-et-listes.html#cb103-1" aria-hidden="true" tabindex="-1"></a>masque <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, </span>
-<span id="cb103-2"><a href="matrices-et-listes.html#cb103-2" aria-hidden="true" tabindex="-1"></a>                   <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>), <span class="at">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb103-3"><a href="matrices-et-listes.html#cb103-3" aria-hidden="true" tabindex="-1"></a>masque</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="matrices-et-listes.html#cb103-1" tabindex="-1"></a>masque <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, </span>
+<span id="cb103-2"><a href="matrices-et-listes.html#cb103-2" tabindex="-1"></a>                   <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>), <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb103-3"><a href="matrices-et-listes.html#cb103-3" tabindex="-1"></a>masque</span></code></pre></div>
 <pre><code>##       [,1]  [,2]  [,3]  [,4]
 ## [1,]  TRUE FALSE  TRUE FALSE
 ## [2,] FALSE  TRUE  TRUE FALSE
 ## [3,] FALSE FALSE FALSE FALSE</code></pre>
 <p>En appliquant ce masque de valeurs logiques à la matrice A, on récpuère dans un vecteur les valeurs pour lesquelles la valeur dans le masque à la même position vaut <code class="sourceCode r"><span class="cn">TRUE</span></code> :</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="matrices-et-listes.html#cb105-1" aria-hidden="true" tabindex="-1"></a>A[masque]</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="matrices-et-listes.html#cb105-1" tabindex="-1"></a>A[masque]</span></code></pre></div>
 <pre><code>## [1] 1 5 7 8</code></pre>
 <p>Evidemment, écrire de tels masques à la main n’est pas très utile. En revanche, ils peuvent être obtenus suite à l’évaluation d’une condition logique. Par exemple, si on souhaite obtenir les éléments de la matrice A dont la valeur est inférieure à 5, on peut créer le masque suivant :</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="matrices-et-listes.html#cb107-1" aria-hidden="true" tabindex="-1"></a>A<span class="sc">&lt;</span><span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="matrices-et-listes.html#cb107-1" tabindex="-1"></a>A<span class="sc">&lt;</span><span class="dv">5</span></span></code></pre></div>
 <pre><code>##      [,1]  [,2]  [,3]  [,4]
 ## [1,] TRUE  TRUE FALSE FALSE
 ## [2,] TRUE FALSE FALSE FALSE
 ## [3,] TRUE FALSE FALSE FALSE</code></pre>
 <p>Et ensuite appliquer ce masque avec la fonction crochet :</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="matrices-et-listes.html#cb109-1" aria-hidden="true" tabindex="-1"></a>A[A<span class="sc">&lt;</span><span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="matrices-et-listes.html#cb109-1" tabindex="-1"></a>A[A<span class="sc">&lt;</span><span class="dv">5</span>]</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4</code></pre>
 <div class="greenbox">
 <p><strong>Exercice</strong></p>
@@ -467,28 +467,28 @@ div.csl-indent {
 <p>Comme pour les vecteurs, le remplacement de valeurs peut s’effectuer avec la flèche d’affectation <code class="sourceCode r"><span class="ot">&lt;-</span></code>. On écrit à gauche de cette flèche l’extraction réalisée par indexation et à droite les valeurs de remplacement.</p>
 <p>Reprenons notre matrice A :</p>
 <p><span class="math display">\[A = \begin{bmatrix}1 &amp; 4 &amp; 7 &amp; 10\\2 &amp; 5 &amp; 8 &amp; 11\\ 3 &amp; 6 &amp; 9 &amp; 12\end{bmatrix}\]</span></p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="matrices-et-listes.html#cb111-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb111-2"><a href="matrices-et-listes.html#cb111-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="matrices-et-listes.html#cb111-1" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb111-2"><a href="matrices-et-listes.html#cb111-2" tabindex="-1"></a>A</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    4    7   10
 ## [2,]    2    5    8   11
 ## [3,]    3    6    9   12</code></pre>
 <p>Remplaçons les valeurs 10 et 11 par -10 et -11</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="matrices-et-listes.html#cb113-1" aria-hidden="true" tabindex="-1"></a>A[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">11</span>)</span>
-<span id="cb113-2"><a href="matrices-et-listes.html#cb113-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="matrices-et-listes.html#cb113-1" tabindex="-1"></a>A[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">11</span>)</span>
+<span id="cb113-2"><a href="matrices-et-listes.html#cb113-2" tabindex="-1"></a>A</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    4    7  -10
 ## [2,]    2    5    8  -11
 ## [3,]    3    6    9   12</code></pre>
 <p>Cela fonctionne aussi avec un indexation par condition. Créons un masque indiquant si les valeurs sont négatives :</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="matrices-et-listes.html#cb115-1" aria-hidden="true" tabindex="-1"></a>A<span class="sc">&lt;</span><span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="matrices-et-listes.html#cb115-1" tabindex="-1"></a>A<span class="sc">&lt;</span><span class="dv">0</span></span></code></pre></div>
 <pre><code>##       [,1]  [,2]  [,3]  [,4]
 ## [1,] FALSE FALSE FALSE  TRUE
 ## [2,] FALSE FALSE FALSE  TRUE
 ## [3,] FALSE FALSE FALSE FALSE</code></pre>
 <p>Puis affectons la valeur <code class="sourceCode r"><span class="cn">NA</span></code> à la place des valeurs négatives de la matrice <code>A</code> :</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="matrices-et-listes.html#cb117-1" aria-hidden="true" tabindex="-1"></a>A[A<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb117-2"><a href="matrices-et-listes.html#cb117-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="matrices-et-listes.html#cb117-1" tabindex="-1"></a>A[A<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb117-2"><a href="matrices-et-listes.html#cb117-2" tabindex="-1"></a>A</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    4    7   NA
 ## [2,]    2    5    8   NA
@@ -510,55 +510,55 @@ div.csl-indent {
 <p><span class="math display">\[B = \begin{bmatrix}5 &amp; 1\\ 2 &amp; 3\\ 3 &amp; 4\end{bmatrix}\]</span></p>
 <p><span class="math display">\[C = \begin{bmatrix}1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1\end{bmatrix}\]</span></p>
 <p><span class="math display">\[D = \begin{bmatrix}-2 &amp; 2 &amp; -3 \\ -1 &amp; 1 &amp; 3\\4 &amp; 0 &amp; -1\end{bmatrix}\]</span></p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="matrices-et-listes.html#cb119-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">0</span>,<span class="sc">-</span><span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
-<span id="cb119-2"><a href="matrices-et-listes.html#cb119-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb119-3"><a href="matrices-et-listes.html#cb119-3" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb119-4"><a href="matrices-et-listes.html#cb119-4" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="matrices-et-listes.html#cb119-1" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">0</span>,<span class="sc">-</span><span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb119-2"><a href="matrices-et-listes.html#cb119-2" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb119-3"><a href="matrices-et-listes.html#cb119-3" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb119-4"><a href="matrices-et-listes.html#cb119-4" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p>Considérons par ailleurs le scalaire <span class="math inline">\(a = 3\)</span>.</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="matrices-et-listes.html#cb120-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="matrices-et-listes.html#cb120-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">3</span></span></code></pre></div>
 <div id="addition-soustraction" class="section level4 hasAnchor" number="3.1.3.1">
 <h4><span class="header-section-number">3.1.3.1</span> Addition, soustraction<a href="matrices-et-listes.html#addition-soustraction" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Pour additionner ou soustraire un scalaire ou une matrice à une matrice, on utilise simplement les opérateurs d’addition (<code class="sourceCode r"><span class="sc">+</span></code>) ou de soustraction (<code class="sourceCode r"><span class="sc">-</span></code>), respectivement :</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="matrices-et-listes.html#cb121-1" aria-hidden="true" tabindex="-1"></a>A<span class="sc">+</span>a</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="matrices-et-listes.html#cb121-1" tabindex="-1"></a>A<span class="sc">+</span>a</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    4    5    3
 ## [2,]    7    6    2</code></pre>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="matrices-et-listes.html#cb123-1" aria-hidden="true" tabindex="-1"></a>A<span class="sc">-</span>a</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="matrices-et-listes.html#cb123-1" tabindex="-1"></a>A<span class="sc">-</span>a</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]   -2   -1   -3
 ## [2,]    1    0   -4</code></pre>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="matrices-et-listes.html#cb125-1" aria-hidden="true" tabindex="-1"></a>C<span class="sc">+</span>D</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="matrices-et-listes.html#cb125-1" tabindex="-1"></a>C<span class="sc">+</span>D</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]   -1    2   -3
 ## [2,]   -1    2    3
 ## [3,]    4    0    0</code></pre>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="matrices-et-listes.html#cb127-1" aria-hidden="true" tabindex="-1"></a>C<span class="sc">-</span>D</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="matrices-et-listes.html#cb127-1" tabindex="-1"></a>C<span class="sc">-</span>D</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    3   -2    3
 ## [2,]    1    0   -3
 ## [3,]   -4    0    2</code></pre>
 <p>Lorsqu’on essaie d’additionner ou de soustraire deux matrices non compatibles, R retourne une erreur :</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="matrices-et-listes.html#cb129-1" aria-hidden="true" tabindex="-1"></a>A<span class="sc">+</span>C</span></code></pre></div>
-<pre><code>## Error in A + C: tableaux de tailles inadéquates</code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="matrices-et-listes.html#cb129-1" tabindex="-1"></a>A<span class="sc">+</span>C</span></code></pre></div>
+<pre><code>## Error in A + C: non-conformable arrays</code></pre>
 </div>
 <div id="multiplication" class="section level4 hasAnchor" number="3.1.3.2">
 <h4><span class="header-section-number">3.1.3.2</span> Multiplication<a href="matrices-et-listes.html#multiplication" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>La multiplication par un scalaire s’effectue avec l’étoile <code class="sourceCode r"><span class="sc">*</span></code>:</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="matrices-et-listes.html#cb131-1" aria-hidden="true" tabindex="-1"></a>A<span class="sc">*</span>a</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="matrices-et-listes.html#cb131-1" tabindex="-1"></a>A<span class="sc">*</span>a</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    3    6    0
 ## [2,]   12    9   -3</code></pre>
 <p>Pour multiplier deux matrices (compatibles) entre-elles, on utilise l’opérateur de produit matriciel <code>%*%</code> :</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="matrices-et-listes.html#cb133-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> B</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="matrices-et-listes.html#cb133-1" tabindex="-1"></a>A <span class="sc">%*%</span> B</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    9    7
 ## [2,]   23    9</code></pre>
 <p>En cas d’incompatibilité, R nous prévient :</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="matrices-et-listes.html#cb135-1" aria-hidden="true" tabindex="-1"></a>C <span class="sc">%*%</span> A</span></code></pre></div>
-<pre><code>## Error in C %*% A: arguments inadéquats</code></pre>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="matrices-et-listes.html#cb135-1" tabindex="-1"></a>C <span class="sc">%*%</span> A</span></code></pre></div>
+<pre><code>## Error in C %*% A: non-conformable arguments</code></pre>
 <div class="notebox">
 <p>Attention, si on utilise l’étoile au lieu de l’opérateur de produit matriciel, si les deux matrices ont la même dimension, alors R effectue une multiplication terme à terme :</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="matrices-et-listes.html#cb137-1" aria-hidden="true" tabindex="-1"></a>C <span class="sc">*</span> D</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="matrices-et-listes.html#cb137-1" tabindex="-1"></a>C <span class="sc">*</span> D</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]   -2    0    0
 ## [2,]    0    1    0
@@ -568,7 +568,7 @@ div.csl-indent {
 <div id="transposée" class="section level4 hasAnchor" number="3.1.3.3">
 <h4><span class="header-section-number">3.1.3.3</span> Transposée<a href="matrices-et-listes.html#transposée" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>La transposée d’une matrice s’obtient en R avec la fonction <code class="sourceCode r"><span class="fu">t</span>()</code>:</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="matrices-et-listes.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(A)</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="matrices-et-listes.html#cb139-1" tabindex="-1"></a><span class="fu">t</span>(A)</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    4
 ## [2,]    2    3
@@ -577,58 +577,58 @@ div.csl-indent {
 <div id="inversion" class="section level4 hasAnchor" number="3.1.3.4">
 <h4><span class="header-section-number">3.1.3.4</span> Inversion<a href="matrices-et-listes.html#inversion" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>L’inversion d’une matrice est calculée à l’aide de la fonction <code>solve()</code>:</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="matrices-et-listes.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(D)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="matrices-et-listes.html#cb141-1" tabindex="-1"></a><span class="fu">solve</span>(D)</span></code></pre></div>
 <pre><code>##             [,1]       [,2] [,3]
 ## [1,] -0.02777778 0.05555556 0.25
 ## [2,]  0.30555556 0.38888889 0.25
 ## [3,] -0.11111111 0.22222222 0.00</code></pre>
 <div class="notebox">
 <p>En économétrie, l’estimateur des moindres carrés ordinaires est donné par <span class="math inline">\((X^{\top}X)^{-1}(X^{\top}y)\)</span>, où <span class="math inline">\(X\)</span> est la matrice des variables explicatives et <span class="math inline">\(y\)</span> le vecteur de la variable endogène.</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="matrices-et-listes.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> (<span class="fu">t</span>(X) <span class="sc">%*%</span> y)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="matrices-et-listes.html#cb143-1" tabindex="-1"></a><span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> (<span class="fu">t</span>(X) <span class="sc">%*%</span> y)</span></code></pre></div>
 <p>Qui peut aussi se calculer de manière équivalente (nous le ferons dans un prochain exercice) :</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="matrices-et-listes.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crossprod</span>(X,X) <span class="sc">%*%</span> <span class="fu">crossprod</span>(X,y)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="matrices-et-listes.html#cb144-1" tabindex="-1"></a><span class="fu">crossprod</span>(X,X) <span class="sc">%*%</span> <span class="fu">crossprod</span>(X,y)</span></code></pre></div>
 </div>
 </div>
 <div id="déterminant" class="section level4 hasAnchor" number="3.1.3.5">
 <h4><span class="header-section-number">3.1.3.5</span> Déterminant<a href="matrices-et-listes.html#déterminant" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Le déterminant s’obtient avec la fonction <code class="sourceCode r"><span class="fu">det</span>()</code> :</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="matrices-et-listes.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(D)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="matrices-et-listes.html#cb145-1" tabindex="-1"></a><span class="fu">det</span>(D)</span></code></pre></div>
 <pre><code>## [1] 36</code></pre>
 </div>
 <div id="diagonale" class="section level4 hasAnchor" number="3.1.3.6">
 <h4><span class="header-section-number">3.1.3.6</span> Diagonale<a href="matrices-et-listes.html#diagonale" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>La diagonale d’une matrice peut être obtenue avec la fonction <code>det()</code>{.R :</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="matrices-et-listes.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(C)</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="matrices-et-listes.html#cb147-1" tabindex="-1"></a><span class="fu">diag</span>(C)</span></code></pre></div>
 <pre><code>## [1] 1 1 1</code></pre>
 <div class="notebox">
 <p><strong>Note</strong></p>
 <p>La fonction <code>diag()</code> permet par ailleurs de créer une matrice identité :</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="matrices-et-listes.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="matrices-et-listes.html#cb149-1" tabindex="-1"></a><span class="fu">diag</span>(<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    0    0
 ## [2,]    0    1    0
 ## [3,]    0    0    1</code></pre>
 </div>
 <p>Pour obtenir la trace d’une matrice carrée, on peut simplement sommer les éléments de la diagonale :</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="matrices-et-listes.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(D))</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="matrices-et-listes.html#cb151-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(D))</span></code></pre></div>
 <pre><code>## [1] -2</code></pre>
 </div>
 </div>
 <div id="combiner-des-matrices" class="section level3 hasAnchor" number="3.1.4">
 <h3><span class="header-section-number">3.1.4</span> Combiner des matrices<a href="matrices-et-listes.html#combiner-des-matrices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Pour ajouter des <strong>colonnes</strong> à une matrice, la fonction <code class="sourceCode r"><span class="fu">cbind</span>()</code> peut être utilisée. Il s’agit de combiner (<em>bind</em>) les colonnes (<em>columns</em>) de deux matrices ou d’une matrice et d’un vecteur colonne.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="matrices-et-listes.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(B, C)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="matrices-et-listes.html#cb153-1" tabindex="-1"></a><span class="fu">cbind</span>(B, C)</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
 ## [1,]    5    1    1    0    0
 ## [2,]    2    3    0    1    0
 ## [3,]    3    4    0    0    1</code></pre>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="matrices-et-listes.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(B, <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="matrices-et-listes.html#cb155-1" tabindex="-1"></a><span class="fu">cbind</span>(B, <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    5    1   10
 ## [2,]    2    3   11
 ## [3,]    3    4   12</code></pre>
 <p>Pour ajouter des <strong>lignes</strong> à une matrice, la fonction <code class="sourceCode r"><span class="fu">rbind</span>()</code> peut être utilisée. Il s’agit de combiner (<em>bind</em>) les lignes (<em>rows</em>) de deux matrices ou d’une matrice et d’un vecteur ligne.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="matrices-et-listes.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(C, D)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="matrices-et-listes.html#cb157-1" tabindex="-1"></a><span class="fu">rbind</span>(C, D)</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    0    0
 ## [2,]    0    1    0
@@ -636,7 +636,7 @@ div.csl-indent {
 ## [4,]   -2    2   -3
 ## [5,]   -1    1    3
 ## [6,]    4    0   -1</code></pre>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="matrices-et-listes.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(C, <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="matrices-et-listes.html#cb159-1" tabindex="-1"></a><span class="fu">rbind</span>(C, <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    0    0
 ## [2,]    0    1    0
@@ -645,7 +645,7 @@ div.csl-indent {
 <div class="notebox">
 <p><strong>Note</strong></p>
 <p>Si on ajoute un vecteur colonne (ligne) à une matrice, et que la taille du vecteur est inférieure au nombre de colonnes (lignes), R effectue ce que l’on appelle un <strong>recyclage</strong>. C’est-à-dire que R va compléter le vecteur plus court à l’aide des valeurs de ce même vecteur, en repartant au début de celui-ci, afin d’obtenir deux objets de même taille.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="matrices-et-listes.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(B, <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="matrices-et-listes.html#cb161-1" tabindex="-1"></a><span class="fu">cbind</span>(B, <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    5    1   10
 ## [2,]    2    3   11
@@ -665,11 +665,11 @@ avec <span class="math inline">\(y\)</span> le vecteur de la variable à expliqu
 où <span class="math inline">\(\textrm{consommation}\)</span> est la variables à expliquer (<span class="math inline">\(y\)</span>). Il s’agit d’un vecteur de valeurs de consommation de carburant (miles par gallons). <span class="math inline">\(\textrm{puissance}\)</span> et <span class="math inline">\(\textrm{masse}\)</span> sont des vecteurs de puissance (nombre de chevaux) et de masse du véhicule (en millième de livres) respectivement. Le vecteur <span class="math inline">\(\varepsilon\)</span> est un terme d’erreurs que l’on suppose distribué selon une normale d’espérance nulle.</p>
 <p>L’objectif de l’exercice est d’estimer les paramètres <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> et <span class="math inline">\(\beta_2\)</span>.</p>
 <p>Dans un premier temps, évaluez les instructions suivantes pour récupérer les valeurs (qui sont stockées dans un tableau de données nommé <code>mtcars</code> qui est fourni dans le <em>package</em> {datasets}).</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="matrices-et-listes.html#cb163-1" aria-hidden="true" tabindex="-1"></a>consommation <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>mpg</span>
-<span id="cb163-2"><a href="matrices-et-listes.html#cb163-2" aria-hidden="true" tabindex="-1"></a>puissance <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>hp</span>
-<span id="cb163-3"><a href="matrices-et-listes.html#cb163-3" aria-hidden="true" tabindex="-1"></a>masse <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>wt</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="matrices-et-listes.html#cb163-1" tabindex="-1"></a>consommation <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>mpg</span>
+<span id="cb163-2"><a href="matrices-et-listes.html#cb163-2" tabindex="-1"></a>puissance <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>hp</span>
+<span id="cb163-3"><a href="matrices-et-listes.html#cb163-3" tabindex="-1"></a>masse <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>wt</span></code></pre></div>
 <p>Créez également un vecteur pour la constante (ce vecteur ne contient que des 1) :</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="matrices-et-listes.html#cb164-1" aria-hidden="true" tabindex="-1"></a>constante <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(mtcars))</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="matrices-et-listes.html#cb164-1" tabindex="-1"></a>constante <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(mtcars))</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Créez la matrice <code>X</code> qui doit contenir 3 colonnes : une pour la constante (<code>constante</code>), une autre pour la puissance (<code>puissance</code>) et une dernière pour la masse (<code>masse</code>) ;</li>
 <li>Calculez la transposée de <span class="math inline">\(X\)</span> : <span class="math inline">\(X^\top\)</span> ;</li>
@@ -684,16 +684,16 @@ où <span class="math inline">\(\textrm{consommation}\)</span> est la variables 
 <div id="listes" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Listes<a href="matrices-et-listes.html#listes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Tandis que les éléments d’un vecteur ou d’une matrice doivent nécessairement être de même type, les listes proposent une structure de données moins rigide à cet égard. Les types des élément d’une liste en R peuvent être différents.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="matrices-et-listes.html#cb165-1" aria-hidden="true" tabindex="-1"></a>l_1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">15</span>), <span class="fu">c</span>(<span class="st">&quot;Janvier&quot;</span>, <span class="st">&quot;Fevrier&quot;</span>))</span>
-<span id="cb165-2"><a href="matrices-et-listes.html#cb165-2" aria-hidden="true" tabindex="-1"></a>l_1</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="matrices-et-listes.html#cb165-1" tabindex="-1"></a>l_1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">15</span>), <span class="fu">c</span>(<span class="st">&quot;Janvier&quot;</span>, <span class="st">&quot;Fevrier&quot;</span>))</span>
+<span id="cb165-2"><a href="matrices-et-listes.html#cb165-2" tabindex="-1"></a>l_1</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 10 12 15
 ## 
 ## [[2]]
 ## [1] &quot;Janvier&quot; &quot;Fevrier&quot;</code></pre>
 <p>Les classes d’objets à l’intérieur d’une liste ne sont pas non plus nécessairement identiques. Dans l’exemple qui suit, la liste <code>l_2</code> contient un vecteur de numériques en premier élément, et une matrice de numériques en second :</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="matrices-et-listes.html#cb167-1" aria-hidden="true" tabindex="-1"></a>l_2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">2</span>))</span>
-<span id="cb167-2"><a href="matrices-et-listes.html#cb167-2" aria-hidden="true" tabindex="-1"></a>l_2</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="matrices-et-listes.html#cb167-1" tabindex="-1"></a>l_2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">2</span>))</span>
+<span id="cb167-2"><a href="matrices-et-listes.html#cb167-2" tabindex="-1"></a>l_2</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 1 2 3
 ## 
@@ -702,17 +702,17 @@ où <span class="math inline">\(\textrm{consommation}\)</span> est la variables 
 ## [1,]    1    3
 ## [2,]    2    4</code></pre>
 <p>Les éléments peuvent être, comme dans un vecteur, nommés. Les noms peuvent être indiqués au moment de la création…</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="matrices-et-listes.html#cb169-1" aria-hidden="true" tabindex="-1"></a>l_1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">notes =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">5</span>), <span class="at">mois =</span> <span class="fu">c</span>(<span class="st">&quot;Janvier&quot;</span>, <span class="st">&quot;Fevrier&quot;</span>))</span>
-<span id="cb169-2"><a href="matrices-et-listes.html#cb169-2" aria-hidden="true" tabindex="-1"></a>l_1</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="matrices-et-listes.html#cb169-1" tabindex="-1"></a>l_1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">notes =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">5</span>), <span class="at">mois =</span> <span class="fu">c</span>(<span class="st">&quot;Janvier&quot;</span>, <span class="st">&quot;Fevrier&quot;</span>))</span>
+<span id="cb169-2"><a href="matrices-et-listes.html#cb169-2" tabindex="-1"></a>l_1</span></code></pre></div>
 <pre><code>## $notes
 ## [1] 10 12  5
 ## 
 ## $mois
 ## [1] &quot;Janvier&quot; &quot;Fevrier&quot;</code></pre>
 <p>… ou une fois la liste créée, à l’aide de la fonction <code class="sourceCode r"><span class="fu">names</span>()</code> :</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="matrices-et-listes.html#cb171-1" aria-hidden="true" tabindex="-1"></a>l_1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">5</span>),  <span class="fu">c</span>(<span class="st">&quot;Janvier&quot;</span>, <span class="st">&quot;Fevrier&quot;</span>))</span>
-<span id="cb171-2"><a href="matrices-et-listes.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(l_1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;notes&quot;</span>, <span class="st">&quot;mois&quot;</span>)</span>
-<span id="cb171-3"><a href="matrices-et-listes.html#cb171-3" aria-hidden="true" tabindex="-1"></a>l_1</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="matrices-et-listes.html#cb171-1" tabindex="-1"></a>l_1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">5</span>),  <span class="fu">c</span>(<span class="st">&quot;Janvier&quot;</span>, <span class="st">&quot;Fevrier&quot;</span>))</span>
+<span id="cb171-2"><a href="matrices-et-listes.html#cb171-2" tabindex="-1"></a><span class="fu">names</span>(l_1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;notes&quot;</span>, <span class="st">&quot;mois&quot;</span>)</span>
+<span id="cb171-3"><a href="matrices-et-listes.html#cb171-3" tabindex="-1"></a>l_1</span></code></pre></div>
 <pre><code>## $notes
 ## [1] 10 12  5
 ## 
@@ -722,9 +722,9 @@ où <span class="math inline">\(\textrm{consommation}\)</span> est la variables 
 <h3><span class="header-section-number">3.2.1</span> Accès aux éléments<a href="matrices-et-listes.html#accès-aux-éléments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Comme pour les vecteurs, il est possible d’utiliser les crochets pour extraire des éléments d’une liste. <strong>La fonction crochet appliquée à une liste retourne une liste</strong>. On donne en arguments de cette fonction, comme pour les vecteurs, soit des positions, soit des noms, soit des valeurs logiques.</p>
 <p>Créons une liste contenant 4 éléments :</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="matrices-et-listes.html#cb173-1" aria-hidden="true" tabindex="-1"></a>l_3 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">nombres =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">alphabet_min =</span> letters,</span>
-<span id="cb173-2"><a href="matrices-et-listes.html#cb173-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">alphabet_maj =</span> LETTERS, <span class="at">mois =</span> month.name)</span>
-<span id="cb173-3"><a href="matrices-et-listes.html#cb173-3" aria-hidden="true" tabindex="-1"></a>l_3</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="matrices-et-listes.html#cb173-1" tabindex="-1"></a>l_3 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">nombres =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">alphabet_min =</span> letters,</span>
+<span id="cb173-2"><a href="matrices-et-listes.html#cb173-2" tabindex="-1"></a>            <span class="at">alphabet_maj =</span> LETTERS, <span class="at">mois =</span> month.name)</span>
+<span id="cb173-3"><a href="matrices-et-listes.html#cb173-3" tabindex="-1"></a>l_3</span></code></pre></div>
 <pre><code>## $nombres
 ## [1] 1 2 3 4 5
 ## 
@@ -751,17 +751,17 @@ où <span class="math inline">\(\textrm{consommation}\)</span> est la variables 
 </ul>
 </div>
 <p>L’indexation par position fonctionne comme pour un vecteur :</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="matrices-et-listes.html#cb175-1" aria-hidden="true" tabindex="-1"></a>l_3[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="matrices-et-listes.html#cb175-1" tabindex="-1"></a>l_3[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## $nombres
 ## [1] 1 2 3 4 5</code></pre>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="matrices-et-listes.html#cb177-1" aria-hidden="true" tabindex="-1"></a>l_3[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="matrices-et-listes.html#cb177-1" tabindex="-1"></a>l_3[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</span></code></pre></div>
 <pre><code>## $nombres
 ## [1] 1 2 3 4 5
 ## 
 ## $alphabet_maj
 ##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot;
 ## [20] &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="matrices-et-listes.html#cb179-1" aria-hidden="true" tabindex="-1"></a>l_3[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="matrices-et-listes.html#cb179-1" tabindex="-1"></a>l_3[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)]</span></code></pre></div>
 <pre><code>## $nombres
 ## [1] 1 2 3 4 5
 ## 
@@ -769,7 +769,7 @@ où <span class="math inline">\(\textrm{consommation}\)</span> est la variables 
 ##  [1] &quot;January&quot;   &quot;February&quot;  &quot;March&quot;     &quot;April&quot;     &quot;May&quot;       &quot;June&quot;     
 ##  [7] &quot;July&quot;      &quot;August&quot;    &quot;September&quot; &quot;October&quot;   &quot;November&quot;  &quot;December&quot;</code></pre>
 <p>L’indexation par nom fonctionne aussi comme pour les vecteurs :</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="matrices-et-listes.html#cb181-1" aria-hidden="true" tabindex="-1"></a>l_3[<span class="fu">c</span>(<span class="st">&quot;mois&quot;</span>, <span class="st">&quot;nombres&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="matrices-et-listes.html#cb181-1" tabindex="-1"></a>l_3[<span class="fu">c</span>(<span class="st">&quot;mois&quot;</span>, <span class="st">&quot;nombres&quot;</span>)]</span></code></pre></div>
 <pre><code>## $mois
 ##  [1] &quot;January&quot;   &quot;February&quot;  &quot;March&quot;     &quot;April&quot;     &quot;May&quot;       &quot;June&quot;     
 ##  [7] &quot;July&quot;      &quot;August&quot;    &quot;September&quot; &quot;October&quot;   &quot;November&quot;  &quot;December&quot; 
@@ -777,7 +777,7 @@ où <span class="math inline">\(\textrm{consommation}\)</span> est la variables 
 ## $nombres
 ## [1] 1 2 3 4 5</code></pre>
 <p>Il en est de même pour l’indexation par condition :</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="matrices-et-listes.html#cb183-1" aria-hidden="true" tabindex="-1"></a>l_3[<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="matrices-et-listes.html#cb183-1" tabindex="-1"></a>l_3[<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)]</span></code></pre></div>
 <pre><code>## $nombres
 ## [1] 1 2 3 4 5
 ## 
@@ -789,35 +789,35 @@ où <span class="math inline">\(\textrm{consommation}\)</span> est la variables 
 <p>Nous verrons lors de la séance de travaux dirigés sur les boucles comment parcourir les éléments d’une liste tout en appliquant un test logique à chaque élément.</p>
 </div>
 <p>On note bien que le résultat retourné est une liste :</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="matrices-et-listes.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(l_3[<span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="matrices-et-listes.html#cb185-1" tabindex="-1"></a><span class="fu">class</span>(l_3[<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## [1] &quot;list&quot;</code></pre>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="matrices-et-listes.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(l_3[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="matrices-et-listes.html#cb187-1" tabindex="-1"></a><span class="fu">class</span>(l_3[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)])</span></code></pre></div>
 <pre><code>## [1] &quot;list&quot;</code></pre>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="matrices-et-listes.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(l_3[<span class="st">&quot;nombres&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="matrices-et-listes.html#cb189-1" tabindex="-1"></a><span class="fu">class</span>(l_3[<span class="st">&quot;nombres&quot;</span>])</span></code></pre></div>
 <pre><code>## [1] &quot;list&quot;</code></pre>
 <p>Si l’on souhaite accéder au <strong>contenu</strong> d’un élément particulier, il faut utiliser la fonction double crochets (<code class="sourceCode r"><span class="st">&quot;[[&quot;</span>()</code>). De manière analogue à la fonction crochets (<code class="sourceCode r"><span class="st">&quot;[&quot;</span>()</code>), une syntaxe allégée est proposée.</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="matrices-et-listes.html#cb191-1" aria-hidden="true" tabindex="-1"></a>l_3[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="matrices-et-listes.html#cb191-1" tabindex="-1"></a>l_3[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
 <p>Le résultat retourné est bien le contenu, ici un vecteur d’entiers :</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="matrices-et-listes.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(l_3[[<span class="dv">1</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="matrices-et-listes.html#cb193-1" tabindex="-1"></a><span class="fu">class</span>(l_3[[<span class="dv">1</span>]])</span></code></pre></div>
 <pre><code>## [1] &quot;integer&quot;</code></pre>
 <p>La fonction <code class="sourceCode r"><span class="fu">str</span>()</code>, qui affiche la structure d’un objet de manière compacte, permet de mieux se fixer les idées :</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="matrices-et-listes.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(l_3[<span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="matrices-et-listes.html#cb195-1" tabindex="-1"></a><span class="fu">str</span>(l_3[<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## List of 1
 ##  $ nombres: int [1:5] 1 2 3 4 5</code></pre>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="matrices-et-listes.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(l_3[[<span class="dv">1</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="matrices-et-listes.html#cb197-1" tabindex="-1"></a><span class="fu">str</span>(l_3[[<span class="dv">1</span>]])</span></code></pre></div>
 <pre><code>##  int [1:5] 1 2 3 4 5</code></pre>
 <div class="notebox">
 <p><strong>Note</strong></p>
 <p>Lorsque les éléments de la liste son nommés et que l’on désire extraire le contenu d’un seul élément, il est possible d’utiliser le dollar en lieu et place des crochets, en indiquant le nom de l’élément.</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="matrices-et-listes.html#cb199-1" aria-hidden="true" tabindex="-1"></a>l_3<span class="sc">$</span>nombres</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="matrices-et-listes.html#cb199-1" tabindex="-1"></a>l_3<span class="sc">$</span>nombres</span></code></pre></div>
 </div>
 <p>Créons une liste comprenant trois éléments, dont le 3e est une liste de deux éléments :</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="matrices-et-listes.html#cb200-1" aria-hidden="true" tabindex="-1"></a>l_4 <span class="ot">&lt;-</span> </span>
-<span id="cb200-2"><a href="matrices-et-listes.html#cb200-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),</span>
-<span id="cb200-3"><a href="matrices-et-listes.html#cb200-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">c</span>(<span class="st">&quot;Bonjour&quot;</span>, <span class="st">&quot;Hello&quot;</span>),</span>
-<span id="cb200-4"><a href="matrices-et-listes.html#cb200-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), month.name))</span>
-<span id="cb200-5"><a href="matrices-et-listes.html#cb200-5" aria-hidden="true" tabindex="-1"></a>l_4</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="matrices-et-listes.html#cb200-1" tabindex="-1"></a>l_4 <span class="ot">&lt;-</span> </span>
+<span id="cb200-2"><a href="matrices-et-listes.html#cb200-2" tabindex="-1"></a>  <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),</span>
+<span id="cb200-3"><a href="matrices-et-listes.html#cb200-3" tabindex="-1"></a>     <span class="fu">c</span>(<span class="st">&quot;Bonjour&quot;</span>, <span class="st">&quot;Hello&quot;</span>),</span>
+<span id="cb200-4"><a href="matrices-et-listes.html#cb200-4" tabindex="-1"></a>     <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), month.name))</span>
+<span id="cb200-5"><a href="matrices-et-listes.html#cb200-5" tabindex="-1"></a>l_4</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 1 2 3
 ## 
@@ -832,19 +832,19 @@ où <span class="math inline">\(\textrm{consommation}\)</span> est la variables 
 ##  [1] &quot;January&quot;   &quot;February&quot;  &quot;March&quot;     &quot;April&quot;     &quot;May&quot;       &quot;June&quot;     
 ##  [7] &quot;July&quot;      &quot;August&quot;    &quot;September&quot; &quot;October&quot;   &quot;November&quot;  &quot;December&quot;</code></pre>
 <p>Si on souhaite extraire le premier élément du troisième élément de <code>l_4</code>, on utilise dans un premier temps les doubles crochets (pour extraire le contenu du 3e élément de <code>l_4</code>), puis on utilise la fonction crochet sur le résultat (pour extraire le premier élément). Il s’agit d’une composition de fonctions, et la fonction appliquée en dernier étant la fonction crochet, le résultat est… une liste !</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="matrices-et-listes.html#cb202-1" aria-hidden="true" tabindex="-1"></a>l_4[[<span class="dv">3</span>]][<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="matrices-et-listes.html#cb202-1" tabindex="-1"></a>l_4[[<span class="dv">3</span>]][<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 1 2 3</code></pre>
 <p>Si l’on souhaite extraire le <strong>contenu</strong> du 1er élément du 3e élément de <code>l_4</code>, on utilisera deux fois la fonction double crochets : la première pour extraire le contenu du 3e élément (on récupère l’objet en 3e position, qui est une liste) puis la seconde pour extraire le contenu du premier élément de ce que l’on vient d’extraire :</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="matrices-et-listes.html#cb204-1" aria-hidden="true" tabindex="-1"></a>l_4[[<span class="dv">3</span>]][[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="matrices-et-listes.html#cb204-1" tabindex="-1"></a>l_4[[<span class="dv">3</span>]][[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## [1] 1 2 3</code></pre>
 </div>
 <div id="remplacement-et-ajout-déléments" class="section level3 hasAnchor" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Remplacement et ajout d’éléments<a href="matrices-et-listes.html#remplacement-et-ajout-déléments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Pour remplacer un élément dans une liste, comme pour un vecteur ou une matrice, on utilise une nouvelle affectation.</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="matrices-et-listes.html#cb206-1" aria-hidden="true" tabindex="-1"></a>l_3[[<span class="st">&quot;nombres&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
-<span id="cb206-2"><a href="matrices-et-listes.html#cb206-2" aria-hidden="true" tabindex="-1"></a>l_3<span class="sc">$</span>mois <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;January&quot;</span>, <span class="st">&quot;February&quot;</span>)</span>
-<span id="cb206-3"><a href="matrices-et-listes.html#cb206-3" aria-hidden="true" tabindex="-1"></a>l_3</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="matrices-et-listes.html#cb206-1" tabindex="-1"></a>l_3[[<span class="st">&quot;nombres&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb206-2"><a href="matrices-et-listes.html#cb206-2" tabindex="-1"></a>l_3<span class="sc">$</span>mois <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;January&quot;</span>, <span class="st">&quot;February&quot;</span>)</span>
+<span id="cb206-3"><a href="matrices-et-listes.html#cb206-3" tabindex="-1"></a>l_3</span></code></pre></div>
 <pre><code>## $nombres
 ## [1] 6 5 4 3 2 1 0
 ## 
@@ -859,8 +859,8 @@ où <span class="math inline">\(\textrm{consommation}\)</span> est la variables 
 ## $mois
 ## [1] &quot;January&quot;  &quot;February&quot;</code></pre>
 <p>Pour ajouter un élément, on effectue simplement une affectation. Soit on nomme le nouvel élément :</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="matrices-et-listes.html#cb208-1" aria-hidden="true" tabindex="-1"></a>l_3[<span class="st">&quot;autres_nombres&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb208-2"><a href="matrices-et-listes.html#cb208-2" aria-hidden="true" tabindex="-1"></a>l_3</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="matrices-et-listes.html#cb208-1" tabindex="-1"></a>l_3[<span class="st">&quot;autres_nombres&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb208-2"><a href="matrices-et-listes.html#cb208-2" tabindex="-1"></a>l_3</span></code></pre></div>
 <pre><code>## $nombres
 ## [1] 6 5 4 3 2 1 0
 ## 
@@ -878,8 +878,8 @@ où <span class="math inline">\(\textrm{consommation}\)</span> est la variables 
 ## $autres_nombres
 ## [1] 1</code></pre>
 <p>Si l’élément n’as pas vocation à être nommé, on utilise la fonction <code class="sourceCode r"><span class="fu">c</span>()</code> et on place le nouvel élément au sein d’une liste :</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="matrices-et-listes.html#cb210-1" aria-hidden="true" tabindex="-1"></a>l_3 <span class="ot">&lt;-</span> <span class="fu">c</span>(l_3, <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)))</span>
-<span id="cb210-2"><a href="matrices-et-listes.html#cb210-2" aria-hidden="true" tabindex="-1"></a>l_3</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="matrices-et-listes.html#cb210-1" tabindex="-1"></a>l_3 <span class="ot">&lt;-</span> <span class="fu">c</span>(l_3, <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)))</span>
+<span id="cb210-2"><a href="matrices-et-listes.html#cb210-2" tabindex="-1"></a>l_3</span></code></pre></div>
 <pre><code>## $nombres
 ## [1] 6 5 4 3 2 1 0
 ## 
@@ -903,11 +903,11 @@ où <span class="math inline">\(\textrm{consommation}\)</span> est la variables 
 <p><strong>Exercice</strong></p>
 <ol style="list-style-type: decimal">
 <li><p>Extrayez le 3e élément de la liste suivante :</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="matrices-et-listes.html#cb212-1" aria-hidden="true" tabindex="-1"></a>ma_liste <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>), LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>], month.abb)</span></code></pre></div></li>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="matrices-et-listes.html#cb212-1" tabindex="-1"></a>ma_liste <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>), LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>], month.abb)</span></code></pre></div></li>
 <li><p>Extrayez tous les éléments de la liste <code>ma_liste</code> sauf le second.</p></li>
 <li><p>Extrayez le contenu du troisième élément de la liste <code class="sourceCode r">ma_liste_2</code>, en utilisant le nom de l’élément.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="matrices-et-listes.html#cb213-1" aria-hidden="true" tabindex="-1"></a>ma_liste_2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">nombre =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
-<span id="cb213-2"><a href="matrices-et-listes.html#cb213-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">lettre =</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>], <span class="at">mois =</span> month.abb)</span></code></pre></div></li>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="matrices-et-listes.html#cb213-1" tabindex="-1"></a>ma_liste_2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">nombre =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb213-2"><a href="matrices-et-listes.html#cb213-2" tabindex="-1"></a>             <span class="at">lettre =</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>], <span class="at">mois =</span> month.abb)</span></code></pre></div></li>
 <li><p>Toujours en accédant par le nom, ajoutez <code class="sourceCode r"><span class="dv">10</span></code> à chacune des valeurs du premier élément de <code>ma_liste_2</code>. Le résultat doit altérer <code>ma_liste_2</code>.</p></li>
 <li><p>Ajouter un élément au vecteur de nombres de l’élément <code>nombre</code> de la liste <code>ma_liste_2</code>. Cet élément doit être le numérique <code class="sourceCode r"><span class="sc">-</span><span class="dv">10</span></code>.</p></li>
 </ol>
@@ -981,7 +981,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null

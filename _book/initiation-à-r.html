@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 Initiation à R | Travaux dirigés d’Informatique</title>
   <meta name="description" content="1 Initiation à R | Travaux dirigés d’Informatique" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 Initiation à R | Travaux dirigés d’Informatique" />
   <meta property="og:type" content="book" />
@@ -361,9 +361,9 @@ div.csl-indent {
 <h2><span class="header-section-number">1.1</span> Travailler par projets<a href="initiation-à-r.html#travailler-par-projets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Durant vos études universitaires, vous allez réaliser des études en vous appuyant sur des données et sur leur analyse statistique. Il convient de prendre de bonnes habitudes en travaillant avec des projets RStudio. Dans cet exercice, vous allez mettre en place un projet pour la première séance de travaux dirigés.</p>
 <p>En respectant l’arborescence présentée sur l’image ci-dessous, il sera aisé de vous repérer et le partage de vos codes avec vos collaborateurs sera simple.</p>
-<div class="figure">
-<img src="figs/project_tree_structure.png" title="Arborescence de fichiers contenant un fichier de projet, des dossiers Data, Script et Output." style="width:25.0%" alt="" />
-<p class="caption">Structure basique pour les projets. Source: <a href="https://martinctc.github.io/" class="uri">https://martinctc.github.io/</a>.</p>
+<div class="float">
+<img src="figs/project_tree_structure.png" title="Arborescence de fichiers contenant un fichier de projet, des dossiers Data, Script et Output." style="width:25.0%" alt="Structure basique pour les projets. Source: https://martinctc.github.io/." />
+<div class="figcaption">Structure basique pour les projets. Source: <a href="https://martinctc.github.io/" class="uri">https://martinctc.github.io/</a>.</div>
 </div>
 <div class="greenbox">
 <p><strong>Création d’un projet</strong></p>
@@ -384,8 +384,8 @@ div.csl-indent {
 <p>Pour créer un objet, il est nécessaire de lui donner un nom et un contenu. On écrit le nom en respectant des conventions de nommage. Le nom d’une variable doit être composé de caractères alphanumériques ou du point ou du trait de soulignement uniquement. Il ne doit pas commencer par un chiffre ou contenir d’espace, sauf s’il est entouré par des guillemets. Il est important de noter que ces noms sont sensibles à la casse, c’est à dire qu’une distinction entre les majuscules et les minuscules a lieu.</p>
 <p>Dans le cadre de ces travaux dirigés, nous utiliseront une convention supplémentaire, consistant à créer des variables dont on peut facilement deviner le contenu grâce à leur nom, en utilisant uniquement des lettres minuscules, et en ajoutant un trait de soulignement entre les différents termes s’il y a lieu d’utiliser plusieurs termes. Par exemple, une variable qui contiendrait l’année de naissance d’un individu pourrais être nommée <code>annee_naissance</code>.</p>
 <p>L’affectation du contenu à une variable, une fois son nom indiqué, se fait en ajoutant un symbole d’affectation : <code class="sourceCode r"><span class="ot">&lt;-</span></code> (on peut aussi utiliser le symbole égal (<code>=</code>)).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="initiation-à-r.html#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb1-2"><a href="initiation-à-r.html#cb1-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="initiation-à-r.html#cb1-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb1-2"><a href="initiation-à-r.html#cb1-2" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <div class="greenbox">
 <p><strong>Exercice</strong></p>
@@ -445,8 +445,8 @@ div.csl-indent {
 <ol style="list-style-type: decimal">
 <li>Évaluez le coode suivant, et lisez le message d’erreur :</li>
 </ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="initiation-à-r.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
-<span id="cb3-2"><a href="initiation-à-r.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="initiation-à-r.html#cb3-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="initiation-à-r.html#cb3-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Les fonctions <code class="sourceCode r"><span class="fu">ggplot</span>()</code>, <code class="sourceCode r"><span class="fu">aes</span>()</code> et <code class="sourceCode r"><span class="fu">geom_point</span>()</code> sont contenues dans le <em>package</em> {ggplot2}. <strong>Sans charger</strong> le <em>package</em>, et en utilisant la syntaxe avec les deux-points (<code>::</code>), modifiez l’instruction de la question précédente pour afficher un nuage de point comme ci-dessous :
 <img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></li>
@@ -504,7 +504,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null

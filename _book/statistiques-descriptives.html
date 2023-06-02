@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7 Statistiques descriptives | Travaux dirigés d’Informatique</title>
   <meta name="description" content="7 Statistiques descriptives | Travaux dirigés d’Informatique" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 Statistiques descriptives | Travaux dirigés d’Informatique" />
   <meta property="og:type" content="book" />
@@ -360,13 +360,13 @@ div.csl-indent {
 <p>Ce chapitre vous permet de mobiliser vos connaissances acquises avec le <a href="tableaux-de-données.html#tableaux-de-données">chapitre sur les tableaux de données</a> et le <a href="r-markdown.html#markdown">chapitre sur R Markdown</a> pour produire rapidement des résumés statistiques à partir de données tabulaires.</p>
 <div id="données-du-chapitre" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Données du chapitre<a href="statistiques-descriptives.html#données-du-chapitre" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Dans ce chapitre, vous allez manipuler des données qui proviennent de l’article de <span class="citation">Bertrand and Mullainathan (<a href="#ref-bertrand_2004_AER" role="doc-biblioref">2004</a>)</span> intitulé <em>Are Emily and Greg More Employable Than Lakisha and Jamal?</em>, dans lequel les auteurs se sont penchés sur l’existence de discrimination sur le marché du travail aux États-Unis. Dans leur travail, les chercheurs ont envoyé des faux CVs en réponse à des annonces postées dans des journeaux à Boston et à Chicago. Ces faux CVs ont été réalisés de manière aléatoire, en faisant varier diverses caractéristiques : le genre de la personne qui postule, la qualité de rédaction, l’expérience, le niveau d’études, etc. Ce qui intéresse les auteurs est de mesurer la discrimination raciale. Plutôt que d’indiquer l’ethnicité des personnes sur les CVs, les auteurs ont choisi de donner des noms à consonnance afro-américaine ou caucasienne aux faux CVs, en attribuant de manière aléatoire les noms aux faux CVs.</p>
+<p>Dans ce chapitre, vous allez manipuler des données qui proviennent de l’article de <span class="citation">Bertrand and Mullainathan (<a href="#ref-bertrand_2004_AER">2004</a>)</span> intitulé <em>Are Emily and Greg More Employable Than Lakisha and Jamal?</em>, dans lequel les auteurs se sont penchés sur l’existence de discrimination sur le marché du travail aux États-Unis. Dans leur travail, les chercheurs ont envoyé des faux CVs en réponse à des annonces postées dans des journeaux à Boston et à Chicago. Ces faux CVs ont été réalisés de manière aléatoire, en faisant varier diverses caractéristiques : le genre de la personne qui postule, la qualité de rédaction, l’expérience, le niveau d’études, etc. Ce qui intéresse les auteurs est de mesurer la discrimination raciale. Plutôt que d’indiquer l’ethnicité des personnes sur les CVs, les auteurs ont choisi de donner des noms à consonnance afro-américaine ou caucasienne aux faux CVs, en attribuant de manière aléatoire les noms aux faux CVs.</p>
 <p>Le <em>package</em> {AER} fournit les données de l’étude. Si ce <em>package</em> n’est pas installé sur votre machine, vous pouvez l’installer comme suit :</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="statistiques-descriptives.html#cb412-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;AER&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="statistiques-descriptives.html#cb412-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;AER&quot;</span>)</span></code></pre></div>
 <p>Ensuite, vous pouvez charger le jeu de données <code>ResumeNames</code> comme suit :</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="statistiques-descriptives.html#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ResumeNames, <span class="at">package =</span> <span class="st">&quot;AER&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="statistiques-descriptives.html#cb413-1" tabindex="-1"></a><span class="fu">data</span>(ResumeNames, <span class="at">package =</span> <span class="st">&quot;AER&quot;</span>)</span></code></pre></div>
 <p>Pour afficher la page d’aide du jeu de données <code>ResumeNames</code> et ainsi accéder au descriptif des variables, vous pouvez écrire dans la console R :</p>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="statistiques-descriptives.html#cb414-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">&quot;ResumeNames&quot;</span>, <span class="at">package =</span> <span class="st">&quot;AER&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="statistiques-descriptives.html#cb414-1" tabindex="-1"></a><span class="fu">help</span>(<span class="st">&quot;ResumeNames&quot;</span>, <span class="at">package =</span> <span class="st">&quot;AER&quot;</span>)</span></code></pre></div>
 <p>Nous allons nous concentrer sur les variables listées dans le Tableau <a href="statistiques-descriptives.html#tab:resumes-liste-variables">7.1</a> (libre à vous d’en conserver davantage par la suite pour explorer ces données) :</p>
 <table>
 <caption><span id="tab:resumes-liste-variables">Table 7.1: </span> Caractéristiques des fichiers texte avec séparateur de champ</caption>
@@ -412,11 +412,11 @@ div.csl-indent {
 </tbody>
 </table>
 <p>Créons un objet contenant uniquement les colonnes mentionnées dans le Tableau <a href="statistiques-descriptives.html#tab:resumes-liste-variables">7.1</a>.</p>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="statistiques-descriptives.html#cb415-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="ot">&lt;-</span> </span>
-<span id="cb415-2"><a href="statistiques-descriptives.html#cb415-2" aria-hidden="true" tabindex="-1"></a>  ResumeNames <span class="sc">%&gt;%</span> </span>
-<span id="cb415-3"><a href="statistiques-descriptives.html#cb415-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, gender, ethnicity, call, city, jobs, experience) <span class="sc">%&gt;%</span> </span>
-<span id="cb415-4"><a href="statistiques-descriptives.html#cb415-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
-<span id="cb415-5"><a href="statistiques-descriptives.html#cb415-5" aria-hidden="true" tabindex="-1"></a>resumes</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="statistiques-descriptives.html#cb415-1" tabindex="-1"></a>resumes <span class="ot">&lt;-</span> </span>
+<span id="cb415-2"><a href="statistiques-descriptives.html#cb415-2" tabindex="-1"></a>  ResumeNames <span class="sc">%&gt;%</span> </span>
+<span id="cb415-3"><a href="statistiques-descriptives.html#cb415-3" tabindex="-1"></a>  <span class="fu">select</span>(name, gender, ethnicity, call, city, jobs, experience) <span class="sc">%&gt;%</span> </span>
+<span id="cb415-4"><a href="statistiques-descriptives.html#cb415-4" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
+<span id="cb415-5"><a href="statistiques-descriptives.html#cb415-5" tabindex="-1"></a>resumes</span></code></pre></div>
 <pre><code>## # A tibble: 4,870 × 7
 ##    name    gender ethnicity call  city     jobs experience
 ##    &lt;fct&gt;   &lt;fct&gt;  &lt;fct&gt;     &lt;fct&gt; &lt;fct&gt;   &lt;int&gt;      &lt;int&gt;
@@ -430,7 +430,7 @@ div.csl-indent {
 ##  8 Kenya   female afam      no    chicago     4         21
 ##  9 Latonya female afam      no    chicago     3          3
 ## 10 Tyrone  male   afam      no    chicago     2          6
-## # … with 4,860 more rows</code></pre>
+## # ℹ 4,860 more rows</code></pre>
 </div>
 <div id="résumés-statistiques-à-la-main" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Résumés statistiques à la main<a href="statistiques-descriptives.html#résumés-statistiques-à-la-main" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -438,11 +438,11 @@ div.csl-indent {
 <div id="dimensions-résumés-grossiers" class="section level3 hasAnchor" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Dimensions, résumés grossiers<a href="statistiques-descriptives.html#dimensions-résumés-grossiers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La première chose à savoir sur un jeu de données est la suivante : <strong>quelles en sont ses dimensions ?</strong> Nous souhaitons connaître le nombre d’observations (<span class="math inline">\(n\)</span>) et le nombre de colonnes (<span class="math inline">\(p\)</span>). Nous l’avons vu dans le <a href="tableaux-de-données.html#tableaux-de-données">chapitre portant sur les tableaux de données</a>, pour ce faire, la fonction <code class="sourceCode r"><span class="fu">dim</span>()</code> est très pratique :</p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="statistiques-descriptives.html#cb417-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(resumes)</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="statistiques-descriptives.html#cb417-1" tabindex="-1"></a><span class="fu">dim</span>(resumes)</span></code></pre></div>
 <pre><code>## [1] 4870    7</code></pre>
 <p>Un simple affichage du tableau de données dans la console permet par ailleurs d’avoir accès à ces informations. L’avantage de <code class="sourceCode r"><span class="fu">dim</span>()</code> est que les valeurs peuvent être stockées dans un objet et réutilisées ensuite (dans le cadre de la réalisation de boucles, par exemple).</p>
 <p>Pour avoir un aperçu grossier du tableau de données, nous pouvons utiliser la fonction <code class="sourceCode r"><span class="fu">summary</span>()</code> :</p>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="statistiques-descriptives.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(resumes)</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="statistiques-descriptives.html#cb419-1" tabindex="-1"></a><span class="fu">summary</span>(resumes)</span></code></pre></div>
 <pre><code>##       name         gender     ethnicity    call           city     
 ##  Tamika : 256   male  :1124   cauc:2435   no :4478   boston :2166  
 ##  Anne   : 242   female:3746   afam:2435   yes: 392   chicago:2704  
@@ -465,7 +465,7 @@ div.csl-indent {
 <li>pour des variables <strong>catégorielles</strong> : la fréquence des 6 premières valeurs les plus présentes.</li>
 </ul>
 <p>Pour la variable <code>name</code> du tableau <code>resumes</code>, nous pouvons voir qu’il semble y avoir plus de 6 valeurs. Nous pouvons les lister avec la fonction <code class="sourceCode r"><span class="fu">unique</span>()</code> :</p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="statistiques-descriptives.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(resumes<span class="sc">$</span>name)</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="statistiques-descriptives.html#cb421-1" tabindex="-1"></a><span class="fu">unique</span>(resumes<span class="sc">$</span>name)</span></code></pre></div>
 <pre><code>##  [1] Allison  Kristen  Lakisha  Latonya  Carrie   Jay      Jill     Kenya   
 ##  [9] Tyrone   Aisha    Geoffrey Matthew  Tamika   Leroy    Todd     Greg    
 ## [17] Keisha   Brad     Laurie   Meredith Anne     Emily    Latoya   Ebony   
@@ -473,7 +473,7 @@ div.csl-indent {
 ## [33] Jermaine Tanisha  Rasheed  Kareem  
 ## 36 Levels: Allison Anne Carrie Emily Jill Laurie Kristen Meredith ... Tyrone</code></pre>
 <p>Pour dénombrer la fréquence de chaque modalité d’une variable catégorielle, on peut utiliser la fonction <code class="sourceCode r"><span class="fu">table</span>()</code> :</p>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="statistiques-descriptives.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(resumes<span class="sc">$</span>name)</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="statistiques-descriptives.html#cb423-1" tabindex="-1"></a><span class="fu">table</span>(resumes<span class="sc">$</span>name)</span></code></pre></div>
 <pre><code>## 
 ##  Allison     Anne   Carrie    Emily     Jill   Laurie  Kristen Meredith 
 ##      232      242      168      227      203      195      213      187 
@@ -486,7 +486,7 @@ div.csl-indent {
 ##    Leroy  Rasheed Tremayne   Tyrone 
 ##       64       67       69       75</code></pre>
 <p>Rien ne nous empêche de trier les résultats avec la fonction <code class="sourceCode r"><span class="fu">sort</span>()</code> :</p>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="statistiques-descriptives.html#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">table</span>(resumes<span class="sc">$</span>name))</span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="statistiques-descriptives.html#cb425-1" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">table</span>(resumes<span class="sc">$</span>name))</span></code></pre></div>
 <pre><code>## 
 ##  Darnell     Greg Jermaine    Hakim Geoffrey    Brett    Jamal     Brad 
 ##       42       51       52       55       59       59       61       63 
@@ -511,60 +511,60 @@ div.csl-indent {
 <div id="tableaux-à-double-entrée" class="section level4 hasAnchor" number="7.2.2.1">
 <h4><span class="header-section-number">7.2.2.1</span> Tableaux à double entrée<a href="statistiques-descriptives.html#tableaux-à-double-entrée" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>La fonction <code class="sourceCode r"><span class="fu">table</span>()</code> est également très pratique pour faire des tableaux croisés. Pour ce faire, il convient de fournir en argument les vecteurs de valeurs (contenant des variables catégorielles de type <em>character</em> ou <em>factor</em>). Par exemple, dans l’article dont les données de ce chapitre sont issues, nous pouvons regarder combien de candidatures ont reçu ou non un retour, selon l’ethnicité :</p>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="statistiques-descriptives.html#cb427-1" aria-hidden="true" tabindex="-1"></a>call_ethnicity_tb <span class="ot">&lt;-</span> </span>
-<span id="cb427-2"><a href="statistiques-descriptives.html#cb427-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(resumes<span class="sc">$</span>call, resumes<span class="sc">$</span>ethnicity)</span>
-<span id="cb427-3"><a href="statistiques-descriptives.html#cb427-3" aria-hidden="true" tabindex="-1"></a>call_ethnicity_tb</span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="statistiques-descriptives.html#cb427-1" tabindex="-1"></a>call_ethnicity_tb <span class="ot">&lt;-</span> </span>
+<span id="cb427-2"><a href="statistiques-descriptives.html#cb427-2" tabindex="-1"></a>  <span class="fu">table</span>(resumes<span class="sc">$</span>call, resumes<span class="sc">$</span>ethnicity)</span>
+<span id="cb427-3"><a href="statistiques-descriptives.html#cb427-3" tabindex="-1"></a>call_ethnicity_tb</span></code></pre></div>
 <pre><code>##      
 ##       cauc afam
 ##   no  2200 2278
 ##   yes  235  157</code></pre>
 <p>Pour davantage de lisibilité du tableau, les arguments de la fonction peuvent être nommés ; le tableau croisé affichera ainsi une étiquette pour les lignes et les colonnes :</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="statistiques-descriptives.html#cb429-1" aria-hidden="true" tabindex="-1"></a>call_ethnicity_tb <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity)</span>
-<span id="cb429-2"><a href="statistiques-descriptives.html#cb429-2" aria-hidden="true" tabindex="-1"></a>call_ethnicity_tb</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="statistiques-descriptives.html#cb429-1" tabindex="-1"></a>call_ethnicity_tb <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity)</span>
+<span id="cb429-2"><a href="statistiques-descriptives.html#cb429-2" tabindex="-1"></a>call_ethnicity_tb</span></code></pre></div>
 <pre><code>##      ethnicity
 ## call  cauc afam
 ##   no  2200 2278
 ##   yes  235  157</code></pre>
 <p>Les marges peuvent être ajoutées avec la fonction <code class="sourceCode r"><span class="fu">addmargins</span>()</code> :</p>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="statistiques-descriptives.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(call_ethnicity_tb)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="statistiques-descriptives.html#cb431-1" tabindex="-1"></a><span class="fu">addmargins</span>(call_ethnicity_tb)</span></code></pre></div>
 <pre><code>##      ethnicity
 ## call  cauc afam  Sum
 ##   no  2200 2278 4478
 ##   yes  235  157  392
 ##   Sum 2435 2435 4870</code></pre>
 <p>Pour obtenir les proportions sans avoir à utiliser les crochets comme dans l’exercice plus haut, R propose la fonction <code class="sourceCode r"><span class="fu">prop.table</span>()</code>, que l’on applique au tableau croisé :</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="statistiques-descriptives.html#cb433-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity))</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="statistiques-descriptives.html#cb433-1" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity))</span></code></pre></div>
 <pre><code>##      ethnicity
 ## call        cauc       afam
 ##   no  0.45174538 0.46776181
 ##   yes 0.04825462 0.03223819</code></pre>
 <p>Ou en utilisant l’opérateur pipe (<code class="sourceCode r"><span class="sc">%&gt;%</span></code>) pour davantage de lisibilité :</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="statistiques-descriptives.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb435-2"><a href="statistiques-descriptives.html#cb435-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="statistiques-descriptives.html#cb435-1" tabindex="-1"></a><span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb435-2"><a href="statistiques-descriptives.html#cb435-2" tabindex="-1"></a>  <span class="fu">prop.table</span>()</span></code></pre></div>
 <pre><code>##      ethnicity
 ## call        cauc       afam
 ##   no  0.45174538 0.46776181
 ##   yes 0.04825462 0.03223819</code></pre>
 <p>Il est possible d’appliquer une fonction sur le tableau croisé ; par exemple, on peut vouloir appliquer la fonction <code class="sourceCode r"><span class="fu">round</span>()</code> pour afficher moins de décimales :</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="statistiques-descriptives.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb437-2"><a href="statistiques-descriptives.html#cb437-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb437-3"><a href="statistiques-descriptives.html#cb437-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="statistiques-descriptives.html#cb437-1" tabindex="-1"></a><span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb437-2"><a href="statistiques-descriptives.html#cb437-2" tabindex="-1"></a>  <span class="fu">prop.table</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb437-3"><a href="statistiques-descriptives.html#cb437-3" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##      ethnicity
 ## call  cauc afam
 ##   no  0.45 0.47
 ##   yes 0.05 0.03</code></pre>
 <p>Les proportions marginales peuvent être obtenues en précisant l’argument <code>margin</code> à la fonction <code class="sourceCode r"><span class="fu">prop.table</span>()</code>. En optant pour <code class="sourceCode r">margin <span class="ot">=</span> <span class="dv">1</span></code>, on obtient les fréquences relatives à chaque ligne (ici, on peut lire la fréquence marginale des ethnicités selon la réponse obtenue ou non) :</p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="statistiques-descriptives.html#cb439-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb439-2"><a href="statistiques-descriptives.html#cb439-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>(<span class="at">margin =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb439-3"><a href="statistiques-descriptives.html#cb439-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="statistiques-descriptives.html#cb439-1" tabindex="-1"></a><span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb439-2"><a href="statistiques-descriptives.html#cb439-2" tabindex="-1"></a>  <span class="fu">prop.table</span>(<span class="at">margin =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb439-3"><a href="statistiques-descriptives.html#cb439-3" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##      ethnicity
 ## call  cauc afam
 ##   no  0.49 0.51
 ##   yes 0.60 0.40</code></pre>
 <p>En optant pour <code class="sourceCode r">margin <span class="ot">=</span> <span class="dv">2</span></code>, on obtient les fréquences relatives à chaque colonne (ici, on peut lire la fréquence marginale des réponses selon l’ethnicité, ce qui est particulièrement intéressant dans la question posée par le papier de recherche) :</p>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="statistiques-descriptives.html#cb441-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb441-2"><a href="statistiques-descriptives.html#cb441-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>(<span class="at">margin =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb441-3"><a href="statistiques-descriptives.html#cb441-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="statistiques-descriptives.html#cb441-1" tabindex="-1"></a><span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb441-2"><a href="statistiques-descriptives.html#cb441-2" tabindex="-1"></a>  <span class="fu">prop.table</span>(<span class="at">margin =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb441-3"><a href="statistiques-descriptives.html#cb441-3" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##      ethnicity
 ## call  cauc afam
 ##   no  0.90 0.94
@@ -580,12 +580,12 @@ div.csl-indent {
 </ol>
 </div>
 <p>Dans le cours de Statistiques Inférentielles de 2e année, vous avez appris à effectuer un test d’indépendance à l’aide d’une statistique du Khi-deux.</p>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="statistiques-descriptives.html#cb443-1" aria-hidden="true" tabindex="-1"></a>effectifs_obs <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity) </span>
-<span id="cb443-2"><a href="statistiques-descriptives.html#cb443-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb443-3"><a href="statistiques-descriptives.html#cb443-3" aria-hidden="true" tabindex="-1"></a>prop_table <span class="ot">&lt;-</span> </span>
-<span id="cb443-4"><a href="statistiques-descriptives.html#cb443-4" aria-hidden="true" tabindex="-1"></a>  effectifs_obs <span class="sc">%&gt;%</span> </span>
-<span id="cb443-5"><a href="statistiques-descriptives.html#cb443-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>(<span class="at">margin =</span> <span class="dv">2</span>)</span>
-<span id="cb443-6"><a href="statistiques-descriptives.html#cb443-6" aria-hidden="true" tabindex="-1"></a>prop_table</span></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="statistiques-descriptives.html#cb443-1" tabindex="-1"></a>effectifs_obs <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">call =</span> resumes<span class="sc">$</span>call, <span class="at">ethnicity =</span> resumes<span class="sc">$</span>ethnicity) </span>
+<span id="cb443-2"><a href="statistiques-descriptives.html#cb443-2" tabindex="-1"></a></span>
+<span id="cb443-3"><a href="statistiques-descriptives.html#cb443-3" tabindex="-1"></a>prop_table <span class="ot">&lt;-</span> </span>
+<span id="cb443-4"><a href="statistiques-descriptives.html#cb443-4" tabindex="-1"></a>  effectifs_obs <span class="sc">%&gt;%</span> </span>
+<span id="cb443-5"><a href="statistiques-descriptives.html#cb443-5" tabindex="-1"></a>  <span class="fu">prop.table</span>(<span class="at">margin =</span> <span class="dv">2</span>)</span>
+<span id="cb443-6"><a href="statistiques-descriptives.html#cb443-6" tabindex="-1"></a>prop_table</span></code></pre></div>
 <pre><code>##      ethnicity
 ## call        cauc       afam
 ##   no  0.90349076 0.93552361
@@ -595,74 +595,74 @@ div.csl-indent {
 <p><span class="math display">\[\chi^2 = \sum_{j=1}^{q} \sum_{i=1}^{p} \frac{(n_{ij} - n_{ij}^e)^2}{n_{ij}^e},\]</span></p>
 <p>avec <span class="math inline">\(q\)</span> le nombre de sous-populations (ici, <span class="math inline">\(q=2\)</span> : afro-américains et caucasiens) et <span class="math inline">\(p\)</span> le nombre de modalités du caractère étudié (ici, <span class="math inline">\(p=2\)</span> : rappel ou non), <span class="math inline">\(n_{ij}\)</span> le nombre obseré d’observations dans la sous-population <span class="math inline">\(j\)</span> disposant du caractère <span class="math inline">\(i\)</span> et <span class="math inline">\(n_{ij}^e\)</span> le nombre d’observations théoriques que l’on s’attend à observer dans la sous-population <span class="math inline">\(j\)</span> avec le caractère <span class="math inline">\(i\)</span> si l’hypothèse nulle est vraie.</p>
 <p>Les effectifs observés sont les suivants :</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="statistiques-descriptives.html#cb445-1" aria-hidden="true" tabindex="-1"></a>effectifs_obs</span></code></pre></div>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="statistiques-descriptives.html#cb445-1" tabindex="-1"></a>effectifs_obs</span></code></pre></div>
 <pre><code>##      ethnicity
 ## call  cauc afam
 ##   no  2200 2278
 ##   yes  235  157</code></pre>
 <p>Si l’etnicité est indépendante du fait de se faire rappeler suite à un dépot de CV, alors on s’attend aux valeurs suivantes :</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="statistiques-descriptives.html#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="co"># caucasien &amp; pas de rappel</span></span>
-<span id="cb447-2"><a href="statistiques-descriptives.html#cb447-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2200</span><span class="sc">+</span><span class="dv">235</span>) <span class="sc">*</span> (<span class="dv">2200</span><span class="sc">+</span><span class="dv">2278</span>) <span class="sc">/</span> <span class="fu">sum</span>(effectifs_obs)</span></code></pre></div>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="statistiques-descriptives.html#cb447-1" tabindex="-1"></a><span class="co"># caucasien &amp; pas de rappel</span></span>
+<span id="cb447-2"><a href="statistiques-descriptives.html#cb447-2" tabindex="-1"></a>(<span class="dv">2200</span><span class="sc">+</span><span class="dv">235</span>) <span class="sc">*</span> (<span class="dv">2200</span><span class="sc">+</span><span class="dv">2278</span>) <span class="sc">/</span> <span class="fu">sum</span>(effectifs_obs)</span></code></pre></div>
 <pre><code>## [1] 2239</code></pre>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="statistiques-descriptives.html#cb449-1" aria-hidden="true" tabindex="-1"></a><span class="co"># caucasien et rappel</span></span>
-<span id="cb449-2"><a href="statistiques-descriptives.html#cb449-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2200</span><span class="sc">+</span><span class="dv">235</span>) <span class="sc">*</span> (<span class="dv">235</span><span class="sc">+</span><span class="dv">157</span>) <span class="sc">/</span> <span class="fu">sum</span>(effectifs_obs)</span></code></pre></div>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="statistiques-descriptives.html#cb449-1" tabindex="-1"></a><span class="co"># caucasien et rappel</span></span>
+<span id="cb449-2"><a href="statistiques-descriptives.html#cb449-2" tabindex="-1"></a>(<span class="dv">2200</span><span class="sc">+</span><span class="dv">235</span>) <span class="sc">*</span> (<span class="dv">235</span><span class="sc">+</span><span class="dv">157</span>) <span class="sc">/</span> <span class="fu">sum</span>(effectifs_obs)</span></code></pre></div>
 <pre><code>## [1] 196</code></pre>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="statistiques-descriptives.html#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="co"># afro-américain &amp; pas de rappel</span></span>
-<span id="cb451-2"><a href="statistiques-descriptives.html#cb451-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2278</span> <span class="sc">+</span> <span class="dv">157</span>) <span class="sc">*</span> (<span class="dv">2200</span><span class="sc">+</span><span class="dv">2278</span>) <span class="sc">/</span> <span class="fu">sum</span>(effectifs_obs)</span></code></pre></div>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="statistiques-descriptives.html#cb451-1" tabindex="-1"></a><span class="co"># afro-américain &amp; pas de rappel</span></span>
+<span id="cb451-2"><a href="statistiques-descriptives.html#cb451-2" tabindex="-1"></a>(<span class="dv">2278</span> <span class="sc">+</span> <span class="dv">157</span>) <span class="sc">*</span> (<span class="dv">2200</span><span class="sc">+</span><span class="dv">2278</span>) <span class="sc">/</span> <span class="fu">sum</span>(effectifs_obs)</span></code></pre></div>
 <pre><code>## [1] 2239</code></pre>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="statistiques-descriptives.html#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="co"># afro-américain &amp; rappel</span></span>
-<span id="cb453-2"><a href="statistiques-descriptives.html#cb453-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2278</span> <span class="sc">+</span> <span class="dv">157</span>) <span class="sc">*</span> (<span class="dv">235</span><span class="sc">+</span><span class="dv">157</span>) <span class="sc">/</span> <span class="fu">sum</span>(effectifs_obs)</span></code></pre></div>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="statistiques-descriptives.html#cb453-1" tabindex="-1"></a><span class="co"># afro-américain &amp; rappel</span></span>
+<span id="cb453-2"><a href="statistiques-descriptives.html#cb453-2" tabindex="-1"></a>(<span class="dv">2278</span> <span class="sc">+</span> <span class="dv">157</span>) <span class="sc">*</span> (<span class="dv">235</span><span class="sc">+</span><span class="dv">157</span>) <span class="sc">/</span> <span class="fu">sum</span>(effectifs_obs)</span></code></pre></div>
 <pre><code>## [1] 196</code></pre>
 <p>On peut obtenir ces effectifs théoriques sans entrer à la main une seule valeur :</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="statistiques-descriptives.html#cb455-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Effectifs selon le caractère (rappelé ou non)</span></span>
-<span id="cb455-2"><a href="statistiques-descriptives.html#cb455-2" aria-hidden="true" tabindex="-1"></a>somme_ligne <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(effectifs_obs)</span>
-<span id="cb455-3"><a href="statistiques-descriptives.html#cb455-3" aria-hidden="true" tabindex="-1"></a>somme_ligne</span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="statistiques-descriptives.html#cb455-1" tabindex="-1"></a><span class="co"># Effectifs selon le caractère (rappelé ou non)</span></span>
+<span id="cb455-2"><a href="statistiques-descriptives.html#cb455-2" tabindex="-1"></a>somme_ligne <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(effectifs_obs)</span>
+<span id="cb455-3"><a href="statistiques-descriptives.html#cb455-3" tabindex="-1"></a>somme_ligne</span></code></pre></div>
 <pre><code>##   no  yes 
 ## 4478  392</code></pre>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="statistiques-descriptives.html#cb457-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Effectifs selon les sous-populations (afam ou cauc)</span></span>
-<span id="cb457-2"><a href="statistiques-descriptives.html#cb457-2" aria-hidden="true" tabindex="-1"></a>somme_colonne <span class="ot">&lt;-</span> <span class="fu">colSums</span>(effectifs_obs)</span>
-<span id="cb457-3"><a href="statistiques-descriptives.html#cb457-3" aria-hidden="true" tabindex="-1"></a>somme_colonne</span></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="statistiques-descriptives.html#cb457-1" tabindex="-1"></a><span class="co"># Effectifs selon les sous-populations (afam ou cauc)</span></span>
+<span id="cb457-2"><a href="statistiques-descriptives.html#cb457-2" tabindex="-1"></a>somme_colonne <span class="ot">&lt;-</span> <span class="fu">colSums</span>(effectifs_obs)</span>
+<span id="cb457-3"><a href="statistiques-descriptives.html#cb457-3" tabindex="-1"></a>somme_colonne</span></code></pre></div>
 <pre><code>## cauc afam 
 ## 2435 2435</code></pre>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="statistiques-descriptives.html#cb459-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nombre total d&#39;observations</span></span>
-<span id="cb459-2"><a href="statistiques-descriptives.html#cb459-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">sum</span>(effectifs_obs)</span>
-<span id="cb459-3"><a href="statistiques-descriptives.html#cb459-3" aria-hidden="true" tabindex="-1"></a>n</span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="statistiques-descriptives.html#cb459-1" tabindex="-1"></a><span class="co"># Nombre total d&#39;observations</span></span>
+<span id="cb459-2"><a href="statistiques-descriptives.html#cb459-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">sum</span>(effectifs_obs)</span>
+<span id="cb459-3"><a href="statistiques-descriptives.html#cb459-3" tabindex="-1"></a>n</span></code></pre></div>
 <pre><code>## [1] 4870</code></pre>
 <p>Reste alors à calculer le produit extérieur (on multiplie chaque élément du vecteur <code>somme_ligne</code> par chaque élément du vecteur <code>somme_colonne</code>), puis à diviser par l’effectif total :</p>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="statistiques-descriptives.html#cb461-1" aria-hidden="true" tabindex="-1"></a>effectifs_theo <span class="ot">&lt;-</span> <span class="fu">outer</span>(somme_ligne, somme_colonne, <span class="st">&quot;*&quot;</span>)<span class="sc">/</span>n</span>
-<span id="cb461-2"><a href="statistiques-descriptives.html#cb461-2" aria-hidden="true" tabindex="-1"></a>effectifs_theo</span></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="statistiques-descriptives.html#cb461-1" tabindex="-1"></a>effectifs_theo <span class="ot">&lt;-</span> <span class="fu">outer</span>(somme_ligne, somme_colonne, <span class="st">&quot;*&quot;</span>)<span class="sc">/</span>n</span>
+<span id="cb461-2"><a href="statistiques-descriptives.html#cb461-2" tabindex="-1"></a>effectifs_theo</span></code></pre></div>
 <pre><code>##     cauc afam
 ## no  2239 2239
 ## yes  196  196</code></pre>
 <p>On peut de fait calculer la statistique de test :</p>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="statistiques-descriptives.html#cb463-1" aria-hidden="true" tabindex="-1"></a>statstique <span class="ot">&lt;-</span> <span class="fu">sum</span>((effectifs_obs <span class="sc">-</span> effectifs_theo)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> effectifs_theo)</span>
-<span id="cb463-2"><a href="statistiques-descriptives.html#cb463-2" aria-hidden="true" tabindex="-1"></a>statstique</span></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="statistiques-descriptives.html#cb463-1" tabindex="-1"></a>statstique <span class="ot">&lt;-</span> <span class="fu">sum</span>((effectifs_obs <span class="sc">-</span> effectifs_theo)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> effectifs_theo)</span>
+<span id="cb463-2"><a href="statistiques-descriptives.html#cb463-2" tabindex="-1"></a>statstique</span></code></pre></div>
 <pre><code>## [1] 16.87905</code></pre>
 <p>Cette statistique est à comparer avec le quantile d’ordre <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\chi^{2, \alpha}_{(p-1)(q-1)}\)</span> que l’on peut lire dans une table du Khi-deux à <span class="math inline">\((p-1)(q-1)\)</span> degrés de liberté… ou que l’on peut obtenir avec R ! La fonction <code class="sourceCode r"><span class="fu">qchisq</span>()</code> permet d’obtenir le quantile <span class="math inline">\(\chi^{2, \alpha}_{(p-1)(q-1)}\)</span> tel que la probabilité d’obtenir une valeur supérieure à ce quantile selon une Khi-deux à <span class="math inline">\((p-1)(q-1)\)</span> degrés de liberté soit égale à <span class="math inline">\(1-\alpha\)</span>.</p>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="statistiques-descriptives.html#cb465-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">=</span> <span class="dv">5</span><span class="sc">/</span><span class="dv">100</span></span>
-<span id="cb465-2"><a href="statistiques-descriptives.html#cb465-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">2</span> ; q <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb465-3"><a href="statistiques-descriptives.html#cb465-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="at">p =</span> <span class="dv">1</span><span class="sc">-</span>alpha, <span class="at">df =</span> (p<span class="dv">-1</span>)<span class="sc">*</span>(q<span class="dv">-1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="statistiques-descriptives.html#cb465-1" tabindex="-1"></a>alpha <span class="ot">=</span> <span class="dv">5</span><span class="sc">/</span><span class="dv">100</span></span>
+<span id="cb465-2"><a href="statistiques-descriptives.html#cb465-2" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">2</span> ; q <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb465-3"><a href="statistiques-descriptives.html#cb465-3" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="at">p =</span> <span class="dv">1</span><span class="sc">-</span>alpha, <span class="at">df =</span> (p<span class="dv">-1</span>)<span class="sc">*</span>(q<span class="dv">-1</span>))</span></code></pre></div>
 <pre><code>## [1] 3.841459</code></pre>
 <p>La statistique observée étant largement supérieure au quantile obtenu, on rejette l’hypothèse nulle du test (avec un risque de rejetter l’hypothèse nulle à tort de 5%) d’indépendance de l’ethnicité et de la réponse à une candidature à Boston ou Chicago. Il semble bien qu’il y ait une discrimination à l’accès à l’emploi.</p>
 <p>On peut également calculer la probabilité d’observer une valeur au moins aussi grande que celle que nous observons pour notre statistique (16.88) : c’est-à-dire, chercher à calculer la p-value associée au test. La fonction <code class="sourceCode r"><span class="fu">pchisq</span>()</code> nous donne la probailité d’observer une valeur inférieure ou égale à un quantile donné, pour un degré de liberté spécifique. Aussi, ce que nous recherchons est 1 moins cette probabilité :</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="statistiques-descriptives.html#cb467-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(<span class="at">q =</span> statstique, <span class="at">df =</span> (p<span class="dv">-1</span>)<span class="sc">*</span>(q<span class="dv">-1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="statistiques-descriptives.html#cb467-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(<span class="at">q =</span> statstique, <span class="at">df =</span> (p<span class="dv">-1</span>)<span class="sc">*</span>(q<span class="dv">-1</span>))</span></code></pre></div>
 <pre><code>## [1] 3.983887e-05</code></pre>
 <p>Cette p-value est très faible. Grossièrement parlant, il y a une probabilité de <span class="math inline">\(3,98\times 10^{-5}\)</span> d’observer une valeur de la statistique du test qui soit au moins aussi grande que 16.87, si l’hypothèse nulle du test est vraie.</p>
 <p>Rassurez-vous, pour effectuer un test du Khi-deux, il n’est pas nécessaire de passer par toutes ces étapes avec R. Il existe évidemment une fonction qui vous permette d’effectuer le test en une seule ligne, à partir du moment où vous avez obtenu votre tableau croisé : <code class="sourceCode r"><span class="fu">chisq.test</span>()</code>. On retrouve bien les mêmes valeurs.</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="statistiques-descriptives.html#cb469-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(effectifs_obs, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb469-2"><a href="statistiques-descriptives.html#cb469-2" aria-hidden="true" tabindex="-1"></a>res</span></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="statistiques-descriptives.html#cb469-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(effectifs_obs, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb469-2"><a href="statistiques-descriptives.html#cb469-2" tabindex="-1"></a>res</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
 ## data:  effectifs_obs
 ## X-squared = 16.879, df = 1, p-value = 3.984e-05</code></pre>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="statistiques-descriptives.html#cb471-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>statistic</span></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="statistiques-descriptives.html#cb471-1" tabindex="-1"></a>res<span class="sc">$</span>statistic</span></code></pre></div>
 <pre><code>## X-squared 
 ##  16.87905</code></pre>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="statistiques-descriptives.html#cb473-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>parameter</span></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="statistiques-descriptives.html#cb473-1" tabindex="-1"></a>res<span class="sc">$</span>parameter</span></code></pre></div>
 <pre><code>## df 
 ##  1</code></pre>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="statistiques-descriptives.html#cb475-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>p.value</span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="statistiques-descriptives.html#cb475-1" tabindex="-1"></a>res<span class="sc">$</span>p.value</span></code></pre></div>
 <pre><code>## [1] 3.983887e-05</code></pre>
 <div class="notebox">
 <p><strong>Note</strong> : Par défaut, l’argument <code class="sourceCode r">correct</code> de la fonction <code class="sourceCode r"><span class="fu">chisq.test</span>()</code> vaut <code class="sourceCode r"><span class="cn">TRUE</span></code>. Dans ce cas, la correction de continuité de Yates est appliquée. La statistique de test est alors légèrment modifiée :</p>
@@ -672,9 +672,9 @@ div.csl-indent {
 <div id="statistiques-par-sous-groupes" class="section level4 hasAnchor" number="7.2.2.2">
 <h4><span class="header-section-number">7.2.2.2</span> Statistiques par sous-groupes<a href="statistiques-descriptives.html#statistiques-par-sous-groupes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Pour obtenir le même type d’informations que ce qui est offert par la fonction <code class="sourceCode r"><span class="fu">table</span>()</code>, nous pouvons effectuer dans un premier temps un regroupement du tableau de données avec la fonction <code class="sourceCode r"><span class="fu">group_by</span>()</code> que nous avons déjà utilisée dans le <a href="tableaux-de-données.html#tableaux-de-données">chapitre portant sur les tableaux de données</a>. Ensuite, en appliquant la fonction <code class="sourceCode r"><span class="fu">count</span>()</code> au résultat, nous pouvons obtenir les fréquence pour chacun des sous-groupes.</p>
-<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="statistiques-descriptives.html#cb477-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span> </span>
-<span id="cb477-2"><a href="statistiques-descriptives.html#cb477-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(call, ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb477-3"><a href="statistiques-descriptives.html#cb477-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="statistiques-descriptives.html#cb477-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span> </span>
+<span id="cb477-2"><a href="statistiques-descriptives.html#cb477-2" tabindex="-1"></a>  <span class="fu">group_by</span>(call, ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb477-3"><a href="statistiques-descriptives.html#cb477-3" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 3
 ## # Groups:   call, ethnicity [4]
 ##   call  ethnicity     n
@@ -684,9 +684,9 @@ div.csl-indent {
 ## 3 yes   cauc        235
 ## 4 yes   afam        157</code></pre>
 <p>L’argument <code>name</code> de la fonction <code class="sourceCode r"><span class="fu">count</span>()</code> permet de spécifier le nom de la colonne dans laquelle les effectifs seront reportés :</p>
-<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="statistiques-descriptives.html#cb479-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span> </span>
-<span id="cb479-2"><a href="statistiques-descriptives.html#cb479-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(call, ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb479-3"><a href="statistiques-descriptives.html#cb479-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="at">name =</span> <span class="st">&quot;Nombre d&#39;observations&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="statistiques-descriptives.html#cb479-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span> </span>
+<span id="cb479-2"><a href="statistiques-descriptives.html#cb479-2" tabindex="-1"></a>  <span class="fu">group_by</span>(call, ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb479-3"><a href="statistiques-descriptives.html#cb479-3" tabindex="-1"></a>  <span class="fu">count</span>(<span class="at">name =</span> <span class="st">&quot;Nombre d&#39;observations&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 3
 ## # Groups:   call, ethnicity [4]
 ##   call  ethnicity `Nombre d&#39;observations`
@@ -696,17 +696,17 @@ div.csl-indent {
 ## 3 yes   cauc                          235
 ## 4 yes   afam                          157</code></pre>
 <p>On peut vérifier, à l’aide de la fonction <code class="sourceCode r"><span class="fu">filter</span>()</code> que le décompte correspond bien au nombre d’observations pour lesquelles la valeur dans la colonne <code>call</code> est <code class="sourceCode r"><span class="st">&quot;no&quot;</span></code> et pour lesquelles celles dans la colonne <code>ethnicity</code> vaut <code class="sourceCode r"><span class="st">&quot;cauc&quot;</span></code> :</p>
-<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="statistiques-descriptives.html#cb481-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb481-2"><a href="statistiques-descriptives.html#cb481-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(call <span class="sc">==</span> <span class="st">&quot;no&quot;</span> <span class="sc">&amp;</span> ethnicity <span class="sc">==</span> <span class="st">&quot;cauc&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb481-3"><a href="statistiques-descriptives.html#cb481-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="statistiques-descriptives.html#cb481-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb481-2"><a href="statistiques-descriptives.html#cb481-2" tabindex="-1"></a>  <span class="fu">filter</span>(call <span class="sc">==</span> <span class="st">&quot;no&quot;</span> <span class="sc">&amp;</span> ethnicity <span class="sc">==</span> <span class="st">&quot;cauc&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb481-3"><a href="statistiques-descriptives.html#cb481-3" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
 <pre><code>## [1] 2200</code></pre>
 <p>Pour obtenir les fréquences marginales, il suffit d’effectuer un nouveau regroupement après l’appel à la fonction <code class="sourceCode r"><span class="fu">count</span>()</code> :</p>
-<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="statistiques-descriptives.html#cb483-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span> </span>
-<span id="cb483-2"><a href="statistiques-descriptives.html#cb483-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(call, ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb483-3"><a href="statistiques-descriptives.html#cb483-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="at">name =</span> <span class="st">&quot;Nombre d&#39;observations&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb483-4"><a href="statistiques-descriptives.html#cb483-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb483-5"><a href="statistiques-descriptives.html#cb483-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> <span class="st">`</span><span class="at">Nombre d&#39;observations</span><span class="st">`</span> <span class="sc">/</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">Nombre d&#39;observations</span><span class="st">`</span>),</span>
-<span id="cb483-6"><a href="statistiques-descriptives.html#cb483-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">prop =</span> <span class="fu">round</span>(prop, <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="statistiques-descriptives.html#cb483-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span> </span>
+<span id="cb483-2"><a href="statistiques-descriptives.html#cb483-2" tabindex="-1"></a>  <span class="fu">group_by</span>(call, ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb483-3"><a href="statistiques-descriptives.html#cb483-3" tabindex="-1"></a>  <span class="fu">count</span>(<span class="at">name =</span> <span class="st">&quot;Nombre d&#39;observations&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb483-4"><a href="statistiques-descriptives.html#cb483-4" tabindex="-1"></a>  <span class="fu">group_by</span>(ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb483-5"><a href="statistiques-descriptives.html#cb483-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> <span class="st">`</span><span class="at">Nombre d&#39;observations</span><span class="st">`</span> <span class="sc">/</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">Nombre d&#39;observations</span><span class="st">`</span>),</span>
+<span id="cb483-6"><a href="statistiques-descriptives.html#cb483-6" tabindex="-1"></a>         <span class="at">prop =</span> <span class="fu">round</span>(prop, <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 4
 ## # Groups:   ethnicity [2]
 ##   call  ethnicity `Nombre d&#39;observations`  prop
@@ -716,11 +716,11 @@ div.csl-indent {
 ## 3 yes   cauc                          235  0.1 
 ## 4 yes   afam                          157  0.06</code></pre>
 <p>Pour obtenir des résumés statistiques de variables numériques, on peut utiliser le combo <code class="sourceCode r"><span class="fu">group_by</span>()</code> et <code class="sourceCode r"><span class="fu">summarise</span>()</code> abordé dans le <a href="tableaux-de-données.html#tableaux-de-données">chapitre portant sur les tableaux de données</a> :</p>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="statistiques-descriptives.html#cb485-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span> </span>
-<span id="cb485-2"><a href="statistiques-descriptives.html#cb485-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender, ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb485-3"><a href="statistiques-descriptives.html#cb485-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_experience =</span> <span class="fu">mean</span>(experience),</span>
-<span id="cb485-4"><a href="statistiques-descriptives.html#cb485-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_experience =</span> <span class="fu">sd</span>(experience),</span>
-<span id="cb485-5"><a href="statistiques-descriptives.html#cb485-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">q1_experience =</span> <span class="fu">quantile</span>(experience, <span class="at">probs =</span> .<span class="dv">25</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="statistiques-descriptives.html#cb485-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span> </span>
+<span id="cb485-2"><a href="statistiques-descriptives.html#cb485-2" tabindex="-1"></a>  <span class="fu">group_by</span>(gender, ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb485-3"><a href="statistiques-descriptives.html#cb485-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_experience =</span> <span class="fu">mean</span>(experience),</span>
+<span id="cb485-4"><a href="statistiques-descriptives.html#cb485-4" tabindex="-1"></a>            <span class="at">sd_experience =</span> <span class="fu">sd</span>(experience),</span>
+<span id="cb485-5"><a href="statistiques-descriptives.html#cb485-5" tabindex="-1"></a>            <span class="at">q1_experience =</span> <span class="fu">quantile</span>(experience, <span class="at">probs =</span> .<span class="dv">25</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 5
 ## # Groups:   gender [2]
 ##   gender ethnicity mean_experience sd_experience q1_experience
@@ -745,12 +745,12 @@ div.csl-indent {
 <h2><span class="header-section-number">7.3</span> Résumés avec gtsummary : vers la communication des résultats<a href="statistiques-descriptives.html#résumés-avec-gtsummary-vers-la-communication-des-résultats" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Les différentes méthodes abordées jusqu’à présent pour réaliser des résumés statistiques sont très pratiques pour réaliser une fouille grossière des données. Dans cette partie, nous allons explorer quelques possibilités offertes par un <em>package</em> nommé {gtsummary}, qui permet de produire des tableaux formatés pour être communiqués. Il existe de bien nombreux <em>packages</em> qui permettent de réaliser des tableaux prêts pour la communication, mais il me semble que {gtsummary} offre des fonctionnalités particulièrement utiles pour des économètres.</p>
 <p>Dans un premier temps, si le <em>package</em> n’est pas installé :</p>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="statistiques-descriptives.html#cb487-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(gtsummary)</span></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="statistiques-descriptives.html#cb487-1" tabindex="-1"></a><span class="fu">install.packages</span>(gtsummary)</span></code></pre></div>
 <p>Ensuite, chargons le <em>package</em> :</p>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="statistiques-descriptives.html#cb488-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span></code></pre></div>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="statistiques-descriptives.html#cb488-1" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span></code></pre></div>
 <p>La fonction au cœur du package se nomme <code class="sourceCode r"><span class="fu">tbl_summary</span>()</code>. Elle produit un tableau qui s’affiche dans l’onglet “Viewer”. Le tableau qui est produit s’adapte en fonction du contenu des colonnes : une détection automatique du type des variables est effectuée. Lorsque les variables sont <strong>discrètes</strong>, la colonne descriptive indique le nombre d’observation et la proportion que chaque modalité représente. Lorsque les variables sont <strong>continues</strong>, la description est la médiane et l’écart interquartile.</p>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="statistiques-descriptives.html#cb489-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb489-2"><a href="statistiques-descriptives.html#cb489-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="statistiques-descriptives.html#cb489-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb489-2"><a href="statistiques-descriptives.html#cb489-2" tabindex="-1"></a>  <span class="fu">tbl_summary</span>()</span></code></pre></div>
 <table style="NAborder-bottom: 0;">
 <thead>
 <tr>
@@ -1216,8 +1216,8 @@ experience
 </tfoot>
 </table>
 <p>Parmi les arguments de la fonction <code class="sourceCode r"><span class="fu">tbl_summary</span>()</code>, figure <code class="sourceCode r">by<span class="ot">=</span></code> qui permet de réaliser des sous-groupes dans les données avant de reporter les statistiques descriptives. Les différents groupes sont alors créés en fonction des valeurs distinctes rencontrées dans le colonne dont le nom est indiqué à l’argument <code class="sourceCode r">by<span class="ot">=</span></code>. Par exemple, pour obtenir des statistiques descriptives du jeu de données <code>resumes</code> selon l’origine ethnique (colonne <code>ethnicity</code>), on pourra écrire :</p>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="statistiques-descriptives.html#cb490-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb490-2"><a href="statistiques-descriptives.html#cb490-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity)</span></code></pre></div>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="statistiques-descriptives.html#cb490-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb490-2"><a href="statistiques-descriptives.html#cb490-2" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity)</span></code></pre></div>
 <table style="NAborder-bottom: 0;">
 <thead>
 <tr>
@@ -1818,9 +1818,9 @@ experience
 </tfoot>
 </table>
 <p>Pour la suite de cette section, nous allons éviter d’afficher les informations pour la colonne <code>name</code>, pour gagner un peu en lisibilité. Pour ce faire, il suffit d’exclure du tableau cette colonne avant d’appliquer la fonction <code class="sourceCode r">tbl_summary</code> :</p>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="statistiques-descriptives.html#cb491-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb491-2"><a href="statistiques-descriptives.html#cb491-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
-<span id="cb491-3"><a href="statistiques-descriptives.html#cb491-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity)</span></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="statistiques-descriptives.html#cb491-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb491-2"><a href="statistiques-descriptives.html#cb491-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
+<span id="cb491-3"><a href="statistiques-descriptives.html#cb491-3" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity)</span></code></pre></div>
 <table style="NAborder-bottom: 0;">
 <thead>
 <tr>
@@ -2016,10 +2016,10 @@ experience
 </tfoot>
 </table>
 <p>Pour réaliser un <strong>test d’indépendance</strong> entre chaque variables et la variable de regroupement, on peut appliquer la fonction <code class="sourceCode r"><span class="fu">add_p</span>()</code> sur le tableau gtsummary. Une colonne est ajoutée à droite avec les p-values.</p>
-<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="statistiques-descriptives.html#cb492-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb492-2"><a href="statistiques-descriptives.html#cb492-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
-<span id="cb492-3"><a href="statistiques-descriptives.html#cb492-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb492-4"><a href="statistiques-descriptives.html#cb492-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="statistiques-descriptives.html#cb492-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb492-2"><a href="statistiques-descriptives.html#cb492-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
+<span id="cb492-3"><a href="statistiques-descriptives.html#cb492-3" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb492-4"><a href="statistiques-descriptives.html#cb492-4" tabindex="-1"></a>  <span class="fu">add_p</span>()</span></code></pre></div>
 <table style="NAborder-bottom: 0;">
 <thead>
 <tr>
@@ -2260,11 +2260,11 @@ experience
 </tfoot>
 </table>
 <p>Avoir des statistiques pour chacun des sous groupes est très utile, mais il est parfois également intéressant d’afficher les statistiques pour l’échantillon total. Pour ce faire, on peut utiliser la fonction <code class="sourceCode r"><span class="fu">add_overall</span>()</code>, qui ajoutera une colonne à gauche. En fournissant à l’argument <code class="sourceCode r">col_label<span class="ot">=</span></code> une chaîne de caractère, le nom de la colonne ainsi ajoutée peut être modifié (par défaut, la valeur <code class="sourceCode r"><span class="st">&quot;Overall&quot;</span></code> est utilisée) :</p>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="statistiques-descriptives.html#cb493-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb493-2"><a href="statistiques-descriptives.html#cb493-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
-<span id="cb493-3"><a href="statistiques-descriptives.html#cb493-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb493-4"><a href="statistiques-descriptives.html#cb493-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb493-5"><a href="statistiques-descriptives.html#cb493-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="statistiques-descriptives.html#cb493-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb493-2"><a href="statistiques-descriptives.html#cb493-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
+<span id="cb493-3"><a href="statistiques-descriptives.html#cb493-3" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb493-4"><a href="statistiques-descriptives.html#cb493-4" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb493-5"><a href="statistiques-descriptives.html#cb493-5" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>)</span></code></pre></div>
 <table style="NAborder-bottom: 0;">
 <thead>
 <tr>
@@ -2272,7 +2272,7 @@ experience
 Characteristic
 </th>
 <th style="text-align:center;">
-Ech. total
+Overall, N = 4,870
 </th>
 <th style="text-align:center;">
 cauc, N = 2,435
@@ -2553,12 +2553,12 @@ experience
 </tfoot>
 </table>
 <p>Sur la première colonne, on peut lire en cartouche : <strong>Characteristic</strong>. Pour changer cela, on peut faire appel à la fonction <code class="sourceCode r"><span class="fu">modify_header</span>()</code>, en indiquant la valeur souhaitée à l’argument <code class="sourceCode r">label<span class="ot">=</span></code>. On peut fournir une valeur rédigée en markdown. Dans l’exemple ci-dessous, pour que la valeur <strong>Variable</strong> soit affichée, on écrit ainsi :</p>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="statistiques-descriptives.html#cb494-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb494-2"><a href="statistiques-descriptives.html#cb494-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
-<span id="cb494-3"><a href="statistiques-descriptives.html#cb494-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb494-4"><a href="statistiques-descriptives.html#cb494-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb494-5"><a href="statistiques-descriptives.html#cb494-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb494-6"><a href="statistiques-descriptives.html#cb494-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="statistiques-descriptives.html#cb494-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb494-2"><a href="statistiques-descriptives.html#cb494-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
+<span id="cb494-3"><a href="statistiques-descriptives.html#cb494-3" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb494-4"><a href="statistiques-descriptives.html#cb494-4" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb494-5"><a href="statistiques-descriptives.html#cb494-5" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb494-6"><a href="statistiques-descriptives.html#cb494-6" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>)</span></code></pre></div>
 <table style="NAborder-bottom: 0;">
 <thead>
 <tr>
@@ -2566,7 +2566,7 @@ experience
 Variable
 </th>
 <th style="text-align:center;">
-Ech. total
+Overall, N = 4,870
 </th>
 <th style="text-align:center;">
 cauc, N = 2,435
@@ -2847,13 +2847,13 @@ experience
 </tfoot>
 </table>
 <p>Pour ajouter une étiquette permettant de regrouper visuellement les sous-groupes, le <em>package</em> {gtsummary} propose la fonction <code class="sourceCode r"><span class="fu">modify_spanning_header</span>()</code>. Dans notre exemple, nous avons deux sous-groupes formés selon les modalités de la variable <code>ethnicity</code>. Aussi, nous pourrons indiquer que nous souhaitons que les colonnes <code>stat_1</code> et <code>stat_2</code> (colonne contenant les statistiques descriptives pour le premier et le second sous-groupes) disposent d’une en-tête :</p>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="statistiques-descriptives.html#cb495-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb495-2"><a href="statistiques-descriptives.html#cb495-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
-<span id="cb495-3"><a href="statistiques-descriptives.html#cb495-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb495-4"><a href="statistiques-descriptives.html#cb495-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb495-5"><a href="statistiques-descriptives.html#cb495-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb495-6"><a href="statistiques-descriptives.html#cb495-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb495-7"><a href="statistiques-descriptives.html#cb495-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="statistiques-descriptives.html#cb495-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb495-2"><a href="statistiques-descriptives.html#cb495-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
+<span id="cb495-3"><a href="statistiques-descriptives.html#cb495-3" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb495-4"><a href="statistiques-descriptives.html#cb495-4" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb495-5"><a href="statistiques-descriptives.html#cb495-5" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb495-6"><a href="statistiques-descriptives.html#cb495-6" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb495-7"><a href="statistiques-descriptives.html#cb495-7" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>)</span></code></pre></div>
 <table style="NAborder-bottom: 0;">
 <thead>
 <tr>
@@ -2872,7 +2872,7 @@ Consonnance du nom
 Variable
 </th>
 <th style="text-align:center;">
-Ech. total
+Overall, N = 4,870
 </th>
 <th style="text-align:center;">
 cauc, N = 2,435
@@ -3153,29 +3153,29 @@ experience
 </tfoot>
 </table>
 <p>Lorsque les colonnes du tableau de données fourni à la fonction <code class="sourceCode r"><span class="fu">tbl_summary</span>()</code> contient des étiquettes, ces dernières sont automatiquement utilisées dans le tableau retourné à la place des noms de variables. Pour ajouter des étiquettes à des colonnes, nous pouvons utiliser le <em>package</em> {labelled}, qu’il faut au préalable installer.</p>
-<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="statistiques-descriptives.html#cb496-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;labelled&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="statistiques-descriptives.html#cb496-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;labelled&quot;</span>)</span></code></pre></div>
 <p>Une fois le <em>package</em> installé, il est nécessaire de le charger :</p>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="statistiques-descriptives.html#cb497-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled)</span></code></pre></div>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="statistiques-descriptives.html#cb497-1" tabindex="-1"></a><span class="fu">library</span>(labelled)</span></code></pre></div>
 <p>La fonction <code class="sourceCode r"><span class="fu">set_variable_labels</span>()</code> de {labelled} permet d’ajouter les étiquettes aux variables. Il suffit de donner le nom des variables et, après un symbole égal (<code class="sourceCode r"><span class="ot">=</span></code>), leur étiquette correspondante.</p>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="statistiques-descriptives.html#cb498-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="ot">&lt;-</span> </span>
-<span id="cb498-2"><a href="statistiques-descriptives.html#cb498-2" aria-hidden="true" tabindex="-1"></a>  resumes <span class="sc">%&gt;%</span> </span>
-<span id="cb498-3"><a href="statistiques-descriptives.html#cb498-3" aria-hidden="true" tabindex="-1"></a>  labelled<span class="sc">::</span><span class="fu">set_variable_labels</span>(</span>
-<span id="cb498-4"><a href="statistiques-descriptives.html#cb498-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Prénom&quot;</span>,</span>
-<span id="cb498-5"><a href="statistiques-descriptives.html#cb498-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="st">&quot;Genre&quot;</span>,</span>
-<span id="cb498-6"><a href="statistiques-descriptives.html#cb498-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ethnicity =</span> <span class="st">&quot;Ethnicité&quot;</span>,</span>
-<span id="cb498-7"><a href="statistiques-descriptives.html#cb498-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">call =</span> <span class="st">&quot;Entretien&quot;</span>,</span>
-<span id="cb498-8"><a href="statistiques-descriptives.html#cb498-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">city =</span> <span class="st">&quot;Ville&quot;</span>,</span>
-<span id="cb498-9"><a href="statistiques-descriptives.html#cb498-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">jobs =</span> <span class="st">&quot;Nombre d&#39;emplois listés&quot;</span>,</span>
-<span id="cb498-10"><a href="statistiques-descriptives.html#cb498-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">experience =</span> <span class="st">&quot;Nombre d&#39;années d&#39;expérience&quot;</span></span>
-<span id="cb498-11"><a href="statistiques-descriptives.html#cb498-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="statistiques-descriptives.html#cb498-1" tabindex="-1"></a>resumes <span class="ot">&lt;-</span> </span>
+<span id="cb498-2"><a href="statistiques-descriptives.html#cb498-2" tabindex="-1"></a>  resumes <span class="sc">%&gt;%</span> </span>
+<span id="cb498-3"><a href="statistiques-descriptives.html#cb498-3" tabindex="-1"></a>  labelled<span class="sc">::</span><span class="fu">set_variable_labels</span>(</span>
+<span id="cb498-4"><a href="statistiques-descriptives.html#cb498-4" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Prénom&quot;</span>,</span>
+<span id="cb498-5"><a href="statistiques-descriptives.html#cb498-5" tabindex="-1"></a>    <span class="at">gender =</span> <span class="st">&quot;Genre&quot;</span>,</span>
+<span id="cb498-6"><a href="statistiques-descriptives.html#cb498-6" tabindex="-1"></a>    <span class="at">ethnicity =</span> <span class="st">&quot;Ethnicité&quot;</span>,</span>
+<span id="cb498-7"><a href="statistiques-descriptives.html#cb498-7" tabindex="-1"></a>    <span class="at">call =</span> <span class="st">&quot;Entretien&quot;</span>,</span>
+<span id="cb498-8"><a href="statistiques-descriptives.html#cb498-8" tabindex="-1"></a>    <span class="at">city =</span> <span class="st">&quot;Ville&quot;</span>,</span>
+<span id="cb498-9"><a href="statistiques-descriptives.html#cb498-9" tabindex="-1"></a>    <span class="at">jobs =</span> <span class="st">&quot;Nombre d&#39;emplois listés&quot;</span>,</span>
+<span id="cb498-10"><a href="statistiques-descriptives.html#cb498-10" tabindex="-1"></a>    <span class="at">experience =</span> <span class="st">&quot;Nombre d&#39;années d&#39;expérience&quot;</span></span>
+<span id="cb498-11"><a href="statistiques-descriptives.html#cb498-11" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Si on évalue à nouveau notre dernier code permettant d’afficher un tableau de statistiques descriptives pour notre jeu de données, on note que les noms de variables (<code>gender</code>, <code>call</code>, <code>city</code>, etc.) ne s’affichent plus et qu’à la place, l’étiquette est utilisée :</p>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="statistiques-descriptives.html#cb499-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb499-2"><a href="statistiques-descriptives.html#cb499-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
-<span id="cb499-3"><a href="statistiques-descriptives.html#cb499-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb499-4"><a href="statistiques-descriptives.html#cb499-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb499-5"><a href="statistiques-descriptives.html#cb499-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb499-6"><a href="statistiques-descriptives.html#cb499-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb499-7"><a href="statistiques-descriptives.html#cb499-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="statistiques-descriptives.html#cb499-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb499-2"><a href="statistiques-descriptives.html#cb499-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
+<span id="cb499-3"><a href="statistiques-descriptives.html#cb499-3" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb499-4"><a href="statistiques-descriptives.html#cb499-4" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb499-5"><a href="statistiques-descriptives.html#cb499-5" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb499-6"><a href="statistiques-descriptives.html#cb499-6" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb499-7"><a href="statistiques-descriptives.html#cb499-7" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>)</span></code></pre></div>
 <table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
 <thead>
 <tr>
@@ -3194,7 +3194,7 @@ Consonnance du nom
 Variable
 </th>
 <th style="text-align:center;">
-Ech. total
+Overall, N = 4,870
 </th>
 <th style="text-align:center;">
 cauc, N = 2,435
@@ -3479,16 +3479,16 @@ Nombre d’années d’expérience
 <p>Il est possible de fournir à l’argument <code class="sourceCode r">label<span class="ot">=</span></code> de la fonction <code class="sourceCode r"><span class="fu">tbl_summary</span>()</code> les étiquettes à utiliser pour chaque variable, plutôt que de passer par la définition des étiquettes via l’ajout d’un attribut aux colonnes avec la fonction <code class="sourceCode r"><span class="fu">set_variable_labels</span>()</code>.</p>
 </div>
 <p>Le nom des différents sous-groupes constitués à l’aide de la variable dont le nom est fourni à l’argument <code class="sourceCode r">by<span class="ot">=</span></code> de la fonction <code class="sourceCode r"><span class="fu">tbl_summary</span>()</code> sont définis selon les valeurs présentes dans le tableau. Pour recoder les valeurs d’une variable factorielle, nous pouvons utiliser la fonction <code class="sourceCode r"><span class="fu">recode</span>()</code> de {dplyr}. Attention, la syntaxe est assez peu heureuse, dans la mesure où elle est à contre courant de ce que l’on peut trouver avec la fonction <code class="sourceCode r"><span class="fu">rename</span>()</code> (fonction permettant de renommer les colonnes d’un tableau de données) : on écrit l’ancien nomn, puis après un symbole égal (<code class="sourceCode r"><span class="ot">=</span></code>) le nouveau nom, dans une chaîne de caractères.</p>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="statistiques-descriptives.html#cb500-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="ot">&lt;-</span> </span>
-<span id="cb500-2"><a href="statistiques-descriptives.html#cb500-2" aria-hidden="true" tabindex="-1"></a>  resumes <span class="sc">%&gt;%</span> </span>
-<span id="cb500-3"><a href="statistiques-descriptives.html#cb500-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb500-4"><a href="statistiques-descriptives.html#cb500-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="fu">recode</span>(gender, <span class="at">female =</span> <span class="st">&quot;femme&quot;</span>, <span class="at">male =</span> <span class="st">&quot;homme&quot;</span>),</span>
-<span id="cb500-5"><a href="statistiques-descriptives.html#cb500-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ethnicity =</span> <span class="fu">recode</span>(ethnicity,</span>
-<span id="cb500-6"><a href="statistiques-descriptives.html#cb500-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cauc =</span> <span class="st">&quot;Caucasien&quot;</span>, <span class="at">afam =</span> <span class="st">&quot;Afro-americain&quot;</span>),</span>
-<span id="cb500-7"><a href="statistiques-descriptives.html#cb500-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">call =</span> <span class="fu">recode</span>(call, <span class="at">no =</span> <span class="st">&quot;Non&quot;</span>, <span class="at">yes =</span> <span class="st">&quot;Oui&quot;</span>)</span>
-<span id="cb500-8"><a href="statistiques-descriptives.html#cb500-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb500-9"><a href="statistiques-descriptives.html#cb500-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb500-10"><a href="statistiques-descriptives.html#cb500-10" aria-hidden="true" tabindex="-1"></a>resumes</span></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="statistiques-descriptives.html#cb500-1" tabindex="-1"></a>resumes <span class="ot">&lt;-</span> </span>
+<span id="cb500-2"><a href="statistiques-descriptives.html#cb500-2" tabindex="-1"></a>  resumes <span class="sc">%&gt;%</span> </span>
+<span id="cb500-3"><a href="statistiques-descriptives.html#cb500-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb500-4"><a href="statistiques-descriptives.html#cb500-4" tabindex="-1"></a>    <span class="at">gender =</span> <span class="fu">recode</span>(gender, <span class="at">female =</span> <span class="st">&quot;femme&quot;</span>, <span class="at">male =</span> <span class="st">&quot;homme&quot;</span>),</span>
+<span id="cb500-5"><a href="statistiques-descriptives.html#cb500-5" tabindex="-1"></a>    <span class="at">ethnicity =</span> <span class="fu">recode</span>(ethnicity,</span>
+<span id="cb500-6"><a href="statistiques-descriptives.html#cb500-6" tabindex="-1"></a>                       <span class="at">cauc =</span> <span class="st">&quot;Caucasien&quot;</span>, <span class="at">afam =</span> <span class="st">&quot;Afro-americain&quot;</span>),</span>
+<span id="cb500-7"><a href="statistiques-descriptives.html#cb500-7" tabindex="-1"></a>    <span class="at">call =</span> <span class="fu">recode</span>(call, <span class="at">no =</span> <span class="st">&quot;Non&quot;</span>, <span class="at">yes =</span> <span class="st">&quot;Oui&quot;</span>)</span>
+<span id="cb500-8"><a href="statistiques-descriptives.html#cb500-8" tabindex="-1"></a>  )</span>
+<span id="cb500-9"><a href="statistiques-descriptives.html#cb500-9" tabindex="-1"></a></span>
+<span id="cb500-10"><a href="statistiques-descriptives.html#cb500-10" tabindex="-1"></a>resumes</span></code></pre></div>
 <pre><code>## # A tibble: 4,870 × 7
 ##    name    gender ethnicity      call  city     jobs experience
 ##    &lt;fct&gt;   &lt;fct&gt;  &lt;fct&gt;          &lt;fct&gt; &lt;fct&gt;   &lt;int&gt;      &lt;int&gt;
@@ -3502,15 +3502,15 @@ Nombre d’années d’expérience
 ##  8 Kenya   femme  Afro-americain Non   chicago     4         21
 ##  9 Latonya femme  Afro-americain Non   chicago     3          3
 ## 10 Tyrone  homme  Afro-americain Non   chicago     2          6
-## # … with 4,860 more rows</code></pre>
+## # ℹ 4,860 more rows</code></pre>
 <p>Une fois les valeurs recodées à l’intérieur du tableau, celui qui est produit par la fonction <code class="sourceCode r"><span class="fu">tbl_summary</span>()</code> est également impacté :</p>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="statistiques-descriptives.html#cb502-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb502-2"><a href="statistiques-descriptives.html#cb502-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
-<span id="cb502-3"><a href="statistiques-descriptives.html#cb502-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb502-4"><a href="statistiques-descriptives.html#cb502-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb502-5"><a href="statistiques-descriptives.html#cb502-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb502-6"><a href="statistiques-descriptives.html#cb502-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb502-7"><a href="statistiques-descriptives.html#cb502-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="statistiques-descriptives.html#cb502-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb502-2"><a href="statistiques-descriptives.html#cb502-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
+<span id="cb502-3"><a href="statistiques-descriptives.html#cb502-3" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb502-4"><a href="statistiques-descriptives.html#cb502-4" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb502-5"><a href="statistiques-descriptives.html#cb502-5" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb502-6"><a href="statistiques-descriptives.html#cb502-6" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb502-7"><a href="statistiques-descriptives.html#cb502-7" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>)</span></code></pre></div>
 <table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
 <thead>
 <tr>
@@ -3529,7 +3529,7 @@ Consonnance du nom
 Variable
 </th>
 <th style="text-align:center;">
-Ech. total
+Overall, N = 4,870
 </th>
 <th style="text-align:center;">
 Caucasien, N = 2,435
@@ -3839,14 +3839,14 @@ Nombre d’années d’expérience
 </tfoot>
 </table>
 <p>Pour décider qulles variables inclure dans le tableau de statistiques descriptives, on peut utiliser la fonction <code class="sourceCode r"><span class="fu">select</span>()</code> de {dplyr} sur le tableau de l’on fournit à la fonction <code class="sourceCode r"><span class="fu">tbl_summary</span>()</code>, ou bien on peut préciser quelles colonnes inclure à l’aide de l’argument <code class="sourceCode r">include<span class="ot">=</span></code> de <code class="sourceCode r"><span class="fu">tbl_summary</span>()</code>.</p>
-<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="statistiques-descriptives.html#cb503-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb503-2"><a href="statistiques-descriptives.html#cb503-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb503-3"><a href="statistiques-descriptives.html#cb503-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
-<span id="cb503-4"><a href="statistiques-descriptives.html#cb503-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
-<span id="cb503-5"><a href="statistiques-descriptives.html#cb503-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb503-6"><a href="statistiques-descriptives.html#cb503-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb503-7"><a href="statistiques-descriptives.html#cb503-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb503-8"><a href="statistiques-descriptives.html#cb503-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="statistiques-descriptives.html#cb503-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb503-2"><a href="statistiques-descriptives.html#cb503-2" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb503-3"><a href="statistiques-descriptives.html#cb503-3" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
+<span id="cb503-4"><a href="statistiques-descriptives.html#cb503-4" tabindex="-1"></a>    <span class="at">by =</span> ethnicity) <span class="sc">%&gt;%</span> </span>
+<span id="cb503-5"><a href="statistiques-descriptives.html#cb503-5" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb503-6"><a href="statistiques-descriptives.html#cb503-6" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb503-7"><a href="statistiques-descriptives.html#cb503-7" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb503-8"><a href="statistiques-descriptives.html#cb503-8" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>)</span></code></pre></div>
 <table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
 <thead>
 <tr>
@@ -3865,7 +3865,7 @@ Consonnance du nom
 Variable
 </th>
 <th style="text-align:center;">
-Ech. total
+Overall, N = 4,870
 </th>
 <th style="text-align:center;">
 Caucasien, N = 2,435
@@ -4129,22 +4129,22 @@ Nombre d’années d’expérience
 </tfoot>
 </table>
 <p>L’argument <code class="sourceCode r">statistic<span class="ot">=</span></code> de la fonction <code class="sourceCode r"><span class="fu">tbl_summary</span>()</code> permet de changer les statistiques reportées. On fournit une liste dans laquelle on indique des formules spécifiant les types de statistiques descriptives à afficher pour les variables. Nous avons vu plus haut que les valeurs par défaut qui sont utilisées sont la médiane, suivi, entre parenthèses de l’écart interquartile pour les variables continues, et le nombre d’observations suivi de la proportion entre parenthèses, soit :</p>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="statistiques-descriptives.html#cb504-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>,</span>
-<span id="cb504-2"><a href="statistiques-descriptives.html#cb504-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="statistiques-descriptives.html#cb504-1" tabindex="-1"></a><span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>,</span>
+<span id="cb504-2"><a href="statistiques-descriptives.html#cb504-2" tabindex="-1"></a>     <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span>)</span></code></pre></div>
 <p>Si on désire afficher la moyenne (<em>mean</em>) suivie de l’écart-type (<em>standard deviation</em>) pour les variables continues, et le nombre d’observations et la proportion pour les variables discrètes, on écrira :</p>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="statistiques-descriptives.html#cb505-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb505-2"><a href="statistiques-descriptives.html#cb505-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb505-3"><a href="statistiques-descriptives.html#cb505-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
-<span id="cb505-4"><a href="statistiques-descriptives.html#cb505-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
-<span id="cb505-5"><a href="statistiques-descriptives.html#cb505-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
-<span id="cb505-6"><a href="statistiques-descriptives.html#cb505-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;{mean} ({sd})&quot;</span>,</span>
-<span id="cb505-7"><a href="statistiques-descriptives.html#cb505-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
-<span id="cb505-8"><a href="statistiques-descriptives.html#cb505-8" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb505-9"><a href="statistiques-descriptives.html#cb505-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb505-10"><a href="statistiques-descriptives.html#cb505-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb505-11"><a href="statistiques-descriptives.html#cb505-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb505-12"><a href="statistiques-descriptives.html#cb505-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb505-13"><a href="statistiques-descriptives.html#cb505-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="statistiques-descriptives.html#cb505-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb505-2"><a href="statistiques-descriptives.html#cb505-2" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb505-3"><a href="statistiques-descriptives.html#cb505-3" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
+<span id="cb505-4"><a href="statistiques-descriptives.html#cb505-4" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
+<span id="cb505-5"><a href="statistiques-descriptives.html#cb505-5" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
+<span id="cb505-6"><a href="statistiques-descriptives.html#cb505-6" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;{mean} ({sd})&quot;</span>,</span>
+<span id="cb505-7"><a href="statistiques-descriptives.html#cb505-7" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
+<span id="cb505-8"><a href="statistiques-descriptives.html#cb505-8" tabindex="-1"></a>      )</span>
+<span id="cb505-9"><a href="statistiques-descriptives.html#cb505-9" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb505-10"><a href="statistiques-descriptives.html#cb505-10" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb505-11"><a href="statistiques-descriptives.html#cb505-11" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb505-12"><a href="statistiques-descriptives.html#cb505-12" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb505-13"><a href="statistiques-descriptives.html#cb505-13" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>)</span></code></pre></div>
 <table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
 <thead>
 <tr>
@@ -4163,7 +4163,7 @@ Consonnance du nom
 Variable
 </th>
 <th style="text-align:center;">
-Ech. total
+Overall, N = 4,870
 </th>
 <th style="text-align:center;">
 Caucasien, N = 2,435
@@ -4427,20 +4427,20 @@ Nombre d’années d’expérience
 </tfoot>
 </table>
 <p>Pour afficher des résumés statistiques sur plusieurs lignes pour les variables continues, il faut le préciser, à l’aide de l’argument <code class="sourceCode r">type<span class="ot">=</span></code> de la fonction <code class="sourceCode r"><span class="fu">tbl_summary</span>()</code>. En écrivant <code class="sourceCode r">type <span class="ot">=</span> <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span></code>, toutes les variables continues disposeront de deux lignes de résumés statistiques. Reste alors à indiquer ce qu’indiquera chaque ligne. Pour cela, ils nous suffit de fournir un vecteur de longueur 2 à l’élément de la liste fournie au pramètre <code class="sourceCode r">statistic<span class="ot">=</span></code> qui se charge de définir les statistiques à retourner pour les variables continues. Dans l’exemple qui suit, nous reporterons la moyenne et l’écart-type sur la première ligne, et la médiane accompagnée de l’écart interquartile sur la seconde.</p>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="statistiques-descriptives.html#cb506-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb506-2"><a href="statistiques-descriptives.html#cb506-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb506-3"><a href="statistiques-descriptives.html#cb506-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
-<span id="cb506-4"><a href="statistiques-descriptives.html#cb506-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
-<span id="cb506-5"><a href="statistiques-descriptives.html#cb506-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
-<span id="cb506-6"><a href="statistiques-descriptives.html#cb506-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
-<span id="cb506-7"><a href="statistiques-descriptives.html#cb506-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
-<span id="cb506-8"><a href="statistiques-descriptives.html#cb506-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
-<span id="cb506-9"><a href="statistiques-descriptives.html#cb506-9" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb506-10"><a href="statistiques-descriptives.html#cb506-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb506-11"><a href="statistiques-descriptives.html#cb506-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb506-12"><a href="statistiques-descriptives.html#cb506-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb506-13"><a href="statistiques-descriptives.html#cb506-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb506-14"><a href="statistiques-descriptives.html#cb506-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="statistiques-descriptives.html#cb506-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb506-2"><a href="statistiques-descriptives.html#cb506-2" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb506-3"><a href="statistiques-descriptives.html#cb506-3" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
+<span id="cb506-4"><a href="statistiques-descriptives.html#cb506-4" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
+<span id="cb506-5"><a href="statistiques-descriptives.html#cb506-5" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
+<span id="cb506-6"><a href="statistiques-descriptives.html#cb506-6" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
+<span id="cb506-7"><a href="statistiques-descriptives.html#cb506-7" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
+<span id="cb506-8"><a href="statistiques-descriptives.html#cb506-8" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
+<span id="cb506-9"><a href="statistiques-descriptives.html#cb506-9" tabindex="-1"></a>      )</span>
+<span id="cb506-10"><a href="statistiques-descriptives.html#cb506-10" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb506-11"><a href="statistiques-descriptives.html#cb506-11" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb506-12"><a href="statistiques-descriptives.html#cb506-12" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb506-13"><a href="statistiques-descriptives.html#cb506-13" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb506-14"><a href="statistiques-descriptives.html#cb506-14" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>)</span></code></pre></div>
 <table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
 <thead>
 <tr>
@@ -4459,7 +4459,7 @@ Consonnance du nom
 Variable
 </th>
 <th style="text-align:center;">
-Ech. total
+Overall, N = 4,870
 </th>
 <th style="text-align:center;">
 Caucasien, N = 2,435
@@ -4752,26 +4752,26 @@ Median (IQR)
 </tfoot>
 </table>
 <p>Avec la fonction <code class="sourceCode r"><span class="fu">add_stat_label</span>()</code>, nous pouvons préciser, en créant une liste contenant des formules, les indications à faire figurer dans le tableau pour les étiquettes des statistiques qui s’afficheront. Dans l’exemple qui suit, nous demandons à ce que sur la première ligne figure la valeur <code>Moyenne (Ecart-type)</code> et sur la deuxième <code>Médiane (IQR)</code> lorsque la variables est continue, et <code>n (%)</code> lorsqu’elle est discrète.</p>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="statistiques-descriptives.html#cb507-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb507-2"><a href="statistiques-descriptives.html#cb507-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb507-3"><a href="statistiques-descriptives.html#cb507-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
-<span id="cb507-4"><a href="statistiques-descriptives.html#cb507-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
-<span id="cb507-5"><a href="statistiques-descriptives.html#cb507-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
-<span id="cb507-6"><a href="statistiques-descriptives.html#cb507-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
-<span id="cb507-7"><a href="statistiques-descriptives.html#cb507-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
-<span id="cb507-8"><a href="statistiques-descriptives.html#cb507-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
-<span id="cb507-9"><a href="statistiques-descriptives.html#cb507-9" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb507-10"><a href="statistiques-descriptives.html#cb507-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb507-11"><a href="statistiques-descriptives.html#cb507-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb507-12"><a href="statistiques-descriptives.html#cb507-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb507-13"><a href="statistiques-descriptives.html#cb507-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb507-14"><a href="statistiques-descriptives.html#cb507-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb507-15"><a href="statistiques-descriptives.html#cb507-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_stat_label</span>(</span>
-<span id="cb507-16"><a href="statistiques-descriptives.html#cb507-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb507-17"><a href="statistiques-descriptives.html#cb507-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;Moyenne (Ecart-type)&quot;</span>, <span class="st">&quot;Médiane (IQR)&quot;</span>),</span>
-<span id="cb507-18"><a href="statistiques-descriptives.html#cb507-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;n (%)&quot;</span></span>
-<span id="cb507-19"><a href="statistiques-descriptives.html#cb507-19" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb507-20"><a href="statistiques-descriptives.html#cb507-20" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="statistiques-descriptives.html#cb507-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb507-2"><a href="statistiques-descriptives.html#cb507-2" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb507-3"><a href="statistiques-descriptives.html#cb507-3" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
+<span id="cb507-4"><a href="statistiques-descriptives.html#cb507-4" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
+<span id="cb507-5"><a href="statistiques-descriptives.html#cb507-5" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
+<span id="cb507-6"><a href="statistiques-descriptives.html#cb507-6" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
+<span id="cb507-7"><a href="statistiques-descriptives.html#cb507-7" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
+<span id="cb507-8"><a href="statistiques-descriptives.html#cb507-8" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
+<span id="cb507-9"><a href="statistiques-descriptives.html#cb507-9" tabindex="-1"></a>      )</span>
+<span id="cb507-10"><a href="statistiques-descriptives.html#cb507-10" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb507-11"><a href="statistiques-descriptives.html#cb507-11" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb507-12"><a href="statistiques-descriptives.html#cb507-12" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb507-13"><a href="statistiques-descriptives.html#cb507-13" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb507-14"><a href="statistiques-descriptives.html#cb507-14" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb507-15"><a href="statistiques-descriptives.html#cb507-15" tabindex="-1"></a>  <span class="fu">add_stat_label</span>(</span>
+<span id="cb507-16"><a href="statistiques-descriptives.html#cb507-16" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb507-17"><a href="statistiques-descriptives.html#cb507-17" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;Moyenne (Ecart-type)&quot;</span>, <span class="st">&quot;Médiane (IQR)&quot;</span>),</span>
+<span id="cb507-18"><a href="statistiques-descriptives.html#cb507-18" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;n (%)&quot;</span></span>
+<span id="cb507-19"><a href="statistiques-descriptives.html#cb507-19" tabindex="-1"></a>    )</span>
+<span id="cb507-20"><a href="statistiques-descriptives.html#cb507-20" tabindex="-1"></a>  )</span></code></pre></div>
 <table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
 <thead>
 <tr>
@@ -4790,7 +4790,7 @@ Consonnance du nom
 Variable
 </th>
 <th style="text-align:center;">
-Ech. total
+Overall, N = 4,870
 </th>
 <th style="text-align:center;">
 Caucasien, N = 2,435
@@ -5078,27 +5078,27 @@ Médiane (IQR)
 </tfoot>
 </table>
 <p>Dans l’ensemble des tableaux que nous avons réalisés avec la fonction <code class="sourceCode r"><span class="fu">tbl_summary</span>()</code>, la variable <code>jobs</code> qui indique le nombre de précédents emplois occupés a été considérée comme étant discrète. Si nous souhaitons que la fonction considère cette colonne comme étant numérique, il faut l’indiquer à travers l’argument <code class="sourceCode r">type</code>, en donnant comme élément de liste une formule spécifique pour cette colonne :</p>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="statistiques-descriptives.html#cb508-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb508-2"><a href="statistiques-descriptives.html#cb508-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb508-3"><a href="statistiques-descriptives.html#cb508-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
-<span id="cb508-4"><a href="statistiques-descriptives.html#cb508-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
-<span id="cb508-5"><a href="statistiques-descriptives.html#cb508-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
-<span id="cb508-6"><a href="statistiques-descriptives.html#cb508-6" aria-hidden="true" tabindex="-1"></a>                jobs <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>),</span>
-<span id="cb508-7"><a href="statistiques-descriptives.html#cb508-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
-<span id="cb508-8"><a href="statistiques-descriptives.html#cb508-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
-<span id="cb508-9"><a href="statistiques-descriptives.html#cb508-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
-<span id="cb508-10"><a href="statistiques-descriptives.html#cb508-10" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb508-11"><a href="statistiques-descriptives.html#cb508-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb508-12"><a href="statistiques-descriptives.html#cb508-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb508-13"><a href="statistiques-descriptives.html#cb508-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb508-14"><a href="statistiques-descriptives.html#cb508-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb508-15"><a href="statistiques-descriptives.html#cb508-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb508-16"><a href="statistiques-descriptives.html#cb508-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_stat_label</span>(</span>
-<span id="cb508-17"><a href="statistiques-descriptives.html#cb508-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb508-18"><a href="statistiques-descriptives.html#cb508-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;Moyenne (Ecart-type)&quot;</span>, <span class="st">&quot;Médiane (IQR)&quot;</span>),</span>
-<span id="cb508-19"><a href="statistiques-descriptives.html#cb508-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;n (%)&quot;</span></span>
-<span id="cb508-20"><a href="statistiques-descriptives.html#cb508-20" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb508-21"><a href="statistiques-descriptives.html#cb508-21" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="statistiques-descriptives.html#cb508-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb508-2"><a href="statistiques-descriptives.html#cb508-2" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb508-3"><a href="statistiques-descriptives.html#cb508-3" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
+<span id="cb508-4"><a href="statistiques-descriptives.html#cb508-4" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
+<span id="cb508-5"><a href="statistiques-descriptives.html#cb508-5" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
+<span id="cb508-6"><a href="statistiques-descriptives.html#cb508-6" tabindex="-1"></a>                jobs <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>),</span>
+<span id="cb508-7"><a href="statistiques-descriptives.html#cb508-7" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
+<span id="cb508-8"><a href="statistiques-descriptives.html#cb508-8" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
+<span id="cb508-9"><a href="statistiques-descriptives.html#cb508-9" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
+<span id="cb508-10"><a href="statistiques-descriptives.html#cb508-10" tabindex="-1"></a>      )</span>
+<span id="cb508-11"><a href="statistiques-descriptives.html#cb508-11" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb508-12"><a href="statistiques-descriptives.html#cb508-12" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb508-13"><a href="statistiques-descriptives.html#cb508-13" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb508-14"><a href="statistiques-descriptives.html#cb508-14" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb508-15"><a href="statistiques-descriptives.html#cb508-15" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb508-16"><a href="statistiques-descriptives.html#cb508-16" tabindex="-1"></a>  <span class="fu">add_stat_label</span>(</span>
+<span id="cb508-17"><a href="statistiques-descriptives.html#cb508-17" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb508-18"><a href="statistiques-descriptives.html#cb508-18" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;Moyenne (Ecart-type)&quot;</span>, <span class="st">&quot;Médiane (IQR)&quot;</span>),</span>
+<span id="cb508-19"><a href="statistiques-descriptives.html#cb508-19" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;n (%)&quot;</span></span>
+<span id="cb508-20"><a href="statistiques-descriptives.html#cb508-20" tabindex="-1"></a>    )</span>
+<span id="cb508-21"><a href="statistiques-descriptives.html#cb508-21" tabindex="-1"></a>  )</span></code></pre></div>
 <table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
 <thead>
 <tr>
@@ -5117,7 +5117,7 @@ Consonnance du nom
 Variable
 </th>
 <th style="text-align:center;">
-Ech. total
+Overall, N = 4,870
 </th>
 <th style="text-align:center;">
 Caucasien, N = 2,435
@@ -5325,28 +5325,28 @@ Médiane (IQR)
 </tfoot>
 </table>
 <p>Le contrôle du nombre de chiffres après la virgule s’effectue via l’argument <code>digits</code>. Encore une fois, une liste contenant des formules est donnée. Ici, demandons d’afficher 3 décimales après la virgule pour chaque statistique des variables continues :</p>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="statistiques-descriptives.html#cb509-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb509-2"><a href="statistiques-descriptives.html#cb509-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb509-3"><a href="statistiques-descriptives.html#cb509-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
-<span id="cb509-4"><a href="statistiques-descriptives.html#cb509-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
-<span id="cb509-5"><a href="statistiques-descriptives.html#cb509-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
-<span id="cb509-6"><a href="statistiques-descriptives.html#cb509-6" aria-hidden="true" tabindex="-1"></a>                jobs <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>),</span>
-<span id="cb509-7"><a href="statistiques-descriptives.html#cb509-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
-<span id="cb509-8"><a href="statistiques-descriptives.html#cb509-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
-<span id="cb509-9"><a href="statistiques-descriptives.html#cb509-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
-<span id="cb509-10"><a href="statistiques-descriptives.html#cb509-10" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb509-11"><a href="statistiques-descriptives.html#cb509-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="dv">3</span>)</span>
-<span id="cb509-12"><a href="statistiques-descriptives.html#cb509-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb509-13"><a href="statistiques-descriptives.html#cb509-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb509-14"><a href="statistiques-descriptives.html#cb509-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb509-15"><a href="statistiques-descriptives.html#cb509-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb509-16"><a href="statistiques-descriptives.html#cb509-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb509-17"><a href="statistiques-descriptives.html#cb509-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_stat_label</span>(</span>
-<span id="cb509-18"><a href="statistiques-descriptives.html#cb509-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb509-19"><a href="statistiques-descriptives.html#cb509-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;Moyenne (Ecart-type)&quot;</span>, <span class="st">&quot;Médiane (IQR)&quot;</span>),</span>
-<span id="cb509-20"><a href="statistiques-descriptives.html#cb509-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;n (%)&quot;</span></span>
-<span id="cb509-21"><a href="statistiques-descriptives.html#cb509-21" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb509-22"><a href="statistiques-descriptives.html#cb509-22" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="statistiques-descriptives.html#cb509-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb509-2"><a href="statistiques-descriptives.html#cb509-2" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb509-3"><a href="statistiques-descriptives.html#cb509-3" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
+<span id="cb509-4"><a href="statistiques-descriptives.html#cb509-4" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
+<span id="cb509-5"><a href="statistiques-descriptives.html#cb509-5" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
+<span id="cb509-6"><a href="statistiques-descriptives.html#cb509-6" tabindex="-1"></a>                jobs <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>),</span>
+<span id="cb509-7"><a href="statistiques-descriptives.html#cb509-7" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
+<span id="cb509-8"><a href="statistiques-descriptives.html#cb509-8" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
+<span id="cb509-9"><a href="statistiques-descriptives.html#cb509-9" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
+<span id="cb509-10"><a href="statistiques-descriptives.html#cb509-10" tabindex="-1"></a>      ),</span>
+<span id="cb509-11"><a href="statistiques-descriptives.html#cb509-11" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="dv">3</span>)</span>
+<span id="cb509-12"><a href="statistiques-descriptives.html#cb509-12" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb509-13"><a href="statistiques-descriptives.html#cb509-13" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb509-14"><a href="statistiques-descriptives.html#cb509-14" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb509-15"><a href="statistiques-descriptives.html#cb509-15" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb509-16"><a href="statistiques-descriptives.html#cb509-16" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb509-17"><a href="statistiques-descriptives.html#cb509-17" tabindex="-1"></a>  <span class="fu">add_stat_label</span>(</span>
+<span id="cb509-18"><a href="statistiques-descriptives.html#cb509-18" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb509-19"><a href="statistiques-descriptives.html#cb509-19" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;Moyenne (Ecart-type)&quot;</span>, <span class="st">&quot;Médiane (IQR)&quot;</span>),</span>
+<span id="cb509-20"><a href="statistiques-descriptives.html#cb509-20" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;n (%)&quot;</span></span>
+<span id="cb509-21"><a href="statistiques-descriptives.html#cb509-21" tabindex="-1"></a>    )</span>
+<span id="cb509-22"><a href="statistiques-descriptives.html#cb509-22" tabindex="-1"></a>  )</span></code></pre></div>
 <table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
 <thead>
 <tr>
@@ -5365,7 +5365,7 @@ Consonnance du nom
 Variable
 </th>
 <th style="text-align:center;">
-Ech. total
+Overall, N = 4,870
 </th>
 <th style="text-align:center;">
 Caucasien, N = 2,435
@@ -5573,28 +5573,28 @@ Médiane (IQR)
 </tfoot>
 </table>
 <p>Lorsque de multiples statistiques sont retournées pour une variable, on fournit un vecteur de valeurs à la formule si on désire que le nombre de décimales soit différent d’une statistique à l’autre. La longueur de ce vecteur doit correspondre au nombre de statistiques demandées via l’argument <code class="sourceCode r">statistic<span class="ot">=</span></code>. Ici, demandons d’afficher 1 décimale pour la moyenne, 3 pour l’écart-type et la médiane, puis 1 pour les premiers et troisièmes quartiles.</p>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="statistiques-descriptives.html#cb510-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb510-2"><a href="statistiques-descriptives.html#cb510-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb510-3"><a href="statistiques-descriptives.html#cb510-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
-<span id="cb510-4"><a href="statistiques-descriptives.html#cb510-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
-<span id="cb510-5"><a href="statistiques-descriptives.html#cb510-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
-<span id="cb510-6"><a href="statistiques-descriptives.html#cb510-6" aria-hidden="true" tabindex="-1"></a>                jobs <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>),</span>
-<span id="cb510-7"><a href="statistiques-descriptives.html#cb510-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
-<span id="cb510-8"><a href="statistiques-descriptives.html#cb510-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
-<span id="cb510-9"><a href="statistiques-descriptives.html#cb510-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
-<span id="cb510-10"><a href="statistiques-descriptives.html#cb510-10" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb510-11"><a href="statistiques-descriptives.html#cb510-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb510-12"><a href="statistiques-descriptives.html#cb510-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb510-13"><a href="statistiques-descriptives.html#cb510-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb510-14"><a href="statistiques-descriptives.html#cb510-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb510-15"><a href="statistiques-descriptives.html#cb510-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb510-16"><a href="statistiques-descriptives.html#cb510-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb510-17"><a href="statistiques-descriptives.html#cb510-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_stat_label</span>(</span>
-<span id="cb510-18"><a href="statistiques-descriptives.html#cb510-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb510-19"><a href="statistiques-descriptives.html#cb510-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;Moyenne (Ecart-type)&quot;</span>, <span class="st">&quot;Médiane (IQR)&quot;</span>),</span>
-<span id="cb510-20"><a href="statistiques-descriptives.html#cb510-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;n (%)&quot;</span></span>
-<span id="cb510-21"><a href="statistiques-descriptives.html#cb510-21" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb510-22"><a href="statistiques-descriptives.html#cb510-22" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="statistiques-descriptives.html#cb510-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb510-2"><a href="statistiques-descriptives.html#cb510-2" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb510-3"><a href="statistiques-descriptives.html#cb510-3" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
+<span id="cb510-4"><a href="statistiques-descriptives.html#cb510-4" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
+<span id="cb510-5"><a href="statistiques-descriptives.html#cb510-5" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
+<span id="cb510-6"><a href="statistiques-descriptives.html#cb510-6" tabindex="-1"></a>                jobs <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>),</span>
+<span id="cb510-7"><a href="statistiques-descriptives.html#cb510-7" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
+<span id="cb510-8"><a href="statistiques-descriptives.html#cb510-8" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
+<span id="cb510-9"><a href="statistiques-descriptives.html#cb510-9" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
+<span id="cb510-10"><a href="statistiques-descriptives.html#cb510-10" tabindex="-1"></a>      ),</span>
+<span id="cb510-11"><a href="statistiques-descriptives.html#cb510-11" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb510-12"><a href="statistiques-descriptives.html#cb510-12" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb510-13"><a href="statistiques-descriptives.html#cb510-13" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb510-14"><a href="statistiques-descriptives.html#cb510-14" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb510-15"><a href="statistiques-descriptives.html#cb510-15" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb510-16"><a href="statistiques-descriptives.html#cb510-16" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb510-17"><a href="statistiques-descriptives.html#cb510-17" tabindex="-1"></a>  <span class="fu">add_stat_label</span>(</span>
+<span id="cb510-18"><a href="statistiques-descriptives.html#cb510-18" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb510-19"><a href="statistiques-descriptives.html#cb510-19" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;Moyenne (Ecart-type)&quot;</span>, <span class="st">&quot;Médiane (IQR)&quot;</span>),</span>
+<span id="cb510-20"><a href="statistiques-descriptives.html#cb510-20" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;n (%)&quot;</span></span>
+<span id="cb510-21"><a href="statistiques-descriptives.html#cb510-21" tabindex="-1"></a>    )</span>
+<span id="cb510-22"><a href="statistiques-descriptives.html#cb510-22" tabindex="-1"></a>  )</span></code></pre></div>
 <table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
 <thead>
 <tr>
@@ -5613,7 +5613,7 @@ Consonnance du nom
 Variable
 </th>
 <th style="text-align:center;">
-Ech. total
+Overall, N = 4,870
 </th>
 <th style="text-align:center;">
 Caucasien, N = 2,435
@@ -5821,29 +5821,29 @@ Médiane (IQR)
 </tfoot>
 </table>
 <p>Il est également possible de définir le nombre de décimales spécifiquement pour une ou plusieurs variables, en ajoutant une ou plusieurs formules à la liste fournie à l’argument <code class="sourceCode r">digits<span class="ot">=</span></code> de la fonction <code class="sourceCode r"><span class="fu">tbl_summary</span>()</code>.</p>
-<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="statistiques-descriptives.html#cb511-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb511-2"><a href="statistiques-descriptives.html#cb511-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb511-3"><a href="statistiques-descriptives.html#cb511-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
-<span id="cb511-4"><a href="statistiques-descriptives.html#cb511-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
-<span id="cb511-5"><a href="statistiques-descriptives.html#cb511-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
-<span id="cb511-6"><a href="statistiques-descriptives.html#cb511-6" aria-hidden="true" tabindex="-1"></a>                jobs <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>),</span>
-<span id="cb511-7"><a href="statistiques-descriptives.html#cb511-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
-<span id="cb511-8"><a href="statistiques-descriptives.html#cb511-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
-<span id="cb511-9"><a href="statistiques-descriptives.html#cb511-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
-<span id="cb511-10"><a href="statistiques-descriptives.html#cb511-10" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb511-11"><a href="statistiques-descriptives.html#cb511-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>),</span>
-<span id="cb511-12"><a href="statistiques-descriptives.html#cb511-12" aria-hidden="true" tabindex="-1"></a>                  jobs <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
-<span id="cb511-13"><a href="statistiques-descriptives.html#cb511-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb511-14"><a href="statistiques-descriptives.html#cb511-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb511-15"><a href="statistiques-descriptives.html#cb511-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb511-16"><a href="statistiques-descriptives.html#cb511-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb511-17"><a href="statistiques-descriptives.html#cb511-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb511-18"><a href="statistiques-descriptives.html#cb511-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_stat_label</span>(</span>
-<span id="cb511-19"><a href="statistiques-descriptives.html#cb511-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb511-20"><a href="statistiques-descriptives.html#cb511-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;Moyenne (Ecart-type)&quot;</span>, <span class="st">&quot;Médiane (IQR)&quot;</span>),</span>
-<span id="cb511-21"><a href="statistiques-descriptives.html#cb511-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;n (%)&quot;</span></span>
-<span id="cb511-22"><a href="statistiques-descriptives.html#cb511-22" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb511-23"><a href="statistiques-descriptives.html#cb511-23" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="statistiques-descriptives.html#cb511-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb511-2"><a href="statistiques-descriptives.html#cb511-2" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb511-3"><a href="statistiques-descriptives.html#cb511-3" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
+<span id="cb511-4"><a href="statistiques-descriptives.html#cb511-4" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
+<span id="cb511-5"><a href="statistiques-descriptives.html#cb511-5" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
+<span id="cb511-6"><a href="statistiques-descriptives.html#cb511-6" tabindex="-1"></a>                jobs <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>),</span>
+<span id="cb511-7"><a href="statistiques-descriptives.html#cb511-7" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
+<span id="cb511-8"><a href="statistiques-descriptives.html#cb511-8" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
+<span id="cb511-9"><a href="statistiques-descriptives.html#cb511-9" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span></span>
+<span id="cb511-10"><a href="statistiques-descriptives.html#cb511-10" tabindex="-1"></a>      ),</span>
+<span id="cb511-11"><a href="statistiques-descriptives.html#cb511-11" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>, <span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>),</span>
+<span id="cb511-12"><a href="statistiques-descriptives.html#cb511-12" tabindex="-1"></a>                  jobs <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb511-13"><a href="statistiques-descriptives.html#cb511-13" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb511-14"><a href="statistiques-descriptives.html#cb511-14" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb511-15"><a href="statistiques-descriptives.html#cb511-15" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb511-16"><a href="statistiques-descriptives.html#cb511-16" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb511-17"><a href="statistiques-descriptives.html#cb511-17" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb511-18"><a href="statistiques-descriptives.html#cb511-18" tabindex="-1"></a>  <span class="fu">add_stat_label</span>(</span>
+<span id="cb511-19"><a href="statistiques-descriptives.html#cb511-19" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb511-20"><a href="statistiques-descriptives.html#cb511-20" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;Moyenne (Ecart-type)&quot;</span>, <span class="st">&quot;Médiane (IQR)&quot;</span>),</span>
+<span id="cb511-21"><a href="statistiques-descriptives.html#cb511-21" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;n (%)&quot;</span></span>
+<span id="cb511-22"><a href="statistiques-descriptives.html#cb511-22" tabindex="-1"></a>    )</span>
+<span id="cb511-23"><a href="statistiques-descriptives.html#cb511-23" tabindex="-1"></a>  )</span></code></pre></div>
 <table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
 <thead>
 <tr>
@@ -5862,7 +5862,7 @@ Consonnance du nom
 Variable
 </th>
 <th style="text-align:center;">
-Ech. total
+Overall, N = 4,870
 </th>
 <th style="text-align:center;">
 Caucasien, N = 2,435
@@ -6070,30 +6070,30 @@ Médiane (IQR)
 </tfoot>
 </table>
 <p>Les tableaux produits utilisent par défaut des normes anglo-saxonnes. Pour utiliser des normes françaises, on peut se servir de la fonction <code class="sourceCode r"><span class="fu">theme_gtsummary_language</span>()</code> et indiquer la valeur <code class="sourceCode r"><span class="st">&quot;fr&quot;</span></code> à l’argument <code class="sourceCode r">language<span class="ot">=</span></code> :</p>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="statistiques-descriptives.html#cb512-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_gtsummary_language</span>(<span class="at">language =</span> <span class="st">&quot;fr&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="statistiques-descriptives.html#cb513-1" aria-hidden="true" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
-<span id="cb513-2"><a href="statistiques-descriptives.html#cb513-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb513-3"><a href="statistiques-descriptives.html#cb513-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
-<span id="cb513-4"><a href="statistiques-descriptives.html#cb513-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
-<span id="cb513-5"><a href="statistiques-descriptives.html#cb513-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
-<span id="cb513-6"><a href="statistiques-descriptives.html#cb513-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
-<span id="cb513-7"><a href="statistiques-descriptives.html#cb513-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
-<span id="cb513-8"><a href="statistiques-descriptives.html#cb513-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span>),</span>
-<span id="cb513-9"><a href="statistiques-descriptives.html#cb513-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">list</span>(</span>
-<span id="cb513-10"><a href="statistiques-descriptives.html#cb513-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="dv">2</span>,</span>
-<span id="cb513-11"><a href="statistiques-descriptives.html#cb513-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="dv">0</span></span>
-<span id="cb513-12"><a href="statistiques-descriptives.html#cb513-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb513-13"><a href="statistiques-descriptives.html#cb513-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb513-14"><a href="statistiques-descriptives.html#cb513-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb513-15"><a href="statistiques-descriptives.html#cb513-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb513-16"><a href="statistiques-descriptives.html#cb513-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(label <span class="sc">~</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb513-17"><a href="statistiques-descriptives.html#cb513-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb513-18"><a href="statistiques-descriptives.html#cb513-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_stat_label</span>(</span>
-<span id="cb513-19"><a href="statistiques-descriptives.html#cb513-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb513-20"><a href="statistiques-descriptives.html#cb513-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;Moyenne (Ecart-type)&quot;</span>, <span class="st">&quot;Médiane (IQR)&quot;</span>),</span>
-<span id="cb513-21"><a href="statistiques-descriptives.html#cb513-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;n (%)&quot;</span></span>
-<span id="cb513-22"><a href="statistiques-descriptives.html#cb513-22" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb513-23"><a href="statistiques-descriptives.html#cb513-23" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="statistiques-descriptives.html#cb512-1" tabindex="-1"></a><span class="fu">theme_gtsummary_language</span>(<span class="at">language =</span> <span class="st">&quot;fr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="statistiques-descriptives.html#cb513-1" tabindex="-1"></a>resumes <span class="sc">%&gt;%</span></span>
+<span id="cb513-2"><a href="statistiques-descriptives.html#cb513-2" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb513-3"><a href="statistiques-descriptives.html#cb513-3" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;call&quot;</span>, <span class="st">&quot;jobs&quot;</span>, <span class="st">&quot;experience&quot;</span>),</span>
+<span id="cb513-4"><a href="statistiques-descriptives.html#cb513-4" tabindex="-1"></a>    <span class="at">by =</span> ethnicity,</span>
+<span id="cb513-5"><a href="statistiques-descriptives.html#cb513-5" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">&quot;continuous2&quot;</span>,</span>
+<span id="cb513-6"><a href="statistiques-descriptives.html#cb513-6" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
+<span id="cb513-7"><a href="statistiques-descriptives.html#cb513-7" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;{mean} ({sd})&quot;</span>, <span class="st">&quot;{median} ({p25}, {p75})&quot;</span>),</span>
+<span id="cb513-8"><a href="statistiques-descriptives.html#cb513-8" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;{n} ({p}%)&quot;</span>),</span>
+<span id="cb513-9"><a href="statistiques-descriptives.html#cb513-9" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">list</span>(</span>
+<span id="cb513-10"><a href="statistiques-descriptives.html#cb513-10" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb513-11"><a href="statistiques-descriptives.html#cb513-11" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="dv">0</span></span>
+<span id="cb513-12"><a href="statistiques-descriptives.html#cb513-12" tabindex="-1"></a>    )</span>
+<span id="cb513-13"><a href="statistiques-descriptives.html#cb513-13" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb513-14"><a href="statistiques-descriptives.html#cb513-14" tabindex="-1"></a>  <span class="fu">add_p</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb513-15"><a href="statistiques-descriptives.html#cb513-15" tabindex="-1"></a>  <span class="fu">add_overall</span>(<span class="at">col_label =</span> <span class="st">&quot;Ech. total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb513-16"><a href="statistiques-descriptives.html#cb513-16" tabindex="-1"></a>  <span class="fu">modify_header</span>(label <span class="sc">~</span> <span class="st">&quot;**Variable**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb513-17"><a href="statistiques-descriptives.html#cb513-17" tabindex="-1"></a>  <span class="fu">modify_spanning_header</span>(<span class="fu">c</span>(<span class="st">&quot;stat_1&quot;</span>, <span class="st">&quot;stat_2&quot;</span>) <span class="sc">~</span> <span class="st">&quot;**Consonnance du nom**&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb513-18"><a href="statistiques-descriptives.html#cb513-18" tabindex="-1"></a>  <span class="fu">add_stat_label</span>(</span>
+<span id="cb513-19"><a href="statistiques-descriptives.html#cb513-19" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb513-20"><a href="statistiques-descriptives.html#cb513-20" tabindex="-1"></a>      <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">&quot;Moyenne (Ecart-type)&quot;</span>, <span class="st">&quot;Médiane (IQR)&quot;</span>),</span>
+<span id="cb513-21"><a href="statistiques-descriptives.html#cb513-21" tabindex="-1"></a>      <span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">&quot;n (%)&quot;</span></span>
+<span id="cb513-22"><a href="statistiques-descriptives.html#cb513-22" tabindex="-1"></a>    )</span>
+<span id="cb513-23"><a href="statistiques-descriptives.html#cb513-23" tabindex="-1"></a>  )</span></code></pre></div>
 <table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
 <thead>
 <tr>
@@ -6112,7 +6112,7 @@ Consonnance du nom
 Variable
 </th>
 <th style="text-align:center;">
-Ech. total
+Total, N = 4,870
 </th>
 <th style="text-align:center;">
 Caucasien, N = 2,435
@@ -6465,7 +6465,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null

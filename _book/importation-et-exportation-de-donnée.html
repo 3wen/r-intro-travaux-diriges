@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Importation et exportation de donnée | Travaux dirigés d’Informatique</title>
   <meta name="description" content="4 Importation et exportation de donnée | Travaux dirigés d’Informatique" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Importation et exportation de donnée | Travaux dirigés d’Informatique" />
   <meta property="og:type" content="book" />
@@ -440,24 +440,24 @@ div.csl-indent {
 </div>
 <p>Nous allons à présent importer dans R le contenu du fichier <code>fichier_donnees.csv</code>. Ce fichier contient une première ligne définissant les en-têtes, et une seconde ligne contenant une observation. Dans le fichier, les différents champs sont séparés par un point-virgule (<code>;</code>).</p>
 <p>Pour importer le contenu de ce fichier CSV dans R, nous allons nous appuyer sur la fonction <code class="sourceCode r"><span class="fu">read_csv2</span>()</code> du <em>package</em> {readr}. Nous allons indiquer le chemin vers le fichier à l’argument <code>file</code> de cette fonction. Le tableau de données sera stocké dans un objet que nous allons appeler <code>df_exercice</code> :</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="importation-et-exportation-de-donnée.html#cb215-1" aria-hidden="true" tabindex="-1"></a>df_exercice <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&quot;fichier_donnees.csv&quot;</span>)</span>
-<span id="cb215-2"><a href="importation-et-exportation-de-donnée.html#cb215-2" aria-hidden="true" tabindex="-1"></a>df_exercice</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="importation-et-exportation-de-donnée.html#cb215-1" tabindex="-1"></a>df_exercice <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&quot;fichier_donnees.csv&quot;</span>)</span>
+<span id="cb215-2"><a href="importation-et-exportation-de-donnée.html#cb215-2" tabindex="-1"></a>df_exercice</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##   Dossier          Valeur
 ##   &lt;chr&gt;            &lt;chr&gt; 
 ## 1 Dossier_Exercice Bravo</code></pre>
 <p>L’importation a bien fonctionné, R nous prévient avoir deviné que les valeurs dans les colonnes <code>Dossier</code> et <code>Valeur</code> sont des chaînes de caractères (la fonction <code class="sourceCode r"><span class="fu">col_character</span>()</code> a été utilisée pour ces deux colonnes).</p>
 <p>Nous pouvons obtenir le même résultat en écrivant le chemin absolu vers le fichier :</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="importation-et-exportation-de-donnée.html#cb217-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;C:/Users/votre_numero_etudiant/Downloads/&quot;</span>,</span>
-<span id="cb217-2"><a href="importation-et-exportation-de-donnée.html#cb217-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;exercice_importation/Exercice/fichier_donnees.csv&quot;</span>)</span>
-<span id="cb217-3"><a href="importation-et-exportation-de-donnée.html#cb217-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv2</span>(<span class="at">file =</span> path)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="importation-et-exportation-de-donnée.html#cb217-1" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;C:/Users/votre_numero_etudiant/Downloads/&quot;</span>,</span>
+<span id="cb217-2"><a href="importation-et-exportation-de-donnée.html#cb217-2" tabindex="-1"></a>               <span class="st">&quot;exercice_importation/Exercice/fichier_donnees.csv&quot;</span>)</span>
+<span id="cb217-3"><a href="importation-et-exportation-de-donnée.html#cb217-3" tabindex="-1"></a><span class="fu">read_csv2</span>(<span class="at">file =</span> path)</span></code></pre></div>
 <div class="greenbox">
 <p><strong>Note</strong> : le chemin étant trop long pour tenir sur une page PDF, la fonction <code class="sourceCode r">paste0</code> a été utilisée ici pour concaténer deux chaînes de caractères en une seule. Sur votre machine, vous pouvez écrire le chemin complet sans passer par l’utilisation de la fonction <code class="sourceCode r">paste0</code>.</p>
 </div>
 <p>Nous verrons plus loin que l’utilisation des chemins absolus dans les scripts posent des soucis lorsque l’on change d’ordinateur ou que l’on partage son code avec d’autres personnes.</p>
 <p>Le fichier <code>fichier_donnees_A.csv</code> n’est pas situé dans le répertoire courant : il se situe dans le répertoire <code>Dossier_A</code>, contenu dans le répertoire courant (<code>Exercice</code>). Pour pouvoir charger le contenu de ce fichier dans R avec un lien relatif, il faut constuire le chemin en indiquant que l’on souhaite descendre dans le répertoire <code>Dossier_A</code> dans un premier temps :</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="importation-et-exportation-de-donnée.html#cb218-1" aria-hidden="true" tabindex="-1"></a>df_exercice_A <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&quot;Dossier_A/fichier_donnees_A.csv&quot;</span>)</span>
-<span id="cb218-2"><a href="importation-et-exportation-de-donnée.html#cb218-2" aria-hidden="true" tabindex="-1"></a>df_exercice_A</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="importation-et-exportation-de-donnée.html#cb218-1" tabindex="-1"></a>df_exercice_A <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&quot;Dossier_A/fichier_donnees_A.csv&quot;</span>)</span>
+<span id="cb218-2"><a href="importation-et-exportation-de-donnée.html#cb218-2" tabindex="-1"></a>df_exercice_A</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##   Dossier   Valeur
 ##   &lt;chr&gt;     &lt;chr&gt; 
@@ -470,8 +470,8 @@ div.csl-indent {
 </ol>
 </div>
 <p>Si la ressource que l’on souhaite atteindre nécessite de remonter dans un répertoire parent (un répertoire qui contient un autre est appelé “répertoire parent”), il suffit d’utiliser sa désignation : <code>..</code>. Par exemple, pour accéder au fichier <code>fichier_donnees_C.csv</code>, qui se trouve dans le répertoire <code>Dossier_C</code> contenu dans le répertoire <code>exercice_importation</code> (qui contient le répertoire <code>Exercice</code> et est donc le répertoire parent de <code>Exercice</code>), on peut écrire :</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="importation-et-exportation-de-donnée.html#cb220-1" aria-hidden="true" tabindex="-1"></a>df_exercice_C <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&quot;../Dossier_C/fichier_donnees_C.csv&quot;</span>)</span>
-<span id="cb220-2"><a href="importation-et-exportation-de-donnée.html#cb220-2" aria-hidden="true" tabindex="-1"></a>df_exercice_C</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="importation-et-exportation-de-donnée.html#cb220-1" tabindex="-1"></a>df_exercice_C <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&quot;../Dossier_C/fichier_donnees_C.csv&quot;</span>)</span>
+<span id="cb220-2"><a href="importation-et-exportation-de-donnée.html#cb220-2" tabindex="-1"></a>df_exercice_C</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##   Dossier   Valeur
 ##   &lt;chr&gt;     &lt;chr&gt; 
@@ -501,12 +501,12 @@ div.csl-indent {
 </ol>
 </div>
 <p>Si vous avez écrit les chemins vers les fichiers en utilisant des chemins absolus, vous serez obligé de les modifier un à un…</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="importation-et-exportation-de-donnée.html#cb222-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;C:/Users/votre_numero_etudiant/Downloads/&quot;</span>,</span>
-<span id="cb222-2"><a href="importation-et-exportation-de-donnée.html#cb222-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;exercice_importation/Exercice/fichier_donnees.csv&quot;</span>)</span>
-<span id="cb222-3"><a href="importation-et-exportation-de-donnée.html#cb222-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv2</span>(<span class="at">file =</span> path)</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="importation-et-exportation-de-donnée.html#cb222-1" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;C:/Users/votre_numero_etudiant/Downloads/&quot;</span>,</span>
+<span id="cb222-2"><a href="importation-et-exportation-de-donnée.html#cb222-2" tabindex="-1"></a>               <span class="st">&quot;exercice_importation/Exercice/fichier_donnees.csv&quot;</span>)</span>
+<span id="cb222-3"><a href="importation-et-exportation-de-donnée.html#cb222-3" tabindex="-1"></a><span class="fu">read_csv2</span>(<span class="at">file =</span> path)</span></code></pre></div>
 <p>Cette instruction qui permettait de charger le fichier <code>fichier_donnees.csv</code> ne fonctionne plus. R retourne un message d’erreur indiquant “<em>No such file or directory</em>” (un tel fichier ou répertoire n’existe pas).</p>
 <p>Si vous avez employé des chemins relatifs, vous n’aurez rien à modifier.</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="importation-et-exportation-de-donnée.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&quot;./fichier_donnees.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="importation-et-exportation-de-donnée.html#cb223-1" tabindex="-1"></a><span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&quot;./fichier_donnees.csv&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="chargement-de-formats-différents" class="section level2 hasAnchor" number="4.2">
@@ -534,7 +534,7 @@ div.csl-indent {
 &quot;Basurto&quot;;&quot;Anthony&quot;;2;2;&quot;Mathématiques 1&quot;;6
 &quot;Begaye&quot;;&quot;Kai&quot;;3;3;&quot;Mathématiques 1&quot;;18</code></pre>
 <p>Face à la possibilité d’utiliser différents caractères pour séparer les champs ainsi que pour séparer la partie entière de la partie décimale des nombres, R propose tout un attirail de fonctions. Nous allons en utiliser une qui permet d’être polyvalent : <code class="sourceCode r"><span class="fu">read_delim</span>()</code>. Cette fonction est proposée dans le <em>package</em> {readr}.</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="importation-et-exportation-de-donnée.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="importation-et-exportation-de-donnée.html#cb226-1" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code></pre></div>
 <div class="greenbox">
 <ol style="list-style-type: decimal">
 <li>Affichez la page d’aide de la fonction <code>read_delim</code>.</li>
@@ -630,8 +630,8 @@ div.csl-indent {
 <li><code>notes.RData</code> : 8 tableaux de données (<code>micro</code>, <code>macro</code>, <code>maths</code>, <code>info</code>, <code>stats</code>, <code>anglais</code>, <code>eco_envir</code>, et <code>finance</code>).</li>
 </ul>
 <p>Pour importer un fichier <code>.RDS</code>, on utilise la fonction <code class="sourceCode r"><span class="fu">readRDS</span>()</code>. De la même manière que pour <code class="sourceCode r"><span class="fu">read_delim</span>()</code>, il est nécessaire de stocker le résultat dans un objet.</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="importation-et-exportation-de-donnée.html#cb227-1" aria-hidden="true" tabindex="-1"></a>notes_anglais <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">&quot;importation_formats/L1/anglais.RDS&quot;</span>)</span>
-<span id="cb227-2"><a href="importation-et-exportation-de-donnée.html#cb227-2" aria-hidden="true" tabindex="-1"></a>notes_anglais</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="importation-et-exportation-de-donnée.html#cb227-1" tabindex="-1"></a>notes_anglais <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">&quot;importation_formats/L1/anglais.RDS&quot;</span>)</span>
+<span id="cb227-2"><a href="importation-et-exportation-de-donnée.html#cb227-2" tabindex="-1"></a>notes_anglais</span></code></pre></div>
 <pre><code>## # A tibble: 32 × 5
 ##    nom        prenom     id matiere    note
 ##    &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
@@ -645,9 +645,9 @@ div.csl-indent {
 ##  8 Coberley   Rebecca     8 Anglais 1   6  
 ##  9 De Venecia Madison     9 Anglais 1   6  
 ## 10 Gurule     Elliott    12 Anglais 1   6  
-## # … with 22 more rows</code></pre>
+## # ℹ 22 more rows</code></pre>
 <p>Pour charger les objets d’un fichier <code>.RData</code> dans votre session R, il faut utiliser la fonction <code class="sourceCode r"><span class="fu">load</span>()</code>. Attention, si un objet est nommé <code>x</code> dans votre fichier <code>.RData</code> et qu’un objet existant dans votre session R s’appelle également <code>x</code>, ce dernier sera remplacé par l’objet qui vient d’être chargé avec la fonction <code class="sourceCode r"><span class="fu">load</span>()</code>.</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="importation-et-exportation-de-donnée.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="at">file =</span> <span class="st">&quot;importation_formats/L1/notes.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="importation-et-exportation-de-donnée.html#cb229-1" tabindex="-1"></a><span class="fu">load</span>(<span class="at">file =</span> <span class="st">&quot;importation_formats/L1/notes.RData&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="exportation" class="section level2 hasAnchor" number="4.3">
@@ -665,10 +665,10 @@ div.csl-indent {
 <div id="format-r" class="section level3 hasAnchor" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Format R<a href="importation-et-exportation-de-donnée.html#format-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Pour sauvegarder un seul objet, on peut utiliser la fonction <code class="sourceCode r"><span class="fu">saveRDS</span>()</code> et exporter les données au format <code>.RDS</code> :</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="importation-et-exportation-de-donnée.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(maths, <span class="at">file =</span> <span class="st">&quot;importation_formats/L1/maths.RDS&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="importation-et-exportation-de-donnée.html#cb230-1" tabindex="-1"></a><span class="fu">saveRDS</span>(maths, <span class="at">file =</span> <span class="st">&quot;importation_formats/L1/maths.RDS&quot;</span>)</span></code></pre></div>
 <p>Pour sauvegarder plusieurs objets, on peut utiliser la fonction <code class="sourceCode r"><span class="fu">save</span>()</code>, en indiquant les noms des objets à sauvegarder en argument de la fonction.</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="importation-et-exportation-de-donnée.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(micro, macro, maths, info, stats, anglais, eco_envir, finance,</span>
-<span id="cb231-2"><a href="importation-et-exportation-de-donnée.html#cb231-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">file =</span> <span class="st">&quot;importation_formats/L1/notes_L1.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="importation-et-exportation-de-donnée.html#cb231-1" tabindex="-1"></a><span class="fu">save</span>(micro, macro, maths, info, stats, anglais, eco_envir, finance,</span>
+<span id="cb231-2"><a href="importation-et-exportation-de-donnée.html#cb231-2" tabindex="-1"></a>     <span class="at">file =</span> <span class="st">&quot;importation_formats/L1/notes_L1.RData&quot;</span>)</span></code></pre></div>
 <!-- # Seance 4 -->
 <!-- Tableaux -->
 <!-- # Manipulation des tableaux -->
@@ -738,7 +738,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null
