@@ -59,9 +59,13 @@ Dans RStudio :
     -   laissez le bouton radio sur l'option `HTML` pour que le rapport qui sera créé après soit un document html (langage conçu pour présenter des pages web).
     -   créer le document en cliquant sur le bouton `OK`.
 
--   Sauvegardez le fichier créé en lui donnant le nom de votre choix (par exemple : \`premier_rapport.Rmd\`\`).
+-   Sauvegardez le fichier créé en lui donnant le nom de votre choix (par exemple : `premier_rapport.Rmd`).
 
-![Fenêtre de création d'un nouveau document R Markdown.](figs/creation_markdown.png "Fenêtre de paramétrage du document RMarkdown dans RStudio."){width="75%"}
+```{r pressure, echo=FALSE, out.width = '75%'}
+knitr::include_graphics("figs/creation_markdown.png")
+```
+
+
 :::
 
 Un document R Markdown, dont l'extension est `.Rmd` est alors créé. Ce document est composé de trois parties :

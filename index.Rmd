@@ -31,6 +31,10 @@ output:
       fontsettings:
         theme: night
       search: yes
+      url: https://egallic.fr/Enseignement/R/TD/
+      github-repo: https://github.com/3wen/r-intro-travaux-diriges
+      view: https://github.com/3wen/r-intro-travaux-diriges/edit/main/%s
+      edit: https://github.com/3wen/r-intro-travaux-diriges/edit/main/%s
   bookdown::pdf_book:
     latex_engine: xelatex
     toc_depth: 4
@@ -38,7 +42,6 @@ output:
     keep_tex: yes
     includes:
       in_header: assets/mystyle_books.tex
-  
 ---
 
 ```{r knitr_init, echo=FALSE, cache=FALSE, include=FALSE}
