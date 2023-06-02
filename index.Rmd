@@ -33,7 +33,7 @@ output:
       search: yes
       url: https://egallic.fr/Enseignement/R/TD/
       github-repo: https://github.com/3wen/r-intro-travaux-diriges
-      view: https://github.com/3wen/r-intro-travaux-diriges/edit/main/%s
+      view: https://github.com/3wen/r-intro-travaux-diriges/blob/main/%s
       edit: https://github.com/3wen/r-intro-travaux-diriges/edit/main/%s
   bookdown::pdf_book:
     latex_engine: xelatex
